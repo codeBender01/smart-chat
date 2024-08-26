@@ -1,13 +1,11 @@
-import {FC, useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
-
-import {createTheme, ThemeProvider, TextField, InputAdornment} from '@mui/material';
-import ChatInfoText from '@app/components/ChatInfoText';
-
-import {IoMdSend} from 'react-icons/io';
+import {FC, useEffect, useState} from 'react';
 import {BsPaperclip} from 'react-icons/bs';
-import {MdOutlineNewLabel} from 'react-icons/md';
 import {CgArrowLongLeft} from 'react-icons/cg';
+import {IoMdSend} from 'react-icons/io';
+import {MdOutlineNewLabel} from 'react-icons/md';
+import {useNavigate} from 'react-router-dom';
+import ChatInfoText from '@app/components/ChatInfoText';
+import {createTheme, InputAdornment, TextField, ThemeProvider} from '@mui/material';
 
 import logo from '../../common/assets/chatLogo.png';
 import profile2 from '../../common/assets/profile2.jpeg';
@@ -190,7 +188,9 @@ const ChatSupportWindow: FC = () => {
                                                 style={{
                                                     backgroundColor: sug.colorCode,
                                                 }}
-                                                className={`text-textColor flex-wrap text-default font-mainSans rounded-medium w-fit py-1 px-2 hover:opacity-85 duration-200 cursor-pointer`}
+                                                className={
+                                                    'text-textColor flex-wrap text-default font-mainSans rounded-medium w-fit py-1 px-2 hover:opacity-85 duration-200 cursor-pointer'
+                                                }
                                             >
                                                 {sug.label}
                                             </div>
@@ -282,7 +282,9 @@ const ChatSupportWindow: FC = () => {
                                                         style={{
                                                             backgroundColor: sug.colorCode,
                                                         }}
-                                                        className={`text-textColor text-default font-mainSans rounded-medium w-fit py-1 px-4 hover:opacity-85 duration-200 cursor-pointer`}
+                                                        className={
+                                                            'text-textColor text-default font-mainSans rounded-medium w-fit py-1 px-4 hover:opacity-85 duration-200 cursor-pointer'
+                                                        }
                                                     >
                                                         {sug.label}
                                                     </div>

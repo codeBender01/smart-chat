@@ -1,6 +1,5 @@
 import {FC, useState} from 'react';
-
-import {Modal, ThemeProvider, Button, createTheme} from '@mui/material';
+import {Button, createTheme, Modal, ThemeProvider} from '@mui/material';
 
 import ModalProps from 'src/common/interfaces/modal.interface';
 

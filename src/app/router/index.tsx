@@ -13,7 +13,7 @@ const SettingsMobileLayout = lazy(() => import('../layouts/SettingsMobileLayout'
 //pages
 const ChatWindow = lazy(() => import('../pages/ChatWindow'));
 const BlankPage = lazy(() => import('../pages/BlankPage'));
-const ChatSupportWindow = lazy(() => import('../pages/CharSupportWindow'));
+const ChatSupportWindow = lazy(() => import('../pages/ChatSupportWindow'));
 const TermsAndConditions = lazy(() => import('../pages/TermsAndConditions'));
 const Password = lazy(() => import('../pages/Password'));
 const Currency = lazy(() => import('../pages/Currency'));

@@ -1,8 +1,6 @@
 import {FC, useState} from 'react';
-
-import {FormControl, Select, MenuItem, InputLabel, SelectChangeEvent, ThemeProvider, createTheme, Button, TextField} from '@mui/material';
-
 import TerminationApproveModal from '@app/components/TerminationApproveModal';
+import {Button, createTheme, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, ThemeProvider} from '@mui/material';
 
 const reasons = [
     {

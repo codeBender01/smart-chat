@@ -1,13 +1,11 @@
 import {FC, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-
-import {createTheme, ThemeProvider, TextField, InputAdornment, Button} from '@mui/material';
-import ChatInfoText from '@app/components/ChatInfoText';
-
-import {IoMdSend} from 'react-icons/io';
 import {BsPaperclip} from 'react-icons/bs';
-import {FaHand} from 'react-icons/fa6';
 import {CgArrowLongLeft} from 'react-icons/cg';
+import {FaHand} from 'react-icons/fa6';
+import {IoMdSend} from 'react-icons/io';
+import {useNavigate} from 'react-router-dom';
+import ChatInfoText from '@app/components/ChatInfoText';
+import {Button, createTheme, InputAdornment, TextField, ThemeProvider} from '@mui/material';
 
 import logo from '../../common/assets/chatLogo.png';
 import profile2 from '../../common/assets/profile2.jpeg';

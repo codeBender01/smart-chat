@@ -1,12 +1,9 @@
 import {FC} from 'react';
-
-import {useNavigate} from 'react-router-dom';
-
-import {Outlet} from 'react-router-dom';
-import Header from '@app/components/Header';
-import Footer from '@app/components/Footer';
-
 import {CgArrowLongLeft} from 'react-icons/cg';
+import {useNavigate} from 'react-router-dom';
+import {Outlet} from 'react-router-dom';
+import Footer from '@app/components/Footer';
+import Header from '@app/components/Header';
 
 const MainLayoutMobile: FC = () => {
     const navigate = useNavigate();

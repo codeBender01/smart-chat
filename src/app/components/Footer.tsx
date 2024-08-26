@@ -1,12 +1,11 @@
 import {FC} from 'react';
-
-import logo from '../../common/assets/logo.png';
-import facebook from '../../common/assets/facebook.png';
-import twitter from '../../common/assets/twitter.png';
-import instagram from '../../common/assets/instagram.png';
-import telegram from '../../common/assets/telegram.png';
-
 import {PiGlobe} from 'react-icons/pi';
+
+import facebook from '../../common/assets/facebook.png';
+import instagram from '../../common/assets/instagram.png';
+import logo from '../../common/assets/logo.png';
+import telegram from '../../common/assets/telegram.png';
+import twitter from '../../common/assets/twitter.png';
 
 const Footer: FC = () => {
     return (

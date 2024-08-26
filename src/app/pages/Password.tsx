@@ -1,8 +1,6 @@
 import {FC, useState} from 'react';
-
-import {FormControl, InputLabel, InputAdornment, IconButton, OutlinedInput, createTheme, ThemeProvider, Button} from '@mui/material';
-
 import {IoEyeOffOutline, IoEyeOutline} from 'react-icons/io5';
+import {Button, createTheme, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, ThemeProvider} from '@mui/material';
 
 const Password: FC = () => {
     const [showPassword, setShowPassword] = useState(false);

@@ -1,7 +1,6 @@
 import {FC, useState} from 'react';
 import {useMediaQuery} from 'react-responsive';
-
-import {Tabs, Tab, Box, createTheme, ThemeProvider, Button} from '@mui/material';
+import {Box, Button, createTheme, Tab, Tabs, ThemeProvider} from '@mui/material';
 
 interface TabPanelProps {
     children?: React.ReactNode;

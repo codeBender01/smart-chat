@@ -1,10 +1,8 @@
 import {FC} from 'react';
-import {useNavigate, useLocation} from 'react-router-dom';
 import {useMediaQuery} from 'react-responsive';
-
-import Header from '@app/components/Header';
-
+import {useLocation, useNavigate} from 'react-router-dom';
 import {Outlet} from 'react-router-dom';
+import Header from '@app/components/Header';
 
 const links = [
     {
