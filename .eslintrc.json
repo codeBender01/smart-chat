@@ -33,27 +33,27 @@
                 ]
             }
         ],
-        "prettier/prettier": ["error", {"endOfLine": "auto"}],
+        "prettier/prettier": ["error", {"endOfLine": "auto"}]
         //    "no-restricted-imports": ["warn", {
         //      "patterns": [{
         //        "group": ["../..*", "src"],
         //        "message": "\n\nOnly same-folder relative import is accepted. In other cases try to avoid it:\n - Double-check if classes or functions you are using can be moved to the one of internal packages like '@components', '@styles', '@services' etc. \n - Think about introducing a new internal package that can be reused"
         //      }]
         //    }],
-        "simple-import-sort/imports": [
-            "error",
-            {
-                "groups": [
-                    // Packages `react` related packages come first.
-                    ["^react(.*)", "^(?!@style|@components|@services|@models|@redux)(?!src/(.*))@?[\\w\\-/_]*"],
-                    // Internal packages.
-                    ["^@style(/)?(.*)$", "^@components/(.*)$", "^@services(/)?(.*)$", "^@models/(.*)$", "^@redux(/)?(.*)$"],
-                    // Parent imports. Put `..` last.
-                    ["^src/(.*)", "^\\.\\.(?!/?$)", "^\\.\\./?$"],
-                    // Other relative imports. Put same-folder imports and `.` last.
-                    ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
-                ]
-            }
-        ]
+        // "simple-import-sort/imports": [
+        //     "error",
+        //     {
+        //         "groups": [
+        //             // Packages `react` related packages come first.
+        //             ["^react(.*)", "^(?!@style|@components|@services|@models|@redux)(?!src/(.*))@?[\\w\\-/_]*"],
+        //             // Internal packages.
+        //             ["^@style(/)?(.*)$", "^@components/(.*)$", "^@services(/)?(.*)$", "^@models/(.*)$", "^@redux(/)?(.*)$"],
+        //             // Parent imports. Put `..` last.
+        //             ["^src/(.*)", "^\\.\\.(?!/?$)", "^\\.\\./?$"],
+        //             // Other relative imports. Put same-folder imports and `.` last.
+        //             ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+        //         ]
+        //     }
+        // ]
     }
 }

@@ -1,4 +1,5 @@
 import {FC, RefObject, useEffect, useRef, useState} from 'react';
+import {FaPenAlt} from 'react-icons/fa';
 import {IoMdOptions, IoMdSearch} from 'react-icons/io';
 import {useMediaQuery} from 'react-responsive';
 import {useNavigate} from 'react-router-dom';
@@ -380,7 +381,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
 
             {/* ///////////// chat support //////// */}
 
-            <div ref={cursor} id="cursor"></div>
+            <div ref={cursor} id="cursor" className="cursor-invisible">
+                <FaPenAlt />
+            </div>
 
             <div
                 onScroll={e => {
@@ -389,8 +392,14 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                     }
                 }}
                 className="overflow-y-auto max-h-[85vh] pb-12 cursor-none"
-                onMouseEnter={() => cursor.current?.classList.add('cursor')}
-                onMouseLeave={() => cursor.current?.classList.remove('cursor')}
+                onMouseEnter={() => {
+                    cursor.current?.classList.remove('cursor-invisible');
+                    cursor.current?.classList.add('cursor');
+                }}
+                onMouseLeave={() => {
+                    cursor.current?.classList.add('cursor-invisible');
+                    cursor.current?.classList.remove('cursor');
+                }}
             >
                 <div className="min-h-[100vh]">
                     {isAdmin ? null : (

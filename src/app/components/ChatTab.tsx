@@ -1,5 +1,6 @@
 import {FC, RefObject, useEffect, useRef} from 'react';
 import {FaStar} from 'react-icons/fa';
+import {FaPenAlt} from 'react-icons/fa';
 import {IoCarSharp} from 'react-icons/io5';
 import {MdOutlineLocationOn} from 'react-icons/md';
 import {RiArchiveLine} from 'react-icons/ri';
@@ -51,7 +52,9 @@ const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColo
 
     return (
         <>
-            <div ref={cursor} id="cursor"></div>
+            <div ref={cursor} id="cursor" className="cursor-invisible">
+                <FaPenAlt />
+            </div>
             <div
                 onClick={() => {
                     if (isMobile) {
@@ -60,8 +63,14 @@ const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColo
                     }
                     navigate(`/chat-view/${chatId}`, {state: isPackage});
                 }}
-                onMouseEnter={() => cursor.current?.classList.add('cursor')}
-                onMouseLeave={() => cursor.current?.classList.remove('cursor')}
+                onMouseEnter={() => {
+                    cursor.current?.classList.remove('cursor-invisible');
+                    cursor.current?.classList.add('cursor');
+                }}
+                onMouseLeave={() => {
+                    cursor.current?.classList.add('cursor-invisible');
+                    cursor.current?.classList.remove('cursor');
+                }}
                 className={`${
                     location.pathname.includes(`/chat-view/${chatId}`) ? 'bg-activeChatGray' : 'bg-paleGray'
                 } w-[100%] border-b-[1px] border-borderGray py-4 px-2 flex gap-2 hover:bg-activeChatGray duration-200 cursor-none`}
