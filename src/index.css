@@ -1,10 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'QuicksandReg';
+        src: url('../public/fonts/QuicksandMedium.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'QuicksandLight';
+        src: url('../public/fonts/Quicksand-Light.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'QuicksandBold';
+        src: url('../public/fonts/Quicksand-Bold.ttf');
+    }
+
+    @font-face {
+        font-family: 'OpenReg';
+        src: url('../public/fonts/OpenSansRegular.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'OpenBold';
+        src: url('../public/fonts/OpenSans-Bold.ttf') format('truetype');
+    }
+
+    @font-face {
+        font-family: 'OpenLight';
+        src: url('../public/fonts/OpenSans-Light.ttf'), format('truetype');
+    }
+
+    @font-face {
+        font-family: 'Lato';
+        src: url('../public/fonts/Lato-Regular.ttf') format('truetype');
+    }
+}
+
 body {
     margin: 0;
-    font-family: 'Quicksand', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-    /*-webkit-tap-highlight-color: transparent;*/
+    /* font-family: 'Quicksand', sans-serif; */
+    /* -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; */
+    /* -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-tap-highlight-color: transparent; */
 }
 
 html {

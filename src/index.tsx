@@ -1,17 +1,14 @@
-import React from 'react';
 import {render} from 'react-dom';
 import './index.css';
 import 'reflect-metadata';
 
 import App from './app/components/App';
-import {initStore} from './common/store/initStore';
 import reportWebVitals from './reportWebVitals';
 
 // renderApp(document.getElementById('root') as HTMLElement);
 
 export function renderApp(element: HTMLElement) {
-    const {store, history} = initStore();
-    return render(<App store={store} history={history}></App>, element);
+    return render(<App></App>, element);
 }
 
 renderApp(document.getElementById('root') as HTMLElement);

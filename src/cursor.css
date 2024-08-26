@@ -1,0 +1,9 @@
+.cursor {
+    position: fixed;
+    width: 15px;
+    height: 15px;
+    transition: width 0.3s, height 0.3s;
+    pointer-events: none;
+    background-image: url('./common/assets/pen-cursor.svg');
+    background-size: contain;
+}

@@ -1,10 +1,7 @@
 import React from 'react';
 import {IntlProvider} from 'react-intl';
-import {Provider} from 'react-redux';
+import {BrowserRouter} from 'react-router-dom';
 import {makeStyles} from '@mui/styles';
-import {History} from 'history';
-import {Container} from 'inversify';
-import {Store} from 'redux';
 
 import {CustomTheme, CustomThemeProvider} from '@style';
 import {ModalProvider} from '@components/modal/ModalProvider';
@@ -16,42 +13,37 @@ import {AppRoutes} from '../routing/AppRoutes';
 const useStyles = makeStyles<CustomTheme>(theme => ({
     container: {
         background: theme.palette.background.default,
-        marginTop: `${theme.spacing(8)}`,
+        // marginTop: `${theme.spacing(8)}`,
         minHeight: '100vh',
     },
 }));
 
-type AppProps = {
-    store: Store;
-    history: History<unknown>;
-};
-
-function AppInner({history}: Pick<AppProps, 'history'>) {
+function AppInner() {
     const classes = useStyles();
 
     return (
         <>
-            <Alert />
+            {/* <Alert /> */}
             <div className={classes.container}>
-                <AppRoutes history={history} />
+                <AppRoutes />
             </div>
         </>
     );
 }
 
-function App({store, history}: AppProps) {
+function App() {
     const locale: Locale = 'en';
 
     return (
-        <Provider store={store}>
-            <IntlProvider locale={locale}>
-                <CustomThemeProvider locale={locale}>
+        <IntlProvider locale={locale}>
+            <CustomThemeProvider locale={locale}>
+                <BrowserRouter>
                     <ModalProvider>
-                        <AppInner history={history} />
+                        <AppInner />
                     </ModalProvider>
-                </CustomThemeProvider>
-            </IntlProvider>
-        </Provider>
+                </BrowserRouter>
+            </CustomThemeProvider>
+        </IntlProvider>
     );
 }
 

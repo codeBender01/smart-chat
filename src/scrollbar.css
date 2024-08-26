@@ -1,0 +1,21 @@
+.chatlist::-webkit-scrollbar {
+    width: 2px !important;
+}
+
+.chatlist {
+    overflow: auto;
+}
+
+.chatlist::-webkit-scrollbar-track,
+#chatbody::-webkit-scrollbar-track {
+    background-color: #f7f7f7;
+}
+
+.chatlist::-webkit-scrollbar-thumb,
+#chatbody::-webkit-scrollbar-thumb {
+    background-color: #4c52588b;
+}
+
+#chatbody::-webkit-scrollbar {
+    width: 4px !important;
+}

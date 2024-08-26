@@ -9,26 +9,28 @@ import {clearAlertAction} from '../actions';
 
 export function Alert() {
     const autoHideDuration = 5000;
-    const dispatch = useDispatch();
-    const message = useSelector((state: RootState) => state?.alert?.message);
-    const values = useSelector((state: RootState) => state?.alert?.values);
-    const isError = useSelector((state: RootState) => state?.alert?.isError);
+    // const dispatch = useDispatch();
+    // const message = useSelector((state: RootState) => state?.alert?.message);
+    // const values = useSelector((state: RootState) => state?.alert?.values);
+    // const isError = useSelector((state: RootState) => state?.alert?.isError);
 
     function handleSnackbarClose(_: React.SyntheticEvent<unknown> | Event, reason: string) {
         if (reason !== 'clickaway') {
-            clearAlertState();
+            // clearAlertState();
         }
     }
 
-    function clearAlertState() {
-        dispatch(clearAlertAction());
-    }
+    // function clearAlertState() {
+    //     dispatch(clearAlertAction());
+    // }
 
     return (
-        <Snackbar open={!!message} autoHideDuration={autoHideDuration} onClose={handleSnackbarClose}>
-            <MuiAlert variant="filled" severity={isError ? 'error' : 'success'} onClose={clearAlertState}>
-                {message ? <LocalizedText label={message} labelParams={values} /> : null}
-            </MuiAlert>
-        </Snackbar>
+        // <Snackbar open={!!message} autoHideDuration={autoHideDuration} onClose={handleSnackbarClose}>
+        //     <MuiAlert variant="filled" severity={isError ? 'error' : 'success'} onClose={clearAlertState}>
+        //         {message ? <LocalizedText label={message} labelParams={values} /> : null}
+        //     </MuiAlert>
+        // </Snackbar>
+
+        <div></div>
     );
 }

@@ -62,14 +62,7 @@ module.exports = env => {
                     ],
                     exclude: '/node_modules/',
                 },
-                {
-                    test: /\.(png|jpe?g|gif)$/i,
-                    use: [
-                        {
-                            loader: 'file-loader',
-                        },
-                    ],
-                },
+
                 {
                     test: /\.jsx?$/,
                     use: ['babel-loader'],
@@ -80,14 +73,19 @@ module.exports = env => {
                     test: /\.svg$/,
                     use: ['@svgr/webpack', 'file-loader'],
                 },
+                // {
+                //     test: /\.css$/,
+                //     use: ['style-loader', 'css-loader'],
+                //     exclude: '/node_modules/',
+                // },
                 {
-                    test: /\.css$/,
-                    use: ['style-loader', 'css-loader'],
-                    exclude: '/node_modules/',
+                    test: /\.css$/i,
+                    include: path.resolve(__dirname, 'src'),
+                    use: ['style-loader', 'css-loader', 'postcss-loader'],
                 },
                 {
-                    test: /\.(woff|woff2|eot|ttf|owdtf)$/,
-                    loader: 'file-loader',
+                    test: /\.(jpe?g|svg|png|gif|ico|eot|ttf|woff2?)(\?v=\d+\.\d+\.\d+)?$/i,
+                    type: 'asset/resource',
                 },
                 {
                     test: /\.m?js/,
