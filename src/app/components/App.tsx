@@ -7,13 +7,11 @@ import {CustomTheme, CustomThemeProvider} from '@style';
 import {ModalProvider} from '@components/modal/ModalProvider';
 
 import {Locale} from '../../common/style/theme';
-import {Alert} from '../../features/alerts/components/Alert';
 import {AppRoutes} from '../routing/AppRoutes';
 
 const useStyles = makeStyles<CustomTheme>(theme => ({
     container: {
         background: theme.palette.background.default,
-        // marginTop: `${theme.spacing(8)}`,
         minHeight: '100vh',
     },
 }));
