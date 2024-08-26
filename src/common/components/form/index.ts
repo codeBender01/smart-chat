@@ -1,0 +1,1 @@
+export {withFormController} from './FormControllerHoc';

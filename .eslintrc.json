@@ -1,0 +1,59 @@
+{
+    "extends": ["./node_modules/gts/"],
+    "plugins": ["node", "simple-import-sort", "import"],
+    "rules": {
+        "node/no-extraneous-import": [
+            2,
+            {
+                "allowModules": ["prop-types", "react-router", "history", "moment", "@testing-library/dom", "react-material-ui-carousel"]
+            }
+        ],
+        "node/no-unpublished-import": [
+            2,
+            {
+                "allowModules": ["redux-mock-store", "@testing-library/react", "@testing-library/jest-dom", "@testing-library/react-hooks"]
+            }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            {
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        "node/no-unpublished-require": [
+            "error",
+            {
+                "allowModules": [
+                    "html-webpack-plugin",
+                    "eslint-webpack-plugin",
+                    "webpackbar",
+                    "fork-ts-checker-webpack-plugin",
+                    "ts-nameof",
+                    "terser-webpack-plugin"
+                ]
+            }
+        ],
+        "prettier/prettier": ["error", {"endOfLine": "auto"}],
+        //    "no-restricted-imports": ["warn", {
+        //      "patterns": [{
+        //        "group": ["../..*", "src"],
+        //        "message": "\n\nOnly same-folder relative import is accepted. In other cases try to avoid it:\n - Double-check if classes or functions you are using can be moved to the one of internal packages like '@components', '@styles', '@services' etc. \n - Think about introducing a new internal package that can be reused"
+        //      }]
+        //    }],
+        "simple-import-sort/imports": [
+            "error",
+            {
+                "groups": [
+                    // Packages `react` related packages come first.
+                    ["^react(.*)", "^(?!@style|@components|@services|@models|@redux)(?!src/(.*))@?[\\w\\-/_]*"],
+                    // Internal packages.
+                    ["^@style(/)?(.*)$", "^@components/(.*)$", "^@services(/)?(.*)$", "^@models/(.*)$", "^@redux(/)?(.*)$"],
+                    // Parent imports. Put `..` last.
+                    ["^src/(.*)", "^\\.\\.(?!/?$)", "^\\.\\./?$"],
+                    // Other relative imports. Put same-folder imports and `.` last.
+                    ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+                ]
+            }
+        ]
+    }
+}

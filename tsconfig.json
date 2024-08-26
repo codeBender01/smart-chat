@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "target": "es2015",
+        "lib": ["es6", "dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "baseUrl": ".",
+        "paths": {
+            "@app/*": ["src/app/*"],
+            "@components/*": ["src/common/components/*"],
+            "@configs/*": ["src/app/configs/*"],
+            "@hooks/*": ["src/common/hooks/*"],
+            "@models/*": ["src/common/models/*"],
+            "@redux": ["src/common/redux/index.ts"],
+            "@redux/*": ["src/common/redux/*"],
+            "@services": ["src/common/services/index.ts"],
+            "@services/*": ["src/common/services/*"],
+            "@store/*": ["src/common/store/*"],
+            "@style": ["src/common/style/index.ts"],
+            "@utils": ["src/common/utils/index.ts"]
+        },
+        "types": ["reflect-metadata"],
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "include": ["src"]
+}
