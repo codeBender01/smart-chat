@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import {createTheme, ThemeProvider, TextField, InputAdornment} from '@mui/material';
@@ -19,14 +19,14 @@ const suggestions = [
         colorCode: '#A0D6FF',
     },
     {
-        label: 'Report a service problem',
-        value: 'service',
-        colorCode: '#FF9A9A',
-    },
-    {
         label: 'Leave review',
         value: 'review',
         colorCode: '#B3E5B4',
+    },
+    {
+        label: 'Report a service problem',
+        value: 'service',
+        colorCode: '#FF9A9A',
     },
     {
         label: 'Suggest improvements',
@@ -78,9 +78,11 @@ const ChatSupportWindow: FC = () => {
 
     const navigate = useNavigate();
 
-    document.body.addEventListener('click', () => {
-        setIsSuggestionsOpen(false);
-    });
+    useEffect(() => {
+        document.body.addEventListener('click', () => {
+            setIsSuggestionsOpen(false);
+        });
+    }, []);
 
     const theme = createTheme({
         components: {
@@ -149,12 +151,12 @@ const ChatSupportWindow: FC = () => {
             </div>
 
             <div
-                className={`flex-1 overflow-y-auto  flex flex-col py-6 px-4 gap-6 z-10 ${
+                className={`flex-1 overflow-y-auto  flex flex-col py-3 px-4 gap-6 z-10 ${
                     !isMessageSent ? 'justify-center items-center' : ''
                 }`}
             >
                 {isMessageSent || option === 'help' || option === 'service' ? (
-                    <div className="min-h-[400vh] flex flex-col p-8 gap-6 z-10">
+                    <div className=" flex flex-col gap-6 z-10">
                         <div className="flex gap-2 items-center">
                             <div
                                 className="w-[36px] h-[36px] rounded-round"
@@ -179,7 +181,7 @@ const ChatSupportWindow: FC = () => {
                             ></div>
                             <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
                                 <p>Select one of the tags that matches your request to make the process easier</p>
-                                <div className="flex gap-3 items-center flex-wrap mt-4">
+                                <div className="flex gap-4 items-center flex-wrap mt-4">
                                     {suggestions.map(sug => {
                                         return (
                                             <div
@@ -188,7 +190,7 @@ const ChatSupportWindow: FC = () => {
                                                 style={{
                                                     backgroundColor: sug.colorCode,
                                                 }}
-                                                className={`text-textColor text-default font-mainSans rounded-medium w-fit py-1 px-4 hover:opacity-85 duration-200 cursor-pointer`}
+                                                className={`text-textColor flex-wrap text-default font-mainSans rounded-medium w-fit py-1 px-2 hover:opacity-85 duration-200 cursor-pointer`}
                                             >
                                                 {sug.label}
                                             </div>
@@ -352,7 +354,7 @@ const ChatSupportWindow: FC = () => {
                 )}
             </div>
 
-            <div className="px-4 mb-6">
+            <div className="px-4 mb-2">
                 <ThemeProvider theme={theme}>
                     <TextField
                         placeholder="Write a message..."

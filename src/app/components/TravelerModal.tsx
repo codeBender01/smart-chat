@@ -27,28 +27,28 @@ const TravelerModal: FC<TravelerModalProps> = ({open, setOpen}) => {
                     </div>
                 </div>
 
-                <div className="h-[280px] w-[380px] self-center">
-                    <img src={money} alt="" className="h-[100%] w-[100%] object-cover" />
+                <div className="breakpoint:h-[280px] breakpoint:w-[380px] self-center">
+                    <img src={money} alt="" className="h-[100%] w-[100%] max-w-[100%] object-cover" />
                 </div>
 
-                <div className="flex items-center justify-between w-[65%] mt-2">
-                    <div>
+                <div className="flex items-center justify-between w-[80%] breakpoint:w-[65%] mt-2">
+                    <div className="flex flex-col items-center">
                         <div className="text-textColor font-boldSans text-default">Krakov</div>
                         <div className="text-lineGray text-sm font-mainSans">18.07.2023 </div>
                     </div>
                     <div className="text-textColor text-[22px]">
                         <IoIosSubway />
                     </div>
-                    <div>
+                    <div className="flex flex-col items-center">
                         <div className="text-textColor font-boldSans text-default">Minsk</div>
                         <div className="text-lineGray text-sm font-mainSans">18.07.2023 </div>
                     </div>
                 </div>
-                <div className="flex mt-2 px-4 items-center gap-[2px]">
+                <div className="flex ml-auto breakpoint:ml-0 mt-2 px-4 w-[95%] items-center gap-[2px]">
                     <div className="w-[8px] h-[8px] bg-logoGreen rounded-round"></div>
-                    <div className="w-[58%] bg-logoGreen h-[2px]"></div>
+                    <div className="w-[72%] breakpoint:w-[58%] bg-logoGreen h-[2px]"></div>
                     <div className="w-[8px] h-[8px] bg-logoGreen rounded-round"></div>
-                    <div className="w-[35%] bg-lineGray h-[2px]"></div>
+                    <div className="w-[30%] breakpoint:w-[35%] bg-lineGray h-[2px]"></div>
                     <div className="w-[8px] h-[8px] bg-lineGray rounded-round"></div>
                 </div>
 
