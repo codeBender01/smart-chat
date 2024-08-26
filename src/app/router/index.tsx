@@ -6,11 +6,20 @@ import Loading from '@app/layouts/Loading';
 
 //layouts
 const MainLayout = lazy(() => import('../layouts/MainLayout'));
+const MainLayoutMobile = lazy(() => import('../layouts/MainLayoutMobile'));
+const SettingsLayout = lazy(() => import('../layouts/SettingsLayout'));
+const SettingsMobileLayout = lazy(() => import('../layouts/SettingsMobileLayout'));
 
+//pages
 const ChatWindow = lazy(() => import('../pages/ChatWindow'));
 const BlankPage = lazy(() => import('../pages/BlankPage'));
 const ChatSupportWindow = lazy(() => import('../pages/CharSupportWindow'));
 const TermsAndConditions = lazy(() => import('../pages/TermsAndConditions'));
+const Password = lazy(() => import('../pages/Password'));
+const Currency = lazy(() => import('../pages/Currency'));
+const Language = lazy(() => import('../pages/Language'));
+const Payments = lazy(() => import('../pages/Payments'));
+const Account = lazy(() => import('../pages/Account'));
 
 export default function Router() {
     const routes = useRoutes([
@@ -69,6 +78,80 @@ export default function Router() {
                 {
                     element: <TermsAndConditions />,
                     path: '/about',
+                },
+            ],
+        },
+        {
+            element: (
+                <Suspense fallback={<Loading />}>
+                    <MainLayoutMobile />
+                </Suspense>
+            ),
+            path: '/about-mobile',
+            children: [
+                {
+                    element: <TermsAndConditions />,
+                    path: '/about-mobile',
+                },
+            ],
+        },
+        {
+            element: (
+                <Suspense fallback={<Loading />}>
+                    <SettingsLayout />
+                </Suspense>
+            ),
+            path: '/settings',
+            children: [
+                {
+                    element: <Password />,
+                    path: '/settings/password',
+                },
+                {
+                    element: <Currency />,
+                    path: '/settings/currency',
+                },
+                {
+                    element: <Language />,
+                    path: '/settings/language',
+                },
+                {
+                    element: <Account />,
+                    path: '/settings/account',
+                },
+                {
+                    element: <Payments />,
+                    path: '/settings/payments',
+                },
+            ],
+        },
+        {
+            element: (
+                <Suspense fallback={<Loading />}>
+                    <SettingsMobileLayout />
+                </Suspense>
+            ),
+            path: '/settings-mob',
+            children: [
+                {
+                    element: <Password />,
+                    path: '/settings-mob/password',
+                },
+                {
+                    element: <Currency />,
+                    path: '/settings-mob/currency',
+                },
+                {
+                    element: <Language />,
+                    path: '/settings-mob/language',
+                },
+                {
+                    element: <Payments />,
+                    path: '/settings-mob/payments',
+                },
+                {
+                    element: <Account />,
+                    path: '/settings-mob/account',
                 },
             ],
         },

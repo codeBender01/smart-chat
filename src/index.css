@@ -48,7 +48,3 @@ body {
     -webkit-tap-highlight-color: transparent;
     background-color: #fff;
 }
-
-html {
-    min-width: 520px;
-}
