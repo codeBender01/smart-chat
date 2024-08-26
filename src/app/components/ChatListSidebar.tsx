@@ -154,6 +154,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
             MuiTextField: {
                 styleOverrides: {
                     root: {
+                        '& .MuiInputBase-input:focus': {
+                            boxShadow: 'none',
+                        },
                         '& .MuiInputBase-input::placeholder': {
                             fontFamily: 'OpenReg, sans-serif',
                             fontSize: '16px',

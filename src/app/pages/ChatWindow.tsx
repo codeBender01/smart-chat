@@ -72,6 +72,9 @@ const ChatWindow: FC = () => {
                             padding: '12px 18px',
                             fontFamily: 'OpenReg, sans-serif',
                         },
+                        '& .MuiInputBase-input:focus': {
+                            boxShadow: 'none',
+                        },
                         input: {
                             '::placeholder': {
                                 color: '#282D41',
