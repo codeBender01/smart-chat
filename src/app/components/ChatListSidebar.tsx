@@ -1,4 +1,5 @@
 import {FC, RefObject, useEffect, useRef, useState} from 'react';
+import {CgArrowLongLeft} from 'react-icons/cg';
 import {FaPenAlt} from 'react-icons/fa';
 import {IoMdOptions, IoMdSearch} from 'react-icons/io';
 import {useMediaQuery} from 'react-responsive';
@@ -77,6 +78,52 @@ const roles = [
     },
 ];
 
+const travelers = [
+    {
+        id: 1,
+        title: 'Optimal',
+        value: 'Optimal',
+    },
+    {
+        id: 2,
+        title: 'Small parcel',
+        value: 'Small parcel',
+    },
+    {
+        id: 3,
+        title: 'Light parcel',
+        value: 'Light parcel',
+    },
+    {
+        id: 4,
+        title: 'High price',
+        value: 'High price',
+    },
+];
+
+const customers = [
+    {
+        id: 1,
+        title: 'Optimal',
+        value: 'Optimal',
+    },
+    {
+        id: 2,
+        title: 'Soon date',
+        value: 'Soon date',
+    },
+    {
+        id: 3,
+        title: 'Low price',
+        value: 'Low price',
+    },
+    {
+        id: 4,
+        title: 'Rating',
+        value: 'Rating',
+    },
+];
+
 interface ChatListSidebarProps {
     isAdmin: boolean;
 }
@@ -99,6 +146,8 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     const [selectedOption, setSelectedOption] = useState('All');
     const [selectedRole, setSelectedRole] = useState('');
     const [isFilterOpen, setIsFilterOpen] = useState(false);
+    const [isTraveler, setIsTraveler] = useState(false);
+    const [isCustomer, setIsCustomer] = useState(false);
 
     const navigate = useNavigate();
     const isMobile = useMediaQuery({query: '(max-width: 850px)'});
@@ -110,6 +159,11 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     const handleRoleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.stopPropagation();
         setSelectedRole((event.target as HTMLInputElement).value);
+        if (event.target.value === 'traveler') {
+            setIsTraveler(true);
+        } else if (event.target.value === 'customer') {
+            setIsCustomer(true);
+        }
     };
 
     const cursor = useRef<HTMLDivElement>(null);
@@ -338,44 +392,160 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             transition: 'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
                             opacity: isFilterOpen ? '1' : '0',
                             zIndex: isFilterOpen ? 1 : -1,
+                            overflow: 'hidden',
                         }}
                     >
-                        <div className="text-md font-boldQuick text-textColor">Filter by role</div>
-                        <FormControl>
-                            <RadioGroup
-                                aria-labelledby="demo-radio-buttons-group-label"
-                                defaultValue="all"
-                                name="radio-buttons-group"
-                                onChange={handleRoleSelect}
-                                sx={{
-                                    '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
-                                        color: '#15C370',
-                                    },
+                        <div
+                            style={{
+                                display: isTraveler || isCustomer ? 'none' : 'initial',
+                            }}
+                        >
+                            <div className="text-md font-boldQuick text-textColor">Filter by role</div>
+                            <FormControl>
+                                <RadioGroup
+                                    aria-labelledby="demo-radio-buttons-group-label"
+                                    defaultValue="all"
+                                    name="radio-buttons-group"
+                                    onChange={handleRoleSelect}
+                                    sx={{
+                                        '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
+                                            color: '#15C370',
+                                        },
 
-                                    '& .MuiFormControlLabel-root': {
-                                        height: '24px',
-                                    },
-                                    gap: '12px',
-                                    marginTop: '16px',
+                                        '& .MuiFormControlLabel-root': {
+                                            height: '24px',
+                                        },
+                                        gap: '12px',
+                                        marginTop: '16px',
+                                    }}
+                                >
+                                    {roles.map(r => {
+                                        return (
+                                            <FormControlLabel
+                                                value={r.value}
+                                                control={<Radio />}
+                                                label={r.title}
+                                                key={r.id}
+                                                sx={{
+                                                    '& .MuiTypography-root': {
+                                                        color: r.value === selectedRole ? '#15C370' : '#838383', // Change colors as needed
+                                                    },
+                                                }}
+                                            />
+                                        );
+                                    })}
+                                </RadioGroup>
+                            </FormControl>
+                        </div>
+
+                        {isTraveler ? (
+                            <div
+                                style={{
+                                    display: isTraveler ? 'initial' : 'none',
                                 }}
                             >
-                                {roles.map(r => {
-                                    return (
-                                        <FormControlLabel
-                                            value={r.value}
-                                            control={<Radio />}
-                                            label={r.title}
-                                            key={r.id}
-                                            sx={{
-                                                '& .MuiTypography-root': {
-                                                    color: r.value === selectedRole ? '#15C370' : '#838383', // Change colors as needed
-                                                },
-                                            }}
-                                        />
-                                    );
-                                })}
-                            </RadioGroup>
-                        </FormControl>
+                                <div className="text-md font-boldQuick text-textColor">Sort by</div>
+                                <FormControl>
+                                    <RadioGroup
+                                        aria-labelledby="demo-radio-buttons-group-label"
+                                        defaultValue="all"
+                                        name="radio-buttons-group"
+                                        onChange={handleRoleSelect}
+                                        sx={{
+                                            '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
+                                                color: '#15C370',
+                                            },
+
+                                            '& .MuiFormControlLabel-root': {
+                                                height: '24px',
+                                            },
+                                            gap: '12px',
+                                            marginTop: '16px',
+                                        }}
+                                    >
+                                        {travelers.map(r => {
+                                            return (
+                                                <FormControlLabel
+                                                    value={r.value}
+                                                    control={<Radio />}
+                                                    label={r.title}
+                                                    key={r.id}
+                                                    sx={{
+                                                        '& .MuiTypography-root': {
+                                                            color: r.value === selectedRole ? '#15C370' : '#838383', // Change colors as needed
+                                                        },
+                                                    }}
+                                                />
+                                            );
+                                        })}
+                                    </RadioGroup>
+                                </FormControl>
+                                <div
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        setIsTraveler(false);
+                                    }}
+                                    className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit p-2 cursor-pointer duration-200 font-boldSans"
+                                >
+                                    <CgArrowLongLeft />
+                                    Reset role
+                                </div>
+                            </div>
+                        ) : null}
+                        {isCustomer ? (
+                            <div
+                                style={{
+                                    display: isTraveler ? 'none' : 'initial',
+                                }}
+                            >
+                                <div className="text-md font-boldQuick text-textColor">Filter by role</div>
+                                <FormControl>
+                                    <RadioGroup
+                                        aria-labelledby="demo-radio-buttons-group-label"
+                                        defaultValue="all"
+                                        name="radio-buttons-group"
+                                        onChange={handleRoleSelect}
+                                        sx={{
+                                            '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
+                                                color: '#15C370',
+                                            },
+
+                                            '& .MuiFormControlLabel-root': {
+                                                height: '24px',
+                                            },
+                                            gap: '12px',
+                                            marginTop: '16px',
+                                        }}
+                                    >
+                                        {customers.map(r => {
+                                            return (
+                                                <FormControlLabel
+                                                    value={r.value}
+                                                    control={<Radio />}
+                                                    label={r.title}
+                                                    key={r.id}
+                                                    sx={{
+                                                        '& .MuiTypography-root': {
+                                                            color: r.value === selectedRole ? '#15C370' : '#838383', // Change colors as needed
+                                                        },
+                                                    }}
+                                                />
+                                            );
+                                        })}
+                                    </RadioGroup>
+                                </FormControl>
+                                <div
+                                    onClick={e => {
+                                        e.stopPropagation();
+                                        setIsCustomer(false);
+                                    }}
+                                    className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit p-2 cursor-pointer duration-200 font-boldSans"
+                                >
+                                    <CgArrowLongLeft />
+                                    Reset role
+                                </div>
+                            </div>
+                        ) : null}
                     </div>
                 </div>
             </div>

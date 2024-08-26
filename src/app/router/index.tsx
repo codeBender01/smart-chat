@@ -20,6 +20,7 @@ const Currency = lazy(() => import('../pages/Currency'));
 const Language = lazy(() => import('../pages/Language'));
 const Payments = lazy(() => import('../pages/Payments'));
 const Account = lazy(() => import('../pages/Account'));
+const AdminChatSupportWindow = lazy(() => import('../pages/AdminChatSupportWindow'));
 
 export default function Router() {
     const routes = useRoutes([
@@ -152,6 +153,34 @@ export default function Router() {
                 {
                     element: <Account />,
                     path: '/settings-mob/account',
+                },
+            ],
+        },
+        {
+            element: (
+                <Suspense fallback={<Loading />}>
+                    <ChatView />
+                </Suspense>
+            ),
+            path: '/admin',
+            children: [
+                {
+                    element: <AdminChatSupportWindow />,
+                    path: '/admin/:chat-id',
+                },
+            ],
+        },
+        {
+            element: (
+                <Suspense fallback={<Loading />}>
+                    <ChatViewMobile />
+                </Suspense>
+            ),
+            path: '/admin-mobile',
+            children: [
+                {
+                    element: <AdminChatSupportWindow />,
+                    path: '/admin-mobile/:chat-id',
                 },
             ],
         },
