@@ -1,6 +1,5 @@
-import {FC, RefObject, useEffect, useRef} from 'react';
+import {FC, RefObject} from 'react';
 import {FaStar} from 'react-icons/fa';
-import {FaPenAlt} from 'react-icons/fa';
 import {IoCarSharp} from 'react-icons/io5';
 import {MdOutlineLocationOn} from 'react-icons/md';
 import {RiArchiveLine} from 'react-icons/ri';
@@ -24,37 +23,14 @@ interface CursorProps {
     cursor: RefObject<HTMLDivElement>;
 }
 
-function moveCursor(e: MouseEvent, cursor: CursorProps['cursor']) {
-    const x = e.clientX;
-    const y = e.clientY;
-
-    if (cursor.current) {
-        cursor.current.style.left = `${x}px`;
-        cursor.current.style.top = `${y}px`;
-    }
-}
-
 const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColor, chatId}) => {
     const navigate = useNavigate();
     const location = useLocation();
 
     const isMobile = useMediaQuery({query: '(max-width: 850px)'});
-    const cursor = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => moveCursor(e, cursor);
-
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, []);
 
     return (
         <>
-            <div ref={cursor} id="cursor" className="cursor-invisible">
-                <FaPenAlt />
-            </div>
             <div
                 onClick={() => {
                     if (isMobile) {
@@ -63,17 +39,9 @@ const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColo
                     }
                     navigate(`/chat-view/${chatId}`, {state: isPackage});
                 }}
-                onMouseEnter={() => {
-                    cursor.current?.classList.remove('cursor-invisible');
-                    cursor.current?.classList.add('cursor');
-                }}
-                onMouseLeave={() => {
-                    cursor.current?.classList.add('cursor-invisible');
-                    cursor.current?.classList.remove('cursor');
-                }}
                 className={`${
                     location.pathname.includes(`/chat-view/${chatId}`) ? 'bg-activeChatGray' : 'bg-paleGray'
-                } w-[100%] border-b-[1px] border-borderGray py-4 px-2 flex gap-2 hover:bg-activeChatGray duration-200 cursor-none`}
+                } w-[100%] border-b-[1px] border-borderGray py-4 px-2 flex gap-2 hover:bg-activeChatGray duration-200 cursor-pointer`}
                 style={{}}
             >
                 <div

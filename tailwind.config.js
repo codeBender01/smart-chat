@@ -44,6 +44,7 @@ module.exports = {
                 service: '#FF9A9A',
                 suggestion: '#FFFFB3',
                 other: '#D3D3D3',
+                emailBg: '#191621',
             },
             fontFamily: {
                 opensans: 'Open Sans',
@@ -60,6 +61,7 @@ module.exports = {
 
             fontSize: {
                 xl: '32px',
+                lg2: '28px',
                 lg: '24px',
                 md2: '20px',
                 md: '18px',

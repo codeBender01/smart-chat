@@ -21,6 +21,7 @@ const Language = lazy(() => import('../pages/Language'));
 const Payments = lazy(() => import('../pages/Payments'));
 const Account = lazy(() => import('../pages/Account'));
 const AdminChatSupportWindow = lazy(() => import('../pages/AdminChatSupportWindow'));
+const EmailTemplate = lazy(() => import('../pages/EmailTemplate'));
 
 export default function Router() {
     const routes = useRoutes([
@@ -183,6 +184,14 @@ export default function Router() {
                     path: '/admin-mobile/:chat-id',
                 },
             ],
+        },
+        {
+            element: (
+                <Suspense fallback={<Loading />}>
+                    <EmailTemplate />
+                </Suspense>
+            ),
+            path: '/email',
         },
 
         {path: '*', element: <Navigate to="/chat-view" replace />},

@@ -132,16 +132,6 @@ interface CursorProps {
     cursor: RefObject<HTMLDivElement>;
 }
 
-function moveCursor(e: MouseEvent, cursor: CursorProps['cursor']) {
-    const x = e.clientX;
-    const y = e.clientY;
-
-    if (cursor.current) {
-        cursor.current.style.left = `${x}px`;
-        cursor.current.style.top = `${y}px`;
-    }
-}
-
 const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     const [selectedOption, setSelectedOption] = useState('All');
     const [selectedRole, setSelectedRole] = useState('');
@@ -169,15 +159,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     const cursor = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => moveCursor(e, cursor);
-
-        window.addEventListener('mousemove', handleMouseMove);
         document.body.addEventListener('click', () => {
             setIsFilterOpen(false);
         });
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
     }, []);
 
     const selectTheme = createTheme({
@@ -554,25 +538,13 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
 
             {/* ///////////// chat support //////// */}
 
-            <div ref={cursor} id="cursor" className="cursor-invisible">
-                <FaPenAlt />
-            </div>
-
             <div
                 onScroll={e => {
                     if (e.currentTarget.classList.contains('chatlist') === false) {
                         e.currentTarget.classList.add('chatlist');
                     }
                 }}
-                className="overflow-y-auto max-h-[85vh] pb-12 cursor-none"
-                onMouseEnter={() => {
-                    cursor.current?.classList.remove('cursor-invisible');
-                    cursor.current?.classList.add('cursor');
-                }}
-                onMouseLeave={() => {
-                    cursor.current?.classList.add('cursor-invisible');
-                    cursor.current?.classList.remove('cursor');
-                }}
+                className="overflow-y-auto max-h-[85vh] pb-12 cursor-pointer"
             >
                 <div className="min-h-[100vh]">
                     {isAdmin ? null : (
