@@ -304,14 +304,14 @@ export function createCustomTheme(locale: Locale, mode: PaletteMode = 'light'): 
                 // Typography -> Title
                 h4: {
                     fontStyle: 'normal',
-                    fontWeight: 500,
-                    fontSize: '24px',
+                    fontWeight: 600,
+                    fontSize: '20px',
                     lineHeight: '30px',
                 },
                 h5: {
                     fontStyle: 'normal',
                     fontWeight: 600,
-                    fontSize: '18px',
+                    fontSize: '14px',
                     lineHeight: '27px',
                     letterSpacing: '-1%',
                 },
@@ -344,6 +344,7 @@ export function createCustomTheme(locale: Locale, mode: PaletteMode = 'light'): 
                 subtitle1: {
                     fontStyle: 'normal',
                     fontWeight: 400,
+                    fontFamily: 'Open Sans',
                     fontSize: '14px',
                     lineHeight: '20px',
                     letterSpacing: '-0.3%',
@@ -360,7 +361,7 @@ export function createCustomTheme(locale: Locale, mode: PaletteMode = 'light'): 
                 },
                 // Typography -> Caption Caps
                 caption: {
-                    fontWeight: 500,
+                    fontWeight: 600,
                     fontSize: '10px',
                     lineHeight: '14px',
                     letterSpacing: '1px',

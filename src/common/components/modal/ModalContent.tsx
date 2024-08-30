@@ -8,7 +8,7 @@ const useStyles = makeStyles<CustomTheme>(theme => ({
         display: 'flex',
         flexDirection: 'column',
         gap: theme.spacing(2),
-        padding: theme.spacing(2),
+        padding: theme.spacing(0),
         overflowY: 'auto',
         margin: `0 ${theme.spacing(0.25)}`,
     },

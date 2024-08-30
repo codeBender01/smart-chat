@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {BsPaperclip} from 'react-icons/bs';
 import {CgArrowLongLeft} from 'react-icons/cg';
-import {IoIosInformationCircleOutline, IoMdCloseCircleOutline, IoMdMore, IoMdSend} from 'react-icons/io';
+import {IoMdMore, IoMdSend, IoIosInformationCircleOutline} from 'react-icons/io';
 import {MdEdit} from 'react-icons/md';
 import {TbRefresh} from 'react-icons/tb';
 import {useNavigate} from 'react-router-dom';
@@ -153,17 +153,23 @@ const ChatWindow: FC = () => {
                                 <LocalizedText label={{id: 'awaitingHandover', defaultMessage: 'pending confirmation'}} />
                             )}
                         </div>
-                        <div
-                            onClick={() => setIsTravelerModalOpen(true)}
-                            className="text-md2 text-textColor hover:text-lineGray duration-200 cursor-pointer"
-                        >
-                            <IoIosInformationCircleOutline />
-                        </div>
+                        <TravelerModal />
+
                         <div
                             className="text-md2 text-textColor hover:text-lineGray duration-200 cursor-pointer"
                             onClick={() => setIsModalOpen(true)}
                         >
-                            {isEmailSent ? <TbRefresh /> : <AddUser />}
+                            {isEmailSent ? (
+                                <TbRefresh />
+                            ) : (
+                                <AddUserModal
+                                    open={isModalOpen}
+                                    setOpen={setIsModalOpen}
+                                    isEmailSent={isEmailSent}
+                                    setIsEmailSent={setIsEmailSent}
+                                    setInviteModal={setIsApproveModal}
+                                />
+                            )}
                         </div>
                         <div className="relative">
                             <div
@@ -192,13 +198,7 @@ const ChatWindow: FC = () => {
                                     <IoIosInformationCircleOutline />
                                     <LocalizedText label={{id: 'reportProblem', defaultMessage: 'Report a problem'}} />
                                 </div>
-                                <div
-                                    onClick={() => setIsTerminateModal(true)}
-                                    className="flex items-center text-alertRed text-default py-[16px] px-[24px] font-mainSans gap-2 hover:opacity-80 duration-200 cursor-pointer"
-                                >
-                                    <IoMdCloseCircleOutline />
-                                    <LocalizedText label={{id: 'terminateDeal', defaultMessage: 'Terminate the deal'}} />
-                                </div>
+                                <TerminationModal isTerminated={isTerminated} setIsTerminated={setIsTerminated} />
                             </div>
                         </div>
                     </div>
@@ -219,20 +219,7 @@ const ChatWindow: FC = () => {
                             />
                         </p>
                     </div>
-                    <ThemeProvider theme={theme}>
-                        <Button
-                            variant="contained"
-                            sx={{
-                                zIndex: 1,
-                            }}
-                            onClick={() => {
-                                setIsDealApproved(true);
-                                setIsDealCompletedModalOpen(true);
-                            }}
-                        >
-                            Yes
-                        </Button>
-                    </ThemeProvider>
+                    <DealCompletedModal setIsDealApproved={setIsDealApproved} />
                 </div>
             </div>
 
@@ -325,24 +312,6 @@ const ChatWindow: FC = () => {
                     />
                 </ThemeProvider>
             </div>
-
-            <TravelerModal open={isTravelerModalOpen} setOpen={setIsTravelerModalOpen} />
-            <AddUserModal
-                open={isModalOpen}
-                setOpen={setIsModalOpen}
-                isEmailSent={isEmailSent}
-                setIsEmailSent={setIsEmailSent}
-                setInviteModal={setIsApproveModal}
-            />
-
-            <ApproveModal open={isApproveModal} setOpen={setIsApproveModal} />
-            <TerminationModal
-                open={isTerminateModal}
-                setOpen={setIsTerminateModal}
-                isTerminated={isTerminated}
-                setIsTerminated={setIsTerminated}
-            />
-            <DealCompletedModal open={isDealCompletedModalOpen} setOpen={setIsDealCompletedModalOpen} />
         </div>
     );
 };

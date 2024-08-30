@@ -3,6 +3,8 @@ import {FaStar} from 'react-icons/fa';
 import {useMediaQuery} from 'react-responsive';
 import {useNavigate} from 'react-router-dom';
 
+import {Typography} from '@mui/material';
+
 import profile1 from '../../common/assets/profile1.jpeg';
 import profile2 from '../../common/assets/profile2.jpeg';
 
@@ -41,11 +43,17 @@ const AdminChatTab: FC<ChatTabProps> = ({isPackage, name, rating, chatId, reques
             <div className="flex-1">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <div className="text-textColor font-mainQuick text-md2 ">{name}</div>
+                        <div>
+                            <Typography variant="h4">{name}</Typography>
+                        </div>
                         <div className="text-sm2 text-logoGreen">
                             <FaStar />
                         </div>
-                        <div className="text-xs text-textColor font-mainSans">{rating}</div>
+                        <div className="text-xs text-textColor font-mainSans">
+                            <Typography variant="caption" color={'#282D41'}>
+                                {rating}
+                            </Typography>
+                        </div>
                     </div>
                     <div className="text-lineGray text-sm font-mainSans uppercase">31 sep</div>
                 </div>

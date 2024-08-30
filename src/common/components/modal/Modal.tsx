@@ -4,12 +4,14 @@ import {makeStyles} from '@mui/styles';
 
 import {CustomTheme} from '@style';
 import {ModalContext} from '@components/modal/ModalProvider';
+import {maxWidth} from '@mui/system';
 
 const useStyles = makeStyles<CustomTheme>(theme => ({
     modal: {
         '& .MuiPaper-root': {
             borderRadius: theme.shape.borderRadius * 4,
-            padding: theme.spacing(1, 1, 0),
+            // padding: theme.spacing(1, 1, 0),
+            maxWidth: '840px',
         },
     },
 }));

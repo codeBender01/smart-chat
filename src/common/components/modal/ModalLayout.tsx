@@ -13,10 +13,8 @@ const useStyles = makeStyles<CustomTheme>(theme => ({
         display: 'flex',
         flexDirection: 'column',
         gap: theme.spacing(2),
-        padding: theme.spacing(4),
+        padding: theme.spacing(0),
         borderRadius: theme.shape.borderRadius * 5,
-
-        maxWidth: '500px',
 
         background: theme.palette.background.paper,
     },

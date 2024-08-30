@@ -1,8 +1,7 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {IntlProvider} from 'react-intl';
 import {BrowserRouter} from 'react-router-dom';
 import {makeStyles} from '@mui/styles';
-import {Provider} from 'react-redux';
 
 import {useTypedSelector} from '@store/initStore';
 
@@ -11,7 +10,6 @@ import messages from '../../common/lang';
 import {CustomTheme, CustomThemeProvider} from '@style';
 import {ModalProvider} from '@components/modal/ModalProvider';
 
-import {Locale} from '../../common/style/theme';
 import {AppRoutes} from '../routing/AppRoutes';
 
 const useStyles = makeStyles<CustomTheme>(theme => ({
@@ -37,9 +35,7 @@ function AppInner() {
 function App() {
     const lang = useTypedSelector(state => state.lang.lang);
 
-    useEffect(() => {
-        console.log(lang);
-    }, [lang]);
+    useEffect(() => {}, [lang]);
 
     return (
         <IntlProvider messages={messages[lang]} locale={lang}>

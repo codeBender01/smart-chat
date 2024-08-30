@@ -29,7 +29,7 @@ const links = [
     {
         label: 'Account',
         path: '/settings/account',
-        value: 'password',
+        value: 'account',
     },
 ];
 

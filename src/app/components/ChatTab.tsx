@@ -1,4 +1,4 @@
-import {FC, RefObject} from 'react';
+import {FC} from 'react';
 import {FaStar} from 'react-icons/fa';
 import {IoCarSharp} from 'react-icons/io5';
 import {MdOutlineLocationOn} from 'react-icons/md';
@@ -17,10 +17,6 @@ interface ChatTabProps {
     packageName: string;
     bgColor: string;
     chatId: number;
-}
-
-interface CursorProps {
-    cursor: RefObject<HTMLDivElement>;
 }
 
 const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColor, chatId}) => {

@@ -1,7 +1,6 @@
-import {FC, RefObject, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {useIntl} from 'react-intl';
 import {CgArrowLongLeft} from 'react-icons/cg';
-import {FaPenAlt} from 'react-icons/fa';
 import {IoMdOptions, IoMdSearch} from 'react-icons/io';
 import {useMediaQuery} from 'react-responsive';
 import {useNavigate} from 'react-router-dom';
@@ -130,10 +129,6 @@ interface ChatListSidebarProps {
     isAdmin: boolean;
 }
 
-interface CursorProps {
-    cursor: RefObject<HTMLDivElement>;
-}
-
 const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     const [selectedOption, setSelectedOption] = useState('All');
     const [selectedRole, setSelectedRole] = useState('All');
@@ -160,210 +155,174 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
         }
     };
 
-    const cursor = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
         document.body.addEventListener('click', () => {
             setIsFilterOpen(false);
         });
     }, []);
 
-    const selectTheme = createTheme({
-        components: {
-            MuiPaper: {
-                styleOverrides: {
-                    root: {
-                        borderRadius: '18px',
-                        height: '330px',
-                    },
-                },
-            },
-
-            MuiMenuList: {
-                styleOverrides: {
-                    root: {
-                        borderRadius: '18px',
-                    },
-                },
-            },
-
-            MuiMenuItem: {
-                styleOverrides: {
-                    root: {},
-                },
-            },
-
-            MuiTextField: {
-                styleOverrides: {
-                    root: {
-                        '& .MuiInputBase-input:focus': {
-                            boxShadow: 'none',
-                        },
-                        '& .MuiInputBase-input::placeholder': {
-                            fontFamily: 'OpenReg, sans-serif',
-                            fontSize: '16px',
-                            letterSpacing: '0.5px',
-                            outline: 'none',
-                        },
-                    },
-                },
-            },
-        },
-    });
-
     return (
         <div className="w-[100%] bg-paleGray min-[850px]:min-w-[380px] min-[850px]:w-[35%]  py-4 px-4 lg:min-w-[450px]" id="sidebar">
             <div className="flex items-center gap-6">
-                <ThemeProvider theme={selectTheme}>
-                    <div className="border-inputBorderGray border-[1px] rounded-pill w-[90%] min-[850px]:w-[95%] py-[8px] pl-[24px] flex items-center">
-                        <FormControl
-                            sx={{
-                                width: '5%',
-                                minWidth: '18px',
-                            }}
-                        >
-                            <Select
-                                id="search-filter"
-                                MenuProps={{
-                                    MenuListProps: {
+                <div className="border-inputBorderGray border-[1px] rounded-pill w-[90%] min-[850px]:w-[95%] py-[8px] pl-[24px] flex items-center">
+                    <FormControl
+                        sx={{
+                            width: '5%',
+                            minWidth: '18px',
+                        }}
+                    >
+                        <Select
+                            id="search-filter"
+                            MenuProps={{
+                                MenuListProps: {
+                                    sx: {
+                                        maxHeight: '330px',
+                                        overflowY: 'auto',
+                                        paddingBottom: '16px',
+                                        borderRadius: '18px',
+                                        '&::-webkit-scrollbar': {
+                                            width: '6px',
+                                        },
+                                        '&::-webkit-scrollbar-track': {
+                                            backgroundColor: '#F1F3F4',
+                                        },
+                                        '&::-webkit-scrollbar-thumb': {
+                                            backgroundColor: '#70757A',
+                                            borderRadius: '0',
+                                            '&:hover': {
+                                                backgroundColor: '#555',
+                                            },
+                                        },
+                                    },
+                                },
+                                slotProps: {
+                                    paper: {
                                         sx: {
-                                            maxHeight: '330px',
-                                            overflowY: 'auto',
-                                            paddingBottom: '16px',
-
-                                            '&::-webkit-scrollbar': {
-                                                width: '6px',
-                                            },
-                                            '&::-webkit-scrollbar-track': {
-                                                backgroundColor: '#F1F3F4',
-                                            },
-                                            '&::-webkit-scrollbar-thumb': {
-                                                backgroundColor: '#70757A',
-                                                borderRadius: '0',
-                                                '&:hover': {
-                                                    backgroundColor: '#555',
-                                                },
-                                            },
+                                            padding: '12px 8px',
+                                            overflow: 'hidden',
+                                            borderRadius: '18px',
+                                            height: '330px',
                                         },
                                     },
-                                    slotProps: {
-                                        paper: {
-                                            sx: {
-                                                padding: '12px 8px',
-                                                overflow: 'hidden',
-                                            },
-                                        },
-                                    },
-                                }}
-                                sx={{
-                                    border: 'none',
-                                    width: '100%',
-                                    '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                                        border: 'none',
-                                    },
-                                    '& .css-6hp17o-MuiList-root-MuiMenu-list': {
-                                        borderRadius: '18px !important',
-                                        minWidth: '350px',
-                                    },
-                                    '& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input':
-                                        {
-                                            paddingRight: 0,
-                                        },
-                                    '& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
-                                        padding: 0,
-                                        fontFamily: 'OpenReg',
-                                        fontSize: 12,
-                                        color: '#282D41',
-                                    },
-                                    '& .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiSelect-icon.MuiSelect-iconOutlined.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon, .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiSelect-icon.MuiSelect-iconOutlined.MuiSelect-iconOpen.css-bpeome-MuiSvgIcon-root-MuiSelect-icon':
-                                        {
-                                            left: '100%',
-                                        },
-                                }}
-                                value={selectedOption}
-                                onChange={handleChange}
-                                renderValue={selected => {
-                                    return (
-                                        <div className="w-[100%] font-boldSans text-ellipsis text-nowrap overflow-hidden">
-                                            <LocalizedText label={{id: selected}} />
-                                        </div>
-                                    );
-                                }}
-                            >
-                                {filterOptions.map(opt => {
-                                    return (
-                                        <MenuItem
-                                            sx={{
-                                                padding: '7px 16px',
-                                                '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
-                                                    color: '#15C370',
-                                                },
-                                                '& .MuiRadio-root.Mui-checked': {color: '#15C370'},
-                                                '&.Mui-selected': {
-                                                    backgroundColor: '#f7f7f7 !important',
-                                                    color: '#1C1B1F',
-                                                    fontSize: '16px',
-
-                                                    '&:hover': {
-                                                        backgroundColor: '#f7f7f7',
-                                                    },
-                                                },
-                                            }}
-                                            key={opt.id}
-                                            value={opt.value}
-                                        >
-                                            <FormControlLabel
-                                                value={opt.value}
-                                                control={<Radio checked={opt.value === selectedOption} />}
-                                                label={<LocalizedText label={{id: opt.name, defaultMessage: opt.name}} />}
-                                                sx={{
-                                                    '& .MuiTypography-root': {
-                                                        color: opt.value === selectedOption ? '#15C370' : '#1C1B1F',
-                                                    },
-                                                }}
-                                            />
-                                        </MenuItem>
-                                    );
-                                })}
-                            </Select>
-                        </FormControl>
-                        <div className="h-[20px] w-[1px] bg-lineGray ml-8 mr-4"></div>
-                        <TextField
+                                },
+                            }}
                             sx={{
-                                width: '90%',
-                                fontFamily: 'OpenReg',
-                                '& .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root': {
-                                    fontSize: '12px',
-                                    color: '#838383',
-                                    fontFamily: 'OpenReg',
-                                },
-                                '& input': {
-                                    padding: 0,
-                                    fontSize: '16px',
-                                },
-
-                                input: {
-                                    '&::placeholder': {
-                                        fontFamily: 'OpenReg, sans-serif',
-                                    },
-                                },
+                                border: 'none',
+                                width: '100%',
                                 '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
                                     border: 'none',
                                 },
+                                '& .css-6hp17o-MuiList-root-MuiMenu-list': {
+                                    borderRadius: '18px !important',
+                                    minWidth: '350px',
+                                },
+                                '& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input':
+                                    {
+                                        paddingRight: 0,
+                                    },
+                                '& .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input': {
+                                    padding: 0,
+                                    fontFamily: 'OpenReg',
+                                    fontSize: 12,
+                                    color: '#282D41',
+                                },
+                                '& .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiSelect-icon.MuiSelect-iconOutlined.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon, .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiSelect-icon.MuiSelect-iconOutlined.MuiSelect-iconOpen.css-bpeome-MuiSvgIcon-root-MuiSelect-icon':
+                                    {
+                                        left: '100%',
+                                    },
                             }}
-                            hiddenLabel
-                            id="filled-hidden-label-normal"
-                            placeholder={intl.formatMessage({id: 'searchInputSidebar', defaultMessage: 'Search by keywords'})}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IoMdSearch size={22} color="#15C370" />
-                                    </InputAdornment>
-                                ),
+                            value={selectedOption}
+                            onChange={handleChange}
+                            renderValue={selected => {
+                                return (
+                                    <div className="w-[100%] font-boldSans text-ellipsis text-nowrap overflow-hidden">
+                                        <LocalizedText label={{id: selected}} />
+                                    </div>
+                                );
                             }}
-                        />
-                    </div>
-                </ThemeProvider>
+                        >
+                            {filterOptions.map(opt => {
+                                return (
+                                    <MenuItem
+                                        sx={{
+                                            padding: '7px 16px',
+                                            '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
+                                                color: '#15C370',
+                                            },
+                                            '& .MuiRadio-root.Mui-checked': {color: '#15C370'},
+                                            '&.Mui-selected': {
+                                                backgroundColor: '#f7f7f7 !important',
+                                                color: '#1C1B1F',
+                                                fontSize: '16px',
+
+                                                '&:hover': {
+                                                    backgroundColor: '#f7f7f7',
+                                                },
+                                            },
+                                        }}
+                                        key={opt.id}
+                                        value={opt.value}
+                                    >
+                                        <FormControlLabel
+                                            value={opt.value}
+                                            control={<Radio checked={opt.value === selectedOption} />}
+                                            label={<LocalizedText label={{id: opt.name, defaultMessage: opt.name}} />}
+                                            sx={{
+                                                '& .MuiTypography-root': {
+                                                    color: opt.value === selectedOption ? '#15C370' : '#1C1B1F',
+                                                },
+                                            }}
+                                        />
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                    <div className="h-[20px] w-[1px] bg-lineGray ml-8 mr-4"></div>
+                    <TextField
+                        sx={{
+                            width: '90%',
+                            fontFamily: 'OpenReg',
+                            '& .MuiInputBase-input:focus': {
+                                boxShadow: 'none',
+                            },
+                            '& .MuiInputBase-input::placeholder': {
+                                fontFamily: 'OpenReg, sans-serif',
+                                fontSize: '16px',
+                                letterSpacing: '0.5px',
+                                outline: 'none',
+                            },
+                            '& .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root': {
+                                fontSize: '12px',
+                                color: '#838383',
+                                fontFamily: 'OpenReg',
+                            },
+                            '& input': {
+                                padding: 0,
+                                fontSize: '16px',
+                            },
+
+                            input: {
+                                '&::placeholder': {
+                                    fontFamily: 'OpenReg, sans-serif',
+                                },
+                            },
+                            '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                                border: 'none',
+                            },
+                        }}
+                        hiddenLabel
+                        id="filled-hidden-label-normal"
+                        placeholder={intl.formatMessage({id: 'searchInputSidebar', defaultMessage: 'Search by keywords'})}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IoMdSearch size={22} color="#15C370" />
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                </div>
                 <div className="text-textColor text-[22px] relative p-2">
                     <div
                         onClick={e => {

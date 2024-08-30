@@ -183,24 +183,8 @@ const Account: FC = () => {
                     >
                         <TextField placeholder={intl.formatMessage({id: 'leaveReason'})} />
                     </FormControl>
-                    <Button
-                        sx={{
-                            width: '120px',
-                            alignSelf: 'flex-end',
-                            '&:hover': {
-                                bgcolor: '#E2542C',
-                                opacity: 0.8,
-                                color: '#fff',
-                                borderColor: '#E2542C',
-                            },
-                        }}
-                        onClick={() => setIsTerminate(true)}
-                    >
-                        <LocalizedText label={{id: 'deactivate', defaultMessage: 'Deactivate'}} />
-                    </Button>
+                    <TerminationApproveModal />
                 </ThemeProvider>
-
-                <TerminationApproveModal open={isTerminate} setOpen={setIsTerminate} />
             </div>
         </div>
     );
