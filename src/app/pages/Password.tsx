@@ -1,6 +1,7 @@
 import {FC, useState} from 'react';
 import {IoEyeOffOutline, IoEyeOutline} from 'react-icons/io5';
 import {Button, createTheme, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, ThemeProvider} from '@mui/material';
+import LocalizedText from '@components/localize/LocalizedText';
 
 const Password: FC = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -74,12 +75,18 @@ const Password: FC = () => {
     return (
         <div className="w-[100%] min-w-[360px] md:w-[35%]">
             <ThemeProvider theme={passwordInputTheme}>
-                <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick ">Password</div>
-                <p className="text-lineGray font-mainSans mb-8 text-default tablet:mb-6">You can change your password</p>
+                <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
+                    <LocalizedText label={{id: 'password', defaultMessage: 'Password'}} />
+                </div>
+                <p className="text-lineGray font-mainSans mb-8 text-default tablet:mb-6">
+                    <LocalizedText label={{id: 'change', defaultMessage: 'You can change your {prop}'}} labelParams={{prop: 'password'}} />
+                </p>
 
                 <div className="min-w-[360px] md:w-[360px] w-[100%] flex flex-col gap-4">
                     <FormControl variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Old password</InputLabel>
+                        <InputLabel htmlFor="outlined-adornment-password">
+                            <LocalizedText label={{id: 'passwordType', defaultMessage: '{type} password'}} labelParams={{type: 'Old'}} />
+                        </InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
@@ -99,7 +106,9 @@ const Password: FC = () => {
                         />
                     </FormControl>
                     <FormControl variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">New password</InputLabel>
+                        <InputLabel htmlFor="outlined-adornment-password">
+                            <LocalizedText label={{id: 'passwordType', defaultMessage: '{type} password'}} labelParams={{type: 'New'}} />
+                        </InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
@@ -119,7 +128,12 @@ const Password: FC = () => {
                         />
                     </FormControl>
                     <FormControl variant="outlined">
-                        <InputLabel htmlFor="outlined-adornment-password">Confirm new password</InputLabel>
+                        <InputLabel htmlFor="outlined-adornment-password">
+                            <LocalizedText
+                                label={{id: 'passwordType', defaultMessage: '{type} password'}}
+                                labelParams={{type: 'Confirm new'}}
+                            />
+                        </InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
                             type={showPassword ? 'text' : 'password'}
@@ -150,7 +164,7 @@ const Password: FC = () => {
                             },
                         }}
                     >
-                        Save
+                        <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
                     </Button>
                 </div>
             </ThemeProvider>

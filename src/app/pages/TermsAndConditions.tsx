@@ -1,4 +1,5 @@
 import {FC} from 'react';
+import LocalizedText from '@components/localize/LocalizedText';
 
 const TermsAndConditions: FC = () => {
     return (
@@ -9,7 +10,9 @@ const TermsAndConditions: FC = () => {
             }}
         >
             <div>
-                <h3 className="text-lg text-textColor font-boldQuick mb-4">Welcome to Eelow</h3>
+                <h3 className="text-lg text-textColor font-boldQuick mb-4">
+                    <LocalizedText label={{id: 'welcome', defaultMessage: 'Welcome to Eelow'}} />
+                </h3>
                 <p className="text-md text-textColor font-mainSans">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
                     tincidunt ipsum, a ultricies massa. Phasellus commodo, quam dignissim gravida porttitor, metus neque pulvinar mi,
@@ -24,7 +27,9 @@ const TermsAndConditions: FC = () => {
                 </p>
             </div>
             <div>
-                <h3 className="text-lg text-textColor font-boldQuick mb-4">Terms of Use</h3>
+                <h3 className="text-lg text-textColor font-boldQuick mb-4">
+                    <LocalizedText label={{id: 'termsOfUse', defaultMessage: 'Terms of Use'}} />
+                </h3>
                 <p className="text-md text-textColor font-mainSans">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
                     tincidunt ipsum, a ultricies massa. Phasellus commodo, quam dignissim gravida porttitor, metus neque pulvinar mi,
@@ -39,7 +44,9 @@ const TermsAndConditions: FC = () => {
                 </p>
             </div>
             <div>
-                <h3 className="text-lg text-textColor font-boldQuick mb-4">Verification</h3>
+                <h3 className="text-lg text-textColor font-boldQuick mb-4">
+                    <LocalizedText label={{id: 'verification', defaultMessage: 'Verification'}} />
+                </h3>
                 <p className="text-md text-textColor font-mainSans">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
                     tincidunt ipsum, a ultricies massa. Phasellus commodo, quam dignissim gravida porttitor, metus neque pulvinar mi,
@@ -54,7 +61,9 @@ const TermsAndConditions: FC = () => {
                 </p>
             </div>
             <div>
-                <h3 className="text-lg text-textColor font-boldQuick mb-4">Payment</h3>
+                <h3 className="text-lg text-textColor font-boldQuick mb-4">
+                    <LocalizedText label={{id: 'payment', defaultMessage: 'Payment'}} />
+                </h3>
                 <p className="text-md text-textColor font-mainSans">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
                     tincidunt ipsum, a ultricies massa. Phasellus commodo, quam dignissim gravida porttitor, metus neque pulvinar mi,

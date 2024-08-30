@@ -2,6 +2,7 @@ import {Dispatch, FC, SetStateAction, useState} from 'react';
 import {Button, createTheme, FormControl, FormControlLabel, Modal, Radio, RadioGroup, TextField, ThemeProvider} from '@mui/material';
 
 import ModalProps from 'src/common/interfaces/modal.interface';
+import LocalizedText from '@components/localize/LocalizedText';
 
 interface AdduserModalProps extends ModalProps {
     isEmailSent: boolean;
@@ -13,12 +14,12 @@ const roles = [
     {
         id: 1,
         title: 'Parcel receiver',
-        value: 'receiver',
+        value: 'parcelReceiver',
     },
     {
         id: 2,
         title: 'Parcel sender',
-        value: 'sender',
+        value: 'parcelSender',
     },
 ];
 
@@ -74,10 +75,27 @@ const AddUserModal: FC<AdduserModalProps> = ({open, setOpen, isEmailSent, setIsE
         <Modal open={open} onClose={() => setOpen(false)}>
             <div className="bg-white rounded-[24px] absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[95%] tablet:w-[515px] lg:w-[35%] py-8 px-8">
                 <div className="text-xl text-textColor font-boldQuick">
-                    {isEmailSent ? 'Are you sure that you want to change the customer2?' : 'Add a customer2'}
+                    {isEmailSent ? (
+                        <LocalizedText
+                            label={{id: 'areYouSure', defaultMessage: 'Are you sure that you want to change the {name}?'}}
+                            labelParams={{name: 'customer2'}}
+                        />
+                    ) : (
+                        <LocalizedText label={{id: 'addCustomer', defaultMessage: 'Add a {name}'}} labelParams={{name: 'customer2'}} />
+                    )}
                 </div>
-                <p className="text-sm text-lineGray font-mainSans">Enter user email and we will send invite-message</p>
-                <div className="font-boldQuick text-md text-textColor mt-4 mb-2">Customer2 role</div>
+                <p className="text-sm text-lineGray font-mainSans">
+                    <LocalizedText label={{id: 'enterEmail', defaultMessage: 'Enter user email and we will send invite-message'}} />
+                </p>
+                <div className="font-boldQuick text-md text-textColor mt-4 mb-2">
+                    <LocalizedText
+                        label={{
+                            id: 'customerRole',
+                            defaultMessage: '{name} role',
+                        }}
+                        labelParams={{name: 'Customer2'}}
+                    />
+                </div>
                 <FormControl>
                     <RadioGroup
                         aria-labelledby="demo-radio-buttons-group-label"
@@ -95,7 +113,7 @@ const AddUserModal: FC<AdduserModalProps> = ({open, setOpen, isEmailSent, setIsE
                                 <FormControlLabel
                                     value={r.value}
                                     control={<Radio />}
-                                    label={r.title}
+                                    label={<LocalizedText label={{id: r.value, defaultMessage: r.title}} />}
                                     key={r.id}
                                     sx={{
                                         '& .MuiTypography-root': {
@@ -127,7 +145,7 @@ const AddUserModal: FC<AdduserModalProps> = ({open, setOpen, isEmailSent, setIsE
                             }}
                             onClick={() => setOpen(false)}
                         >
-                            Cancel
+                            <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
                         </Button>
                         <Button
                             sx={{
@@ -144,7 +162,7 @@ const AddUserModal: FC<AdduserModalProps> = ({open, setOpen, isEmailSent, setIsE
                                 setIsEmailSent(true);
                             }}
                         >
-                            Send
+                            <LocalizedText label={{id: 'send', defaultMessage: 'Send'}} />
                         </Button>
                     </div>
                 </ThemeProvider>

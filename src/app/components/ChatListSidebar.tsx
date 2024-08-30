@@ -1,4 +1,5 @@
 import {FC, RefObject, useEffect, useRef, useState} from 'react';
+import {useIntl} from 'react-intl';
 import {CgArrowLongLeft} from 'react-icons/cg';
 import {FaPenAlt} from 'react-icons/fa';
 import {IoMdOptions, IoMdSearch} from 'react-icons/io';
@@ -26,6 +27,7 @@ import chatLogo from '../../common/assets/chatLogo.png';
 
 import AdminChatTab from './AdminChatTab';
 import ChatTab from './ChatTab';
+import LocalizedText from '@components/localize/LocalizedText';
 
 const filterOptions = [
     {
@@ -74,7 +76,7 @@ const roles = [
     {
         id: 3,
         title: 'All',
-        value: 'all',
+        value: 'All',
     },
 ];
 
@@ -82,22 +84,22 @@ const travelers = [
     {
         id: 1,
         title: 'Optimal',
-        value: 'Optimal',
+        value: 'optimal',
     },
     {
         id: 2,
         title: 'Small parcel',
-        value: 'Small parcel',
+        value: 'smallParcel',
     },
     {
         id: 3,
         title: 'Light parcel',
-        value: 'Light parcel',
+        value: 'lightParcel',
     },
     {
         id: 4,
         title: 'High price',
-        value: 'High price',
+        value: 'highPrice',
     },
 ];
 
@@ -105,12 +107,12 @@ const customers = [
     {
         id: 1,
         title: 'Optimal',
-        value: 'Optimal',
+        value: 'optimal',
     },
     {
         id: 2,
         title: 'Soon date',
-        value: 'Soon date',
+        value: 'soonDate',
     },
     {
         id: 3,
@@ -120,7 +122,7 @@ const customers = [
     {
         id: 4,
         title: 'Rating',
-        value: 'Rating',
+        value: 'rating',
     },
 ];
 
@@ -134,10 +136,12 @@ interface CursorProps {
 
 const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     const [selectedOption, setSelectedOption] = useState('All');
-    const [selectedRole, setSelectedRole] = useState('');
+    const [selectedRole, setSelectedRole] = useState('All');
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [isTraveler, setIsTraveler] = useState(false);
     const [isCustomer, setIsCustomer] = useState(false);
+
+    const intl = useIntl();
 
     const navigate = useNavigate();
     const isMobile = useMediaQuery({query: '(max-width: 850px)'});
@@ -280,7 +284,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 onChange={handleChange}
                                 renderValue={selected => {
                                     return (
-                                        <div className="w-[100%] font-boldSans text-ellipsis text-nowrap overflow-hidden">{selected}</div>
+                                        <div className="w-[100%] font-boldSans text-ellipsis text-nowrap overflow-hidden">
+                                            <LocalizedText label={{id: selected}} />
+                                        </div>
                                     );
                                 }}
                             >
@@ -309,7 +315,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                             <FormControlLabel
                                                 value={opt.value}
                                                 control={<Radio checked={opt.value === selectedOption} />}
-                                                label={opt.name}
+                                                label={<LocalizedText label={{id: opt.name, defaultMessage: opt.name}} />}
                                                 sx={{
                                                     '& .MuiTypography-root': {
                                                         color: opt.value === selectedOption ? '#15C370' : '#1C1B1F',
@@ -347,7 +353,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             }}
                             hiddenLabel
                             id="filled-hidden-label-normal"
-                            placeholder="Search by keywords"
+                            placeholder={intl.formatMessage({id: 'searchInputSidebar', defaultMessage: 'Search by keywords'})}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -384,11 +390,13 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 display: isTraveler || isCustomer ? 'none' : 'initial',
                             }}
                         >
-                            <div className="text-md font-boldQuick text-textColor">Filter by role</div>
+                            <div className="text-md font-boldQuick text-textColor">
+                                <LocalizedText label={{id: 'filterByRole', defaultMessage: 'Filter by role'}} />
+                            </div>
                             <FormControl>
                                 <RadioGroup
                                     aria-labelledby="demo-radio-buttons-group-label"
-                                    defaultValue="all"
+                                    defaultValue="All"
                                     name="radio-buttons-group"
                                     onChange={handleRoleSelect}
                                     sx={{
@@ -408,7 +416,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                             <FormControlLabel
                                                 value={r.value}
                                                 control={<Radio />}
-                                                label={r.title}
+                                                label={<LocalizedText label={{id: r.value, defaultMessage: r.title}} />}
                                                 key={r.id}
                                                 sx={{
                                                     '& .MuiTypography-root': {
@@ -428,7 +436,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     display: isTraveler ? 'initial' : 'none',
                                 }}
                             >
-                                <div className="text-md font-boldQuick text-textColor">Sort by</div>
+                                <div className="text-md font-boldQuick text-textColor">
+                                    <LocalizedText label={{id: 'sortBy', defaultMessage: 'Sort by'}} />
+                                </div>
                                 <FormControl>
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
@@ -452,7 +462,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                                 <FormControlLabel
                                                     value={r.value}
                                                     control={<Radio />}
-                                                    label={r.title}
+                                                    label={<LocalizedText label={{id: r.value, defaultMessage: r.title}} />}
                                                     key={r.id}
                                                     sx={{
                                                         '& .MuiTypography-root': {
@@ -472,7 +482,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit p-2 cursor-pointer duration-200 font-boldSans"
                                 >
                                     <CgArrowLongLeft />
-                                    Reset role
+                                    <LocalizedText label={{id: 'resetRole', defaultMessage: 'Reset role'}} />
                                 </div>
                             </div>
                         ) : null}
@@ -482,7 +492,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     display: isTraveler ? 'none' : 'initial',
                                 }}
                             >
-                                <div className="text-md font-boldQuick text-textColor">Filter by role</div>
+                                <div className="text-md font-boldQuick text-textColor">
+                                    <LocalizedText label={{id: 'sortBy', defaultMessage: 'Sort by'}} />
+                                </div>
                                 <FormControl>
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
@@ -506,7 +518,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                                 <FormControlLabel
                                                     value={r.value}
                                                     control={<Radio />}
-                                                    label={r.title}
+                                                    label={<LocalizedText label={{id: r.value, defaultMessage: r.title}} />}
                                                     key={r.id}
                                                     sx={{
                                                         '& .MuiTypography-root': {
@@ -526,7 +538,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit p-2 cursor-pointer duration-200 font-boldSans"
                                 >
                                     <CgArrowLongLeft />
-                                    Reset role
+                                    <LocalizedText label={{id: 'resetRole', defaultMessage: 'Reset role'}} />
                                 </div>
                             </div>
                         ) : null}
@@ -571,7 +583,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             <div className="flex items-center justify-between flex-1">
                                 <div className="flex flex-col gap-2">
                                     <div className="text-textColor font-boldQuick text-md2 ">Eelow</div>
-                                    <p className="font-mainSans text-sm text-lineGray">help and support</p>
+                                    <p className="font-mainSans text-sm text-lineGray">
+                                        <LocalizedText label={{id: 'helpSupport', defaultMessage: 'help and support'}} />
+                                    </p>
                                 </div>
                             </div>
                             <div className="flex flex-col items-end gap-4">

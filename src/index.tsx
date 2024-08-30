@@ -2,13 +2,21 @@ import {render} from 'react-dom';
 import './index.css';
 import 'reflect-metadata';
 
+import {Provider} from 'react-redux';
 import App from './app/components/App';
 import reportWebVitals from './reportWebVitals';
+
+import store from '@store/initStore';
 
 // renderApp(document.getElementById('root') as HTMLElement);
 
 export function renderApp(element: HTMLElement) {
-    return render(<App></App>, element);
+    return render(
+        <Provider store={store}>
+            <App />
+        </Provider>,
+        element
+    );
 }
 
 renderApp(document.getElementById('root') as HTMLElement);

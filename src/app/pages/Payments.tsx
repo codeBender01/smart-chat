@@ -1,6 +1,7 @@
 import {FC, useState} from 'react';
 import {useMediaQuery} from 'react-responsive';
 import {Box, Button, createTheme, Tab, Tabs, ThemeProvider} from '@mui/material';
+import LocalizedText from '@components/localize/LocalizedText';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -90,8 +91,12 @@ const Payments: FC = () => {
 
     return (
         <div className="w-[100%]">
-            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">Payments</div>
-            <p className="text-lineGray font-mainSans mb-8 text-default max-w-[360px]">You can manage your payments and payouts</p>
+            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
+                <LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />
+            </div>
+            <p className="text-lineGray font-mainSans mb-8 text-default max-w-[360px]">
+                <LocalizedText label={{id: 'manage', defaultMessage: 'You can manage your payments and payouts'}} />
+            </p>
             <ThemeProvider theme={tabsTheme}>
                 <Box
                     sx={{
@@ -99,14 +104,22 @@ const Payments: FC = () => {
                     }}
                 >
                     <Tabs value={tabIndex} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab disableRipple label="Payments" {...a11yProps(0)} />
-                        <Tab disableRipple label="Payouts" {...a11yProps(1)} />
+                        <Tab
+                            disableRipple
+                            label={<LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />}
+                            {...a11yProps(0)}
+                        />
+                        <Tab disableRipple label={<LocalizedText label={{id: 'payouts', defaultMessage: 'Payouts'}} />} {...a11yProps(1)} />
                     </Tabs>
                 </Box>
                 <CustomTabPanel value={tabIndex} index={0}>
                     <div className="flex flex-col gap-4 w-[100%] md:w-[30%] min-w-[360px]">
-                        <div className="text-md font-boldQuick text-[#242136]">Your payments</div>
-                        <p className="font-mainSans text-default text-lineGray">See all your payments and refunds</p>
+                        <div className="text-md font-boldQuick text-[#242136]">
+                            <LocalizedText label={{id: 'yourPayments', defaultMessage: 'Your payments'}} />
+                        </div>
+                        <p className="font-mainSans text-default text-lineGray">
+                            <LocalizedText label={{id: 'seeAllPayments', defaultMessage: 'See all your payments and refunds'}} />
+                        </p>
                         <Button
                             sx={{
                                 bgcolor: '#15C370',
@@ -119,13 +132,17 @@ const Payments: FC = () => {
                                 },
                             }}
                         >
-                            Manage payments
+                            <LocalizedText label={{id: 'managePayments', defaultMessage: 'Manage payments'}} />
                         </Button>
                     </div>
 
                     <div className="flex flex-col gap-4 w-[100%] md:w-[30%] min-w-[360px] mt-6">
-                        <div className="text-md font-boldQuick text-[#242136]">Payments methods</div>
-                        <p className="font-mainSans text-default text-lineGray">Add and manage your payment methods</p>
+                        <div className="text-md font-boldQuick text-[#242136]">
+                            <LocalizedText label={{id: 'paymentsMethod', defaultMessage: 'Payments methods'}} />
+                        </div>
+                        <p className="font-mainSans text-default text-lineGray">
+                            <LocalizedText label={{id: 'addPayment', defaultMessage: ' Add and manage your payment methods'}} />
+                        </p>
                         <Button
                             sx={{
                                 bgcolor: '#15C370',
@@ -138,14 +155,20 @@ const Payments: FC = () => {
                                 },
                             }}
                         >
-                            Add payment method
+                            <LocalizedText label={{id: 'addPaymentBtn', defaultMessage: 'Add payment method'}} />
                         </Button>
                     </div>
                 </CustomTabPanel>
                 <CustomTabPanel value={tabIndex} index={1}>
                     <div className="flex flex-col gap-4 w-[100%] md:w-[40%] mt-6">
-                        <div className="text-md font-boldQuick text-[#242136]">How can you receive your payouts</div>
-                        <p className="font-mainSans text-default text-lineGray">Add payout method so we know where to send your money</p>
+                        <div className="text-md font-boldQuick text-[#242136]">
+                            <LocalizedText label={{id: 'howReceivePayments', defaultMessage: 'How can you receive your payouts'}} />
+                        </div>
+                        <p className="font-mainSans text-default text-lineGray">
+                            <LocalizedText
+                                label={{id: 'addPayoutMethod', defaultMessage: 'Add payout method so we know where to send your money'}}
+                            />
+                        </p>
                         <Button
                             sx={{
                                 bgcolor: '#15C370',
@@ -158,7 +181,7 @@ const Payments: FC = () => {
                                 },
                             }}
                         >
-                            Add payout method
+                            <LocalizedText label={{id: 'addPayoutBtn', defaultMessage: 'Add payout method'}} />
                         </Button>
                     </div>
                 </CustomTabPanel>

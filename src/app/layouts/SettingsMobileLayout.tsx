@@ -3,6 +3,7 @@ import {CgArrowLongLeft} from 'react-icons/cg';
 import {useNavigate} from 'react-router-dom';
 import {Outlet} from 'react-router-dom';
 import Header from '@app/components/Header';
+import LocalizedText from '@components/localize/LocalizedText';
 
 const SettingsMobileLayout: FC = () => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const SettingsMobileLayout: FC = () => {
                     className="flex items-center gap-2 text-logoGreen text-lg hover:opacity-85 w-fit p-2 cursor-pointer duration-200 font-boldSans"
                 >
                     <CgArrowLongLeft />
-                    Back
+                    <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
                 </div>
                 <Outlet />
             </div>

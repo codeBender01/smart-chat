@@ -1,5 +1,7 @@
 import {FC} from 'react';
 
+import LocalizedText from '@components/localize/LocalizedText';
+
 interface ChatInfoTextProps {
     text: string;
     bgColor: string;
@@ -13,7 +15,7 @@ const ChatInfoText: FC<ChatInfoTextProps> = ({text, bgColor}) => {
                 backgroundColor: bgColor,
             }}
         >
-            {text}
+            <LocalizedText label={{id: text}} />
         </div>
     );
 };

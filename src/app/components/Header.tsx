@@ -5,6 +5,8 @@ import {MdOutlineMenu} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
 import {Avatar, Badge} from '@mui/material';
 
+import LocalizedText from '@components/localize/LocalizedText';
+
 import logo from '../../common/assets/logo.png';
 import profileImage from '../../common/assets/profileImage.jpeg';
 
@@ -21,10 +23,10 @@ const Header: FC = () => {
 
                     <ul className="hidden items-center text-md text-textColor gap-12 font-mainSans cursor-pointer max-[1024px]:text-sm min-[768px]:flex">
                         <li className="hover:opacity-80 duration-150" onClick={() => navigate('/settings/password')}>
-                            Settings
+                            <LocalizedText label={{id: 'headerSettings', defaultMessage: 'Settings'}} />
                         </li>
                         <li className="hover:opacity-80 duration-150" onClick={() => navigate('/about')}>
-                            How it works
+                            <LocalizedText label={{id: 'headerHowItWorks', defaultMessage: 'How it works'}} />
                         </li>
                     </ul>
                 </div>
@@ -32,7 +34,7 @@ const Header: FC = () => {
                 <div className="min-[768px]:flex hidden items-center">
                     <div className="hidden text-alertRed font-mainSans items-center text-sm gap-2 min-[950px]:flex mr-[32px]">
                         <IoIosInformationCircleOutline size={22} />
-                        Your deal status has been updated
+                        <LocalizedText label={{id: 'dealHasBeenUpdated', defaultMessage: 'Your deal status has been updated'}} />
                     </div>
                     <div className="border-[1px] mr-[12px] w-[44px] h-[44px] rounded-round border-blackMain flex items-center justify-center hover:bg-blackMain hover:text-white duration-200 cursor-pointer">
                         <IoMoon size={24} />

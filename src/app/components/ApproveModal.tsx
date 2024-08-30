@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import {IoCheckmarkCircleOutline} from 'react-icons/io5';
 import {Button, createTheme, Modal, ThemeProvider} from '@mui/material';
+import LocalizedText from '@components/localize/LocalizedText';
 
 import ModalProps from 'src/common/interfaces/modal.interface';
 
@@ -32,7 +33,9 @@ const ApproveModal: FC<ApproveModal> = ({open, setOpen}) => {
                 <div className="flex items-center justify-center text-[64px] text-logoGreen">
                     <IoCheckmarkCircleOutline />
                 </div>
-                <h2 className="text-textColor text-xl text-center font-boldQuick my-6">Invite has been send</h2>
+                <h2 className="text-textColor text-xl text-center font-boldQuick my-6">
+                    <LocalizedText label={{id: 'inviteSend', defaultMessage: 'Invite has been send'}} />
+                </h2>
                 <ThemeProvider theme={button}>
                     <Button
                         onClick={() => setOpen(false)}
@@ -49,7 +52,7 @@ const ApproveModal: FC<ApproveModal> = ({open, setOpen}) => {
                             },
                         }}
                     >
-                        Back
+                        <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
                     </Button>
                 </ThemeProvider>
             </div>

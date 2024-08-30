@@ -2,6 +2,7 @@ import {FC, useState} from 'react';
 import {Button, createTheme, Modal, ThemeProvider} from '@mui/material';
 
 import ModalProps from 'src/common/interfaces/modal.interface';
+import LocalizedText from '@components/localize/LocalizedText';
 
 type TerminationApproveModalProps = ModalProps;
 
@@ -31,7 +32,9 @@ const TerminationApproveModal: FC<TerminationApproveModalProps> = ({open, setOpe
             <div className="bg-white rounded-[24px] top-[50%] left-[50%] relative translate-x-[-50%] translate-y-[-50%] w-[95%] tablet:w-[35%] py-8 px-6 flex flex-col items-center">
                 {isDeactivated ? (
                     <div className="flex flex-col items-center">
-                        <div className="text-xl text-textColor font-boldQuick text-center">Your account has been deactivated</div>
+                        <div className="text-xl text-textColor font-boldQuick text-center">
+                            <LocalizedText label={{id: 'deactivated', defaultMessage: 'Your account has been deactivated'}} />
+                        </div>
                         <ThemeProvider theme={emailInputTheme}>
                             <Button
                                 sx={{
@@ -47,14 +50,23 @@ const TerminationApproveModal: FC<TerminationApproveModalProps> = ({open, setOpe
                                     setOpen(false);
                                 }}
                             >
-                                Go to Main page
+                                <LocalizedText label={{id: 'goToMain', defaultMessage: 'Go to Main page'}} />
                             </Button>
                         </ThemeProvider>
                     </div>
                 ) : (
                     <div>
-                        <div className="text-xl text-textColor font-boldQuick">Are you sure that you want to deactivate your account?</div>
-                        <p className="text-lineGray text-default font-mainSans mt-4">You won't be able to recover your account</p>
+                        <div className="text-xl text-textColor font-boldQuick">
+                            <LocalizedText
+                                label={{
+                                    id: 'areYouSureDeactivate',
+                                    defaultMessage: 'Are you sure that you want to deactivate your account?',
+                                }}
+                            />
+                        </div>
+                        <p className="text-lineGray text-default font-mainSans mt-4">
+                            <LocalizedText label={{id: 'youWontBeAble', defaultMessage: "You won't be able to recover your account"}} />
+                        </p>
 
                         <ThemeProvider theme={emailInputTheme}>
                             <div className="mt-6 flex justify-end gap-2 w-[100%]">
@@ -71,7 +83,7 @@ const TerminationApproveModal: FC<TerminationApproveModalProps> = ({open, setOpe
                                         setOpen(false);
                                     }}
                                 >
-                                    Keep my account
+                                    <LocalizedText label={{id: 'keepAccount', defaultMessage: ' Keep my account'}} />
                                 </Button>
                                 <Button
                                     sx={{
@@ -87,7 +99,7 @@ const TerminationApproveModal: FC<TerminationApproveModalProps> = ({open, setOpe
                                         setIsDeactivated(true);
                                     }}
                                 >
-                                    Deactivate
+                                    <LocalizedText label={{id: 'deactivate', defaultMessage: 'Deacivate'}} />
                                 </Button>
                             </div>
                         </ThemeProvider>

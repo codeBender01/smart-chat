@@ -1,5 +1,6 @@
 import {FC, useState} from 'react';
 import {Button, createTheme, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, ThemeProvider} from '@mui/material';
+import LocalizedText from '@components/localize/LocalizedText';
 
 const reasons = [
     {
@@ -98,8 +99,12 @@ const Currency: FC = () => {
 
     return (
         <div className="w-[100%] min-w-[360px] md:w-[35%]">
-            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">Currency</div>
-            <p className="text-lineGray font-mainSans mb-8 text-default md:mb-0">You can change your currency</p>
+            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
+                <LocalizedText label={{id: 'currency', defaultMessage: 'Currency'}} />
+            </div>
+            <p className="text-lineGray font-mainSans mb-8 text-default md:mb-0">
+                <LocalizedText label={{id: 'change', defaultMessage: 'You can change your currency'}} labelParams={{prop: 'currency'}} />
+            </p>
             <div className="flex flex-col gap-4 min-w-[360px] md:w-[360px] w-[100%] mt-4">
                 <ThemeProvider theme={selectTheme}>
                     <FormControl
@@ -108,7 +113,9 @@ const Currency: FC = () => {
                         }}
                         fullWidth
                     >
-                        <InputLabel id="demo-simple-select-label">Currency</InputLabel>
+                        <InputLabel id="demo-simple-select-label">
+                            <LocalizedText label={{id: 'currency', defaultMessage: 'Currency'}} />
+                        </InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             label="Currency"
@@ -137,7 +144,7 @@ const Currency: FC = () => {
                             },
                         }}
                     >
-                        Save
+                        <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
                     </Button>
                 </ThemeProvider>
             </div>

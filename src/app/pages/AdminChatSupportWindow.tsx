@@ -6,6 +6,9 @@ import {IoMdSend} from 'react-icons/io';
 import {useNavigate} from 'react-router-dom';
 import ChatInfoText from '@app/components/ChatInfoText';
 import {Button, createTheme, InputAdornment, TextField, ThemeProvider} from '@mui/material';
+import LocalizedText from '@components/localize/LocalizedText';
+
+import {useIntl} from 'react-intl';
 
 import logo from '../../common/assets/chatLogo.png';
 import profile2 from '../../common/assets/profile2.jpeg';
@@ -17,6 +20,7 @@ const AdminChatSupportWindow: FC = () => {
     const [messagesList, setMessagesList] = useState<string[]>([]);
 
     const navigate = useNavigate();
+    const intl = useIntl();
 
     const theme = createTheme({
         components: {
@@ -86,7 +90,7 @@ const AdminChatSupportWindow: FC = () => {
                     className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit cursor-pointer duration-200 font-boldSans"
                 >
                     <CgArrowLongLeft />
-                    Back
+                    <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
                 </div>
             </div>
             <div className="p-4 border-b-[1px] border-[#C6D7DA] flex gap-3">
@@ -154,7 +158,9 @@ const AdminChatSupportWindow: FC = () => {
                                 </div>
                                 <div className="flex gap-2 items-center self-end">
                                     <div className="bg-activeChatGray rounded-t-[10px] flex flex-col items-center gap-4 rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        <div>We helped you with your question?</div>
+                                        <div>
+                                            <LocalizedText label={{id: 'weHelped', defaultMessage: 'We helped you with your question?'}} />
+                                        </div>
                                         <div className="flex items-center">
                                             <ThemeProvider theme={theme}>
                                                 <Button
@@ -165,7 +171,7 @@ const AdminChatSupportWindow: FC = () => {
                                                     variant="contained"
                                                     onClick={() => setIsConversationFinished(true)}
                                                 >
-                                                    yes
+                                                    <LocalizedText label={{id: 'yes', defaultMessage: 'yes'}} />
                                                 </Button>
                                                 <div className="w-[1px] h-[36.5px] bg-lineGray"></div>
                                                 <Button
@@ -175,7 +181,7 @@ const AdminChatSupportWindow: FC = () => {
                                                     }}
                                                     variant="contained"
                                                 >
-                                                    no
+                                                    <LocalizedText label={{id: 'no', defaultMessage: 'no'}} />
                                                 </Button>
                                             </ThemeProvider>
                                         </div>
@@ -210,12 +216,12 @@ const AdminChatSupportWindow: FC = () => {
                         })}
 
                         <div className="w-fit self-center px-4 py-1">
-                            {isConversationFinished ? <ChatInfoText text="Ask for help conversation finished" bgColor="#EFFFF8" /> : null}
+                            {isConversationFinished ? <ChatInfoText text="askForHelp" bgColor="#EFFFF8" /> : null}
                         </div>
                     </div>
                 ) : (
                     <div className="w-[65%] breakpoint:w-fit self-centert px-4 py-1 ">
-                        <ChatInfoText text="Start your dialog. Write something" bgColor="#EEEEEE" />
+                        <ChatInfoText text="startDialog" bgColor="#EEEEEE" />
                     </div>
                 )}
             </div>
@@ -228,7 +234,10 @@ const AdminChatSupportWindow: FC = () => {
                         onChange={e => {
                             setTextMessage(e.target.value);
                         }}
-                        placeholder="Write a message..."
+                        placeholder={intl.formatMessage({
+                            id: 'writeMessage',
+                            defaultMessage: 'Write a message...',
+                        })}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">

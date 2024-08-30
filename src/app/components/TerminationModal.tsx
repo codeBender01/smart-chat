@@ -1,4 +1,5 @@
 import React, {Dispatch, FC, SetStateAction, useState} from 'react';
+import {useIntl} from 'react-intl';
 import {
     Button,
     createTheme,
@@ -13,6 +14,7 @@ import {
 } from '@mui/material';
 
 import ModalProps from 'src/common/interfaces/modal.interface';
+import LocalizedText from '@components/localize/LocalizedText';
 
 interface TerminationModalProps extends ModalProps {
     isTerminated: boolean;
@@ -22,33 +24,35 @@ interface TerminationModalProps extends ModalProps {
 const reasons = [
     {
         label: 'Changed my mind',
-        value: 'Changed my mind',
+        value: 'changedMyMind',
     },
     {
         label: 'Problem with another party',
-        value: 'Problem with another party',
+        value: 'party',
     },
     {
         label: 'Agreement issues',
-        value: 'Agreement issues',
+        value: 'agreementIssue',
     },
     {
         label: 'Payment issues',
-        value: 'Payment issues',
+        value: 'paymentIssue',
     },
     {
         label: 'Found an alternative service',
-        value: 'Found an alternative service',
+        value: 'alternative',
     },
     {
         label: 'Other',
-        value: 'Other',
+        value: 'other',
     },
 ];
 
 const TerminationModal: FC<TerminationModalProps> = ({open, setOpen, setIsTerminated, isTerminated}) => {
     const [reason, setReason] = useState('');
     const [isReasonSelected, setIsReasonSelected] = useState(false);
+
+    const intl = useIntl();
 
     const handleChange = (event: SelectChangeEvent) => {
         setReason(event.target.value as string);
@@ -122,7 +126,9 @@ const TerminationModal: FC<TerminationModalProps> = ({open, setOpen, setIsTermin
     return (
         <Modal open={open} onClose={() => setOpen(false)}>
             <div className="bg-white rounded-[24px] top-[50%] left-[50%] relative translate-x-[-50%]  translate-y-[-50%] w-[95%] tablet:w-[514px] lg:w-[30%] py-8 px-6 flex flex-col items-center">
-                <div className="text-xl text-textColor font-boldQuick">Are you sure that you want to terminate your deal?</div>
+                <div className="text-xl text-textColor font-boldQuick">
+                    <LocalizedText label={{id: 'areYouSureDeal', defaultMessage: 'Are you sure that you want to terminate your deal?'}} />
+                </div>
                 <div className="flex flex-col gap-4 w-[100%]">
                     <ThemeProvider theme={selectTheme}>
                         <FormControl
@@ -131,7 +137,9 @@ const TerminationModal: FC<TerminationModalProps> = ({open, setOpen, setIsTermin
                             }}
                             fullWidth
                         >
-                            <InputLabel id="demo-simple-select-label">Reason</InputLabel>
+                            <InputLabel id="demo-simple-select-label">
+                                <LocalizedText label={{id: 'reason', defaultMessage: 'Reason'}} />
+                            </InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 label="Reason"
@@ -142,7 +150,7 @@ const TerminationModal: FC<TerminationModalProps> = ({open, setOpen, setIsTermin
                                 {reasons.map(r => {
                                     return (
                                         <MenuItem key={r.label} value={r.value}>
-                                            {r.label}
+                                            <LocalizedText label={{id: r.value, defaultMessage: r.label}} />
                                         </MenuItem>
                                     );
                                 })}
@@ -156,15 +164,31 @@ const TerminationModal: FC<TerminationModalProps> = ({open, setOpen, setIsTermin
                                 transition: 'all 0.6s',
                             }}
                         >
-                            <TextField placeholder="Leave your reason" />
+                            <TextField
+                                placeholder={intl.formatMessage({
+                                    id: 'leaveReason',
+                                    defaultMessage: 'Leave your reason',
+                                })}
+                            />
                         </FormControl>
                     </ThemeProvider>
                 </div>
 
                 <p className="mt-6 text-lineGray font-lato font-normal text-default">
-                    By clicking Terminate, you confirm that you have read, consent and agree to our{' '}
-                    <span className="text-linkBlue underline cursor-pointer hover:opacity-85 duration-100">Terms and conditions</span> and{' '}
-                    <span className="text-linkBlue underline cursor-pointer hover:opacity-85 duration-100">Cancellation policy</span>.
+                    <LocalizedText
+                        label={{
+                            id: 'byClicking',
+                            defaultMessage: 'By clicking Terminate, you confirm that you have read, consent and agree to our',
+                        }}
+                    />
+                    <span className="text-linkBlue underline cursor-pointer hover:opacity-85 duration-100">
+                        <LocalizedText label={{id: 'terms', defaultMessage: 'Terms and conditions'}} />
+                    </span>{' '}
+                    <LocalizedText label={{id: 'and', defaultMessage: 'and'}} />{' '}
+                    <span className="text-linkBlue underline cursor-pointer hover:opacity-85 duration-100">
+                        <LocalizedText label={{id: 'cancellation', defaultMessage: 'Cancellation policy'}} />
+                    </span>
+                    .
                 </p>
 
                 <ThemeProvider theme={emailInputTheme}>
@@ -181,7 +205,7 @@ const TerminationModal: FC<TerminationModalProps> = ({open, setOpen, setIsTermin
                             }}
                             onClick={() => setOpen(false)}
                         >
-                            Cancel
+                            <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
                         </Button>
                         <Button
                             sx={{
@@ -197,7 +221,7 @@ const TerminationModal: FC<TerminationModalProps> = ({open, setOpen, setIsTermin
                                 setIsTerminated(!isTerminated);
                             }}
                         >
-                            Terminate
+                            <LocalizedText label={{id: 'terminate', defaultMessage: 'Terminate'}} />
                         </Button>
                     </div>
                 </ThemeProvider>

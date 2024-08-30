@@ -3,27 +3,33 @@ import {useMediaQuery} from 'react-responsive';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {Outlet} from 'react-router-dom';
 import Header from '@app/components/Header';
+import LocalizedText from '@components/localize/LocalizedText';
 
 const links = [
     {
         label: 'Password',
         path: '/settings/password',
+        value: 'password',
     },
     {
         label: 'Currency',
         path: '/settings/currency',
+        value: 'currency',
     },
     {
         label: 'Language',
         path: '/settings/language',
+        value: 'language',
     },
     {
         label: 'Payments',
         path: '/settings/payments',
+        value: 'payments',
     },
     {
         label: 'Account',
         path: '/settings/account',
+        value: 'password',
     },
 ];
 
@@ -31,22 +37,27 @@ const linksMobile = [
     {
         label: 'Password',
         path: '/settings-mob/password',
+        value: 'password',
     },
     {
         label: 'Currency',
         path: '/settings-mob/currency',
+        value: 'currency',
     },
     {
         label: 'Language',
         path: '/settings-mob/language',
+        value: 'language',
     },
     {
         label: 'Payments',
         path: '/settings-mob/payments',
+        value: 'payments',
     },
     {
         label: 'Account',
         path: '/settings-mob/account',
+        value: 'account',
     },
 ];
 
@@ -61,7 +72,9 @@ const SettingsLayout: FC = () => {
             <Header />
             <div className="bg-paleGray min-h-[90vh]">
                 <div className="w-[95%] mx-auto mt-20 min-[620px]:w-[55%] breakpoint:w-[60%]  min-[1024px]:w-[63%]">
-                    <h1 className="text-[48px] text-textColor font-boldQuick mb-4">Settings</h1>
+                    <h1 className="text-[48px] text-textColor font-boldQuick mb-4">
+                        <LocalizedText label={{id: 'headerSettings', defaultMessage: 'Settings'}} />
+                    </h1>
                 </div>
                 <div className="flex gap-6 w-[95%] mx-auto">
                     {isMobile ? (
@@ -79,7 +92,7 @@ const SettingsLayout: FC = () => {
                                                 : 'font-mainSans text-[#242136] text-md border-b-[1px] border-[#EAEBEB]'
                                         }  px-4 py-3 cursor-pointer hover:bg-lightGreen duration-200 hover:text-logoGreen hover:border-l-[2px] hover:border-l-[#15C370]`}
                                     >
-                                        {l.label}
+                                        <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
                                     </li>
                                 );
                             })}
@@ -99,7 +112,7 @@ const SettingsLayout: FC = () => {
                                                 : 'font-mainSans text-[#242136] text-md border-b-[1px] border-[#EAEBEB]'
                                         }  px-4 py-3 cursor-pointer hover:bg-lightGreen duration-200 hover:text-logoGreen hover:border-l-[2px] hover:border-l-[#15C370]`}
                                     >
-                                        {l.label}
+                                        <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
                                     </li>
                                 );
                             })}

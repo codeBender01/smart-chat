@@ -1,7 +1,12 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
 import {IntlProvider} from 'react-intl';
 import {BrowserRouter} from 'react-router-dom';
 import {makeStyles} from '@mui/styles';
+import {Provider} from 'react-redux';
+
+import {useTypedSelector} from '@store/initStore';
+
+import messages from '../../common/lang';
 
 import {CustomTheme, CustomThemeProvider} from '@style';
 import {ModalProvider} from '@components/modal/ModalProvider';
@@ -30,11 +35,15 @@ function AppInner() {
 }
 
 function App() {
-    const locale: Locale = 'en';
+    const lang = useTypedSelector(state => state.lang.lang);
+
+    useEffect(() => {
+        console.log(lang);
+    }, [lang]);
 
     return (
-        <IntlProvider locale={locale}>
-            <CustomThemeProvider locale={locale}>
+        <IntlProvider messages={messages[lang]} locale={lang}>
+            <CustomThemeProvider locale={lang}>
                 <BrowserRouter>
                     <ModalProvider>
                         <AppInner />

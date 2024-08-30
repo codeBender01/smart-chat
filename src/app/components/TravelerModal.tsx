@@ -2,6 +2,7 @@ import {FC} from 'react';
 import {IoIosSubway} from 'react-icons/io';
 import {IoClose} from 'react-icons/io5';
 import {Modal} from '@mui/material';
+import LocalizedText from '@components/localize/LocalizedText';
 
 import ModalProps from 'src/common/interfaces/modal.interface';
 import money from '../../common/assets/money.jpeg';
@@ -53,15 +54,22 @@ const TravelerModal: FC<TravelerModalProps> = ({open, setOpen}) => {
                 </div>
 
                 <div className="flex justify-between items-center border-b-[1px] border-solid border-[#EAEBEB] mt-6 py-2">
-                    <div className="text-textColor font-mainSans text-default">Package type</div>
+                    <div className="text-textColor font-mainSans text-default">
+                        <LocalizedText label={{id: 'packageType', defaultMessage: 'Package Type'}} />
+                        Package type
+                    </div>
                     <div className="text-lineGray text-default font-mainSans">Military</div>
                 </div>
                 <div className="flex justify-between items-center border-b-[1px] border-solid border-[#EAEBEB]  py-2">
-                    <div className="text-textColor font-mainSans text-default">Overall dimensions (cm)</div>
+                    <div className="text-textColor font-mainSans text-default">
+                        <LocalizedText label={{id: 'overallDimensions', defaultMessage: 'Overall dimensions (cm)'}} />
+                    </div>
                     <div className="text-lineGray text-default font-mainSans">120 x 80 x 60</div>
                 </div>
                 <div className="flex justify-between items-center  py-2">
-                    <div className="text-textColor font-mainSans text-default">Weight (kg)</div>
+                    <div className="text-textColor font-mainSans text-default">
+                        <LocalizedText label={{id: 'weight', defaultMessage: 'Weight (kg)'}} />
+                    </div>
                     <div className="text-lineGray text-default font-mainSans">40</div>
                 </div>
             </div>

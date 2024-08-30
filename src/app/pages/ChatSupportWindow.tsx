@@ -7,6 +7,9 @@ import {useNavigate} from 'react-router-dom';
 import ChatInfoText from '@app/components/ChatInfoText';
 import {createTheme, InputAdornment, TextField, ThemeProvider} from '@mui/material';
 
+import LocalizedText from '@components/localize/LocalizedText';
+import {useIntl} from 'react-intl';
+
 import logo from '../../common/assets/chatLogo.png';
 import profile2 from '../../common/assets/profile2.jpeg';
 
@@ -75,6 +78,7 @@ const ChatSupportWindow: FC = () => {
     const [messagesList, setMessagesList] = useState<string[]>([]);
 
     const navigate = useNavigate();
+    const intl = useIntl();
 
     useEffect(() => {
         document.body.addEventListener('click', () => {
@@ -133,7 +137,7 @@ const ChatSupportWindow: FC = () => {
                     className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit cursor-pointer duration-200 font-boldSans"
                 >
                     <CgArrowLongLeft />
-                    Back
+                    <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
                 </div>
             </div>
             <div className="p-4 border-b-[1px] border-[#C6D7DA] flex gap-3">
@@ -165,7 +169,7 @@ const ChatSupportWindow: FC = () => {
                                 }}
                             ></div>
                             <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
-                                Hello! How can we help you?
+                                <LocalizedText label={{id: 'canWeHelpYou', defaultMessage: 'Hello! How can we help you?'}} />
                             </div>
                         </div>
                         <div className="flex gap-2 w-[80%] items-center">
@@ -178,7 +182,14 @@ const ChatSupportWindow: FC = () => {
                                 }}
                             ></div>
                             <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
-                                <p>Select one of the tags that matches your request to make the process easier</p>
+                                <p>
+                                    <LocalizedText
+                                        label={{
+                                            id: 'selectTag',
+                                            defaultMessage: 'Select one of the tags that matches your request to make the process easier',
+                                        }}
+                                    />
+                                </p>
                                 <div className="flex gap-4 items-center flex-wrap mt-4">
                                     {suggestions.map(sug => {
                                         return (
@@ -192,7 +203,7 @@ const ChatSupportWindow: FC = () => {
                                                     'text-textColor flex-wrap text-default font-mainSans rounded-medium w-fit py-1 px-2 hover:opacity-85 duration-200 cursor-pointer'
                                                 }
                                             >
-                                                {sug.label}
+                                                <LocalizedText label={{id: sug.value, defaultMessage: sug.label}} />
                                             </div>
                                         );
                                     })}
@@ -259,7 +270,7 @@ const ChatSupportWindow: FC = () => {
                                         }}
                                     ></div>
                                     <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        Hello! How can we help you?
+                                        <LocalizedText label={{id: 'canWeHelpYou'}} />
                                     </div>
                                 </div>
                                 <div className="flex gap-2 w-[80%] items-center">
@@ -272,7 +283,15 @@ const ChatSupportWindow: FC = () => {
                                         }}
                                     ></div>
                                     <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        <p>Select one of the tags that matches your request to make the process easier</p>
+                                        <p>
+                                            <LocalizedText
+                                                label={{
+                                                    id: 'selectTag',
+                                                    defaultMessage:
+                                                        'Select one of the tags that matches your request to make the process easier',
+                                                }}
+                                            />
+                                        </p>
                                         <div className="flex gap-3 items-center flex-wrap mt-4">
                                             {serviceProblems.map(sug => {
                                                 return (
@@ -286,7 +305,7 @@ const ChatSupportWindow: FC = () => {
                                                             'text-textColor text-default font-mainSans rounded-medium w-fit py-1 px-4 hover:opacity-85 duration-200 cursor-pointer'
                                                         }
                                                     >
-                                                        {sug.label}
+                                                        <LocalizedText label={{id: sug.value, defaultMessage: sug.label}} />
                                                     </div>
                                                 );
                                             })}
@@ -347,11 +366,7 @@ const ChatSupportWindow: FC = () => {
                     </div>
                 ) : (
                     <div className="breakpoint:w-[60%] w-[80%]">
-                        <ChatInfoText
-                            text=" Select one of the tags that matches your request before starting a
-              conversation"
-                            bgColor="#EEEEEE"
-                        />
+                        <ChatInfoText text="chatSupportMessage" bgColor="#EEEEEE" />
                     </div>
                 )}
             </div>
@@ -359,7 +374,10 @@ const ChatSupportWindow: FC = () => {
             <div className="px-4 mb-2">
                 <ThemeProvider theme={theme}>
                     <TextField
-                        placeholder="Write a message..."
+                        placeholder={intl.formatMessage({
+                            id: 'writeMessage',
+                            defaultMessage: 'Write a message',
+                        })}
                         onKeyDown={handleKeyDown}
                         value={textMessage}
                         onChange={e => {
@@ -406,7 +424,7 @@ const ChatSupportWindow: FC = () => {
                                                             onClick={() => {}}
                                                             className="flex items-center px-[24px] py-[12px] text-textColor text-default font-mainSans gap-2 hover:bg-[#eee] duration-200 cursor-pointer"
                                                         >
-                                                            {sug.label}
+                                                            <LocalizedText label={{id: sug.value, defaultMessage: sug.label}} />
                                                         </div>
                                                     );
                                                 })}

@@ -14,6 +14,9 @@ import TerminationModal from '@app/components/TerminationModal';
 import TravelerModal from '@app/components/TravelerModal';
 import {Button, createTheme, InputAdornment, TextField, ThemeProvider} from '@mui/material';
 
+import LocalizedText from '@components/localize/LocalizedText';
+import {useIntl} from 'react-intl';
+
 import AddUser from 'src/common/svgs/AddUser';
 import profile1 from '../../common/assets/profile1.jpeg';
 import profile2 from '../../common/assets/profile2.jpeg';
@@ -31,6 +34,7 @@ const ChatWindow: FC = () => {
     const [textMessage, setTextMessage] = useState('');
     const [messagesList, setMessagesList] = useState<string[]>([]);
     const navigate = useNavigate();
+    const intl = useIntl();
 
     const theme = createTheme({
         components: {
@@ -108,7 +112,7 @@ const ChatWindow: FC = () => {
                         className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit cursor-pointer duration-200 font-boldSans"
                     >
                         <CgArrowLongLeft />
-                        Back
+                        <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
                     </div>
                     <div className="text-md text-textColor font-boldQuick">
                         {isEmailSent ? 'awaiting handover' : 'pending confirmation'}
@@ -143,7 +147,11 @@ const ChatWindow: FC = () => {
 
                     <div className="flex items-center gap-6">
                         <div className="text-md text-textColor font-boldQuick mr-8 hidden min-[850px]:block">
-                            {isEmailSent ? 'awaiting handover' : 'pending confirmation'}
+                            {isEmailSent ? (
+                                <LocalizedText label={{id: 'awaitingHandover', defaultMessage: 'awaiting handover'}} />
+                            ) : (
+                                <LocalizedText label={{id: 'awaitingHandover', defaultMessage: 'pending confirmation'}} />
+                            )}
                         </div>
                         <div
                             onClick={() => setIsTravelerModalOpen(true)}
@@ -178,18 +186,18 @@ const ChatWindow: FC = () => {
                             >
                                 <div className="flex items-center py-[16px] px-[24px] text-textColor text-default font-mainSans gap-2 hover:opacity-80 duration-200 cursor-pointer">
                                     <MdEdit />
-                                    Edit the offer
+                                    <LocalizedText label={{id: 'editTheOffer', defaultMessage: 'Edit the offer'}} />
                                 </div>
                                 <div className="flex items-center text-alertRed py-[16px] px-[24px] text-default font-mainSans gap-2 hover:opacity-80 duration-200 cursor-pointer">
                                     <IoIosInformationCircleOutline />
-                                    Report a problem
+                                    <LocalizedText label={{id: 'reportProblem', defaultMessage: 'Report a problem'}} />
                                 </div>
                                 <div
                                     onClick={() => setIsTerminateModal(true)}
                                     className="flex items-center text-alertRed text-default py-[16px] px-[24px] font-mainSans gap-2 hover:opacity-80 duration-200 cursor-pointer"
                                 >
                                     <IoMdCloseCircleOutline />
-                                    Terminate the deal
+                                    <LocalizedText label={{id: 'terminateDeal', defaultMessage: 'Terminate the deal'}} />
                                 </div>
                             </div>
                         </div>
@@ -198,10 +206,17 @@ const ChatWindow: FC = () => {
 
                 <div className="p-4 flex justify-between items-center bg-lightGreen">
                     <div className="flex flex-col gap-2">
-                        <div className="text-textColor text-md font-boldQuick">Is this traveler right for you?</div>
+                        <div className="text-textColor text-md font-boldQuick">
+                            <LocalizedText label={{id: 'isTravelerRight', defaultMessage: 'Is this traveler right for you?'}} />
+                        </div>
                         <p className="text-sm2 text-lineGray font-mainSans">
-                            If you click on the "yes" button, the deal status will change and you will not be able to select another
-                            traveler
+                            <LocalizedText
+                                label={{
+                                    id: 'warningText',
+                                    defaultMessage:
+                                        "If you click on the 'yes' button, the deal status will change and you will not be able to select another traveler",
+                                }}
+                            />
                         </p>
                     </div>
                     <ThemeProvider theme={theme}>
@@ -230,7 +245,7 @@ const ChatWindow: FC = () => {
         </div> */}
 
                 {isTerminated ? (
-                    <ChatInfoText text="The deal was terminated due to the death of the other party" bgColor="#E2542C40" />
+                    <ChatInfoText text="dealTerminated" bgColor="#E2542C40" />
                 ) : (
                     <div className="flex flex-col p-0 lg:p-8 gap-6">
                         <div className="flex gap-2 items-center self-end">
@@ -247,11 +262,7 @@ const ChatWindow: FC = () => {
                             ></div>
                         </div>
                         <div className="self-center breakpoint:w-[50%] bg-lightGreen py-2 px-4 rounded-[10px] ">
-                            <ChatInfoText
-                                text="The deal has been paid successfully, agree on the other side to
-              hand over the parcel"
-                                bgColor="#EFFFF8"
-                            />
+                            <ChatInfoText text="paidSuccessfully" bgColor="#EFFFF8" />
                         </div>
                         <div className="flex gap-2 items-center">
                             <div
@@ -295,7 +306,10 @@ const ChatWindow: FC = () => {
                         onChange={e => {
                             setTextMessage(e.target.value);
                         }}
-                        placeholder="Write a message..."
+                        placeholder={intl.formatMessage({
+                            id: 'writeMessage',
+                            defaultMessage: 'Write a message...',
+                        })}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">

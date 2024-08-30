@@ -1,11 +1,16 @@
 import {FC} from 'react';
 import {Button, createTheme, FormControl, Modal, Rating, TextField, ThemeProvider} from '@mui/material';
 
+import LocalizedText from '@components/localize/LocalizedText';
+import {useIntl} from 'react-intl';
+
 import ModalProps from 'src/common/interfaces/modal.interface';
 
 type DealCompletedModalProps = ModalProps;
 
 const DealCompletedModal: FC<DealCompletedModalProps> = ({open, setOpen}) => {
+    const intl = useIntl();
+
     const ratingTheme = createTheme({
         components: {
             MuiRating: {
@@ -63,11 +68,17 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({open, setOpen}) => {
     return (
         <Modal open={open} onClose={() => setOpen(false)}>
             <div className="bg-white rounded-[24px] top-[50%] left-[50%] relative translate-x-[-50%]  translate-y-[-50%] w-[95%] tablet:w-[514px] lg:w-[30%] py-8 px-6 flex flex-col items-center">
-                <h2 className="text-textColor text-xl font-boldQuick w-[80%] text-center">The deal has been completed</h2>
-                <div className="text-[#49454F] font-mainSans text-md mt-8">Rate a customer/traveller</div>
+                <h2 className="text-textColor text-xl font-boldQuick w-[80%] text-center">
+                    <LocalizedText label={{id: 'dealCompleted', defaultMessage: 'The deal has been completed'}} />
+                </h2>
+                <div className="text-[#49454F] font-mainSans text-md mt-8">
+                    <LocalizedText label={{id: 'rateACustomer', defaultMessage: 'Rate a customer/traveller'}} />
+                </div>
                 <ThemeProvider theme={ratingTheme}>
                     <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
-                    <div className="text-[#49454F] font-mainSans text-md mt-8">Leave a feedback</div>
+                    <div className="text-[#49454F] font-mainSans text-md mt-8">
+                        <LocalizedText label={{id: 'leaveFeedback', defaultMessage: 'Leave a feedback'}} />{' '}
+                    </div>
                     <FormControl
                         sx={{
                             marginTop: 2,
@@ -75,9 +86,12 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({open, setOpen}) => {
                         fullWidth
                     >
                         <TextField
-                            label="Description"
+                            label={<LocalizedText label={{id: 'description', defaultMessage: 'Description'}} />}
                             multiline
-                            placeholder="Type your comment here"
+                            placeholder={intl.formatMessage({
+                                id: 'typeHere',
+                                defaultMessage: 'Type your comment here',
+                            })}
                             rows={3}
                             minRows={3}
                             sx={{
@@ -106,7 +120,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({open, setOpen}) => {
                             }}
                             onClick={() => setOpen(false)}
                         >
-                            Cancel
+                            <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
                         </Button>
                         <Button
                             sx={{
@@ -121,7 +135,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({open, setOpen}) => {
                                 setOpen(false);
                             }}
                         >
-                            Send
+                            <LocalizedText label={{id: 'send', defaultMessage: 'Send'}} />
                         </Button>
                     </div>
                 </ThemeProvider>
