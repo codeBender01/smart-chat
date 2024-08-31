@@ -1,7 +1,7 @@
-import messagesEn from './en';
-import messagesUk from './uk';
 import messagesBe from './be';
+import messagesEn from './en';
 import messagesPl from './pl';
+import messagesUk from './uk';
 
 const messages = {
     en: messagesEn,

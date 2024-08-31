@@ -1,10 +1,10 @@
 import React from 'react';
 import {Dialog} from '@mui/material';
 import {makeStyles} from '@mui/styles';
+import {maxWidth} from '@mui/system';
 
 import {CustomTheme} from '@style';
 import {ModalContext} from '@components/modal/ModalProvider';
-import {maxWidth} from '@mui/system';
 
 const useStyles = makeStyles<CustomTheme>(theme => ({
     modal: {

@@ -1,6 +1,8 @@
 import {FC, useState} from 'react';
-import {Button, createTheme, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, ThemeProvider} from '@mui/material';
+import {Button, FormControl, InputLabel, MenuItem, SelectChangeEvent} from '@mui/material';
+
 import LocalizedText from '@components/localize/LocalizedText';
+import {Select} from '@components/select/Select';
 
 const reasons = [
     {
@@ -57,46 +59,19 @@ const Currency: FC = () => {
                     }}
                     fullWidth
                 >
-                    <InputLabel
-                        sx={{
-                            fontFamily: 'OpenReg',
-                            color: '#303030',
-
-                            '&.Mui-focused': {
-                                color: '#303030',
-                            },
-                        }}
-                        id="demo-simple-select-label"
-                    >
-                        <LocalizedText label={{id: 'currency', defaultMessage: 'Currency'}} />
-                    </InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         label="Currency"
                         id="demo-simple-select"
                         value={reason}
-                        onChange={handleChange}
+                        options={reasons}
                         sx={{
                             padding: '0 12px',
                             '& input': {
                                 backgroundColor: 'red',
                             },
                         }}
-                    >
-                        {reasons.map(r => {
-                            return (
-                                <MenuItem
-                                    sx={{
-                                        padding: '16px 24px',
-                                    }}
-                                    key={r.label}
-                                    value={r.value}
-                                >
-                                    {r.label}
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
+                    ></Select>
                 </FormControl>
                 <Button
                     variant={'contained'}

@@ -340,6 +340,7 @@ export function createCustomTheme(locale: Locale, mode: PaletteMode = 'light'): 
                     lineHeight: '24.51px',
                     letterSpacing: '-0.32%',
                 },
+
                 // Typography -> Subhead
                 subtitle1: {
                     fontStyle: 'normal',
@@ -371,7 +372,7 @@ export function createCustomTheme(locale: Locale, mode: PaletteMode = 'light'): 
                     fontFamily: 'Open Sans',
                     fontStyle: 'normal',
                     fontWeight: 400,
-                    fontSize: '22px',
+                    fontSize: '16px',
                     lineHeight: '20px',
                     letterSpacing: '-0.3%',
                     textTransform: 'none',

@@ -1,12 +1,11 @@
 import {render} from 'react-dom';
+import {Provider} from 'react-redux';
 import './index.css';
 import 'reflect-metadata';
+import store from '@store/initStore';
 
-import {Provider} from 'react-redux';
 import App from './app/components/App';
 import reportWebVitals from './reportWebVitals';
-
-import store from '@store/initStore';
 
 // renderApp(document.getElementById('root') as HTMLElement);
 

@@ -1,10 +1,10 @@
 import {FC, useState} from 'react';
-import {Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from '@mui/material';
-import LocalizedText from '@components/localize/LocalizedText';
-
+import {useDispatch} from 'react-redux';
+import {Button, FormControl, SelectChangeEvent} from '@mui/material';
 import {setLang} from '@store/languageSlice';
 
-import {useDispatch} from 'react-redux';
+import LocalizedText from '@components/localize/LocalizedText';
+import {Select} from '@components/select/Select';
 
 import {Locale} from 'src/common/style/theme';
 
@@ -54,43 +54,29 @@ const Language: FC = () => {
                             {
                                 borderColor: '#0000003B !important',
                             },
+
+                        '& .css-s8ydqt-MuiButtonBase-root-MuiMenuItem-root': {
+                            padding: '16px 24px',
+                        },
                     }}
                     fullWidth
                 >
-                    <InputLabel
-                        sx={{
-                            fontFamily: 'OpenReg',
-                            color: '#303030',
-
-                            '&.Mui-focused': {
-                                color: '#303030',
-                            },
-                        }}
-                        id="demo-simple-select-label"
-                    >
-                        <LocalizedText label={{id: 'language', defaultMessage: 'Language'}} />
-                    </InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         label={<LocalizedText label={{id: 'language', defaultMessage: 'Language'}} />}
                         id="demo-simple-select"
                         value={language}
-                        onChange={handleChange}
+                        options={reasons}
                         sx={{
                             padding: '0 12px',
+                            fontSize: '16px',
+                            maxHeight: '400px',
+
                             '& input': {
                                 backgroundColor: 'red',
                             },
                         }}
-                    >
-                        {reasons.map(r => {
-                            return (
-                                <MenuItem sx={{padding: '16px 24px'}} key={r.label} value={r.value}>
-                                    {r.label}
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
+                    ></Select>
                 </FormControl>
                 <Button
                     disableFocusRipple

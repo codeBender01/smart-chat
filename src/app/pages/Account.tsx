@@ -1,7 +1,9 @@
 import {FC, useState} from 'react';
 import TerminationApproveModal from '@app/components/TerminationApproveModal';
-import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from '@mui/material';
+import {FormControl, InputLabel, MenuItem, SelectChangeEvent, TextField} from '@mui/material';
 import {useIntl} from 'react-intl';
+
+import {Select} from '@components/select/Select';
 
 import LocalizedText from '@components/localize/LocalizedText';
 
@@ -87,25 +89,12 @@ const Account: FC = () => {
                     }}
                     fullWidth
                 >
-                    <InputLabel
-                        id="demo-simple-select-label"
-                        sx={{
-                            fontFamily: 'OpenReg',
-                            color: '#303030',
-
-                            '&.Mui-focused': {
-                                color: '#303030',
-                            },
-                        }}
-                    >
-                        <LocalizedText label={{id: 'reason', defaultMessage: 'Reason'}} />
-                    </InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         label="Reason"
                         id="demo-simple-select"
                         value={reason}
-                        onChange={handleChange}
+                        options={reasons}
                         sx={{
                             padding: '0 12px',
                             '& .Mui-List': {
@@ -119,15 +108,7 @@ const Account: FC = () => {
                                 borderColor: '#0000003B',
                             },
                         }}
-                    >
-                        {reasons.map(r => {
-                            return (
-                                <MenuItem key={r.label} value={r.value}>
-                                    <LocalizedText label={{id: r.value, defaultMessage: r.label}} />
-                                </MenuItem>
-                            );
-                        })}
-                    </Select>
+                    ></Select>
                 </FormControl>
                 <FormControl
                     fullWidth

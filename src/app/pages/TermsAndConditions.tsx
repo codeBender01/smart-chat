@@ -1,4 +1,5 @@
 import {FC} from 'react';
+
 import LocalizedText from '@components/localize/LocalizedText';
 
 const TermsAndConditions: FC = () => {

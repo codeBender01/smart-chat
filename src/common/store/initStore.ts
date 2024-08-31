@@ -1,6 +1,7 @@
-import {configureStore} from '@reduxjs/toolkit';
-import {useSelector, TypedUseSelectorHook, useDispatch} from 'react-redux';
+import {TypedUseSelectorHook, useSelector} from 'react-redux';
 import thunk from 'redux-thunk';
+
+import {configureStore} from '@reduxjs/toolkit';
 
 import languageSlice from './languageSlice';
 

@@ -1,6 +1,8 @@
 import {Dispatch, FC, SetStateAction, useContext, useState} from 'react';
 import {useIntl} from 'react-intl';
-import {Button, createTheme, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, ThemeProvider} from '@mui/material';
+import {Button, createTheme, FormControl, SelectChangeEvent, TextField, ThemeProvider} from '@mui/material';
+
+import {Select} from '@components/select/Select';
 
 import {IoMdCloseCircleOutline} from 'react-icons/io';
 
@@ -55,70 +57,6 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
         console.log('ejen amy');
     };
 
-    const selectTheme = createTheme({
-        components: {
-            MuiSelect: {
-                styleOverrides: {
-                    root: {
-                        padding: '0 12px',
-                    },
-                },
-            },
-            MuiFormControl: {
-                styleOverrides: {
-                    root: {
-                        '& .css-1m5g6k3-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline':
-                            {
-                                borderColor: '#0000003B',
-                            },
-
-                        '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#0000003B',
-                        },
-                    },
-                },
-            },
-            MuiMenuItem: {
-                styleOverrides: {
-                    root: {
-                        padding: '16px 24px',
-                    },
-                },
-            },
-            MuiInputLabel: {
-                styleOverrides: {
-                    root: {
-                        fontFamily: 'OpenReg',
-                        color: '#303030',
-
-                        '&.Mui-focused': {
-                            color: '#303030',
-                        },
-                    },
-                },
-            },
-        },
-    });
-
-    const emailInputTheme = createTheme({
-        components: {
-            MuiButton: {
-                defaultProps: {
-                    variant: 'contained',
-                    disableElevation: true,
-                    disableRipple: true,
-                },
-                styleOverrides: {
-                    root: {
-                        borderRadius: '20px',
-                        textTransform: 'none',
-                        fontFamily: 'OpenReg',
-                    },
-                },
-            },
-        },
-    });
-
     const handleOpenModal = () => {
         openModal(
             <ModalContent>
@@ -129,51 +67,45 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
                         />
                     </div>
                     <div className="flex flex-col gap-4 w-[100%]">
-                        <ThemeProvider theme={selectTheme}>
-                            <FormControl
-                                sx={{
-                                    marginTop: 2,
-                                }}
-                                fullWidth
-                            >
-                                <InputLabel id="demo-simple-select-label">
-                                    <LocalizedText label={{id: 'reason', defaultMessage: 'Reason'}} />
-                                </InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    label="Reason"
-                                    id="demo-simple-select"
-                                    value={reason}
-                                    onChange={(event: SelectChangeEvent) => {
-                                        setReason(event.target.value);
-                                        setIsReasonSelected(true);
-                                    }}
-                                >
-                                    {reasons.map(r => {
-                                        return (
-                                            <MenuItem key={r.value} value={r.label}>
-                                                <LocalizedText label={{id: r.value, defaultMessage: r.label}} />
-                                            </MenuItem>
-                                        );
-                                    })}
-                                </Select>
-                            </FormControl>
-                            <FormControl
-                                fullWidth
-                                sx={{
-                                    height: isReasonSelected ? 'auto' : 0,
-                                    overflowY: 'hidden',
-                                    transition: 'all 0.6s',
-                                }}
-                            >
-                                <TextField
-                                    placeholder={intl.formatMessage({
-                                        id: 'leaveReason',
-                                        defaultMessage: 'Leave your reason',
-                                    })}
-                                />
-                            </FormControl>
-                        </ThemeProvider>
+                        <FormControl
+                            sx={{
+                                marginTop: 2,
+                                root: {
+                                    '& .css-1m5g6k3-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+                                        {
+                                            borderColor: '#0000003B',
+                                        },
+
+                                    '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                                        borderColor: '#0000003B',
+                                    },
+                                },
+                            }}
+                            fullWidth
+                        >
+                            <Select
+                                labelId="demo-simple-select-label"
+                                label="Reason"
+                                id="demo-simple-select"
+                                value={reason}
+                                options={reasons}
+                            ></Select>
+                        </FormControl>
+                        <FormControl
+                            fullWidth
+                            sx={{
+                                height: isReasonSelected ? 'auto' : 0,
+                                overflowY: 'hidden',
+                                transition: 'all 0.6s',
+                            }}
+                        >
+                            <TextField
+                                placeholder={intl.formatMessage({
+                                    id: 'leaveReason',
+                                    defaultMessage: 'Leave your reason',
+                                })}
+                            />
+                        </FormControl>
                     </div>
 
                     <p className="mt-6 text-lineGray font-lato font-normal text-default">
@@ -193,40 +125,50 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
                         .
                     </p>
 
-                    <ThemeProvider theme={emailInputTheme}>
-                        <div className="mt-6 flex justify-end gap-2 w-[100%]">
-                            <Button
-                                sx={{
+                    <div className="mt-6 flex justify-end gap-2 w-[100%]">
+                        <Button
+                            disableElevation
+                            disableRipple
+                            variant="contained"
+                            sx={{
+                                bgcolor: 'white',
+                                color: '#A9A9A9',
+                                border: '1px solid #A9A9A9',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                fontFamily: 'OpenReg',
+                                '&:hover': {
                                     bgcolor: 'white',
-                                    color: '#A9A9A9',
-                                    border: '1px solid #A9A9A9',
-                                    '&:hover': {
-                                        bgcolor: 'white',
-                                        opacity: 0.8,
-                                    },
-                                }}
-                                onClick={closeModal}
-                            >
-                                <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
-                            </Button>
-                            <Button
-                                sx={{
+                                    opacity: 0.8,
+                                },
+                            }}
+                            onClick={closeModal}
+                        >
+                            <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
+                        </Button>
+                        <Button
+                            disableElevation
+                            disableRipple
+                            variant="contained"
+                            sx={{
+                                bgcolor: '#E2542C',
+                                color: '#fff',
+                                borderRadius: '20px',
+                                textTransform: 'none',
+                                fontFamily: 'OpenReg',
+                                '&:hover': {
                                     bgcolor: '#E2542C',
-                                    color: '#fff',
-                                    '&:hover': {
-                                        bgcolor: '#E2542C',
-                                        opacity: 0.8,
-                                    },
-                                }}
-                                onClick={() => {
-                                    closeModal();
-                                    setIsTerminated(!isTerminated);
-                                }}
-                            >
-                                <LocalizedText label={{id: 'terminate', defaultMessage: 'Terminate'}} />
-                            </Button>
-                        </div>
-                    </ThemeProvider>
+                                    opacity: 0.8,
+                                },
+                            }}
+                            onClick={() => {
+                                closeModal();
+                                setIsTerminated(!isTerminated);
+                            }}
+                        >
+                            <LocalizedText label={{id: 'terminate', defaultMessage: 'Terminate'}} />
+                        </Button>
+                    </div>
                 </div>
             </ModalContent>
         );

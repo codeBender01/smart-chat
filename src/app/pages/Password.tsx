@@ -1,6 +1,7 @@
 import {FC, useState} from 'react';
 import {IoEyeOffOutline, IoEyeOutline} from 'react-icons/io5';
 import {Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from '@mui/material';
+
 import LocalizedText from '@components/localize/LocalizedText';
 
 const Password: FC = () => {

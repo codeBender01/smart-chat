@@ -14,7 +14,7 @@ const TerminationApproveModal: FC = () => {
     const handleOpenModal = () => {
         openModal(
             <ModalContent>
-                <div className="p-8 tablet:min-w-[514px]">
+                <div className="p-8 tablet:min-w-[514px] max-w-[514px]">
                     {isDeactivated ? (
                         <div className="flex flex-col items-center">
                             <div className="text-xl text-textColor font-boldQuick text-center">

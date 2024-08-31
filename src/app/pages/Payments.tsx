@@ -1,6 +1,8 @@
 import {FC, useState} from 'react';
 import {useMediaQuery} from 'react-responsive';
-import {Box, Button, createTheme, Tab, Tabs, ThemeProvider} from '@mui/material';
+import {Box, Button, Tab, Tabs} from '@mui/material';
+import {Typography} from '@mui/material';
+
 import LocalizedText from '@components/localize/LocalizedText';
 
 interface TabPanelProps {
@@ -37,11 +39,15 @@ const Payments: FC = () => {
 
     return (
         <div className="w-[100%]">
-            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
-                <LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />
+            <div className="mt-8 md:hidden block">
+                <Typography variant="h2">
+                    <LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />
+                </Typography>
             </div>
-            <p className="text-lineGray font-mainSans mb-8 text-default max-w-[360px]">
-                <LocalizedText label={{id: 'manage', defaultMessage: 'You can manage your payments and payouts'}} />
+            <p className="text-lineGray mb-8 max-w-[360px]">
+                <Typography variant="body1">
+                    <LocalizedText label={{id: 'manage', defaultMessage: 'You can manage your payments and payouts'}} />
+                </Typography>
             </p>
             <Box
                 sx={{
@@ -74,6 +80,8 @@ const Payments: FC = () => {
                             textTransform: 'none',
                             fontFamily: 'OpenReg',
                             width: isMobile ? '50%' : 'initial',
+                            fontSize: '14px',
+
                             '&.Mui-selected': {
                                 color: '#242136',
                             },
@@ -90,6 +98,7 @@ const Payments: FC = () => {
                             textTransform: 'none',
                             fontFamily: 'OpenReg',
                             width: isMobile ? '50%' : 'initial',
+                            fontSize: '14px',
                             '&.Mui-selected': {
                                 color: '#242136',
                             },
@@ -126,7 +135,9 @@ const Payments: FC = () => {
                             },
                         }}
                     >
-                        <LocalizedText label={{id: 'managePayments', defaultMessage: 'Manage payments'}} />
+                        <Typography variant="button">
+                            <LocalizedText label={{id: 'managePayments', defaultMessage: 'Manage payments'}} />
+                        </Typography>
                     </Button>
                 </div>
 
@@ -156,7 +167,9 @@ const Payments: FC = () => {
                             },
                         }}
                     >
-                        <LocalizedText label={{id: 'addPaymentBtn', defaultMessage: 'Add payment method'}} />
+                        <Typography variant="button">
+                            <LocalizedText label={{id: 'addPaymentBtn', defaultMessage: 'Add payment method'}} />
+                        </Typography>
                     </Button>
                 </div>
             </CustomTabPanel>
@@ -189,7 +202,9 @@ const Payments: FC = () => {
                             },
                         }}
                     >
-                        <LocalizedText label={{id: 'addPayoutBtn', defaultMessage: 'Add payout method'}} />
+                        <Typography variant="button">
+                            <LocalizedText label={{id: 'addPayoutBtn', defaultMessage: 'Add payout method'}} />
+                        </Typography>
                     </Button>
                 </div>
             </CustomTabPanel>

@@ -51,7 +51,13 @@ export function Select({options, valueView = 'default', value, ...props}: Select
                 {...props}
             >
                 {options?.map(option => (
-                    <MenuItem key={`select_option_${option.value}`} value={option?.value}>
+                    <MenuItem
+                        sx={{
+                            padding: '16px 24px',
+                        }}
+                        key={`select_option_${option.value}`}
+                        value={option?.value}
+                    >
                         <LocalizedText label={option?.label} />
                     </MenuItem>
                 ))}
