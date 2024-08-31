@@ -10,8 +10,6 @@ import LocalizedText from '../localize/LocalizedText';
 
 const useStyles = makeStyles<CustomTheme>(theme => ({
     modalLayoutContainer: {
-        display: 'flex',
-        flexDirection: 'column',
         gap: theme.spacing(2),
         padding: theme.spacing(0),
         borderRadius: theme.shape.borderRadius * 5,

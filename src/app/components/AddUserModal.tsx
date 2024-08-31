@@ -1,5 +1,5 @@
-import {Dispatch, FC, SetStateAction, useContext, useState} from 'react';
-import {Button, createTheme, FormControl, FormControlLabel, Radio, RadioGroup, TextField, ThemeProvider} from '@mui/material';
+import React, {Dispatch, FC, SetStateAction, useContext, useState, ChangeEvent} from 'react';
+import {Button, FormControl, FormControlLabel, Radio, RadioGroup, TextField} from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 import ApproveModal from './ApproveModal';
@@ -14,8 +14,8 @@ import AddUser from 'src/common/svgs/AddUser';
 
 interface AdduserModalProps extends ModalProps {
     isEmailSent: boolean;
-    setIsEmailSent: Dispatch<SetStateAction<boolean>>;
-    setInviteModal: Dispatch<SetStateAction<boolean>>;
+    selectedRole: string;
+    handleRoleSelect: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const roles = [
@@ -31,60 +31,13 @@ const roles = [
     },
 ];
 
-const AddUserModal: FC<AdduserModalProps> = ({open, setOpen, isEmailSent, setIsEmailSent, setInviteModal}) => {
-    const [selectedRole, setSelectedRole] = useState('');
-
+const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleRoleSelect}) => {
     const {openModal, closeModal} = useContext(ModalContext);
-
-    const emailInputTheme = createTheme({
-        components: {
-            MuiTextField: {
-                styleOverrides: {
-                    root: {
-                        width: '100%',
-                        color: '#282D41',
-                        fontFamily: 'OpenReg',
-                        marginTop: '10px',
-                        '& .MuiInputBase-input': {
-                            padding: '12px 18px',
-                            fontFamily: 'OpenReg, sans-serif',
-                        },
-                        input: {
-                            '::placeholder': {
-                                color: '#49454F',
-                                opacity: 0.8,
-                            },
-                        },
-                    },
-                },
-            },
-
-            MuiButton: {
-                defaultProps: {
-                    variant: 'contained',
-                    disableElevation: true,
-                    disableRipple: true,
-                },
-                styleOverrides: {
-                    root: {
-                        borderRadius: '20px',
-                        width: '88px',
-                        textTransform: 'none',
-                        fontFamily: 'OpenReg',
-                    },
-                },
-            },
-        },
-    });
-
-    const handleRoleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedRole((event.target as HTMLInputElement).value);
-    };
 
     const handleOpenModal = () => {
         openModal(
-            <ModalLayout title={''}>
-                <div className="w-[100%] tablet:min-w-[514px] px-8 py-6 flex flex-col">
+            <ModalLayout title={''} key={selectedRole}>
+                <div className="w-[100%] tablet:min-w-[514px] px-8 py-8 flex flex-col">
                     <div className="text-xl text-textColor font-boldQuick">
                         {isEmailSent ? (
                             <Typography variant="h2">
@@ -119,20 +72,21 @@ const AddUserModal: FC<AdduserModalProps> = ({open, setOpen, isEmailSent, setIsE
                     <FormControl>
                         <RadioGroup
                             aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue="receiver"
                             name="radio-buttons-group"
                             onChange={handleRoleSelect}
                             sx={{
-                                '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
-                                    color: '#15C370',
+                                '& .Mui-checked': {
+                                    color: '#15C370 !important',
                                 },
                             }}
+                            value={selectedRole}
                         >
                             {roles.map(r => {
                                 return (
                                     <FormControlLabel
-                                        value={r.value}
                                         control={<Radio />}
+                                        checked={selectedRole === r.value}
+                                        value={r.value}
                                         label={<LocalizedText label={{id: r.value, defaultMessage: r.title}} />}
                                         key={r.id}
                                         sx={{
@@ -145,56 +99,52 @@ const AddUserModal: FC<AdduserModalProps> = ({open, setOpen, isEmailSent, setIsE
                             })}
                         </RadioGroup>
                     </FormControl>
-                    <ThemeProvider theme={emailInputTheme}>
-                        <TextField
-                            sx={{
-                                width: '100%',
-                                color: '#282D41',
-                                fontFamily: 'OpenReg',
-                                marginTop: '10px',
-                                marginBottom: '32px',
-                                '& .MuiInputBase-input': {
-                                    padding: '12px 18px',
-                                    fontFamily: 'OpenReg, sans-serif',
+                    <TextField
+                        sx={{
+                            width: '100%',
+                            color: '#282D41',
+                            fontFamily: 'OpenReg',
+                            marginTop: '10px',
+                            marginBottom: '32px',
+                            '& .MuiInputBase-input': {
+                                padding: '12px 18px',
+                                fontFamily: 'OpenReg, sans-serif',
+                            },
+                            input: {
+                                '::placeholder': {
+                                    color: '#49454F',
+                                    opacity: 0.8,
                                 },
-                                input: {
-                                    '::placeholder': {
-                                        color: '#49454F',
-                                        opacity: 0.8,
-                                    },
+                            },
+                        }}
+                        placeholder="Email"
+                    />
+                    <div className="mt-3 flex justify-end gap-2">
+                        <Button
+                            disableElevation
+                            disableRipple
+                            sx={{
+                                bgcolor: 'white',
+                                color: '#A9A9A9',
+                                border: '1px solid #A9A9A9',
+                                borderRadius: '20px',
+                                width: '88px',
+                                textTransform: 'none',
+                                fontFamily: 'OpenReg',
+                                fontSize: '16px',
+                                '&:hover': {
+                                    bgcolor: 'white',
+                                    opacity: 0.8,
                                 },
                             }}
-                            placeholder="Email"
-                        />
-                        <div className="mt-3 flex justify-end gap-2">
-                            <Button
-                                disableElevation
-                                disableRipple
-                                variant="outlined"
-                                sx={{
-                                    bgcolor: 'white',
-                                    color: '#A9A9A9',
-                                    border: '1px solid #A9A9A9',
-                                    borderRadius: '20px',
-                                    width: '88px',
-                                    textTransform: 'none',
-                                    fontFamily: 'OpenReg',
-                                    '&:hover': {
-                                        bgcolor: 'white',
-                                        opacity: 0.8,
-                                    },
-                                }}
-                                onClick={closeModal}
-                            >
-                                <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
-                            </Button>
-                            <ApproveModal />
-                        </div>
-                    </ThemeProvider>
+                            onClick={closeModal}
+                        >
+                            <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
+                        </Button>
+                        <ApproveModal />
+                    </div>
                 </div>
-                ,
-            </ModalLayout>,
-            true
+            </ModalLayout>
         );
     };
 

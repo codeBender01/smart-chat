@@ -35,11 +35,21 @@ const Payments: FC = () => {
         setTabIndex(newValue);
     };
 
-    const tabsTheme = createTheme({
-        components: {
-            MuiTabs: {
-                styleOverrides: {
-                    root: {
+    return (
+        <div className="w-[100%]">
+            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
+                <LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />
+            </div>
+            <p className="text-lineGray font-mainSans mb-8 text-default max-w-[360px]">
+                <LocalizedText label={{id: 'manage', defaultMessage: 'You can manage your payments and payouts'}} />
+            </p>
+            <Box
+                sx={{
+                    marginTop: 2,
+                }}
+            >
+                <Tabs
+                    sx={{
                         backgroundColor: '#fff',
                         marginTop: 2,
                         gap: '10px',
@@ -52,140 +62,137 @@ const Payments: FC = () => {
                             borderRadius: '10px',
                             height: '2px',
                         },
-                    },
-                },
-                defaultProps: {},
-            },
-            MuiTab: {
-                styleOverrides: {
-                    root: {
-                        color: '#838383',
-                        paddingInline: '48px',
-                        textTransform: 'none',
-                        fontFamily: 'OpenReg',
-                        width: isMobile ? '50%' : 'initial',
-                        '&.Mui-selected': {
-                            color: '#242136',
-                        },
-                    },
-                },
-            },
-
-            MuiButton: {
-                defaultProps: {
-                    variant: 'contained',
-                    disableElevation: true,
-                    disableRipple: true,
-                },
-                styleOverrides: {
-                    root: {
-                        borderRadius: '20px',
-                        padding: '10px, 16px',
-                        textTransform: 'none',
-                        fontFamily: 'OpenReg',
-                    },
-                },
-            },
-        },
-    });
-
-    return (
-        <div className="w-[100%]">
-            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
-                <LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />
-            </div>
-            <p className="text-lineGray font-mainSans mb-8 text-default max-w-[360px]">
-                <LocalizedText label={{id: 'manage', defaultMessage: 'You can manage your payments and payouts'}} />
-            </p>
-            <ThemeProvider theme={tabsTheme}>
-                <Box
-                    sx={{
-                        marginTop: 2,
                     }}
+                    value={tabIndex}
+                    onChange={handleChange}
+                    aria-label="basic tabs example"
                 >
-                    <Tabs value={tabIndex} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab
-                            disableRipple
-                            label={<LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />}
-                            {...a11yProps(0)}
-                        />
-                        <Tab disableRipple label={<LocalizedText label={{id: 'payouts', defaultMessage: 'Payouts'}} />} {...a11yProps(1)} />
-                    </Tabs>
-                </Box>
-                <CustomTabPanel value={tabIndex} index={0}>
-                    <div className="flex flex-col gap-4 w-[100%] md:w-[30%] min-w-[360px]">
-                        <div className="text-md font-boldQuick text-[#242136]">
-                            <LocalizedText label={{id: 'yourPayments', defaultMessage: 'Your payments'}} />
-                        </div>
-                        <p className="font-mainSans text-default text-lineGray">
-                            <LocalizedText label={{id: 'seeAllPayments', defaultMessage: 'See all your payments and refunds'}} />
-                        </p>
-                        <Button
-                            sx={{
-                                bgcolor: '#15C370',
-                                color: '#fff',
-                                alignSelf: 'flex-end',
-                                marginTop: 3,
-                                '&:hover': {
-                                    bgcolor: '#15C370',
-                                    opacity: 0.8,
-                                },
-                            }}
-                        >
-                            <LocalizedText label={{id: 'managePayments', defaultMessage: 'Manage payments'}} />
-                        </Button>
+                    <Tab
+                        sx={{
+                            color: '#838383',
+                            paddingInline: '48px',
+                            textTransform: 'none',
+                            fontFamily: 'OpenReg',
+                            width: isMobile ? '50%' : 'initial',
+                            '&.Mui-selected': {
+                                color: '#242136',
+                            },
+                        }}
+                        disableRipple
+                        label={<LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />}
+                        {...a11yProps(0)}
+                    />
+                    <Tab
+                        disableRipple
+                        sx={{
+                            color: '#838383',
+                            paddingInline: '48px',
+                            textTransform: 'none',
+                            fontFamily: 'OpenReg',
+                            width: isMobile ? '50%' : 'initial',
+                            '&.Mui-selected': {
+                                color: '#242136',
+                            },
+                        }}
+                        label={<LocalizedText label={{id: 'payouts', defaultMessage: 'Payouts'}} />}
+                        {...a11yProps(1)}
+                    />
+                </Tabs>
+            </Box>
+            <CustomTabPanel value={tabIndex} index={0}>
+                <div className="flex flex-col gap-4 w-[100%] md:w-[30%] min-w-[360px]">
+                    <div className="text-md font-boldQuick text-[#242136]">
+                        <LocalizedText label={{id: 'yourPayments', defaultMessage: 'Your payments'}} />
                     </div>
+                    <p className="font-mainSans text-default text-lineGray">
+                        <LocalizedText label={{id: 'seeAllPayments', defaultMessage: 'See all your payments and refunds'}} />
+                    </p>
+                    <Button
+                        disableElevation
+                        disableRipple
+                        variant="contained"
+                        sx={{
+                            bgcolor: '#15C370',
+                            color: '#fff',
+                            alignSelf: 'flex-end',
+                            marginTop: 3,
+                            borderRadius: '20px',
+                            padding: '10px, 16px',
+                            textTransform: 'none',
+                            fontFamily: 'OpenReg',
+                            '&:hover': {
+                                bgcolor: '#15C370',
+                                opacity: 0.8,
+                            },
+                        }}
+                    >
+                        <LocalizedText label={{id: 'managePayments', defaultMessage: 'Manage payments'}} />
+                    </Button>
+                </div>
 
-                    <div className="flex flex-col gap-4 w-[100%] md:w-[30%] min-w-[360px] mt-6">
-                        <div className="text-md font-boldQuick text-[#242136]">
-                            <LocalizedText label={{id: 'paymentsMethod', defaultMessage: 'Payments methods'}} />
-                        </div>
-                        <p className="font-mainSans text-default text-lineGray">
-                            <LocalizedText label={{id: 'addPayment', defaultMessage: ' Add and manage your payment methods'}} />
-                        </p>
-                        <Button
-                            sx={{
-                                bgcolor: '#15C370',
-                                color: '#fff',
-                                alignSelf: 'flex-end',
-                                marginTop: 3,
-                                '&:hover': {
-                                    bgcolor: '#15C370',
-                                    opacity: 0.8,
-                                },
-                            }}
-                        >
-                            <LocalizedText label={{id: 'addPaymentBtn', defaultMessage: 'Add payment method'}} />
-                        </Button>
+                <div className="flex flex-col gap-4 w-[100%] md:w-[30%] min-w-[360px] mt-6">
+                    <div className="text-md font-boldQuick text-[#242136]">
+                        <LocalizedText label={{id: 'paymentsMethod', defaultMessage: 'Payments methods'}} />
                     </div>
-                </CustomTabPanel>
-                <CustomTabPanel value={tabIndex} index={1}>
-                    <div className="flex flex-col gap-4 w-[100%] md:w-[40%] mt-6">
-                        <div className="text-md font-boldQuick text-[#242136]">
-                            <LocalizedText label={{id: 'howReceivePayments', defaultMessage: 'How can you receive your payouts'}} />
-                        </div>
-                        <p className="font-mainSans text-default text-lineGray">
-                            <LocalizedText
-                                label={{id: 'addPayoutMethod', defaultMessage: 'Add payout method so we know where to send your money'}}
-                            />
-                        </p>
-                        <Button
-                            sx={{
+                    <p className="font-mainSans text-default text-lineGray">
+                        <LocalizedText label={{id: 'addPayment', defaultMessage: ' Add and manage your payment methods'}} />
+                    </p>
+                    <Button
+                        disableElevation
+                        disableRipple
+                        variant="contained"
+                        sx={{
+                            bgcolor: '#15C370',
+                            color: '#fff',
+                            alignSelf: 'flex-end',
+                            marginTop: 3,
+                            borderRadius: '20px',
+                            padding: '10px, 16px',
+                            textTransform: 'none',
+                            fontFamily: 'OpenReg',
+                            '&:hover': {
                                 bgcolor: '#15C370',
-                                color: '#fff',
-                                alignSelf: 'flex-end',
-                                marginTop: 3,
-                                '&:hover': {
-                                    bgcolor: '#15C370',
-                                    opacity: 0.8,
-                                },
-                            }}
-                        >
-                            <LocalizedText label={{id: 'addPayoutBtn', defaultMessage: 'Add payout method'}} />
-                        </Button>
+                                opacity: 0.8,
+                            },
+                        }}
+                    >
+                        <LocalizedText label={{id: 'addPaymentBtn', defaultMessage: 'Add payment method'}} />
+                    </Button>
+                </div>
+            </CustomTabPanel>
+            <CustomTabPanel value={tabIndex} index={1}>
+                <div className="flex flex-col gap-4 w-[100%] md:w-[40%] mt-6">
+                    <div className="text-md font-boldQuick text-[#242136]">
+                        <LocalizedText label={{id: 'howReceivePayments', defaultMessage: 'How can you receive your payouts'}} />
                     </div>
-                </CustomTabPanel>
-            </ThemeProvider>
+                    <p className="font-mainSans text-default text-lineGray">
+                        <LocalizedText
+                            label={{id: 'addPayoutMethod', defaultMessage: 'Add payout method so we know where to send your money'}}
+                        />
+                    </p>
+                    <Button
+                        disableElevation
+                        disableRipple
+                        variant="contained"
+                        sx={{
+                            bgcolor: '#15C370',
+                            color: '#fff',
+                            alignSelf: 'flex-end',
+                            marginTop: 3,
+                            borderRadius: '20px',
+                            padding: '10px, 16px',
+                            textTransform: 'none',
+                            fontFamily: 'OpenReg',
+                            '&:hover': {
+                                bgcolor: '#15C370',
+                                opacity: 0.8,
+                            },
+                        }}
+                    >
+                        <LocalizedText label={{id: 'addPayoutBtn', defaultMessage: 'Add payout method'}} />
+                    </Button>
+                </div>
+            </CustomTabPanel>
         </div>
     );
 };

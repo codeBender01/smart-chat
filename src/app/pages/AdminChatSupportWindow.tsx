@@ -5,7 +5,7 @@ import {FaHand} from 'react-icons/fa6';
 import {IoMdSend} from 'react-icons/io';
 import {useNavigate} from 'react-router-dom';
 import ChatInfoText from '@app/components/ChatInfoText';
-import {Button, createTheme, InputAdornment, TextField, ThemeProvider} from '@mui/material';
+import {Button, InputAdornment, TextField} from '@mui/material';
 import LocalizedText from '@components/localize/LocalizedText';
 
 import {useIntl} from 'react-intl';
@@ -21,57 +21,6 @@ const AdminChatSupportWindow: FC = () => {
 
     const navigate = useNavigate();
     const intl = useIntl();
-
-    const theme = createTheme({
-        components: {
-            MuiTextField: {
-                styleOverrides: {
-                    root: {
-                        borderRadius: '12px',
-                        backgroundColor: '#eee',
-                        border: 'none',
-                        width: '100%',
-                        color: '#282D41',
-                        fontFamily: 'OpenReg',
-                        '& .MuiInputBase-input:focus': {
-                            boxShadow: 'none',
-                        },
-                        '& fieldset': {
-                            border: 'none',
-                        },
-                        '& .MuiInputBase-input': {
-                            padding: '12px 18px',
-                            fontFamily: 'OpenReg, sans-serif',
-                        },
-                        input: {
-                            '::placeholder': {
-                                color: '#282D41',
-                                opacity: 1,
-                            },
-                        },
-                    },
-                },
-            },
-
-            MuiButton: {
-                styleOverrides: {
-                    root: {
-                        backgroundColor: '#E0E0E0',
-                        color: '#000000DE',
-                        fontWeight: '500',
-                        fontSize: 14,
-                        padding: '6px 12px',
-                        minWidth: '48px',
-                        '&:hover': {
-                            opacity: 0.85,
-                            backgroundColor: '#E0E0E0',
-                        },
-                    },
-                },
-                defaultProps: {},
-            },
-        },
-    });
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === 'Enter') {
@@ -162,28 +111,46 @@ const AdminChatSupportWindow: FC = () => {
                                             <LocalizedText label={{id: 'weHelped', defaultMessage: 'We helped you with your question?'}} />
                                         </div>
                                         <div className="flex items-center">
-                                            <ThemeProvider theme={theme}>
-                                                <Button
-                                                    sx={{
-                                                        borderTopRightRadius: 0,
-                                                        borderBottomRightRadius: 0,
-                                                    }}
-                                                    variant="contained"
-                                                    onClick={() => setIsConversationFinished(true)}
-                                                >
-                                                    <LocalizedText label={{id: 'yes', defaultMessage: 'yes'}} />
-                                                </Button>
-                                                <div className="w-[1px] h-[36.5px] bg-lineGray"></div>
-                                                <Button
-                                                    sx={{
-                                                        borderTopLeftRadius: 0,
-                                                        borderBottomLeftRadius: 0,
-                                                    }}
-                                                    variant="contained"
-                                                >
-                                                    <LocalizedText label={{id: 'no', defaultMessage: 'no'}} />
-                                                </Button>
-                                            </ThemeProvider>
+                                            <Button
+                                                sx={{
+                                                    borderTopRightRadius: 0,
+                                                    borderBottomRightRadius: 0,
+                                                    backgroundColor: '#E0E0E0',
+                                                    color: '#000000DE',
+                                                    fontWeight: '500',
+                                                    fontSize: 14,
+                                                    padding: '6px 12px',
+                                                    minWidth: '48px',
+                                                    '&:hover': {
+                                                        opacity: 0.85,
+                                                        backgroundColor: '#E0E0E0',
+                                                    },
+                                                }}
+                                                variant="contained"
+                                                onClick={() => setIsConversationFinished(true)}
+                                            >
+                                                <LocalizedText label={{id: 'yes', defaultMessage: 'yes'}} />
+                                            </Button>
+                                            <div className="w-[1px] h-[36.5px] bg-lineGray"></div>
+                                            <Button
+                                                sx={{
+                                                    borderTopLeftRadius: 0,
+                                                    borderBottomLeftRadius: 0,
+                                                    backgroundColor: '#E0E0E0',
+                                                    color: '#000000DE',
+                                                    fontWeight: '500',
+                                                    fontSize: 14,
+                                                    padding: '6px 12px',
+                                                    minWidth: '48px',
+                                                    '&:hover': {
+                                                        opacity: 0.85,
+                                                        backgroundColor: '#E0E0E0',
+                                                    },
+                                                }}
+                                                variant="contained"
+                                            >
+                                                <LocalizedText label={{id: 'no', defaultMessage: 'no'}} />
+                                            </Button>
                                         </div>
                                     </div>
                                     <div
@@ -226,40 +193,62 @@ const AdminChatSupportWindow: FC = () => {
                 )}
             </div>
 
-            <div className="px-4">
-                <ThemeProvider theme={theme}>
-                    <TextField
-                        value={textMessage}
-                        onKeyDown={handleKeyDown}
-                        onChange={e => {
-                            setTextMessage(e.target.value);
-                        }}
-                        placeholder={intl.formatMessage({
-                            id: 'writeMessage',
-                            defaultMessage: 'Write a message...',
-                        })}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IoMdSend
-                                        onClick={() => setIsMessageSent(true)}
-                                        size={20}
-                                        color="#34434E"
-                                        className="cursor-pointer hover:opacity-80"
-                                    />
-                                </InputAdornment>
-                            ),
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <div className="flex items-center gap-2">
-                                        <FaHand size={22} color="#34434E" className="cursor-pointer hover:opacity-80" />
-                                        <BsPaperclip size={22} color="#34434E" className="cursor-pointer hover:opacity-80" />
-                                    </div>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </ThemeProvider>
+            <div className="px-4 pb-8">
+                <TextField
+                    value={textMessage}
+                    onKeyDown={handleKeyDown}
+                    onChange={e => {
+                        setTextMessage(e.target.value);
+                    }}
+                    placeholder={intl.formatMessage({
+                        id: 'writeMessage',
+                        defaultMessage: 'Write a message...',
+                    })}
+                    sx={{
+                        borderRadius: '12px',
+                        backgroundColor: '#eee',
+                        border: 'none',
+                        width: '100%',
+                        color: '#282D41',
+                        fontFamily: 'OpenReg',
+                        '& .MuiInputBase-input:focus': {
+                            boxShadow: 'none',
+                        },
+                        '& fieldset': {
+                            border: 'none',
+                        },
+                        '& .MuiInputBase-input': {
+                            padding: '12px 18px',
+                            fontFamily: 'OpenReg, sans-serif',
+                        },
+                        input: {
+                            '::placeholder': {
+                                color: '#282D41',
+                                opacity: 1,
+                            },
+                        },
+                    }}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IoMdSend
+                                    onClick={() => setIsMessageSent(true)}
+                                    size={20}
+                                    color="#34434E"
+                                    className="cursor-pointer hover:opacity-80"
+                                />
+                            </InputAdornment>
+                        ),
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <div className="flex items-center gap-2">
+                                    <FaHand size={22} color="#34434E" className="cursor-pointer hover:opacity-80" />
+                                    <BsPaperclip size={22} color="#34434E" className="cursor-pointer hover:opacity-80" />
+                                </div>
+                            </InputAdornment>
+                        ),
+                    }}
+                />
             </div>
         </div>
     );

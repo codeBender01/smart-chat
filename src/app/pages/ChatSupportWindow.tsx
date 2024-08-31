@@ -5,7 +5,7 @@ import {IoMdSend} from 'react-icons/io';
 import {MdOutlineNewLabel} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
 import ChatInfoText from '@app/components/ChatInfoText';
-import {createTheme, InputAdornment, TextField, ThemeProvider} from '@mui/material';
+import {InputAdornment, TextField} from '@mui/material';
 
 import LocalizedText from '@components/localize/LocalizedText';
 import {useIntl} from 'react-intl';
@@ -85,40 +85,6 @@ const ChatSupportWindow: FC = () => {
             setIsSuggestionsOpen(false);
         });
     }, []);
-
-    const theme = createTheme({
-        components: {
-            MuiTextField: {
-                styleOverrides: {
-                    root: {
-                        borderRadius: '12px',
-                        backgroundColor: '#eee',
-                        border: 'none',
-                        width: '100%',
-                        color: '#282D41',
-                        fontFamily: 'OpenReg',
-
-                        '& fieldset': {
-                            border: 'none',
-                        },
-                        '& .MuiInputBase-input': {
-                            padding: '12px 18px',
-                            fontFamily: 'OpenReg, sans-serif',
-                        },
-                        '& .MuiInputBase-input:focus': {
-                            boxShadow: 'none',
-                        },
-                        input: {
-                            '::placeholder': {
-                                color: '#282D41',
-                                opacity: 1,
-                            },
-                        },
-                    },
-                },
-            },
-        },
-    });
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === 'Enter') {
@@ -371,71 +337,94 @@ const ChatSupportWindow: FC = () => {
                 )}
             </div>
 
-            <div className="px-4 mb-2">
-                <ThemeProvider theme={theme}>
-                    <TextField
-                        placeholder={intl.formatMessage({
-                            id: 'writeMessage',
-                            defaultMessage: 'Write a message',
-                        })}
-                        onKeyDown={handleKeyDown}
-                        value={textMessage}
-                        onChange={e => {
-                            setTextMessage(e.target.value);
-                        }}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IoMdSend
-                                        onClick={() => setIsMessageSent(true)}
-                                        size={20}
-                                        color="#34434E"
-                                        className="cursor-pointer hover:opacity-80"
-                                    />
-                                </InputAdornment>
-                            ),
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <div className="flex items-center gap-2">
-                                        <BsPaperclip size={22} color="#34434E" className="cursor-pointer hover:opacity-80" />
+            <div className="px-4 pb-8">
+                <TextField
+                    placeholder={intl.formatMessage({
+                        id: 'writeMessage',
+                        defaultMessage: 'Write a message',
+                    })}
+                    onKeyDown={handleKeyDown}
+                    value={textMessage}
+                    onChange={e => {
+                        setTextMessage(e.target.value);
+                    }}
+                    sx={{
+                        borderRadius: '12px',
+                        backgroundColor: '#eee',
+                        border: 'none',
+                        width: '100%',
+                        color: '#282D41',
+                        fontFamily: 'OpenReg',
+
+                        '& fieldset': {
+                            border: 'none',
+                        },
+                        '& .MuiInputBase-input': {
+                            padding: '12px 18px',
+                            fontFamily: 'OpenReg, sans-serif',
+                        },
+                        '& .MuiInputBase-input:focus': {
+                            boxShadow: 'none',
+                        },
+                        input: {
+                            '::placeholder': {
+                                color: '#282D41',
+                                opacity: 1,
+                            },
+                        },
+                    }}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IoMdSend
+                                    onClick={() => setIsMessageSent(true)}
+                                    size={20}
+                                    color="#34434E"
+                                    className="cursor-pointer hover:opacity-80"
+                                />
+                            </InputAdornment>
+                        ),
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <div className="flex items-center gap-2">
+                                    <BsPaperclip size={22} color="#34434E" className="cursor-pointer hover:opacity-80" />
+                                    <div
+                                        className="relative"
+                                        onClick={e => {
+                                            e.stopPropagation();
+                                            setIsSuggestionsOpen(!isSuggestionsOpen);
+                                        }}
+                                    >
+                                        <MdOutlineNewLabel size={24} color="#34434E" className="cursor-pointer hover:opacity-80" />
                                         <div
-                                            className="relative"
-                                            onClick={e => {
-                                                e.stopPropagation();
-                                                setIsSuggestionsOpen(!isSuggestionsOpen);
+                                            className="absolute bg-white left-[0%] bottom-[110%] py-2 rounded-[8px] text-md font-mainQuick font-semibold text-nowrap flex flex-col gap-4"
+                                            style={{
+                                                boxShadow:
+                                                    '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
+                                                transition:
+                                                    'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
+                                                opacity: isSuggestionsOpen ? '1' : '0',
+                                                zIndex: isSuggestionsOpen ? 10 : 0,
                                             }}
                                         >
-                                            <MdOutlineNewLabel size={24} color="#34434E" className="cursor-pointer hover:opacity-80" />
-                                            <div
-                                                className="absolute bg-white left-[0%] bottom-[110%] py-2 rounded-[8px] text-md font-mainQuick font-semibold text-nowrap flex flex-col gap-4"
-                                                style={{
-                                                    boxShadow:
-                                                        '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
-                                                    transition:
-                                                        'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
-                                                    opacity: isSuggestionsOpen ? '1' : '0',
-                                                    zIndex: isSuggestionsOpen ? 10 : 0,
-                                                }}
-                                            >
-                                                {suggestions.map(sug => {
-                                                    return (
-                                                        <div
-                                                            key={sug.label}
-                                                            onClick={() => {}}
-                                                            className="flex items-center px-[24px] py-[12px] text-textColor text-default font-mainSans gap-2 hover:bg-[#eee] duration-200 cursor-pointer"
-                                                        >
-                                                            <LocalizedText label={{id: sug.value, defaultMessage: sug.label}} />
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
+                                            {suggestions.map(sug => {
+                                                return (
+                                                    <div
+                                                        key={sug.label}
+                                                        onClick={() => {}}
+                                                        className="flex items-center px-[24px] py-[12px] text-textColor text-default font-mainSans gap-2 hover:bg-[#eee] duration-200 cursor-pointer"
+                                                    >
+                                                        <LocalizedText label={{id: sug.value, defaultMessage: sug.label}} />
+                                                    </div>
+                                                );
+                                            })}
                                         </div>
                                     </div>
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </ThemeProvider>
+                                </div>
+                            </InputAdornment>
+                        ),
+                    }}
+                />
             </div>
         </div>
     );

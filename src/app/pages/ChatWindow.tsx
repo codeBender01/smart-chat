@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useState, ChangeEvent} from 'react';
 import {BsPaperclip} from 'react-icons/bs';
 import {CgArrowLongLeft} from 'react-icons/cg';
 import {IoMdMore, IoMdSend, IoIosInformationCircleOutline} from 'react-icons/io';
@@ -17,24 +17,26 @@ import {Button, createTheme, InputAdornment, TextField, ThemeProvider} from '@mu
 import LocalizedText from '@components/localize/LocalizedText';
 import {useIntl} from 'react-intl';
 
-import AddUser from 'src/common/svgs/AddUser';
 import profile1 from '../../common/assets/profile1.jpeg';
 import profile2 from '../../common/assets/profile2.jpeg';
 
 const ChatWindow: FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isApproveModal, setIsApproveModal] = useState(false);
-    const [isTerminateModal, setIsTerminateModal] = useState(false);
+
     const [isEmailSent, setIsEmailSent] = useState(false);
     const [isMoreOpen, setIsMoreOpen] = useState(false);
     const [isTerminated, setIsTerminated] = useState(false);
     const [isDealApproved, setIsDealApproved] = useState(false);
-    const [isTravelerModalOpen, setIsTravelerModalOpen] = useState(false);
-    const [isDealCompletedModalOpen, setIsDealCompletedModalOpen] = useState(false);
+    const [selectedRole, setSelectedRole] = useState<string>('');
     const [textMessage, setTextMessage] = useState('');
     const [messagesList, setMessagesList] = useState<string[]>([]);
     const navigate = useNavigate();
     const intl = useIntl();
+
+    const handleRoleSelect = (event: ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setSelectedRole(value);
+    };
 
     const theme = createTheme({
         components: {
@@ -166,8 +168,8 @@ const ChatWindow: FC = () => {
                                     open={isModalOpen}
                                     setOpen={setIsModalOpen}
                                     isEmailSent={isEmailSent}
-                                    setIsEmailSent={setIsEmailSent}
-                                    setInviteModal={setIsApproveModal}
+                                    selectedRole={selectedRole}
+                                    handleRoleSelect={handleRoleSelect}
                                 />
                             )}
                         </div>

@@ -46,7 +46,7 @@ const TravelerModal: FC = () => {
                     </div>
                     <div className="flex ml-auto breakpoint:ml-0 mt-2 px-4 w-[95%] items-center gap-[2px]">
                         <div className="w-[8px] h-[8px] bg-logoGreen rounded-round"></div>
-                        <div className="w-[72%] breakpoint:w-[58%] bg-logoGreen h-[2px]"></div>
+                        <div className="w-[72%] breakpoint:w-[65%] bg-logoGreen h-[2px]"></div>
                         <div className="w-[8px] h-[8px] bg-logoGreen rounded-round"></div>
                         <div className="w-[30%] breakpoint:w-[35%] bg-lineGray h-[2px]"></div>
                         <div className="w-[8px] h-[8px] bg-lineGray rounded-round"></div>

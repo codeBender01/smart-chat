@@ -5,8 +5,6 @@ import {CustomTheme} from '@style';
 
 const useStyles = makeStyles<CustomTheme>(theme => ({
     modalContentContainer: {
-        display: 'flex',
-        flexDirection: 'column',
         gap: theme.spacing(2),
         padding: theme.spacing(0),
         overflowY: 'auto',

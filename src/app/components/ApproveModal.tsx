@@ -64,6 +64,7 @@ const ApproveModal: FC = () => {
                     borderRadius: '20px',
                     textTransform: 'none',
                     fontFamily: 'OpenReg',
+                    fontSize: '16px',
                     '&:hover': {
                         bgcolor: '#15C370',
                         opacity: 0.8,

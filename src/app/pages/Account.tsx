@@ -1,6 +1,6 @@
 import {FC, useState} from 'react';
 import TerminationApproveModal from '@app/components/TerminationApproveModal';
-import {Button, createTheme, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField, ThemeProvider} from '@mui/material';
+import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from '@mui/material';
 import {useIntl} from 'react-intl';
 
 import LocalizedText from '@components/localize/LocalizedText';
@@ -56,83 +56,6 @@ const Account: FC = () => {
         setIsReasonSelected(true);
     };
 
-    const selectTheme = createTheme({
-        components: {
-            MuiSelect: {
-                styleOverrides: {
-                    root: {
-                        padding: '0 12px',
-                        '& input': {
-                            backgroundColor: 'red',
-                        },
-                    },
-                },
-            },
-
-            MuiList: {
-                styleOverrides: {
-                    root: {
-                        maxHeight: '400px',
-                    },
-                },
-            },
-
-            MuiFormControl: {
-                styleOverrides: {
-                    root: {
-                        '& .css-1m5g6k3-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline':
-                            {
-                                borderColor: '#0000003B',
-                            },
-
-                        '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#0000003B',
-                        },
-                    },
-                },
-            },
-
-            MuiMenuItem: {
-                styleOverrides: {
-                    root: {
-                        padding: '16px 24px',
-                    },
-                },
-            },
-
-            MuiInputLabel: {
-                styleOverrides: {
-                    root: {
-                        fontFamily: 'OpenReg',
-                        color: '#303030',
-
-                        '&.Mui-focused': {
-                            color: '#303030',
-                        },
-                    },
-                },
-            },
-            MuiButton: {
-                defaultProps: {
-                    variant: 'outlined',
-                    disableElevation: true,
-                    disableRipple: true,
-                },
-                styleOverrides: {
-                    root: {
-                        borderRadius: '20px',
-                        textTransform: 'none',
-                        fontFamily: 'OpenReg',
-                        backgroundColor: 'transparent',
-                        borderColor: '#E2542C',
-                        borderWidth: '1px',
-                        color: '#E2542C',
-                    },
-                },
-            },
-        },
-    });
-
     return (
         <div className="w-[100%] min-w-[360px] md:w-[35%]">
             <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
@@ -147,44 +70,76 @@ const Account: FC = () => {
                 />
             </p>
             <div className="flex flex-col gap-4 min-w-[360px] md:w-[360px] w-[100%] mt-4">
-                <ThemeProvider theme={selectTheme}>
-                    <FormControl
+                <FormControl
+                    sx={{
+                        marginTop: 2,
+                        '& .css-1m5g6k3-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+                            {
+                                borderColor: '#0000003B !important ',
+                            },
+
+                        '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#0000003B',
+                        },
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#0000003B !important ',
+                        },
+                    }}
+                    fullWidth
+                >
+                    <InputLabel
+                        id="demo-simple-select-label"
                         sx={{
-                            marginTop: 2,
-                        }}
-                        fullWidth
-                    >
-                        <InputLabel id="demo-simple-select-label">
-                            <LocalizedText label={{id: 'reason', defaultMessage: 'Reason'}} />
-                        </InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            label="Reason"
-                            id="demo-simple-select"
-                            value={reason}
-                            onChange={handleChange}
-                        >
-                            {reasons.map(r => {
-                                return (
-                                    <MenuItem key={r.label} value={r.value}>
-                                        <LocalizedText label={{id: r.value, defaultMessage: r.label}} />
-                                    </MenuItem>
-                                );
-                            })}
-                        </Select>
-                    </FormControl>
-                    <FormControl
-                        fullWidth
-                        sx={{
-                            height: isReasonSelected ? 'auto' : 0,
-                            overflowY: 'hidden',
-                            transition: 'all 0.6s',
+                            fontFamily: 'OpenReg',
+                            color: '#303030',
+
+                            '&.Mui-focused': {
+                                color: '#303030',
+                            },
                         }}
                     >
-                        <TextField placeholder={intl.formatMessage({id: 'leaveReason'})} />
-                    </FormControl>
-                    <TerminationApproveModal />
-                </ThemeProvider>
+                        <LocalizedText label={{id: 'reason', defaultMessage: 'Reason'}} />
+                    </InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        label="Reason"
+                        id="demo-simple-select"
+                        value={reason}
+                        onChange={handleChange}
+                        sx={{
+                            padding: '0 12px',
+                            '& .Mui-List': {
+                                maxHeight: '400px',
+                            },
+                            '& input': {
+                                backgroundColor: 'red',
+                            },
+
+                            '& .MuiOutlinedInput-notchedOutline': {
+                                borderColor: '#0000003B',
+                            },
+                        }}
+                    >
+                        {reasons.map(r => {
+                            return (
+                                <MenuItem key={r.label} value={r.value}>
+                                    <LocalizedText label={{id: r.value, defaultMessage: r.label}} />
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
+                </FormControl>
+                <FormControl
+                    fullWidth
+                    sx={{
+                        height: isReasonSelected ? 'auto' : 0,
+                        overflowY: 'hidden',
+                        transition: 'all 0.6s',
+                    }}
+                >
+                    <TextField placeholder={intl.formatMessage({id: 'leaveReason'})} />
+                </FormControl>
+                <TerminationApproveModal />
             </div>
         </div>
     );

@@ -122,7 +122,7 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
     const handleOpenModal = () => {
         openModal(
             <ModalContent>
-                <div className="p-8">
+                <div className="p-8 max-w-[514px]">
                     <div className="text-xl text-textColor font-boldQuick">
                         <LocalizedText
                             label={{id: 'areYouSureDeal', defaultMessage: 'Are you sure that you want to terminate your deal?'}}
