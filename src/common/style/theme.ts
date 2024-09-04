@@ -77,6 +77,16 @@ type CustomPalette = {
         new: string;
         evenRows: string;
     };
+    newColors: {
+        sidebarInputBorder: string;
+        headerIconBorder: string;
+        grayDot: string;
+        travelerModalGray: string;
+        lightBlue: string;
+        lightGreen: string;
+        adminChatBorderColor: string;
+        sectionTitle: string;
+    };
     content: {
         fairGrey: string;
         backgroundDarkBlue: string;
@@ -243,20 +253,21 @@ export function createCustomTheme(locale: Locale, mode: PaletteMode = 'light'): 
                 action: {
                     disabledOpacity: 0.2,
                 },
+
                 primary: {
-                    light: 'rgba(238, 244, 255, 1)',
+                    light: '#E2E2E2',
                     main: 'rgba(21, 195, 112, 1)',
                     dark: 'rgb(17,146,84)',
                     contrastText: '#fff',
                 },
                 secondary: {
-                    light: 'rgba(240, 242, 245, 1)',
-                    main: 'rgba(137, 147, 164, 1)',
-                    dark: 'rgba(208, 212, 220, 1)',
-                    contrastText: 'rgba(0, 21, 41, 1)',
+                    light: '#EAEBEB',
+                    main: '#f6f6f6',
+                    dark: '#2B2C3E',
+                    contrastText: '#EEEEEE',
                 },
                 error: {
-                    light: '#e57373',
+                    light: '#E2542C',
                     main: '#f44336',
                     dark: '#d32f2f',
                     contrastText: '#fff',
@@ -265,8 +276,11 @@ export function createCustomTheme(locale: Locale, mode: PaletteMode = 'light'): 
                 //     primary: 'rgba(0, 21, 41, 1)',
                 //     secondary: 'rgba(137, 147, 164, 1)',
                 //     disabled: 'rgba(163, 170, 177, 1)',
-                // hint: 'rgba(169, 175, 182, 1)',
                 // },
+                text: {
+                    primary: '#282D41',
+                    secondary: '#838383',
+                },
                 success: {
                     light: 'rgba(232, 247, 239, 1)',
                     main: 'rgba(20, 170, 87, 1)',
@@ -366,6 +380,7 @@ export function createCustomTheme(locale: Locale, mode: PaletteMode = 'light'): 
                     fontSize: '10px',
                     lineHeight: '14px',
                     letterSpacing: '1px',
+                    fontFamily: 'Open Sans',
                     color: 'rgba(137, 147, 164, 1)',
                 },
                 button: {
@@ -382,8 +397,8 @@ export function createCustomTheme(locale: Locale, mode: PaletteMode = 'light'): 
                 values: {
                     xs: 0,
                     sm: 600,
-                    md: 900,
-                    lg: 1200,
+                    md: 768,
+                    lg: 1024,
                     xl: 1420,
                 },
             },
@@ -406,6 +421,16 @@ export function createCustomTheme(locale: Locale, mode: PaletteMode = 'light'): 
         grid: {
             new: 'rgba(183, 212, 241, 1)',
             evenRows: 'rgba(251, 252, 252, 1)',
+        },
+        newColors: {
+            sidebarInputBorder: '#7c7c7c',
+            headerIconBorder: '#333333',
+            grayDot: '#999999',
+            travelerModalGray: '#7F7F81',
+            lightBlue: '#007BFF',
+            lightGreen: '#EFFFF8',
+            adminChatBorderColor: '#C6D7DA',
+            sectionTitle: '#242136',
         },
         content: {
             backgroundDarkBlue: 'rgba(36, 33, 54, 1)',

@@ -1,8 +1,57 @@
 import {FC, useState} from 'react';
 import {IoEyeOffOutline, IoEyeOutline} from 'react-icons/io5';
 import {Button, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput} from '@mui/material';
+import CustomButton from '@components/Button';
 
 import LocalizedText from '@components/localize/LocalizedText';
+
+import {makeStyles} from '@mui/styles';
+
+import {CustomTheme} from '@style';
+
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        width: '100%',
+        minWidth: '360px',
+        [theme.breakpoints.up(620)]: {
+            width: '35%',
+        },
+    },
+    headerText: {
+        marginTop: theme.spacing(2),
+        display: 'block',
+        textAlign: 'left',
+        fontSize: '32px',
+        color: theme.palette.text.primary,
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: 700,
+        [theme.breakpoints.up(620)]: {
+            display: 'none',
+        },
+    },
+    descriptionText: {
+        color: theme.palette.text.secondary,
+        fontFamily: 'Open Sans, sans-serif',
+        marginBottom: theme.spacing(2),
+        fontSize: '1rem',
+        [theme.breakpoints.up(620)]: {
+            marginBottom: theme.spacing(0),
+        },
+        [theme.breakpoints.up(620)]: {
+            marginBottom: theme.spacing(2),
+        },
+    },
+    formContainer: {
+        minWidth: '360px',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing(2),
+        [theme.breakpoints.up(620)]: {
+            width: '360px',
+        },
+    },
+}));
 
 const Password: FC = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -13,16 +62,17 @@ const Password: FC = () => {
         event.preventDefault();
     };
 
+    const classes = useStyles();
+
     return (
-        <div className="w-[100%] min-w-[360px] md:w-[35%]">
-            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
+        <div className={classes.container}>
+            <div className={classes.headerText}>
                 <LocalizedText label={{id: 'password', defaultMessage: 'Password'}} />
             </div>
-            <p className="text-lineGray font-mainSans mb-8 text-default tablet:mb-6">
+            <p className={classes.descriptionText}>
                 <LocalizedText label={{id: 'change', defaultMessage: 'You can change your {prop}'}} labelParams={{prop: 'password'}} />
             </p>
-
-            <div className="min-w-[360px] md:w-[360px] w-[100%] flex flex-col gap-4">
+            <div className={classes.formContainer}>
                 <FormControl
                     sx={{
                         margin: 0,
@@ -185,26 +235,12 @@ const Password: FC = () => {
                         label="Confirm new password"
                     />
                 </FormControl>
-                <Button
-                    disableElevation
-                    disableRipple
-                    variant="contained"
-                    sx={{
-                        bgcolor: '#15C370',
-                        color: '#fff',
-                        width: '110px',
-                        alignSelf: 'flex-end',
-                        borderRadius: '20px',
-                        textTransform: 'none',
-                        fontFamily: 'OpenReg',
-                        '&:hover': {
-                            bgcolor: '#15C370',
-                            opacity: 0.8,
-                        },
-                    }}
-                >
-                    <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
-                </Button>
+
+                <div className="self-end">
+                    <CustomButton closeModal={() => {}} width="110px" bgcolor="#15C370" color="#fff" borderColor="transparent">
+                        <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
+                    </CustomButton>
+                </div>
             </div>
         </div>
     );

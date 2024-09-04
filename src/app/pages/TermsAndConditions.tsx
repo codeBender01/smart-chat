@@ -2,19 +2,48 @@ import {FC} from 'react';
 
 import LocalizedText from '@components/localize/LocalizedText';
 
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
+
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    card: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing(3),
+        backgroundColor: theme.palette.primary.contrastText,
+        borderRadius: '24px',
+        padding: theme.spacing(2.5, 2.5, 2),
+        flex: 1,
+        boxShadow: '0px 2px 6px 2px #00000026',
+        [theme.breakpoints.up('md')]: {
+            width: '100%',
+        },
+    },
+    title: {
+        fontSize: '1.5rem', // equivalent to 'text-lg'
+        color: theme.palette.text.primary,
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: 700,
+        marginBottom: theme.spacing(1),
+    },
+    description: {
+        fontSize: '18px', // equivalent to 'text-md'
+        color: theme.palette.text.primary,
+        fontFamily: 'Open Sans, sans-serif',
+    },
+}));
+
 const TermsAndConditions: FC = () => {
+    const classes = useStyles();
+
     return (
-        <div
-            className="w-[100%] tablet:w-[100%] flex flex-col gap-12 bg-white rounded-[24px] px-10 py-8 flex-1"
-            style={{
-                boxShadow: '0px 2px 6px 2px #00000026',
-            }}
-        >
+        <div className={classes.card}>
             <div>
-                <h3 className="text-lg text-textColor font-boldQuick mb-4">
+                <h3 className={classes.title}>
                     <LocalizedText label={{id: 'welcome', defaultMessage: 'Welcome to Eelow'}} />
                 </h3>
-                <p className="text-md text-textColor font-mainSans">
+                <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
                     tincidunt ipsum, a ultricies massa. Phasellus commodo, quam dignissim gravida porttitor, metus neque pulvinar mi,
                     suscipit lacinia ex quam nec arcu. Phasellus dignissim lacinia accumsan. Aenean et enim quis orci bibendum sollicitudin
@@ -28,10 +57,10 @@ const TermsAndConditions: FC = () => {
                 </p>
             </div>
             <div>
-                <h3 className="text-lg text-textColor font-boldQuick mb-4">
-                    <LocalizedText label={{id: 'termsOfUse', defaultMessage: 'Terms of Use'}} />
+                <h3 className={classes.title}>
+                    <LocalizedText label={{id: 'welcome', defaultMessage: 'Welcome to Eelow'}} />
                 </h3>
-                <p className="text-md text-textColor font-mainSans">
+                <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
                     tincidunt ipsum, a ultricies massa. Phasellus commodo, quam dignissim gravida porttitor, metus neque pulvinar mi,
                     suscipit lacinia ex quam nec arcu. Phasellus dignissim lacinia accumsan. Aenean et enim quis orci bibendum sollicitudin
@@ -45,10 +74,10 @@ const TermsAndConditions: FC = () => {
                 </p>
             </div>
             <div>
-                <h3 className="text-lg text-textColor font-boldQuick mb-4">
-                    <LocalizedText label={{id: 'verification', defaultMessage: 'Verification'}} />
+                <h3 className={classes.title}>
+                    <LocalizedText label={{id: 'welcome', defaultMessage: 'Welcome to Eelow'}} />
                 </h3>
-                <p className="text-md text-textColor font-mainSans">
+                <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
                     tincidunt ipsum, a ultricies massa. Phasellus commodo, quam dignissim gravida porttitor, metus neque pulvinar mi,
                     suscipit lacinia ex quam nec arcu. Phasellus dignissim lacinia accumsan. Aenean et enim quis orci bibendum sollicitudin
@@ -62,10 +91,10 @@ const TermsAndConditions: FC = () => {
                 </p>
             </div>
             <div>
-                <h3 className="text-lg text-textColor font-boldQuick mb-4">
-                    <LocalizedText label={{id: 'payment', defaultMessage: 'Payment'}} />
+                <h3 className={classes.title}>
+                    <LocalizedText label={{id: 'welcome', defaultMessage: 'Welcome to Eelow'}} />
                 </h3>
-                <p className="text-md text-textColor font-mainSans">
+                <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
                     tincidunt ipsum, a ultricies massa. Phasellus commodo, quam dignissim gravida porttitor, metus neque pulvinar mi,
                     suscipit lacinia ex quam nec arcu. Phasellus dignissim lacinia accumsan. Aenean et enim quis orci bibendum sollicitudin

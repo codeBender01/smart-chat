@@ -1,13 +1,30 @@
 import {FC} from 'react';
 import {Outlet} from 'react-router-dom';
 
+import {makeStyles} from '@mui/styles';
+
 import Header from '../components/Header';
 
+import {CustomTheme} from '@style';
+
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+    },
+    innerContainer: {
+        width: '100%',
+    },
+}));
+
 const ChatViewMobile: FC = () => {
+    const classes = useStyles();
+
     return (
-        <div className="flex flex-col min-h-[100vh]">
+        <div className={classes.container}>
             <Header />
-            <div className="w-[100%]">
+            <div className={classes.innerContainer}>
                 <Outlet />
             </div>
         </div>

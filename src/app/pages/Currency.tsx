@@ -3,6 +3,10 @@ import {Button, FormControl, InputLabel, MenuItem, SelectChangeEvent} from '@mui
 
 import LocalizedText from '@components/localize/LocalizedText';
 import {Select} from '@components/select/Select';
+import CustomButton from '@components/Button';
+
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
 
 const reasons = [
     {
@@ -27,6 +31,48 @@ const reasons = [
     },
 ];
 
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        width: '100%',
+        minWidth: '360px',
+        '@media (min-width: 768px)': {
+            // md:w-[35%]
+            width: '35%',
+        },
+    },
+    title: {
+        marginTop: '32px',
+        display: 'block',
+        fontSize: '32px',
+        color: theme.palette.text.primary,
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+        '@media (min-width: 768px)': {
+            display: 'none',
+        },
+    },
+    description: {
+        color: theme.palette.text.secondary,
+        fontFamily: 'Open Sans, sans-serif',
+        marginBottom: '32px',
+        fontSize: '1rem',
+        '@media (min-width: 768px)': {
+            marginBottom: '0px',
+        },
+    },
+    formContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        minWidth: '360px',
+        width: '100%',
+        marginTop: '16px',
+        '@media (min-width: 768px)': {
+            width: '360px',
+        },
+    },
+}));
+
 const Currency: FC = () => {
     const [reason, setReason] = useState('USD');
 
@@ -34,15 +80,17 @@ const Currency: FC = () => {
         setReason(event.target.value as string);
     };
 
+    const classes = useStyles();
+
     return (
-        <div className="w-[100%] min-w-[360px] md:w-[35%]">
-            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
+        <div className={classes.container}>
+            <div className={classes.title}>
                 <LocalizedText label={{id: 'currency', defaultMessage: 'Currency'}} />
             </div>
-            <p className="text-lineGray font-mainSans mb-8 text-default md:mb-0">
+            <p className={classes.description}>
                 <LocalizedText label={{id: 'change', defaultMessage: 'You can change your currency'}} labelParams={{prop: 'currency'}} />
             </p>
-            <div className="flex flex-col gap-4 min-w-[360px] md:w-[360px] w-[100%] mt-4">
+            <div className={classes.formContainer}>
                 <FormControl
                     sx={{
                         marginTop: 2,
@@ -73,26 +121,11 @@ const Currency: FC = () => {
                         }}
                     ></Select>
                 </FormControl>
-                <Button
-                    variant={'contained'}
-                    disableElevation
-                    disableRipple
-                    sx={{
-                        bgcolor: '#15C370',
-                        color: '#fff',
-                        width: '110px',
-                        alignSelf: 'flex-end',
-                        borderRadius: '20px',
-                        textTransform: 'none',
-                        fontFamily: 'OpenReg',
-                        '&:hover': {
-                            bgcolor: '#15C370',
-                            opacity: 0.8,
-                        },
-                    }}
-                >
-                    <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
-                </Button>
+                <div className="self-end">
+                    <CustomButton closeModal={() => {}} width="110px" bgcolor="#15C370" color="#fff" borderColor="transparent">
+                        <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
+                    </CustomButton>
+                </div>
             </div>
         </div>
     );

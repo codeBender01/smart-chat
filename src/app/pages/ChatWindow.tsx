@@ -7,18 +7,341 @@ import {TbRefresh} from 'react-icons/tb';
 import {useNavigate} from 'react-router-dom';
 import '../../scrollbar.css';
 import AddUserModal from '@app/components/AddUserModal';
-import ApproveModal from '@app/components/ApproveModal';
 import ChatInfoText from '@app/components/ChatInfoText';
 import DealCompletedModal from '@app/components/DealCompleteModal';
 import TerminationModal from '@app/components/TerminationModal';
 import TravelerModal from '@app/components/TravelerModal';
-import {Button, createTheme, InputAdornment, TextField, ThemeProvider} from '@mui/material';
+import {InputAdornment, TextField} from '@mui/material';
 
 import LocalizedText from '@components/localize/LocalizedText';
 import {useIntl} from 'react-intl';
 
 import profile1 from '../../common/assets/profile1.jpeg';
 import profile2 from '../../common/assets/profile2.jpeg';
+
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
+
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    innerContainer: {
+        display: 'flex',
+        padding: '1rem',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        '@media (min-width: 850px)': {
+            display: 'none',
+        },
+    },
+    container: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        maxHeight: '90vh',
+        height: '90vh',
+        justifyContent: 'space-between',
+        paddingBottom: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+        [theme.breakpoints.up(850)]: {
+            backgroundColor: theme.palette.primary.contrastText,
+            width: '100%',
+        },
+    },
+    backButton: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        color: theme.palette.primary.main, // Replace with the value of logoGreen
+        fontSize: '1rem', // Replace with the value of text-default
+        cursor: 'pointer',
+        transition: 'opacity 0.2s',
+        fontFamily: 'Open Sans, sans-serif',
+        fontWeight: '700',
+        '&:hover': {
+            opacity: 0.85,
+        },
+        width: 'fit-content',
+    },
+    headerContainer: {
+        padding: '16px',
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
+    header: {
+        padding: '1rem',
+        borderBottom: '1px solid #C6D7DA',
+        display: 'flex',
+        gap: '0.75rem',
+    },
+    logo: {
+        width: '50px',
+        height: '50px',
+        borderRadius: '50%',
+        backgroundPosition: 'top',
+        backgroundSize: 'cover',
+        position: 'relative',
+    },
+    title: {
+        color: theme.palette.text.primary,
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+        fontSize: '20px',
+    },
+    statusText: {
+        fontSize: '18px',
+        color: theme.palette.text.primary,
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+    },
+    chatContainer: {
+        flex: 1,
+        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '2rem',
+        gap: '1.5rem',
+        zIndex: 10,
+    },
+    messageContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        padding: 0,
+        gap: theme.spacing(1.5), // This converts 'gap-6'
+        [theme.breakpoints.up('lg')]: {
+            padding: theme.spacing(2), // This converts 'lg:p-8'
+        },
+    },
+    chatInfo: {
+        alignSelf: 'center',
+        backgroundColor: theme.custom.palette.newColors.lightGreen,
+        padding: theme.spacing(0.5, 1),
+        borderRadius: 10,
+
+        [theme.breakpoints.up(850)]: {
+            width: '50%',
+        },
+    },
+    messageWrapper: {
+        display: 'flex',
+        gap: '0.5rem',
+        alignItems: 'center',
+    },
+    logoIcon: {
+        width: '36px',
+        height: '36px',
+        borderRadius: '50%',
+        backgroundPosition: 'top',
+        backgroundSize: 'cover',
+    },
+    messageBubbleLeft: {
+        backgroundColor: theme.palette.secondary.contrastText, // Replace with the value of bg-activeChatGray
+        borderRadius: '10px',
+        borderBottomRightRadius: 0,
+        padding: '0.75rem 1rem',
+        fontFamily: 'Open Sans, sans-serif',
+        color: theme.palette.text.primary, // Replace with the value of textColor
+    },
+    messageBubbleRight: {
+        backgroundColor: theme.palette.secondary.contrastText, // Replace with the value of bg-activeChatGray
+        borderRadius: '10px',
+        borderBottomLeftRadius: 0,
+        padding: '0.75rem 1rem',
+        fontFamily: 'Open Sans, sans-serif',
+        color: theme.palette.text.primary, // Replace with the value of textColor
+    },
+    suggestionContainer: {
+        display: 'flex',
+        gap: '12px',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        marginTop: '1rem',
+    },
+    suggestionButton: {
+        color: theme.palette.text.primary,
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '1rem',
+        borderRadius: '0.5rem',
+        padding: '0.25rem 0.5rem',
+        cursor: 'pointer',
+        transition: 'opacity 0.2s',
+        width: 'fit-content',
+        '&:hover': {
+            opacity: 0.85,
+        },
+    },
+    chatInfoContainer: {
+        width: '80%',
+        '@media (min-width: 850px)': {
+            width: '60%',
+        },
+    },
+    suggestionsMessage: {
+        width: '80%',
+    },
+    senderMessage: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        alignSelf: 'flex-end',
+    },
+    inputContainer: {
+        padding: '16px 32px',
+    },
+    inputIcon: {
+        cursor: 'pointer',
+        transition: 'all 100ms',
+        '&:hover': {
+            opacity: 0.8,
+        },
+    },
+    suggestionsModal: {
+        boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
+        transition: 'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
+        overflow: 'hidden',
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: '0',
+        bottom: '110%',
+        padding: '8px 0',
+        borderRadius: '8px',
+        fontSize: '18px',
+        fontFamily: 'Quicksand',
+        fontWeight: '500',
+        textWrap: 'nowrap',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+    },
+    suggestionsModalText: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: '12px 24px',
+        color: theme.palette.text.primary,
+        fontSize: '1rem',
+        fontFamily: 'Open Sans, sans-serif',
+        gap: '8px',
+        cursor: 'pointer',
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.contrastText,
+        },
+        transition: 'background-color 200ms',
+    },
+    headerInner: {
+        display: 'flex',
+        gap: theme.spacing(1.5),
+    },
+    secondaryLogo: {
+        width: '32px',
+        height: '32px',
+        borderRadius: '50%', // equivalent to rounded-round
+        position: 'absolute',
+        bottom: '-15%',
+        right: '-10%',
+        backgroundPosition: 'top',
+        backgroundSize: 'cover',
+    },
+    secondaryName: {
+        color: theme.palette.text.primary,
+        fontFamily: 'Quicksand, sans-serif',
+        fontSize: '0.875rem',
+        fontWeight: '700',
+    },
+    leftHeaderContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: theme.spacing(1.5),
+        zIndex: 20,
+    },
+    awaitingText: {
+        fontSize: '1rem', // equivalent to text-md
+        color: theme.palette.text.primary, // equivalent to text-textColor
+        fontFamily: 'Quicksand, sans-serif', // equivalent to font-boldQuick
+        fontWeight: '700',
+        marginRight: theme.spacing(2), // equivalent to mr-8
+        display: 'none',
+        [theme.breakpoints.up('lg')]: {
+            display: 'block',
+        },
+    },
+    refreshIcon: {
+        fontSize: '1.125rem',
+        color: theme.palette.text.primary,
+        '&:hover': {
+            color: theme.palette.text.secondary,
+        },
+        transition: 'color 0.2s',
+        cursor: 'pointer',
+    },
+    moreIconContainer: {
+        position: 'relative',
+    },
+    moreIcon: {
+        fontSize: '1.25rem',
+        color: theme.palette.text.primary,
+        '&:hover': {
+            color: theme.palette.text.secondary,
+        },
+        transition: 'color 0.2s',
+        cursor: 'pointer',
+    },
+    moreOptions: {
+        position: 'absolute',
+        backgroundColor: theme.palette.primary.contrastText,
+        right: '20%',
+        top: '110%',
+        borderRadius: '8px',
+        fontSize: '1.25rem',
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '500',
+        whiteSpace: 'nowrap',
+        display: 'flex',
+        flexDirection: 'column',
+        boxShadow: '0px 2px 6px 2px #00000026, 0px 1px 2px 0px #0000004D',
+        transition: 'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
+    },
+    optionItem: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: theme.spacing(2, 3),
+        color: theme.palette.text.primary,
+        fontFamily: 'Open Sans, sans-serif',
+        gap: theme.spacing(0.5),
+        '&:hover': {
+            opacity: 0.8,
+        },
+        transition: 'opacity 0.2s',
+        cursor: 'pointer',
+        fontSize: '16px',
+    },
+    reportItem: {
+        color: theme.palette.error.main,
+    },
+    confirmContainer: {
+        padding: theme.spacing(1),
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: theme.custom.palette.newColors.lightGreen,
+        position: 'relative',
+        zIndex: 50,
+    },
+    textContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing(0.5),
+    },
+    confirmTitle: {
+        color: theme.palette.text.primary,
+        fontSize: '18px',
+        fontweight: '700',
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+    },
+    warningText: {
+        fontSize: '12px',
+        color: theme.palette.text.secondary,
+        fontFamily: 'Open Sans, sans-serif',
+    },
+}));
 
 const ChatWindow: FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,33 +361,186 @@ const ChatWindow: FC = () => {
         setSelectedRole(value);
     };
 
-    const theme = createTheme({
-        components: {
-            MuiButton: {
-                defaultProps: {
-                    disableElevation: true,
-                },
-                styleOverrides: {
-                    root: {
-                        backgroundColor: '#15C370',
-                        fontFamily: 'OpenReg',
-                        fontSize: 16,
-                        transitionDuration: '500ms',
-                        borderRadius: '20px',
-                        height: '40px',
-                        padding: '0 26px',
-                        textTransform: 'capitalize',
-                        '&:hover': {
-                            backgroundColor: '#15C370',
-                            opacity: 0.8,
-                        },
-                    },
-                },
-            },
+    const classes = useStyles();
 
-            MuiTextField: {
-                styleOverrides: {
-                    root: {
+    document.body.addEventListener('click', () => {
+        setIsMoreOpen(false);
+    });
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Enter') {
+            setTextMessage('');
+            setMessagesList([...messagesList, textMessage]);
+            event.preventDefault();
+        }
+    };
+
+    return (
+        <div className={classes.container}>
+            <div>
+                <div className={classes.innerContainer}>
+                    <div onClick={() => navigate(-1)} className={classes.backButton}>
+                        <CgArrowLongLeft />
+                        <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
+                    </div>
+                    <div className={classes.statusText}>{isEmailSent ? 'awaiting handover' : 'pending confirmation'}</div>
+                </div>
+                <div className={classes.headerContainer}>
+                    <div className={classes.headerInner}>
+                        <div
+                            className={classes.logo}
+                            style={{
+                                backgroundImage: `url(${profile1})`,
+                            }}
+                        >
+                            {isDealApproved ? (
+                                <div
+                                    className={classes.secondaryLogo}
+                                    style={{
+                                        backgroundImage: `url(${profile2})`,
+                                        backgroundPosition: 'top',
+                                        backgroundSize: 'cover',
+                                    }}
+                                ></div>
+                            ) : null}
+                        </div>
+                        <div>
+                            <div className={classes.title}>Andrew</div>
+                            {isDealApproved ? <div className={classes.secondaryName}>& Alisa</div> : null}
+                        </div>
+                    </div>
+
+                    <div className={classes.leftHeaderContainer}>
+                        <div className={classes.awaitingText}>
+                            {isEmailSent ? (
+                                <LocalizedText label={{id: 'awaitingHandover', defaultMessage: 'awaiting handover'}} />
+                            ) : (
+                                <LocalizedText label={{id: 'awaitingHandover', defaultMessage: 'pending confirmation'}} />
+                            )}
+                        </div>
+                        <TravelerModal />
+
+                        <div className={classes.refreshIcon} onClick={() => setIsModalOpen(true)}>
+                            {isEmailSent ? (
+                                <TbRefresh />
+                            ) : (
+                                <AddUserModal
+                                    open={isModalOpen}
+                                    setOpen={setIsModalOpen}
+                                    isEmailSent={isEmailSent}
+                                    selectedRole={selectedRole}
+                                    handleRoleSelect={handleRoleSelect}
+                                />
+                            )}
+                        </div>
+                        <div className="relative">
+                            <div
+                                className={classes.moreIcon}
+                                onClick={e => {
+                                    e.stopPropagation();
+                                    setIsMoreOpen(!isMoreOpen);
+                                }}
+                            >
+                                <IoMdMore />
+                            </div>
+                            <div
+                                className={classes.moreOptions}
+                                style={{
+                                    opacity: isMoreOpen ? '1' : '0',
+                                }}
+                            >
+                                <div className={classes.optionItem}>
+                                    <MdEdit />
+                                    <LocalizedText label={{id: 'editTheOffer', defaultMessage: 'Edit the offer'}} />
+                                </div>
+                                <div className={`${classes.optionItem} ${classes.reportItem}`}>
+                                    <IoIosInformationCircleOutline />
+                                    <LocalizedText label={{id: 'reportProblem', defaultMessage: 'Report a problem'}} />
+                                </div>
+                                <TerminationModal isTerminated={isTerminated} setIsTerminated={setIsTerminated} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={classes.confirmContainer}>
+                    <div className={classes.textContainer}>
+                        <div className={classes.confirmTitle}>
+                            <LocalizedText label={{id: 'isTravelerRight', defaultMessage: 'Is this traveler right for you?'}} />
+                        </div>
+                        <p className={classes.warningText}>
+                            <LocalizedText
+                                label={{
+                                    id: 'warningText',
+                                    defaultMessage:
+                                        "If you click on the 'yes' button, the deal status will change and you will not be able to select another traveler",
+                                }}
+                            />
+                        </p>
+                    </div>
+                    <DealCompletedModal setIsDealApproved={setIsDealApproved} />
+                </div>
+            </div>
+
+            <div className={` ${classes.chatContainer} ${isTerminated ? 'justify-center' : ''}`} id="chatbody">
+                {/* <div className="text-textColor font-mainQuick text-md bg-activeChatGray rounded-pill px-4 py-1">
+          Start your dialog. Write something
+        </div> */}
+
+                {isTerminated ? (
+                    <ChatInfoText text="dealTerminated" bgColor="#E2542C40" />
+                ) : (
+                    <div className={classes.messageContainer}>
+                        <div className={`${classes.messageWrapper} ${classes.senderMessage}`}>
+                            <div className={classes.messageBubbleLeft}>Hello, can you bring my box with you?</div>
+                            <div
+                                className={classes.logoIcon}
+                                style={{
+                                    backgroundImage: `url(${profile2})`,
+                                }}
+                            ></div>
+                        </div>
+                        <div className={classes.chatInfo}>
+                            <ChatInfoText text="paidSuccessfully" bgColor="#EFFFF8" />
+                        </div>
+                        <div className={classes.messageWrapper}>
+                            <div
+                                className={classes.logoIcon}
+                                style={{
+                                    backgroundImage: `url(${profile1})`,
+                                }}
+                            ></div>
+                            <div className={classes.messageBubbleRight}>Hello, Yes I can</div>
+                        </div>
+                        {messagesList.map(val => {
+                            return (
+                                <div className={`${classes.messageWrapper} ${classes.senderMessage}`}>
+                                    <div className={classes.messageBubbleLeft}>{val}</div>
+                                    <div
+                                        className={classes.logoIcon}
+                                        style={{
+                                            backgroundImage: `url(${profile2})`,
+                                        }}
+                                    ></div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                )}
+            </div>
+
+            <div className={classes.inputContainer}>
+                <TextField
+                    value={textMessage}
+                    onKeyDown={handleKeyDown}
+                    onChange={e => {
+                        setTextMessage(e.target.value);
+                    }}
+                    placeholder={intl.formatMessage({
+                        id: 'writeMessage',
+                        defaultMessage: 'Write a message...',
+                    })}
+                    sx={{
                         borderRadius: '12px',
                         backgroundColor: '#eee',
                         border: 'none',
@@ -87,232 +563,20 @@ const ChatWindow: FC = () => {
                                 opacity: 1,
                             },
                         },
-                    },
-                },
-            },
-        },
-    });
-
-    document.body.addEventListener('click', () => {
-        setIsMoreOpen(false);
-    });
-
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-        if (event.key === 'Enter') {
-            setTextMessage('');
-            setMessagesList([...messagesList, textMessage]);
-            event.preventDefault();
-        }
-    };
-
-    return (
-        <div className="w-[100%] flex flex-col max-h-[90vh] h-[90vh] justify-between pb-4 bg-paleGray breakpoint:bg-white">
-            <div>
-                <div className="flex breakpoint:hidden p-4 justify-between items-center">
-                    <div
-                        onClick={() => navigate(-1)}
-                        className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit cursor-pointer duration-200 font-boldSans"
-                    >
-                        <CgArrowLongLeft />
-                        <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
-                    </div>
-                    <div className="text-md text-textColor font-boldQuick">
-                        {isEmailSent ? 'awaiting handover' : 'pending confirmation'}
-                    </div>
-                </div>
-                <div className="p-4 flex justify-between">
-                    <div className="flex gap-3">
-                        <div
-                            className="w-[50px] h-[50px] rounded-round relative"
-                            style={{
-                                backgroundImage: `url(${profile1})`,
-                                backgroundPosition: 'top',
-                                backgroundSize: 'cover',
-                            }}
-                        >
-                            {isDealApproved ? (
-                                <div
-                                    className="w-[32px] h-[32px] rounded-round absolute bottom-[-15%] right-[-10%]"
-                                    style={{
-                                        backgroundImage: `url(${profile2})`,
-                                        backgroundPosition: 'top',
-                                        backgroundSize: 'cover',
-                                    }}
-                                ></div>
-                            ) : null}
-                        </div>
-                        <div>
-                            <div className="text-textColor font-boldQuick text-md2">Andrew</div>
-                            {isDealApproved ? <div className="font-boldQuick text-sm text-textColor">& Alisa</div> : null}
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-6">
-                        <div className="text-md text-textColor font-boldQuick mr-8 hidden min-[850px]:block">
-                            {isEmailSent ? (
-                                <LocalizedText label={{id: 'awaitingHandover', defaultMessage: 'awaiting handover'}} />
-                            ) : (
-                                <LocalizedText label={{id: 'awaitingHandover', defaultMessage: 'pending confirmation'}} />
-                            )}
-                        </div>
-                        <TravelerModal />
-
-                        <div
-                            className="text-md2 text-textColor hover:text-lineGray duration-200 cursor-pointer"
-                            onClick={() => setIsModalOpen(true)}
-                        >
-                            {isEmailSent ? (
-                                <TbRefresh />
-                            ) : (
-                                <AddUserModal
-                                    open={isModalOpen}
-                                    setOpen={setIsModalOpen}
-                                    isEmailSent={isEmailSent}
-                                    selectedRole={selectedRole}
-                                    handleRoleSelect={handleRoleSelect}
-                                />
-                            )}
-                        </div>
-                        <div className="relative">
-                            <div
-                                className="text-md2 text-textColor hover:text-lineGray duration-200 cursor-pointer"
-                                onClick={e => {
-                                    e.stopPropagation();
-                                    setIsMoreOpen(!isMoreOpen);
-                                }}
-                            >
-                                <IoMdMore />
-                            </div>
-                            <div
-                                className="absolute bg-white right-[20%] top-[110%] rounded-[8px] text-md font-mainQuick font-semibold text-nowrap flex flex-col"
-                                style={{
-                                    boxShadow: 'box-shadow: 0px 2px 6px 2px #00000026 0px 1px 2px 0px #0000004D',
-                                    transition: 'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
-                                    opacity: isMoreOpen ? '1' : '0',
-                                    zIndex: isMoreOpen ? 10 : 0,
-                                }}
-                            >
-                                <div className="flex items-center py-[16px] px-[24px] text-textColor text-default font-mainSans gap-2 hover:opacity-80 duration-200 cursor-pointer">
-                                    <MdEdit />
-                                    <LocalizedText label={{id: 'editTheOffer', defaultMessage: 'Edit the offer'}} />
-                                </div>
-                                <div className="flex items-center text-alertRed py-[16px] px-[24px] text-default font-mainSans gap-2 hover:opacity-80 duration-200 cursor-pointer">
-                                    <IoIosInformationCircleOutline />
-                                    <LocalizedText label={{id: 'reportProblem', defaultMessage: 'Report a problem'}} />
-                                </div>
-                                <TerminationModal isTerminated={isTerminated} setIsTerminated={setIsTerminated} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="p-4 flex justify-between items-center bg-lightGreen">
-                    <div className="flex flex-col gap-2">
-                        <div className="text-textColor text-md font-boldQuick">
-                            <LocalizedText label={{id: 'isTravelerRight', defaultMessage: 'Is this traveler right for you?'}} />
-                        </div>
-                        <p className="text-sm2 text-lineGray font-mainSans">
-                            <LocalizedText
-                                label={{
-                                    id: 'warningText',
-                                    defaultMessage:
-                                        "If you click on the 'yes' button, the deal status will change and you will not be able to select another traveler",
-                                }}
-                            />
-                        </p>
-                    </div>
-                    <DealCompletedModal setIsDealApproved={setIsDealApproved} />
-                </div>
-            </div>
-
-            <div
-                className={` flex-1 overflow-y-auto  flex flex-col pt-8 px-8 pb-8 gap-6  ${isTerminated ? 'justify-center' : ''}`}
-                id="chatbody"
-            >
-                {/* <div className="text-textColor font-mainQuick text-md bg-activeChatGray rounded-pill px-4 py-1">
-          Start your dialog. Write something
-        </div> */}
-
-                {isTerminated ? (
-                    <ChatInfoText text="dealTerminated" bgColor="#E2542C40" />
-                ) : (
-                    <div className="flex flex-col p-0 lg:p-8 gap-6">
-                        <div className="flex gap-2 items-center self-end">
-                            <div className="bg-activeChatGray rounded-t-[10px] rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
-                                Hello, can you bring my box with you?
-                            </div>
-                            <div
-                                className="w-[36px] h-[36px] rounded-round"
-                                style={{
-                                    backgroundImage: `url(${profile2})`,
-                                    backgroundPosition: 'top',
-                                    backgroundSize: 'cover',
-                                }}
-                            ></div>
-                        </div>
-                        <div className="self-center breakpoint:w-[50%] bg-lightGreen py-2 px-4 rounded-[10px] ">
-                            <ChatInfoText text="paidSuccessfully" bgColor="#EFFFF8" />
-                        </div>
-                        <div className="flex gap-2 items-center">
-                            <div
-                                className="w-[36px] h-[36px] rounded-round"
-                                style={{
-                                    backgroundImage: `url(${profile1})`,
-                                    backgroundPosition: 'top',
-                                    backgroundSize: 'cover',
-                                }}
-                            ></div>
-                            <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
-                                Hello, Yes I can
-                            </div>
-                        </div>
-                        {messagesList.map(val => {
-                            return (
-                                <div className="flex gap-2 items-center self-end">
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        {val}
-                                    </div>
-                                    <div
-                                        className="w-[36px] h-[36px] rounded-round"
-                                        style={{
-                                            backgroundImage: `url(${profile2})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
-                                        }}
-                                    ></div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                )}
-            </div>
-
-            <div className="px-4 mb-6">
-                <ThemeProvider theme={theme}>
-                    <TextField
-                        value={textMessage}
-                        onKeyDown={handleKeyDown}
-                        onChange={e => {
-                            setTextMessage(e.target.value);
-                        }}
-                        placeholder={intl.formatMessage({
-                            id: 'writeMessage',
-                            defaultMessage: 'Write a message...',
-                        })}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IoMdSend size={20} color="#34434E" />
-                                </InputAdornment>
-                            ),
-                            startAdornment: (
-                                <InputAdornment position="end">
-                                    <BsPaperclip size={20} color="#34434E" />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
-                </ThemeProvider>
+                    }}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IoMdSend size={20} color="#34434E" className={classes.inputIcon} />
+                            </InputAdornment>
+                        ),
+                        startAdornment: (
+                            <InputAdornment position="end">
+                                <BsPaperclip size={20} color="#34434E" className={classes.inputIcon} />
+                            </InputAdornment>
+                        ),
+                    }}
+                />
             </div>
         </div>
     );

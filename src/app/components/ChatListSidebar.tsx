@@ -8,7 +8,6 @@ import '../../mui.css';
 import '../../scrollbar.css';
 import '../../cursor.css';
 import {
-    createTheme,
     FormControl,
     FormControlLabel,
     InputAdornment,
@@ -18,8 +17,11 @@ import {
     Select,
     SelectChangeEvent,
     TextField,
-    ThemeProvider,
 } from '@mui/material';
+import {makeStyles} from '@mui/styles';
+import {Typography} from '@mui/material';
+
+import {CustomTheme} from '@style';
 
 import chats from 'src/common/pageData/chats';
 import chatLogo from '../../common/assets/chatLogo.png';
@@ -27,6 +29,7 @@ import chatLogo from '../../common/assets/chatLogo.png';
 import AdminChatTab from './AdminChatTab';
 import ChatTab from './ChatTab';
 import LocalizedText from '@components/localize/LocalizedText';
+import {display, padding, width} from '@mui/system';
 
 const filterOptions = [
     {
@@ -125,6 +128,185 @@ const customers = [
     },
 ];
 
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    sidebarContainer: {
+        width: '100%',
+        backgroundColor: theme.palette.secondary.main,
+        padding: '16px',
+        '@media (min-width: 850px)': {
+            minWidth: '380px',
+            width: '35%',
+        },
+        '@media (min-width: 1024px)': {
+            minWidth: '450px',
+        },
+    },
+    innerContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1.5rem',
+    },
+    inputContainer: {
+        borderWidth: '1px',
+        borderColor: theme.custom.palette.newColors.sidebarInputBorder,
+        borderRadius: '28px',
+        width: '90%',
+        padding: '8px 0 8px 24px',
+        display: 'flex',
+        alignItems: 'center',
+        '@media (min-width: 850px)': {
+            width: '95%',
+        },
+    },
+
+    selectedOption: {
+        width: '100%',
+        textOverflow: 'ellipsis',
+        textWrap: 'nowrap',
+        overflow: 'hidden',
+        fontFamily: 'Open Sans',
+        fontWeight: '700',
+    },
+    divider: {
+        height: '20px',
+        width: '1px',
+        backgroundColor: theme.palette.text.secondary,
+        marginLeft: '32px',
+        marginRight: '16px',
+    },
+    filterContainer: {
+        color: theme.palette.text.primary,
+        fontSize: '22px',
+        position: 'relative',
+        padding: '8px',
+    },
+    filterIcon: {
+        transition: 'all 150ms',
+        borderRadius: '6px',
+        cursor: 'pointer',
+        padding: '8px',
+        '&:hover': {
+            backgroundColor: theme.palette.primary.light,
+        },
+    },
+    filterBody: {
+        boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
+        transition: 'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
+        overflow: 'hidden',
+        position: 'absolute',
+        backgroundColor: theme.palette.primary.contrastText,
+        right: '20%',
+        top: '100%',
+        padding: '24px',
+        borderRadius: '12px',
+        fontSize: '18px',
+        fontFamily: 'Quicksand',
+        fontWeight: '500',
+        textWrap: 'nowrap',
+    },
+    filterText: {
+        fontSize: '18px',
+        color: theme.palette.text.primary,
+        fontFamily: 'Quicksand',
+        fontWeight: '700',
+    },
+    goBackFilter: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        color: theme.palette.primary.main,
+        fontSize: '16px',
+        width: 'fit-content',
+        padding: '8px',
+        cursor: 'pointer',
+        transition: 'all 200ms',
+        fontFamily: 'Open Sans',
+        fontWeight: '700',
+        marginTop: '25px',
+        '&:hover': {
+            opacity: 0.85,
+        },
+    },
+    scrollContainer: {
+        overflowY: 'auto',
+        maxHeight: '85vh',
+        paddingBottom: '12px',
+        cursor: 'pointer',
+    },
+    contentContainer: {
+        minHeight: '100vh',
+    },
+    chatItem: {
+        width: '100%',
+        borderBottomWidth: '1px',
+        borderColor: theme.palette.primary.light,
+        padding: '24px 8px',
+        display: 'flex',
+        gap: '8px',
+        transition: 'background-color 0.2s',
+        cursor: 'pointer',
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.contrastText,
+        },
+    },
+    chatItemActive: {
+        backgroundColor: theme.palette.secondary.contrastText,
+    },
+    chatItemInactive: {
+        backgroundColor: theme.palette.secondary.main,
+    },
+    chatItemLogo: {
+        width: '70px',
+        height: '70px',
+        borderRadius: '50%',
+        backgroundPosition: 'top',
+        backgroundSize: 'cover',
+    },
+    chatItemDetails: {
+        display: 'flex',
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    chatItemName: {
+        fontFamily: 'QuicksandBold, sans-serif',
+        fontSize: '20px',
+        color: theme.palette.text.primary,
+    },
+    chatItemSubtext: {
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '14px',
+        color: theme.palette.text.secondary,
+    },
+    chatItemDate: {
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '14px',
+        color: theme.palette.text.secondary,
+        textTransform: 'uppercase',
+    },
+    chatItemBadge: {
+        width: '20px',
+        height: '20px',
+        borderRadius: '50%',
+        backgroundColor: theme.palette.text.primary,
+        color: theme.palette.primary.contrastText,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+    },
+    dateUnreadContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        gap: '16px',
+    },
+}));
+
 interface ChatListSidebarProps {
     isAdmin: boolean;
 }
@@ -155,6 +337,8 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
         }
     };
 
+    const classes = useStyles();
+
     useEffect(() => {
         document.body.addEventListener('click', () => {
             setIsFilterOpen(false);
@@ -162,9 +346,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     }, []);
 
     return (
-        <div className="w-[100%] bg-paleGray min-[850px]:min-w-[380px] min-[850px]:w-[35%]  py-4 px-4 lg:min-w-[450px]" id="sidebar">
-            <div className="flex items-center gap-6">
-                <div className="border-inputBorderGray border-[1px] rounded-pill w-[90%] min-[850px]:w-[95%] py-[8px] pl-[24px] flex items-center">
+        <div className={classes.sidebarContainer} id="sidebar">
+            <div className={classes.innerContainer}>
+                <div className={classes.inputContainer}>
                     <FormControl
                         sx={{
                             width: '5%',
@@ -235,7 +419,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             onChange={handleChange}
                             renderValue={selected => {
                                 return (
-                                    <div className="w-[100%] font-boldSans text-ellipsis text-nowrap overflow-hidden">
+                                    <div className={classes.selectedOption}>
                                         <LocalizedText label={{id: selected}} />
                                     </div>
                                 );
@@ -278,7 +462,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             })}
                         </Select>
                     </FormControl>
-                    <div className="h-[20px] w-[1px] bg-lineGray ml-8 mr-4"></div>
+                    <div className={classes.divider}></div>
                     <TextField
                         sx={{
                             width: '90%',
@@ -323,33 +507,29 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                         }}
                     />
                 </div>
-                <div className="text-textColor text-[22px] relative p-2">
+                <div className={classes.filterContainer}>
                     <div
                         onClick={e => {
                             e.stopPropagation();
                             setIsFilterOpen(!isFilterOpen);
                         }}
-                        className="hover:bg-borderGray duration-150 rounded-[6px] cursor-pointer p-2"
+                        className={classes.filterIcon}
                     >
                         <IoMdOptions />
                     </div>
                     <div
-                        className="absolute bg-white right-[20%] top-[100%] p-6 rounded-[12px] text-md font-mainQuick font-semibold text-nowrap"
                         style={{
-                            boxShadow:
-                                '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
-                            transition: 'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
                             opacity: isFilterOpen ? '1' : '0',
                             zIndex: isFilterOpen ? 1 : -1,
-                            overflow: 'hidden',
                         }}
+                        className={classes.filterBody}
                     >
                         <div
                             style={{
                                 display: isTraveler || isCustomer ? 'none' : 'initial',
                             }}
                         >
-                            <div className="text-md font-boldQuick text-textColor">
+                            <div className={classes.filterText}>
                                 <LocalizedText label={{id: 'filterByRole', defaultMessage: 'Filter by role'}} />
                             </div>
                             <FormControl>
@@ -360,7 +540,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     onChange={handleRoleSelect}
                                     sx={{
                                         '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
-                                            color: '#15C370',
+                                            color: '#15C370 !important',
                                         },
 
                                         '& .MuiFormControlLabel-root': {
@@ -395,7 +575,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     display: isTraveler ? 'initial' : 'none',
                                 }}
                             >
-                                <div className="text-md font-boldQuick text-textColor">
+                                <div className={classes.filterText}>
                                     <LocalizedText label={{id: 'sortBy', defaultMessage: 'Sort by'}} />
                                 </div>
                                 <FormControl>
@@ -451,7 +631,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     display: isTraveler ? 'none' : 'initial',
                                 }}
                             >
-                                <div className="text-md font-boldQuick text-textColor">
+                                <div className={classes.filterText}>
                                     <LocalizedText label={{id: 'sortBy', defaultMessage: 'Sort by'}} />
                                 </div>
                                 <FormControl>
@@ -494,7 +674,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                         e.stopPropagation();
                                         setIsCustomer(false);
                                     }}
-                                    className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit p-2 cursor-pointer duration-200 font-boldSans"
+                                    className={classes.goBackFilter}
                                 >
                                     <CgArrowLongLeft />
                                     <LocalizedText label={{id: 'resetRole', defaultMessage: 'Reset role'}} />
@@ -515,9 +695,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                         e.currentTarget.classList.add('chatlist');
                     }
                 }}
-                className="overflow-y-auto max-h-[85vh] pb-12 cursor-pointer"
+                className={classes.scrollContainer}
             >
-                <div className="min-h-[100vh]">
+                <div className={classes.contentContainer}>
                     {isAdmin ? null : (
                         <div
                             onClick={() => {
@@ -527,31 +707,29 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 }
                                 navigate('/chat-view/support');
                             }}
-                            className={` ${
-                                location.pathname.includes('/chat-view/support') ? 'bg-activeChatGray' : 'bg-paleGray'
-                            } w-[100%] border-b-[1px] border-borderGray py-6 px-2 flex gap-2 hover:bg-activeChatGray duration-200`}
+                            className={`${classes.chatItem} ${
+                                location.pathname.includes('/chat-view/support') ? classes.chatItemActive : classes.chatItemInactive
+                            }`}
                         >
                             <div
-                                className="w-[70px] h-[70px] rounded-round flex self-center"
+                                className={classes.chatItemLogo}
                                 style={{
                                     backgroundImage: `url(${chatLogo})`,
                                     backgroundPosition: 'top',
                                     backgroundSize: 'cover',
                                 }}
                             ></div>
-                            <div className="flex items-center justify-between flex-1">
-                                <div className="flex flex-col gap-2">
-                                    <div className="text-textColor font-boldQuick text-md2 ">Eelow</div>
-                                    <p className="font-mainSans text-sm text-lineGray">
+                            <div className={classes.chatItemDetails}>
+                                <div className={classes.textContainer}>
+                                    <div className={classes.chatItemName}>Eelow</div>
+                                    <p className={classes.chatItemSubtext}>
                                         <LocalizedText label={{id: 'helpSupport', defaultMessage: 'help and support'}} />
                                     </p>
                                 </div>
                             </div>
-                            <div className="flex flex-col items-end gap-4">
-                                <div className="text-lineGray text-sm font-mainSans uppercase">31 sep</div>
-                                <div className="w-[20px] h-[20px] text-white bg-textColor flex items-center justify-center rounded-round">
-                                    1
-                                </div>
+                            <div className={classes.dateUnreadContainer}>
+                                <div className={classes.chatItemDate}>31 sep</div>
+                                <div className={classes.chatItemBadge}>1</div>
                             </div>
                         </div>
                     )}

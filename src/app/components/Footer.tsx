@@ -9,72 +9,239 @@ import logo from '../../common/assets/logo.png';
 import telegram from '../../common/assets/telegram.png';
 import twitter from '../../common/assets/twitter.png';
 
+import {makeStyles} from '@mui/styles';
+import {display} from '@mui/system';
+import {CustomTheme} from '@style';
+
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    footer: {
+        width: '100%',
+        marginTop: 'auto',
+        paddingTop: '56px',
+        paddingBottom: '56px',
+    },
+    container: {
+        width: '90%',
+        '@media (min-width: 768px)': {
+            width: '80%',
+        },
+        margin: '0 auto',
+    },
+
+    upperContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        '@media (max-width: 768px)': {
+            flexDirection: 'column',
+            gap: '44px',
+        },
+    },
+    flexContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        gap: '1rem',
+    },
+    logoContainer: {
+        width: '120px',
+        height: '35px',
+    },
+    logoImage: {
+        width: '100%',
+    },
+    descriptionText: {
+        color: theme.palette.text.primary,
+        fontSize: '16px',
+        fontFamily: 'Open Sans, sans-serif',
+        marginTop: '1rem',
+        marginBottom: '1.5rem',
+        '@media (max-width: 768px)': {
+            marginBottom: 0,
+        },
+    },
+    languageSelector: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        color: theme.palette.text.primary,
+        fontSize: '16px',
+        fontFamily: 'Open Sans, sans-serif',
+        marginBottom: '1.5rem',
+        '@media (max-width: 768px)': {
+            display: 'none',
+        },
+    },
+    socialIconsContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '1rem',
+        '@media (max-width:768px)': {
+            display: 'none',
+        },
+    },
+    socialIcon: {
+        width: '24px',
+        height: '24px',
+        cursor: 'pointer',
+        '&:hover': {
+            transform: 'scale(1.1)',
+            transition: 'transform 0.15s',
+        },
+    },
+    linksContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        width: '70%',
+        '@media (min-width: 768px)': {
+            width: '50%',
+            flexDirection: 'row',
+        },
+    },
+    companyLinks: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.5rem',
+        width: '100%',
+        '@media (min-width: 768px)': {
+            width: '50%',
+        },
+    },
+    sectionTitle: {
+        fontFamily: 'Quicksand, sans-serif',
+        fontSize: '24px',
+        fontWeight: 'bold',
+    },
+    linkItem: {
+        fontFamily: 'Quicksand, sans-serif',
+        color: theme.palette.text.primary,
+        fontSize: '18px',
+        cursor: 'pointer',
+        '&:hover': {
+            opacity: 0.8,
+            transition: 'opacity 0.2s',
+        },
+        '&:not(:first-child)': {
+            marginTop: '0.5rem',
+        },
+    },
+    contactInfo: {
+        fontFamily: 'Quicksand, sans-serif',
+        color: theme.palette.text.primary,
+        fontSize: '20px',
+        '&:not(:first-child)': {
+            marginTop: '0.5rem',
+        },
+    },
+    noteText: {
+        fontFamily: 'Open Sans, sans-serif',
+        color: theme.palette.text.primary,
+        fontSize: '18px',
+
+        marginBottom: '1rem',
+    },
+    divider: {
+        width: '100%',
+        height: '1px',
+        backgroundColor: theme.palette.text.primary,
+        marginTop: '2rem',
+        marginBottom: '2rem',
+    },
+    copyrightText: {
+        fontFamily: 'Open Sans, sans-serif',
+        color: theme.palette.text.primary,
+        fontSize: '18px',
+    },
+    socialIconsContainerMobile: {
+        display: 'none',
+        alignItems: 'center',
+        gap: '44px',
+        alignSelf: 'center',
+        '@media (max-width: 768px)': {
+            display: 'flex',
+        },
+    },
+}));
+
 const Footer: FC = () => {
+    const classes = useStyles();
+
     return (
-        <footer className="w-[100%] mt-auto py-[56px]">
-            <div className=" w-[90%] tablet:w-[80%] mx-auto">
-                <div className="flex flex-col justify-between gap-4 tablet:flex-row">
-                    <div className="flex flex-col">
-                        <div className="w-[120px] h-[35px]">
-                            <img className="w-[100%] " src={logo} alt="Eelow" />
+        <footer className={classes.footer}>
+            <div className={classes.container}>
+                <div className={classes.upperContainer}>
+                    <div className={classes.flexContainer}>
+                        <div className={classes.logoContainer}>
+                            <img className={classes.logoImage} src={logo} alt="Eelow" />
                         </div>
-                        <p className="text-default font-mainSans text-textColor mt-4 mb-6">
+                        <p className={classes.descriptionText}>
                             <LocalizedText label={{id: 'weNeed', defaultMessage: 'We need each other'}} />
                         </p>
-
-                        <div className="flex mb-6 items-center gap-2 text-textColor font-normal text-default font-mainSans">
+                        <div className={classes.languageSelector}>
                             <PiGlobe size={24} />
                             English
                         </div>
-                        <div className="flex items-center gap-4">
-                            <div className="w-[24px] h-[24px] cursor-pointer hover:scale-110 duration-150">
-                                <img className="w-[100%] object-cover h-[100%]" src={facebook} alt="facebook" />
+                        <div className={classes.socialIconsContainer}>
+                            <div className={classes.socialIcon}>
+                                <img className={classes.logoImage} src={facebook} alt="facebook" />
                             </div>
-                            <div className="w-[24px] h-[24px] cursor-pointer hover:scale-110 duration-150">
-                                <img className="w-[100%] object-cover h-[100%]" src={twitter} alt="twitter" />
+                            <div className={classes.socialIcon}>
+                                <img className={classes.logoImage} src={twitter} alt="twitter" />
                             </div>
-                            <div className="w-[24px] h-[24px] cursor-pointer hover:scale-110 duration-150">
-                                <img className="w-[100%] object-cover h-[100%]" src={instagram} alt="instagram" />
+                            <div className={classes.socialIcon}>
+                                <img className={classes.logoImage} src={instagram} alt="instagram" />
                             </div>
-                            <div className="w-[24px] h-[24px] cursor-pointer hover:scale-110 duration-150">
-                                <img className="w-[100%] object-cover h-[100%]" src={telegram} alt="telegram" />
+                            <div className={classes.socialIcon}>
+                                <img className={classes.logoImage} src={telegram} alt="telegram" />
                             </div>
                         </div>
                     </div>
-
-                    <div className="flex flex-col tablet:flex-row gap-4 justify-between w-[70%] tablet:w-[50%] ">
-                        <div className="flex flex-col gap-2 w-[100%] tablet:w-[50%]">
-                            <div className="font-boldQuick font-bold text-lg">
+                    <div className={classes.linksContainer}>
+                        <div className={classes.companyLinks}>
+                            <div className={classes.sectionTitle}>
                                 <LocalizedText label={{id: 'company', defaultMessage: 'Company'}} />
                             </div>
                             <ul>
-                                <li className="font-mainQuick text-textColor text-md cursor-pointer hover:opacity-80 duration-200">
+                                <li className={classes.linkItem}>
                                     <LocalizedText label={{id: 'terms', defaultMessage: 'Terms and Conditions'}} />
                                 </li>
-                                <li className="font-mainQuick mt-2 text-textColor text-md cursor-pointer hover:opacity-80 duration-200">
+                                <li className={classes.linkItem}>
                                     <LocalizedText label={{id: 'ourBlog', defaultMessage: 'Our blog'}} />
                                 </li>
                             </ul>
                         </div>
-                        <div className="flex flex-col w-[100%] tablet:w-[45%]">
-                            <div className="font-boldQuick font-bold text-lg">
+                        <div className={classes.companyLinks}>
+                            <div className={classes.sectionTitle}>
                                 <LocalizedText label={{id: 'alwaysInTouch', defaultMessage: 'We are always in touch!'}} />
                             </div>
                             <ul>
-                                <li className="font-mainQuick text-lineGray text-md ">
+                                <li className={classes.noteText}>
                                     <LocalizedText
                                         label={{id: 'youCanWrite', defaultMessage: 'You can write us a letter or call the numbers'}}
                                     />
                                 </li>
-                                <li className="font-mainQuick mt-2 text-textColor text-md ">(123) 456 789</li>
-                                <li className="font-mainQuick mt-2 mb-6 text-textColor text-md">example@gmail.com</li>
+                                <li className={classes.contactInfo}>(123) 456 789</li>
+                                <li className={classes.contactInfo}>example@gmail.com</li>
                             </ul>
                         </div>
                     </div>
+                    <div className={classes.socialIconsContainerMobile}>
+                        <div className={classes.socialIcon}>
+                            <img className={classes.logoImage} src={facebook} alt="facebook" />
+                        </div>
+                        <div className={classes.socialIcon}>
+                            <img className={classes.logoImage} src={twitter} alt="twitter" />
+                        </div>
+                        <div className={classes.socialIcon}>
+                            <img className={classes.logoImage} src={instagram} alt="instagram" />
+                        </div>
+                        <div className={classes.socialIcon}>
+                            <img className={classes.logoImage} src={telegram} alt="telegram" />
+                        </div>
+                    </div>
                 </div>
-
-                <div className="w-[100%] h-[1px] bg-textColor my-8"></div>
-                <div className="text-md font-mainSans text-textColor">All rights reserved © 2008-2023</div>
+                <div className={classes.divider}></div>
+                <div className={classes.copyrightText}>All rights reserved © 2008-2023</div>
             </div>
         </footer>
     );

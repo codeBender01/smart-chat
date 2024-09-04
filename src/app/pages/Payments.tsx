@@ -3,6 +3,10 @@ import {useMediaQuery} from 'react-responsive';
 import {Box, Button, Tab, Tabs} from '@mui/material';
 import {Typography} from '@mui/material';
 
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
+import CustomButton from '@components/Button';
+
 import LocalizedText from '@components/localize/LocalizedText';
 
 interface TabPanelProps {
@@ -10,6 +14,70 @@ interface TabPanelProps {
     index: number;
     value: number;
 }
+
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        width: '100%',
+    },
+    headerText: {
+        marginTop: theme.spacing(2),
+        display: 'block',
+        [theme.breakpoints.up(620)]: {
+            display: 'none',
+        },
+    },
+    descriptionText: {
+        color: theme.palette.text.secondary,
+        marginBottom: theme.spacing(2),
+        maxWidth: '360px',
+    },
+    tabPanelContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing(2),
+        width: '100%',
+        [theme.breakpoints.up(620)]: {
+            width: '30%',
+        },
+        minWidth: '360px',
+    },
+    tabPanelContainerWide: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: theme.spacing(2),
+        width: '100%',
+        [theme.breakpoints.up(620)]: {
+            width: '40%',
+        },
+        minWidth: '360px',
+        marginTop: theme.spacing(3),
+    },
+    sectionTitle: {
+        fontSize: '1rem',
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: 700,
+        color: theme.custom.palette.newColors.sectionTitle,
+    },
+    sectionDescription: {
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '1rem',
+        color: theme.palette.text.secondary,
+    },
+    button: {
+        backgroundColor: `${theme.palette.primary.main} !important`,
+        color: `${theme.palette.primary.contrastText} !important`,
+        alignSelf: 'flex-end',
+        marginTop: theme.spacing(3),
+        borderRadius: '20px',
+        padding: theme.spacing(1, 2),
+        textTransform: 'none',
+        fontFamily: 'Open Sans, sans-serif',
+        '&:hover': {
+            backgroundColor: theme.palette.primary.main,
+            opacity: 0.8,
+        },
+    },
+}));
 
 function CustomTabPanel(props: TabPanelProps) {
     const {children, value, index, ...other} = props;
@@ -37,23 +105,21 @@ const Payments: FC = () => {
         setTabIndex(newValue);
     };
 
+    const classes = useStyles();
+
     return (
-        <div className="w-[100%]">
-            <div className="mt-8 md:hidden block">
+        <div className={classes.container}>
+            <div className={classes.headerText}>
                 <Typography variant="h2">
                     <LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />
                 </Typography>
             </div>
-            <p className="text-lineGray mb-8 max-w-[360px]">
+            <p className={classes.descriptionText}>
                 <Typography variant="body1">
                     <LocalizedText label={{id: 'manage', defaultMessage: 'You can manage your payments and payouts'}} />
                 </Typography>
             </p>
-            <Box
-                sx={{
-                    marginTop: 2,
-                }}
-            >
+            <Box sx={{marginTop: 2}}>
                 <Tabs
                     sx={{
                         backgroundColor: '#fff',
@@ -63,7 +129,6 @@ const Payments: FC = () => {
                             backgroundColor: '#242136',
                             borderRadius: '10px',
                         },
-
                         '& .MuiTabs-indicator': {
                             borderRadius: '10px',
                             height: '2px',
@@ -78,10 +143,9 @@ const Payments: FC = () => {
                             color: '#838383',
                             paddingInline: '48px',
                             textTransform: 'none',
-                            fontFamily: 'OpenReg',
+                            fontFamily: 'Open Sans, sans-serif',
                             width: isMobile ? '50%' : 'initial',
                             fontSize: '14px',
-
                             '&.Mui-selected': {
                                 color: '#242136',
                             },
@@ -91,29 +155,29 @@ const Payments: FC = () => {
                         {...a11yProps(0)}
                     />
                     <Tab
-                        disableRipple
                         sx={{
                             color: '#838383',
                             paddingInline: '48px',
                             textTransform: 'none',
-                            fontFamily: 'OpenReg',
+                            fontFamily: 'Open Sans, sans-serif',
                             width: isMobile ? '50%' : 'initial',
                             fontSize: '14px',
                             '&.Mui-selected': {
                                 color: '#242136',
                             },
                         }}
+                        disableRipple
                         label={<LocalizedText label={{id: 'payouts', defaultMessage: 'Payouts'}} />}
                         {...a11yProps(1)}
                     />
                 </Tabs>
             </Box>
             <CustomTabPanel value={tabIndex} index={0}>
-                <div className="flex flex-col gap-4 w-[100%] md:w-[30%] min-w-[360px]">
-                    <div className="text-md font-boldQuick text-[#242136]">
+                <div className={classes.tabPanelContainer}>
+                    <div className={classes.sectionTitle}>
                         <LocalizedText label={{id: 'yourPayments', defaultMessage: 'Your payments'}} />
                     </div>
-                    <p className="font-mainSans text-default text-lineGray">
+                    <p className={classes.sectionDescription}>
                         <LocalizedText label={{id: 'seeAllPayments', defaultMessage: 'See all your payments and refunds'}} />
                     </p>
                     <Button
@@ -140,13 +204,12 @@ const Payments: FC = () => {
                         </Typography>
                     </Button>
                 </div>
-
-                <div className="flex flex-col gap-4 w-[100%] md:w-[30%] min-w-[360px] mt-6">
-                    <div className="text-md font-boldQuick text-[#242136]">
+                <div className={`${classes.tabPanelContainer} mt-6`}>
+                    <div className={classes.sectionTitle}>
                         <LocalizedText label={{id: 'paymentsMethod', defaultMessage: 'Payments methods'}} />
                     </div>
-                    <p className="font-mainSans text-default text-lineGray">
-                        <LocalizedText label={{id: 'addPayment', defaultMessage: ' Add and manage your payment methods'}} />
+                    <p className={classes.sectionDescription}>
+                        <LocalizedText label={{id: 'addPayment', defaultMessage: 'Add and manage your payment methods'}} />
                     </p>
                     <Button
                         disableElevation
@@ -174,38 +237,21 @@ const Payments: FC = () => {
                 </div>
             </CustomTabPanel>
             <CustomTabPanel value={tabIndex} index={1}>
-                <div className="flex flex-col gap-4 w-[100%] md:w-[40%] mt-6">
-                    <div className="text-md font-boldQuick text-[#242136]">
+                <div className={classes.tabPanelContainerWide}>
+                    <div className={classes.sectionTitle}>
                         <LocalizedText label={{id: 'howReceivePayments', defaultMessage: 'How can you receive your payouts'}} />
                     </div>
-                    <p className="font-mainSans text-default text-lineGray">
+                    <p className={classes.sectionDescription}>
                         <LocalizedText
                             label={{id: 'addPayoutMethod', defaultMessage: 'Add payout method so we know where to send your money'}}
                         />
                     </p>
-                    <Button
-                        disableElevation
-                        disableRipple
-                        variant="contained"
-                        sx={{
-                            bgcolor: '#15C370',
-                            color: '#fff',
-                            alignSelf: 'flex-end',
-                            marginTop: 3,
-                            borderRadius: '20px',
-                            padding: '10px, 16px',
-                            textTransform: 'none',
-                            fontFamily: 'OpenReg',
-                            '&:hover': {
-                                bgcolor: '#15C370',
-                                opacity: 0.8,
-                            },
-                        }}
-                    >
-                        <Typography variant="button">
-                            <LocalizedText label={{id: 'addPayoutBtn', defaultMessage: 'Add payout method'}} />
-                        </Typography>
-                    </Button>
+
+                    <div className="self-end">
+                        <CustomButton closeModal={() => {}} width="auto" bgcolor="#15C370" color="#fff" borderColor="transparent">
+                            <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
+                        </CustomButton>
+                    </div>
                 </div>
             </CustomTabPanel>
         </div>

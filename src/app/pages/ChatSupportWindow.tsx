@@ -13,6 +13,10 @@ import {useIntl} from 'react-intl';
 import logo from '../../common/assets/chatLogo.png';
 import profile2 from '../../common/assets/profile2.jpeg';
 
+import {makeStyles} from '@mui/styles';
+import {display} from '@mui/system';
+import {CustomTheme} from '@style';
+
 const suggestions = [
     {
         label: 'Ask for help',
@@ -69,6 +73,187 @@ const serviceProblems = [
     },
 ];
 
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    innerContainer: {
+        display: 'flex',
+        padding: '1rem',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        '@media (min-width: 850px)': {
+            display: 'none',
+        },
+    },
+    container: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        maxHeight: '90vh',
+        height: '90vh',
+        justifyContent: 'space-between',
+        paddingBottom: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+        [theme.breakpoints.up(850)]: {
+            backgroundColor: theme.palette.primary.contrastText,
+            width: '100%',
+        },
+    },
+    backButton: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        color: theme.palette.primary.main, // Replace with the value of logoGreen
+        fontSize: '1rem', // Replace with the value of text-default
+        cursor: 'pointer',
+        transition: 'opacity 0.2s',
+        fontFamily: 'Open Sans, sans-serif',
+        fontWeight: '700',
+        '&:hover': {
+            opacity: 0.85,
+        },
+        width: 'fit-content',
+    },
+    header: {
+        padding: '1rem',
+        borderBottomWidth: '1px',
+        borderColor: theme.custom.palette.newColors.headerIconBorder,
+        display: 'flex',
+        gap: '0.75rem',
+    },
+    logo: {
+        width: '50px',
+        height: '50px',
+        borderRadius: '50%',
+        backgroundPosition: 'top',
+        backgroundSize: 'cover',
+    },
+    title: {
+        color: theme.palette.text.primary,
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+        fontSize: '20px',
+    },
+    chatContainer: {
+        flex: 1,
+        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '0.75rem 1rem',
+        gap: '1.5rem',
+        zIndex: 10,
+    },
+    messageContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.5rem',
+        zIndex: 10,
+    },
+    messageWrapper: {
+        display: 'flex',
+        gap: '0.5rem',
+        alignItems: 'center',
+    },
+    logoIcon: {
+        width: '36px',
+        height: '36px',
+        borderRadius: '50%',
+        backgroundPosition: 'top',
+        backgroundSize: 'cover',
+    },
+    messageBubbleLeft: {
+        backgroundColor: theme.palette.secondary.contrastText, // Replace with the value of bg-activeChatGray
+        borderRadius: '10px',
+        borderBottomRightRadius: 0,
+        padding: '0.75rem 1rem',
+        fontFamily: 'Open Sans, sans-serif',
+        color: theme.palette.text.primary, // Replace with the value of textColor
+    },
+    messageBubbleRight: {
+        backgroundColor: theme.palette.secondary.contrastText, // Replace with the value of bg-activeChatGray
+        borderRadius: '10px',
+        borderBottomLeftRadius: 0,
+        padding: '0.75rem 1rem',
+        fontFamily: 'Open Sans, sans-serif',
+        color: theme.palette.text.primary,
+    },
+    suggestionContainer: {
+        display: 'flex',
+        gap: '12px',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        marginTop: '1rem',
+    },
+    suggestionButton: {
+        color: theme.palette.text.primary,
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '1rem',
+        borderRadius: '0.5rem',
+        padding: '0.25rem 0.5rem',
+        cursor: 'pointer',
+        transition: 'opacity 0.2s',
+        width: 'fit-content',
+        '&:hover': {
+            opacity: 0.85,
+        },
+    },
+    chatInfoContainer: {
+        width: '80%',
+        '@media (min-width: 850px)': {
+            width: '60%',
+        },
+    },
+    suggestionsMessage: {
+        width: '80%',
+    },
+    senderMessage: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        alignSelf: 'flex-end',
+    },
+    inputContainer: {
+        padding: '16px 32px',
+    },
+    inputIcon: {
+        cursor: 'pointer',
+        transition: 'all 100ms',
+        '&:hover': {
+            opacity: 0.8,
+        },
+    },
+    suggestionsModal: {
+        boxShadow: '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
+        transition: 'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
+        overflow: 'hidden',
+        position: 'absolute',
+        backgroundColor: 'white',
+        left: '0',
+        bottom: '110%',
+        padding: '8px 0',
+        borderRadius: '8px',
+        fontSize: '18px',
+        fontFamily: 'Quicksand',
+        fontWeight: '500',
+        textWrap: 'nowrap',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+    },
+    suggestionsModalText: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: '12px 24px',
+        color: theme.palette.text.primary,
+        fontSize: '1rem',
+        fontFamily: 'Open Sans, sans-serif',
+        gap: '8px',
+        cursor: 'pointer',
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.contrastText,
+        },
+        transition: 'background-color 200ms',
+    },
+}));
+
 const ChatSupportWindow: FC = () => {
     const [isSuggestionsOpen, setIsSuggestionsOpen] = useState(false);
     const [isMessageSent, setIsMessageSent] = useState(false);
@@ -95,59 +280,53 @@ const ChatSupportWindow: FC = () => {
         }
     };
 
+    const classes = useStyles();
+
     return (
-        <div className="w-[100%] breakpoint:w-[100%] flex flex-col max-h-[90vh] h-[90vh] justify-between pb-4 bg-paleGray breakpoint:bg-white">
-            <div className="flex breakpoint:hidden p-4 justify-between items-center">
-                <div
-                    onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit cursor-pointer duration-200 font-boldSans"
-                >
+        <div className={classes.container}>
+            <div className={classes.innerContainer}>
+                <div onClick={() => navigate(-1)} className={classes.backButton}>
                     <CgArrowLongLeft />
                     <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
                 </div>
             </div>
-            <div className="p-4 border-b-[1px] border-[#C6D7DA] flex gap-3">
+            <div className={classes.header}>
                 <div
-                    className="w-[50px] h-[50px] rounded-round"
+                    className={classes.logo}
                     style={{
                         backgroundImage: `url(${logo})`,
                         backgroundPosition: 'top',
                         backgroundSize: 'cover',
                     }}
                 ></div>
-                <div className="text-textColor font-boldQuick text-md2">Eelow</div>
+                <div className={classes.title}>Eelow</div>
             </div>
-
-            <div
-                className={`flex-1 overflow-y-auto  flex flex-col py-3 px-4 gap-6 z-10 ${
-                    !isMessageSent ? 'justify-center items-center' : ''
-                }`}
-            >
+            <div className={`${classes.chatContainer} ${!isMessageSent ? 'justify-center items-center' : ''}`}>
                 {isMessageSent || option === 'help' || option === 'service' ? (
-                    <div className=" flex flex-col gap-6 z-10">
-                        <div className="flex gap-2 items-center">
+                    <div className={classes.messageContainer}>
+                        <div className={classes.messageWrapper}>
                             <div
-                                className="w-[36px] h-[36px] rounded-round"
+                                className={classes.logoIcon}
                                 style={{
                                     backgroundImage: `url(${logo})`,
                                     backgroundPosition: 'top',
                                     backgroundSize: 'cover',
                                 }}
                             ></div>
-                            <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
+                            <div className={classes.messageBubbleRight}>
                                 <LocalizedText label={{id: 'canWeHelpYou', defaultMessage: 'Hello! How can we help you?'}} />
                             </div>
                         </div>
-                        <div className="flex gap-2 w-[80%] items-center">
+                        <div className={`${classes.messageWrapper} ${classes.suggestionsMessage}`}>
                             <div
-                                className="w-[36px] h-[36px] min-w-[36px] min-h-[36px] rounded-round"
+                                className={classes.logoIcon}
                                 style={{
                                     backgroundImage: `url(${logo})`,
                                     backgroundPosition: 'top',
                                     backgroundSize: 'cover',
                                 }}
                             ></div>
-                            <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
+                            <div className={classes.messageBubbleRight}>
                                 <p>
                                     <LocalizedText
                                         label={{
@@ -156,7 +335,7 @@ const ChatSupportWindow: FC = () => {
                                         }}
                                     />
                                 </p>
-                                <div className="flex gap-4 items-center flex-wrap mt-4">
+                                <div className={classes.suggestionContainer}>
                                     {suggestions.map(sug => {
                                         return (
                                             <div
@@ -165,9 +344,7 @@ const ChatSupportWindow: FC = () => {
                                                 style={{
                                                     backgroundColor: sug.colorCode,
                                                 }}
-                                                className={
-                                                    'text-textColor flex-wrap text-default font-mainSans rounded-medium w-fit py-1 px-2 hover:opacity-85 duration-200 cursor-pointer'
-                                                }
+                                                className={classes.suggestionButton}
                                             >
                                                 <LocalizedText label={{id: sug.value, defaultMessage: sug.label}} />
                                             </div>
@@ -177,12 +354,10 @@ const ChatSupportWindow: FC = () => {
                             </div>
                         </div>
 
-                        <div className="flex gap-2 items-center self-end">
-                            <div className="bg-activeChatGray rounded-t-[10px] rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
-                                messagemessagemessage
-                            </div>
+                        <div className={classes.senderMessage}>
+                            <div className={classes.messageBubbleLeft}>messagemessagemessage</div>
                             <div
-                                className="w-[36px] h-[36px] rounded-round"
+                                className={classes.logoIcon}
                                 style={{
                                     backgroundImage: `url(${profile2})`,
                                     backgroundPosition: 'top',
@@ -191,16 +366,13 @@ const ChatSupportWindow: FC = () => {
                             ></div>
                         </div>
 
-                        {option === 'help' ? <ChatInfoText text="Ask for help conversation started" bgColor="#EFFFF8" /> : null}
-
                         {option === 'help' ? (
                             <>
-                                <div className="flex gap-2 items-center self-end">
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        I can’t get verified on the eelow.com
-                                    </div>
+                                <ChatInfoText text="Ask for help conversation started" bgColor="#EFFFF8" />
+                                <div className={classes.senderMessage}>
+                                    <div className={classes.messageBubbleLeft}>I can’t get verified on the eelow.com</div>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${profile2})`,
                                             backgroundPosition: 'top',
@@ -208,47 +380,45 @@ const ChatSupportWindow: FC = () => {
                                         }}
                                     ></div>
                                 </div>
-                                <div className="flex gap-2 items-center">
+                                <div className={classes.messageWrapper}>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${logo})`,
                                             backgroundPosition: 'top',
                                             backgroundSize: 'cover',
                                         }}
                                     ></div>
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        Got it! Give me a second please
-                                    </div>
+                                    <div className={classes.messageBubbleRight}>Got it! Give me a second please</div>
                                 </div>
                             </>
                         ) : null}
 
                         {option === 'service' ? (
                             <>
-                                <div className="flex gap-2 items-center">
+                                <div className={classes.messageWrapper}>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${logo})`,
                                             backgroundPosition: 'top',
                                             backgroundSize: 'cover',
                                         }}
                                     ></div>
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
+                                    <div className={classes.messageBubbleRight}>
                                         <LocalizedText label={{id: 'canWeHelpYou'}} />
                                     </div>
                                 </div>
-                                <div className="flex gap-2 w-[80%] items-center">
+                                <div className={`${classes.messageWrapper} ${classes.suggestionsMessage}`}>
                                     <div
-                                        className="w-[36px] h-[36px] min-w-[36px] min-h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${logo})`,
                                             backgroundPosition: 'top',
                                             backgroundSize: 'cover',
                                         }}
                                     ></div>
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
+                                    <div className={classes.messageBubbleRight}>
                                         <p>
                                             <LocalizedText
                                                 label={{
@@ -258,7 +428,7 @@ const ChatSupportWindow: FC = () => {
                                                 }}
                                             />
                                         </p>
-                                        <div className="flex gap-3 items-center flex-wrap mt-4">
+                                        <div className={classes.suggestionContainer}>
                                             {serviceProblems.map(sug => {
                                                 return (
                                                     <div
@@ -284,12 +454,10 @@ const ChatSupportWindow: FC = () => {
                             <>
                                 <ChatInfoText text="Problem with payment conversation started" bgColor="#EFFFF8" />
 
-                                <div className="flex gap-2 items-center self-end">
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        I can’t pay for the deal
-                                    </div>
+                                <div className={classes.senderMessage}>
+                                    <div className={classes.messageBubbleLeft}>I can’t pay for the deal</div>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${profile2})`,
                                             backgroundPosition: 'top',
@@ -297,29 +465,25 @@ const ChatSupportWindow: FC = () => {
                                         }}
                                     ></div>
                                 </div>
-                                <div className="flex gap-2 items-center">
+                                <div className={classes.messageWrapper}>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${logo})`,
                                             backgroundPosition: 'top',
                                             backgroundSize: 'cover',
                                         }}
                                     ></div>
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        Got it! Give me a second please
-                                    </div>
+                                    <div className={classes.messageBubbleRight}>Got it! Give me a second please</div>
                                 </div>
                             </>
                         ) : null}
                         {messagesList.map(val => {
                             return (
-                                <div className="flex gap-2 items-center self-end">
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        {val}
-                                    </div>
+                                <div className={classes.senderMessage}>
+                                    <div className={classes.messageBubbleRight}>{val}</div>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${profile2})`,
                                             backgroundPosition: 'top',
@@ -331,13 +495,13 @@ const ChatSupportWindow: FC = () => {
                         })}
                     </div>
                 ) : (
-                    <div className="breakpoint:w-[60%] w-[80%]">
+                    <div className={classes.chatInfoContainer}>
                         <ChatInfoText text="chatSupportMessage" bgColor="#EEEEEE" />
                     </div>
                 )}
             </div>
 
-            <div className="px-4 pb-8">
+            <div className={classes.inputContainer}>
                 <TextField
                     placeholder={intl.formatMessage({
                         id: 'writeMessage',
@@ -376,18 +540,13 @@ const ChatSupportWindow: FC = () => {
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                <IoMdSend
-                                    onClick={() => setIsMessageSent(true)}
-                                    size={20}
-                                    color="#34434E"
-                                    className="cursor-pointer hover:opacity-80"
-                                />
+                                <IoMdSend onClick={() => setIsMessageSent(true)} size={20} color="#34434E" className={classes.inputIcon} />
                             </InputAdornment>
                         ),
                         startAdornment: (
                             <InputAdornment position="start">
-                                <div className="flex items-center gap-2">
-                                    <BsPaperclip size={22} color="#34434E" className="cursor-pointer hover:opacity-80" />
+                                <div className={classes.messageWrapper}>
+                                    <BsPaperclip size={22} color="#34434E" className={classes.inputIcon} />
                                     <div
                                         className="relative"
                                         onClick={e => {
@@ -395,25 +554,17 @@ const ChatSupportWindow: FC = () => {
                                             setIsSuggestionsOpen(!isSuggestionsOpen);
                                         }}
                                     >
-                                        <MdOutlineNewLabel size={24} color="#34434E" className="cursor-pointer hover:opacity-80" />
+                                        <MdOutlineNewLabel size={24} color="#34434E" className={classes.inputIcon} />
                                         <div
-                                            className="absolute bg-white left-[0%] bottom-[110%] py-2 rounded-[8px] text-md font-mainQuick font-semibold text-nowrap flex flex-col gap-4"
+                                            className={classes.suggestionsModal}
                                             style={{
-                                                boxShadow:
-                                                    '0px 5px 5px -3px rgba(0,0,0,0.2),0px 8px 10px 1px rgba(0,0,0,0.14),0px 3px 14px 2px rgba(0,0,0,0.12)',
-                                                transition:
-                                                    'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
                                                 opacity: isSuggestionsOpen ? '1' : '0',
                                                 zIndex: isSuggestionsOpen ? 10 : 0,
                                             }}
                                         >
                                             {suggestions.map(sug => {
                                                 return (
-                                                    <div
-                                                        key={sug.label}
-                                                        onClick={() => {}}
-                                                        className="flex items-center px-[24px] py-[12px] text-textColor text-default font-mainSans gap-2 hover:bg-[#eee] duration-200 cursor-pointer"
-                                                    >
+                                                    <div key={sug.label} onClick={() => {}} className={classes.suggestionsModalText}>
                                                         <LocalizedText label={{id: sug.value, defaultMessage: sug.label}} />
                                                     </div>
                                                 );

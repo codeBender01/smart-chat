@@ -10,66 +10,223 @@ import money from '../../common/assets/money.jpeg';
 import {ModalContext} from '@components/modal/ModalProvider';
 import {ModalContent} from '@components/modal/ModalContent';
 
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
+
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        backgroundColor: 'white',
+        borderRadius: '24px',
+        width: '100%',
+        padding: '32px',
+        display: 'flex',
+        flexDirection: 'column',
+        '@media (min-width: 768px)': {
+            width: '840px',
+        },
+    },
+    header: {
+        display: 'flex',
+        justifyContent: 'space-between',
+    },
+    title: {
+        fontFamily: 'Quicksand, sans-serif',
+        fontSize: '2rem',
+        color: theme.palette.text.primary,
+        fontWeight: '700',
+    },
+    subTitle: {
+        fontFamily: 'Open Sans, sans-serif',
+        color: theme.palette.text.secondary,
+        fontWeight: '600',
+        fontSize: '16px',
+    },
+    closeIcon: {
+        fontSize: '18px',
+        color: '#999999',
+        marginTop: '12px',
+        cursor: 'pointer',
+        '&:hover': {
+            fontSize: '24px',
+            transition: 'font-size 0.2s',
+        },
+    },
+    imageWrapper: {
+        height: '280px',
+        width: '380px',
+        alignSelf: 'center',
+    },
+    image: {
+        height: '100%',
+        width: '100%',
+        maxWidth: '100%',
+        objectFit: 'cover',
+    },
+    routeWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '80%',
+        marginTop: '8px',
+        '@media (min-width: 1024px)': {
+            width: '65%',
+        },
+    },
+    cityInfo: {
+        textAlign: 'center',
+        '& .cityName': {
+            color: theme.palette.text.primary,
+            fontFamily: 'Open Sans, sans-serif',
+            fontSize: '1rem',
+            fontWeight: '600',
+        },
+        '& .date': {
+            color: theme.palette.text.secondary,
+            fontSize: '0.875rem',
+            fontFamily: 'MainSans, sans-serif',
+        },
+    },
+    routeIcon: {
+        color: '#333333',
+        fontSize: '22px',
+    },
+    progressWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        marginTop: '8px',
+        width: '95%',
+        paddingLeft: '16px',
+        '@media (min-width: 1024px)': {
+            marginLeft: '0',
+        },
+    },
+    greenDot: {
+        width: '8px',
+        height: '8px',
+        backgroundColor: theme.palette.primary.main, // Replace with logoGreen
+        borderRadius: '50%',
+    },
+    greenLine: {
+        width: '75%',
+        height: '2px',
+        backgroundColor: theme.palette.primary.main, // Replace with logoGreen
+        '@media (min-width: 1024px)': {
+            width: '65%',
+        },
+        '@media (min-width: 768px)': {
+            width: '64%',
+        },
+    },
+    grayLine: {
+        width: '25%',
+        height: '2px',
+        backgroundColor: theme.custom.palette.newColors.grayDot,
+        '@media (min-width: 1024px)': {
+            width: '35%',
+        },
+        '@media (min-width: 768px)': {
+            width: '36%',
+        },
+    },
+    grayDot: {
+        width: '8px',
+        height: '8px',
+        backgroundColor: theme.custom.palette.newColors.grayDot,
+        borderRadius: '50%',
+    },
+    infoRowContainer: {
+        marginTop: '2rem',
+    },
+    infoRow: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderBottomWidth: '1px',
+        borderColor: theme.palette.secondary.light,
+        paddingTop: '8px',
+        paddingBottom: '8px',
+    },
+    lastInfoRow: {
+        borderBottom: 'none',
+    },
+    labelText: {
+        color: theme.palette.text.primary,
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '1rem',
+        fontWeight: '400',
+    },
+    valueText: {
+        color: theme.custom.palette.newColors.travelerModalGray,
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '1rem',
+        fontWeight: '400',
+    },
+}));
+
 const TravelerModal: FC = () => {
     const {openModal, closeModal} = useContext(ModalContext);
+
+    const classes = useStyles();
 
     const handleOpenModal = () => {
         openModal(
             <ModalContent>
-                <div className="bg-white rounded-[24px] w-[100%] tablet:w-[840px] py-8 px-8 flex flex-col">
-                    <div className="flex justify-between">
+                <div className={classes.container}>
+                    <div className={classes.header}>
                         <div>
-                            <h2 className="font-boldQuick text-xl text-textColor">Toys money Krakow-Minsk</h2>
-                            <p className="text-lineGray font-mainSans">Small box with toys</p>
+                            <h2 className={classes.title}>Toys money Krakow-Minsk</h2>
+                            <p className={classes.subTitle}>Small box with toys</p>
                         </div>
-                        <div onClick={closeModal} className="text-md2 text-lineGray mt-3 hover:text-[24px] duration-200">
+                        <div onClick={closeModal} className={classes.closeIcon}>
                             <IoClose />
                         </div>
                     </div>
 
-                    <div className="breakpoint:h-[280px] breakpoint:w-[380px] self-center">
-                        <img src={money} alt="" className="h-[100%] w-[100%] max-w-[100%] object-cover" />
+                    <div className={classes.imageWrapper}>
+                        <img src={money} alt="" className={classes.image} />
                     </div>
 
-                    <div className="flex items-center justify-between w-[80%] breakpoint:w-[65%] mt-2">
-                        <div className="flex flex-col items-center">
-                            <div className="text-textColor font-boldSans text-default">Krakov</div>
-                            <div className="text-lineGray text-sm font-mainSans">18.07.2023 </div>
+                    <div className={classes.routeWrapper}>
+                        <div className={classes.cityInfo}>
+                            <div className="cityName">Krakov</div>
+                            <div className="date">18.07.2023</div>
                         </div>
-                        <div className="text-textColor text-[22px]">
+                        <div className={classes.routeIcon}>
                             <IoIosSubway />
                         </div>
-                        <div className="flex flex-col items-center">
-                            <div className="text-textColor font-boldSans text-default">Minsk</div>
-                            <div className="text-lineGray text-sm font-mainSans">18.07.2023 </div>
+                        <div className={classes.cityInfo}>
+                            <div className="cityName">Minsk</div>
+                            <div className="date">18.07.2023</div>
                         </div>
-                    </div>
-                    <div className="flex ml-auto breakpoint:ml-0 mt-2 px-4 w-[95%] items-center gap-[2px]">
-                        <div className="w-[8px] h-[8px] bg-logoGreen rounded-round"></div>
-                        <div className="w-[72%] breakpoint:w-[65%] bg-logoGreen h-[2px]"></div>
-                        <div className="w-[8px] h-[8px] bg-logoGreen rounded-round"></div>
-                        <div className="w-[30%] breakpoint:w-[35%] bg-lineGray h-[2px]"></div>
-                        <div className="w-[8px] h-[8px] bg-lineGray rounded-round"></div>
                     </div>
 
-                    <div className="flex justify-between items-center border-b-[1px] border-solid border-[#EAEBEB] mt-6 py-2">
-                        <div className="text-textColor font-mainSans text-default">
-                            <LocalizedText label={{id: 'packageType', defaultMessage: 'Package Type'}} />
-                            Package type
-                        </div>
-                        <div className="text-lineGray text-default font-mainSans">Military</div>
+                    <div className={classes.progressWrapper}>
+                        <div className={classes.greenDot}></div>
+                        <div className={classes.greenLine}></div>
+                        <div className={classes.greenDot}></div>
+                        <div className={classes.grayLine}></div>
+                        <div className={classes.grayDot}></div>
                     </div>
-                    <div className="flex justify-between items-center border-b-[1px] border-solid border-[#EAEBEB]  py-2">
-                        <div className="text-textColor font-mainSans text-default">
-                            <LocalizedText label={{id: 'overallDimensions', defaultMessage: 'Overall dimensions (cm)'}} />
+
+                    <div className={classes.infoRowContainer}>
+                        <div className={classes.infoRow}>
+                            <div className={classes.labelText}>
+                                <LocalizedText label={{id: 'packageType', defaultMessage: 'Package Type'}} />
+                            </div>
+                            <div className={classes.valueText}>Military</div>
                         </div>
-                        <div className="text-lineGray text-default font-mainSans">120 x 80 x 60</div>
-                    </div>
-                    <div className="flex justify-between items-center  py-2">
-                        <div className="text-textColor font-mainSans text-default">
-                            <LocalizedText label={{id: 'weight', defaultMessage: 'Weight (kg)'}} />
+                        <div className={classes.infoRow}>
+                            <div className={classes.labelText}>
+                                <LocalizedText label={{id: 'overallDimensions', defaultMessage: 'Overall dimensions (cm)'}} />
+                            </div>
+                            <div className={classes.valueText}>120 x 80 x 60</div>
                         </div>
-                        <div className="text-lineGray text-default font-mainSans">40</div>
+                        <div className={`${classes.infoRow} ${classes.lastInfoRow}`}>
+                            <div className={classes.labelText}>
+                                <LocalizedText label={{id: 'weight', defaultMessage: 'Weight (kg)'}} />
+                            </div>
+                            <div className={classes.valueText}>40</div>
+                        </div>
                     </div>
                 </div>
             </ModalContent>,

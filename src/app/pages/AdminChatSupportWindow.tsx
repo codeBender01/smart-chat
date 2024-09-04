@@ -13,6 +13,190 @@ import {useIntl} from 'react-intl';
 import logo from '../../common/assets/chatLogo.png';
 import profile2 from '../../common/assets/profile2.jpeg';
 
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
+
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    innerContainer: {
+        display: 'flex',
+        padding: '1rem',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        '@media (min-width: 850px)': {
+            display: 'none',
+        },
+    },
+    container: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        maxHeight: '90vh',
+        height: '90vh',
+        justifyContent: 'space-between',
+        paddingBottom: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+        [theme.breakpoints.up(850)]: {
+            backgroundColor: '#fff',
+            width: '100%',
+        },
+    },
+    backButton: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.5rem',
+        color: theme.palette.primary.main, // Replace with the value of logoGreen
+        fontSize: '1rem', // Replace with the value of text-default
+        cursor: 'pointer',
+        transition: 'opacity 0.2s',
+        fontFamily: 'Open Sans, sans-serif',
+        fontWeight: '700',
+        '&:hover': {
+            opacity: 0.85,
+        },
+        width: 'fit-content',
+    },
+    header: {
+        padding: '1rem',
+        borderBottomWidth: '1px',
+        borderColor: theme.custom.palette.newColors.adminChatBorderColor,
+        display: 'flex',
+        gap: '0.75rem',
+    },
+    logo: {
+        width: '50px',
+        height: '50px',
+        borderRadius: '50%',
+        backgroundPosition: 'top',
+        backgroundSize: 'cover',
+    },
+    title: {
+        color: theme.palette.text.primary,
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+        fontSize: '20px',
+    },
+    chatContainer: {
+        flex: 1,
+        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '0.75rem 1rem',
+        gap: '1.5rem',
+        zIndex: 10,
+    },
+    messageContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.5rem',
+        zIndex: 10,
+        padding: '32px',
+    },
+    messageWrapper: {
+        display: 'flex',
+        gap: '0.5rem',
+        alignItems: 'center',
+    },
+    logoIcon: {
+        width: '36px',
+        height: '36px',
+        borderRadius: '50%',
+        backgroundPosition: 'top',
+        backgroundSize: 'cover',
+    },
+    messageBubbleLeft: {
+        backgroundColor: theme.palette.secondary.contrastText, // Replace with the value of bg-activeChatGray
+        borderRadius: '10px',
+        borderBottomRightRadius: 0,
+        padding: '0.75rem 1rem',
+        fontFamily: 'Open Sans, sans-serif',
+        color: theme.palette.text.primary,
+    },
+    messageBubbleRight: {
+        backgroundColor: theme.palette.secondary.contrastText, // Replace with the value of bg-activeChatGray
+        borderRadius: '10px',
+        borderBottomLeftRadius: 0,
+        padding: '0.75rem 1rem',
+        fontFamily: 'Open Sans, sans-serif',
+        color: theme.palette.text.primary,
+    },
+    suggestionContainer: {
+        display: 'flex',
+        gap: '12px',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        marginTop: '1rem',
+    },
+    suggestionButton: {
+        color: theme.palette.text.primary,
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '1rem',
+        borderRadius: '0.5rem',
+        padding: '0.25rem 0.5rem',
+        cursor: 'pointer',
+        transition: 'opacity 0.2s',
+        width: 'fit-content',
+        '&:hover': {
+            opacity: 0.85,
+        },
+    },
+    chatInfoContainer: {
+        width: '80%',
+        '@media (min-width: 850px)': {
+            width: '60%',
+        },
+    },
+    suggestionsMessage: {
+        width: '80%',
+    },
+    senderMessage: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        alignSelf: 'flex-end',
+    },
+    inputContainer: {
+        padding: '16px 32px',
+    },
+    inputIcon: {
+        cursor: 'pointer',
+        transition: 'all 100ms',
+        '&:hover': {
+            opacity: 0.8,
+        },
+    },
+
+    chatInfoText: {
+        width: 'fit-content',
+        alignSelf: 'center',
+        padding: '4px 16px',
+    },
+    responseButtonContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: '24px',
+    },
+    responseButtonDivider: {
+        backgroundColor: theme.palette.text.secondary,
+        width: '1px',
+        height: '36.5px',
+    },
+
+    inputIconContainer: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+    },
+    starterText: {
+        width: '65%',
+        padding: theme.spacing(1, 2), // equivalent to px-4 py-1
+        alignSelf: 'center',
+        [theme.breakpoints.up(850)]: {
+            width: 'fit-content', // equivalent to w-fit
+        },
+    },
+}));
+
 const AdminChatSupportWindow: FC = () => {
     const [isMessageSent, setIsMessageSent] = useState(false);
     const [isConversationFinished, setIsConversationFinished] = useState(false);
@@ -21,6 +205,8 @@ const AdminChatSupportWindow: FC = () => {
 
     const navigate = useNavigate();
     const intl = useIntl();
+
+    const classes = useStyles();
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
         if (event.key === 'Enter') {
@@ -32,85 +218,66 @@ const AdminChatSupportWindow: FC = () => {
     };
 
     return (
-        <div className="w-[100%] breakpoint:w-[100%] flex flex-col max-h-[90vh] h-[90vh] justify-between pb-4 bg-paleGray breakpoint:bg-white">
-            <div className="flex breakpoint:hidden p-4 justify-between items-center">
-                <div
-                    onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit cursor-pointer duration-200 font-boldSans"
-                >
+        <div className={classes.container}>
+            <div className={classes.innerContainer}>
+                <div onClick={() => navigate(-1)} className={classes.backButton}>
                     <CgArrowLongLeft />
                     <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
                 </div>
             </div>
-            <div className="p-4 border-b-[1px] border-[#C6D7DA] flex gap-3">
+            <div className={classes.header}>
                 <div
-                    className="w-[50px] h-[50px] rounded-round"
+                    className={classes.logo}
                     style={{
                         backgroundImage: `url(${profile2})`,
                         backgroundPosition: 'top',
                         backgroundSize: 'cover',
                     }}
                 ></div>
-                <div className="text-textColor font-boldQuick text-md2">Alisa</div>
+                <div className={classes.title}>Alisa</div>
             </div>
 
-            <div
-                className={`flex-1 overflow-y-auto  flex flex-col py-6 px-4 gap-6 z-10 ${
-                    !isMessageSent ? 'justify-center items-center' : ''
-                }`}
-            >
+            <div className={`${classes.chatContainer} ${!isMessageSent ? 'justify-center items-center' : ''}`}>
                 {isMessageSent ? (
-                    <div className=" flex flex-col p-8 gap-6 z-10">
-                        <div className="w-fit self-center px-4 py-1">
+                    <div className={classes.messageContainer}>
+                        <div className={classes.chatInfoText}>
                             {isMessageSent ? <ChatInfoText text="Ask for help conversation started" bgColor="#EFFFF8" /> : null}
                         </div>
                         {isMessageSent ? (
                             <>
-                                <div className="flex gap-2 items-center">
+                                <div className={classes.messageWrapper}>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${profile2})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
                                         }}
                                     ></div>
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-br-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        I can’t get verified on the eelow.com
-                                    </div>
+                                    <div className={classes.messageBubbleRight}>I can’t get verified on the eelow.com</div>
                                 </div>
-                                <div className="flex gap-2 items-center self-end">
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        Got it! Give me a second please
-                                    </div>
+                                <div className={`${classes.messageWrapper} ${classes.senderMessage}`}>
+                                    <div className={classes.messageBubbleLeft}>Got it! Give me a second please</div>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${logo})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
                                         }}
                                     ></div>
                                 </div>
-                                <div className="flex gap-2 items-center self-end">
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        Done!
-                                    </div>
+                                <div className={`${classes.messageWrapper} ${classes.senderMessage}`}>
+                                    <div className={classes.messageBubbleLeft}>Done!</div>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${logo})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
                                         }}
                                     ></div>
                                 </div>
-                                <div className="flex gap-2 items-center self-end">
-                                    <div className="bg-activeChatGray rounded-t-[10px] flex flex-col items-center gap-4 rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
+                                <div className={`${classes.messageWrapper} ${classes.senderMessage}`}>
+                                    <div className={classes.messageBubbleLeft}>
                                         <div>
                                             <LocalizedText label={{id: 'weHelped', defaultMessage: 'We helped you with your question?'}} />
                                         </div>
-                                        <div className="flex items-center">
+                                        <div className={classes.responseButtonContainer}>
                                             <Button
                                                 sx={{
                                                     borderTopRightRadius: 0,
@@ -121,6 +288,7 @@ const AdminChatSupportWindow: FC = () => {
                                                     fontSize: 14,
                                                     padding: '6px 12px',
                                                     minWidth: '48px',
+                                                    textTransform: 'uppercase',
                                                     '&:hover': {
                                                         opacity: 0.85,
                                                         backgroundColor: '#E0E0E0',
@@ -131,7 +299,7 @@ const AdminChatSupportWindow: FC = () => {
                                             >
                                                 <LocalizedText label={{id: 'yes', defaultMessage: 'yes'}} />
                                             </Button>
-                                            <div className="w-[1px] h-[36.5px] bg-lineGray"></div>
+                                            <div className={classes.responseButtonDivider}></div>
                                             <Button
                                                 sx={{
                                                     borderTopLeftRadius: 0,
@@ -142,6 +310,8 @@ const AdminChatSupportWindow: FC = () => {
                                                     fontSize: 14,
                                                     padding: '6px 12px',
                                                     minWidth: '48px',
+                                                    textTransform: 'uppercase',
+
                                                     '&:hover': {
                                                         opacity: 0.85,
                                                         backgroundColor: '#E0E0E0',
@@ -154,11 +324,9 @@ const AdminChatSupportWindow: FC = () => {
                                         </div>
                                     </div>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${logo})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
                                         }}
                                     ></div>
                                 </div>
@@ -166,34 +334,30 @@ const AdminChatSupportWindow: FC = () => {
                         ) : null}
                         {messagesList.map(val => {
                             return (
-                                <div className="flex gap-2 items-center self-end">
-                                    <div className="bg-activeChatGray rounded-t-[10px] rounded-bl-[10px] px-3 py-2 font-mainSans text-textColor">
-                                        {val}
-                                    </div>
+                                <div className={classes.messageWrapper}>
+                                    <div className={classes.messageBubbleLeft}>{val}</div>
                                     <div
-                                        className="w-[36px] h-[36px] rounded-round"
+                                        className={classes.logoIcon}
                                         style={{
                                             backgroundImage: `url(${logo})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
                                         }}
                                     ></div>
                                 </div>
                             );
                         })}
 
-                        <div className="w-fit self-center px-4 py-1">
+                        <div className={classes.chatInfoText}>
                             {isConversationFinished ? <ChatInfoText text="askForHelp" bgColor="#EFFFF8" /> : null}
                         </div>
                     </div>
                 ) : (
-                    <div className="w-[65%] breakpoint:w-fit self-centert px-4 py-1 ">
+                    <div className={classes.starterText}>
                         <ChatInfoText text="startDialog" bgColor="#EEEEEE" />
                     </div>
                 )}
             </div>
 
-            <div className="px-4 pb-8">
+            <div className={classes.inputContainer}>
                 <TextField
                     value={textMessage}
                     onKeyDown={handleKeyDown}
@@ -231,19 +395,14 @@ const AdminChatSupportWindow: FC = () => {
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                <IoMdSend
-                                    onClick={() => setIsMessageSent(true)}
-                                    size={20}
-                                    color="#34434E"
-                                    className="cursor-pointer hover:opacity-80"
-                                />
+                                <IoMdSend onClick={() => setIsMessageSent(true)} size={20} color="#34434E" className={classes.inputIcon} />
                             </InputAdornment>
                         ),
                         startAdornment: (
                             <InputAdornment position="start">
-                                <div className="flex items-center gap-2">
-                                    <FaHand size={22} color="#34434E" className="cursor-pointer hover:opacity-80" />
-                                    <BsPaperclip size={22} color="#34434E" className="cursor-pointer hover:opacity-80" />
+                                <div className={classes.inputIconContainer}>
+                                    <FaHand size={22} color="#34434E" className={classes.inputIcon} />
+                                    <BsPaperclip size={22} color="#34434E" className={classes.inputIcon} />
                                 </div>
                             </InputAdornment>
                         ),

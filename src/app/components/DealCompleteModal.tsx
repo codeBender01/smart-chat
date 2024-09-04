@@ -6,24 +6,63 @@ import {useIntl} from 'react-intl';
 
 import {ModalContext} from '@components/modal/ModalProvider';
 import {ModalContent} from '@components/modal/ModalContent';
+import CustomButton from '@components/Button';
+
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
 
 interface DealCompletedModalProps {
     setIsDealApproved: Dispatch<SetStateAction<boolean>>;
 }
 
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        padding: '2rem',
+        minWidth: '514px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    heading: {
+        color: theme.palette.text.primary,
+        fontSize: '32px',
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+        width: '80%',
+        textAlign: 'center',
+    },
+    textMd: {
+        color: theme.palette.text.primary,
+        fontFamily: 'OpenReg, sans-serif',
+        fontSize: '18px',
+        marginTop: '2rem',
+    },
+    mt8: {
+        marginTop: '2rem',
+    },
+    buttonGroup: {
+        marginTop: '2rem',
+        display: 'flex',
+        alignSelf: 'flex-end',
+        gap: '0.5rem',
+    },
+}));
+
 const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) => {
     const intl = useIntl();
+
+    const classes = useStyles();
 
     const {openModal, closeModal} = useContext(ModalContext);
 
     const handleOpenModal = () => {
         openModal(
             <ModalContent>
-                <div className="p-8 min-w-[514px] flex flex-col items-center">
-                    <h2 className="text-textColor text-xl font-boldQuick w-[80%] text-center">
+                <div className={classes.container}>
+                    <h2 className={classes.heading}>
                         <LocalizedText label={{id: 'dealCompleted', defaultMessage: 'The deal has been completed'}} />
                     </h2>
-                    <div className="text-[#49454F] font-mainSans text-md mt-8">
+                    <div className={classes.textMd}>
                         <LocalizedText label={{id: 'rateACustomer', defaultMessage: 'Rate a customer/traveller'}} />
                     </div>
                     <Rating
@@ -35,8 +74,8 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                             marginTop: '18px',
                         }}
                     />
-                    <div className="text-[#49454F] font-mainSans text-md mt-8">
-                        <LocalizedText label={{id: 'leaveFeedback', defaultMessage: 'Leave a feedback'}} />{' '}
+                    <div className={classes.textMd}>
+                        <LocalizedText label={{id: 'leaveFeedback', defaultMessage: 'Leave feedback'}} />
                     </div>
                     <FormControl
                         sx={{
@@ -45,15 +84,12 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                                 {
                                     borderColor: '#0000003B',
                                 },
-
                             '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
                                 borderColor: '#0000003B',
                             },
-
                             '& .MuiInputLabel-formControl': {
                                 fontFamily: 'OpenReg',
                                 color: '#303030',
-
                                 '&.Mui-focused': {
                                     color: '#303030',
                                 },
@@ -75,69 +111,27 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                                     paddingBottom: 0,
                                     paddingRight: 0,
                                 },
-
                                 '& .MuiInputBase-input': {
                                     resize: 'both',
                                     overflow: 'auto',
                                 },
-
                                 '& textarea:focus': {
                                     boxShadow: 'none',
                                     borderColor: '#0000003B',
                                 },
-
                                 '& fieldset': {
                                     borderColor: '#0000003B',
                                 },
                             }}
                         />
                     </FormControl>
-
-                    <div className="mt-8 flex self-end gap-2">
-                        <Button
-                            variant={'contained'}
-                            disableElevation
-                            disableRipple
-                            sx={{
-                                bgcolor: 'white',
-                                color: '#A9A9A9',
-                                border: '1px solid #A9A9A9',
-                                borderRadius: '20px',
-                                width: '88px',
-                                textTransform: 'none',
-                                fontFamily: 'OpenReg',
-                                fontSize: '16px',
-                                '&:hover': {
-                                    bgcolor: 'white',
-                                    opacity: 0.8,
-                                },
-                            }}
-                            onClick={closeModal}
-                        >
+                    <div className={classes.buttonGroup}>
+                        <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
                             <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
-                        </Button>
-                        <Button
-                            variant={'contained'}
-                            disableElevation
-                            disableRipple
-                            sx={{
-                                bgcolor: '#15C370',
-                                color: '#fff',
-                                borderRadius: '20px',
-                                width: '88px',
-                                textTransform: 'none',
-                                fontFamily: 'OpenReg',
-                                fontSize: '16px',
-
-                                '&:hover': {
-                                    bgcolor: '#15C370',
-                                    opacity: 0.8,
-                                },
-                            }}
-                            onClick={closeModal}
-                        >
+                        </CustomButton>
+                        <CustomButton closeModal={closeModal} width="88px" bgcolor="#15C370" color="#fff" borderColor="transparent">
                             <LocalizedText label={{id: 'send', defaultMessage: 'Send'}} />
-                        </Button>
+                        </CustomButton>
                     </div>
                 </div>
             </ModalContent>
@@ -145,11 +139,13 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
             true;
     };
 
+    console.log('fuck');
+
     return (
         <Button
             variant="contained"
             sx={{
-                zIndex: 1,
+                zIndex: 5,
                 backgroundColor: '#15C370',
                 fontFamily: 'OpenReg',
                 fontSize: 16,

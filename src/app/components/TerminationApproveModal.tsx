@@ -1,45 +1,95 @@
 import {FC, useContext, useState} from 'react';
-import {Button, createTheme, Modal, ThemeProvider} from '@mui/material';
+import {Button} from '@mui/material';
 
 import LocalizedText from '@components/localize/LocalizedText';
 
 import {ModalContext} from '@components/modal/ModalProvider';
 import {ModalContent} from '@components/modal/ModalContent';
+import CustomButton from '@components/Button';
+
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
+
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        padding: '2rem',
+        '@media (min-width: 768px)': {
+            minWidth: '514px',
+        },
+        maxWidth: '514px',
+    },
+    deactivatedContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    deactivatedText: {
+        fontSize: '1.25rem',
+        color: theme.palette.text.primary, // Replace with the exact value of textColor
+        fontFamily: 'Quicksand, sans-serif',
+        textAlign: 'center',
+        fontWeight: '700',
+    },
+    defaultText: {
+        fontSize: '1rem',
+        color: theme.palette.text.secondary, // Replace with the exact value of lineGray
+        fontFamily: 'Open Sans, sans-serif',
+        marginTop: '1rem',
+    },
+    mainText: {
+        fontSize: '2rem',
+        color: theme.palette.text.primary, // Replace with the exact value of textColor
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+    },
+    buttonContainer: {
+        marginTop: '1.5rem',
+        display: 'flex',
+        justifyContent: 'flex-end',
+        gap: '0.5rem',
+        width: '100%',
+    },
+}));
 
 const TerminationApproveModal: FC = () => {
     const [isDeactivated, setIsDeactivated] = useState(false);
 
     const {openModal, closeModal} = useContext(ModalContext);
 
+    const classes = useStyles();
+
     const handleOpenModal = () => {
         openModal(
             <ModalContent>
-                <div className="p-8 tablet:min-w-[514px] max-w-[514px]">
+                <div className={classes.container}>
                     {isDeactivated ? (
-                        <div className="flex flex-col items-center">
-                            <div className="text-xl text-textColor font-boldQuick text-center">
+                        <div className={classes.deactivatedContainer}>
+                            <div className={classes.deactivatedText}>
                                 <LocalizedText label={{id: 'deactivated', defaultMessage: 'Your account has been deactivated'}} />
                             </div>
-                            <ThemeProvider theme={emailInputTheme}>
-                                <Button
-                                    sx={{
+                            <Button
+                                sx={{
+                                    bgcolor: '#15C370',
+                                    color: '#fff',
+                                    marginTop: 2,
+                                    borderRadius: '20px',
+                                    textTransform: 'none',
+                                    fontFamily: 'OpenReg',
+                                    fontSize: '16px',
+
+                                    '&:hover': {
                                         bgcolor: '#15C370',
-                                        color: '#fff',
-                                        marginTop: 2,
-                                        '&:hover': {
-                                            bgcolor: '#15C370',
-                                            opacity: 0.8,
-                                        },
-                                    }}
-                                    onClick={closeModal}
-                                >
-                                    <LocalizedText label={{id: 'goToMain', defaultMessage: 'Go to Main page'}} />
-                                </Button>
-                            </ThemeProvider>
+                                        opacity: 0.8,
+                                    },
+                                }}
+                                onClick={closeModal}
+                            >
+                                <LocalizedText label={{id: 'goToMain', defaultMessage: 'Go to Main page'}} />
+                            </Button>
                         </div>
                     ) : (
                         <div>
-                            <div className="text-xl text-textColor font-boldQuick">
+                            <div className={classes.mainText}>
                                 <LocalizedText
                                     label={{
                                         id: 'areYouSureDeactivate',
@@ -47,43 +97,18 @@ const TerminationApproveModal: FC = () => {
                                     }}
                                 />
                             </div>
-                            <p className="text-lineGray text-default font-mainSans mt-4">
+                            <p className={classes.defaultText}>
                                 <LocalizedText label={{id: 'youWontBeAble', defaultMessage: "You won't be able to recover your account"}} />
                             </p>
 
-                            <ThemeProvider theme={emailInputTheme}>
-                                <div className="mt-6 flex justify-end gap-2 w-[100%]">
-                                    <Button
-                                        sx={{
-                                            bgcolor: '#15C370',
-                                            color: '#fff',
-                                            '&:hover': {
-                                                bgcolor: '#15C370',
-                                                opacity: 0.8,
-                                            },
-                                        }}
-                                        onClick={closeModal}
-                                    >
-                                        <LocalizedText label={{id: 'keepAccount', defaultMessage: ' Keep my account'}} />
-                                    </Button>
-                                    <Button
-                                        sx={{
-                                            bgcolor: 'white',
-                                            color: '#A9A9A9',
-                                            border: '1px solid #A9A9A9',
-                                            '&:hover': {
-                                                bgcolor: 'white',
-                                                opacity: 0.8,
-                                            },
-                                        }}
-                                        onClick={() => {
-                                            setIsDeactivated(true);
-                                        }}
-                                    >
-                                        <LocalizedText label={{id: 'deactivate', defaultMessage: 'Deacivate'}} />
-                                    </Button>
-                                </div>
-                            </ThemeProvider>
+                            <div className={classes.buttonContainer}>
+                                <CustomButton closeModal={closeModal} width="auto" bgcolor="#15C370" color="#fff" borderColor="transparent">
+                                    <LocalizedText label={{id: 'keepAccount', defaultMessage: ' Keep my account'}} />
+                                </CustomButton>
+                                <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
+                                    <LocalizedText label={{id: 'deactivate', defaultMessage: 'Deacivate'}} />
+                                </CustomButton>
+                            </div>
                         </div>
                     )}
                 </div>
@@ -92,24 +117,6 @@ const TerminationApproveModal: FC = () => {
             true;
     };
 
-    const emailInputTheme = createTheme({
-        components: {
-            MuiButton: {
-                defaultProps: {
-                    variant: 'contained',
-                    disableElevation: true,
-                    disableRipple: true,
-                },
-                styleOverrides: {
-                    root: {
-                        borderRadius: '20px',
-                        textTransform: 'none',
-                        fontFamily: 'OpenReg',
-                    },
-                },
-            },
-        },
-    });
     return (
         <Button
             variant="outlined"

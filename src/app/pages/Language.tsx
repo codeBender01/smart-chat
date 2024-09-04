@@ -5,8 +5,11 @@ import {setLang} from '@store/languageSlice';
 
 import LocalizedText from '@components/localize/LocalizedText';
 import {Select} from '@components/select/Select';
+import CustomButton from '@components/Button';
 
 import {Locale} from 'src/common/style/theme';
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from 'src/common/style/theme';
 
 const reasons = [
     {
@@ -27,10 +30,55 @@ const reasons = [
     },
 ];
 
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        width: '100%',
+        minWidth: '360px',
+        '@media (min-width: 768px)': {
+            // md:w-[35%]
+            width: '35%',
+        },
+    },
+    title: {
+        marginTop: '32px', // mt-8
+        display: 'block',
+        fontSize: '32px', // text-xl
+        color: theme.palette.text.primary, // textColor
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+        '@media (min-width: 768px)': {
+            // md:hidden
+            display: 'none',
+        },
+    },
+    description: {
+        color: theme.palette.text.secondary,
+        fontFamily: 'Open Sans, sans-serif', // font-mainSans
+        marginBottom: '32px', // mb-8
+        fontSize: '1rem', // text-default
+        '@media (min-width: 620px)': {
+            // min-[620px]:mb-8
+            marginBottom: '32px',
+        },
+    },
+    formContainer: {
+        minWidth: '360px',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px', // gap-4
+        '@media (min-width: 768px)': {
+            // md:w-[360px]
+            width: '360px',
+        },
+    },
+}));
+
 const Language: FC = () => {
     const [language, setLanguage] = useState('en');
 
     const dispatch = useDispatch();
+    const classes = useStyles();
 
     const handleChange = (event: SelectChangeEvent) => {
         const newLang = event.target.value as Locale; // Type assertion
@@ -39,14 +87,14 @@ const Language: FC = () => {
     };
 
     return (
-        <div className="w-[100%] min-w-[360px] md:w-[35%]">
-            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
+        <div className={classes.container}>
+            <div className={classes.title}>
                 <LocalizedText label={{id: 'language', defaultMessage: 'Language'}} />
             </div>
-            <p className="text-lineGray font-mainSans mb-8 text-default min-[620px]:mb-8">
+            <p className={classes.description}>
                 <LocalizedText label={{id: 'change', defaultMessage: 'You can change your {prop}'}} labelParams={{prop: 'language'}} />
             </p>
-            <div className="min-w-[360px] md:w-[360px] w-[100%] flex flex-col gap-4">
+            <div className={classes.formContainer}>
                 <FormControl
                     sx={{
                         marginTop: 2,
@@ -54,7 +102,6 @@ const Language: FC = () => {
                             {
                                 borderColor: '#0000003B !important',
                             },
-
                         '& .css-s8ydqt-MuiButtonBase-root-MuiMenuItem-root': {
                             padding: '16px 24px',
                         },
@@ -71,33 +118,17 @@ const Language: FC = () => {
                             padding: '0 12px',
                             fontSize: '16px',
                             maxHeight: '400px',
-
                             '& input': {
                                 backgroundColor: 'red',
                             },
                         }}
-                    ></Select>
+                    />
                 </FormControl>
-                <Button
-                    disableFocusRipple
-                    disableElevation
-                    variant="contained"
-                    sx={{
-                        bgcolor: '#15C370',
-                        color: '#fff',
-                        width: '110px',
-                        alignSelf: 'flex-end',
-                        borderRadius: '20px',
-                        textTransform: 'none',
-                        fontFamily: 'OpenReg',
-                        '&:hover': {
-                            bgcolor: '#15C370',
-                            opacity: 0.8,
-                        },
-                    }}
-                >
-                    <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
-                </Button>
+                <div className="self-end">
+                    <CustomButton closeModal={() => {}} width="110px" bgcolor="#15C370" color="#fff" borderColor="transparent">
+                        <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
+                    </CustomButton>
+                </div>
             </div>
         </div>
     );

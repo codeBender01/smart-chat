@@ -5,17 +5,45 @@ import {Outlet} from 'react-router-dom';
 import Header from '@app/components/Header';
 import LocalizedText from '@components/localize/LocalizedText';
 
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
+
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        width: '100%',
+        height: '100vh',
+        backgroundColor: theme.palette.secondary.main,
+    },
+    innerContainer: {
+        padding: '2rem 24px',
+    },
+    goBackButton: {
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        color: theme.palette.primary.main,
+        fontSize: '24px',
+        width: 'fit-content',
+        cursor: 'pointer',
+        fontFamily: 'Open Sans, sans-serif',
+        fontWeight: '700',
+        transition: 'all 200ms',
+        '&:hover': {
+            opacity: 0.85,
+        },
+    },
+}));
+
 const SettingsMobileLayout: FC = () => {
     const navigate = useNavigate();
 
+    const classes = useStyles();
+
     return (
-        <div className="w-[100%] h-[100vh] bg-paleGray">
+        <div className={classes.container}>
             <Header />
-            <div className="py-8 px-6">
-                <div
-                    onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 text-logoGreen text-lg hover:opacity-85 w-fit p-2 cursor-pointer duration-200 font-boldSans"
-                >
+            <div className={classes.innerContainer}>
+                <div onClick={() => navigate(-1)} className={classes.goBackButton}>
                     <CgArrowLongLeft />
                     <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
                 </div>

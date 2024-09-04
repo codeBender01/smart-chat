@@ -10,6 +10,10 @@ import LocalizedText from '@components/localize/LocalizedText';
 
 import {ModalContext} from '@components/modal/ModalProvider';
 import {ModalContent} from '@components/modal/ModalContent';
+import CustomButton from '@components/Button';
+
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
 
 interface TerminationModalProps {
     isTerminated: boolean;
@@ -43,6 +47,63 @@ const reasons = [
     },
 ];
 
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        padding: '2rem',
+        maxWidth: '514px',
+        zIndex: 20,
+    },
+    title: {
+        fontSize: '32px',
+        color: theme.palette.text.primary, // Replace with the exact value of textColor
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+    },
+    formContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1rem',
+        width: '100%',
+    },
+    text: {
+        marginTop: '1.5rem',
+        fontSize: '1rem', // Replace with the exact value of text-default
+        color: theme.palette.text.secondary,
+        fontFamily: 'Lato, sans-serif',
+        fontWeight: 400, // Replace with the exact value of font-normal
+    },
+    link: {
+        color: theme.custom.palette.newColors.lightBlue,
+        textDecoration: 'underline',
+        cursor: 'pointer',
+        '&:hover': {
+            opacity: 0.85,
+            transition: 'opacity 0.1s',
+        },
+    },
+    buttonContainer: {
+        marginTop: '1.5rem',
+        display: 'flex',
+        justifyContent: 'flex-end',
+        gap: '0.5rem',
+        width: '100%',
+    },
+    alertBox: {
+        display: 'flex',
+        alignItems: 'center',
+        color: theme.palette.error.main,
+        fontSize: '1rem',
+        padding: '16px 24px',
+        fontFamily: 'Open Sans, sans-serif',
+        gap: '0.5rem',
+        cursor: 'pointer',
+        transition: 'opacity 0.2s',
+        '&:hover': {
+            opacity: 0.8,
+        },
+    },
+}));
+
 const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTerminated}) => {
     const [reason, setReason] = useState<string>('');
     const [isReasonSelected, setIsReasonSelected] = useState(false);
@@ -51,22 +112,23 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
 
     const intl = useIntl();
 
+    const classes = useStyles();
+
     const handleChange = (event: SelectChangeEvent<string>) => {
         setReason(event.target.value);
         setIsReasonSelected(true);
-        console.log('ejen amy');
     };
 
     const handleOpenModal = () => {
         openModal(
             <ModalContent>
-                <div className="p-8 max-w-[514px]">
-                    <div className="text-xl text-textColor font-boldQuick">
+                <div className={classes.container}>
+                    <div className={classes.title}>
                         <LocalizedText
                             label={{id: 'areYouSureDeal', defaultMessage: 'Are you sure that you want to terminate your deal?'}}
                         />
                     </div>
-                    <div className="flex flex-col gap-4 w-[100%]">
+                    <div className={classes.formContainer}>
                         <FormControl
                             sx={{
                                 marginTop: 2,
@@ -108,66 +170,30 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
                         </FormControl>
                     </div>
 
-                    <p className="mt-6 text-lineGray font-lato font-normal text-default">
+                    <p className={classes.text}>
                         <LocalizedText
                             label={{
                                 id: 'byClicking',
                                 defaultMessage: 'By clicking Terminate, you confirm that you have read, consent and agree to our',
                             }}
                         />
-                        <span className="text-linkBlue underline cursor-pointer hover:opacity-85 duration-100">
+                        <span className={classes.link}>
                             <LocalizedText label={{id: 'terms', defaultMessage: 'Terms and conditions'}} />
                         </span>{' '}
                         <LocalizedText label={{id: 'and', defaultMessage: 'and'}} />{' '}
-                        <span className="text-linkBlue underline cursor-pointer hover:opacity-85 duration-100">
+                        <span className={classes.link}>
                             <LocalizedText label={{id: 'cancellation', defaultMessage: 'Cancellation policy'}} />
                         </span>
                         .
                     </p>
 
-                    <div className="mt-6 flex justify-end gap-2 w-[100%]">
-                        <Button
-                            disableElevation
-                            disableRipple
-                            variant="contained"
-                            sx={{
-                                bgcolor: 'white',
-                                color: '#A9A9A9',
-                                border: '1px solid #A9A9A9',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                fontFamily: 'OpenReg',
-                                '&:hover': {
-                                    bgcolor: 'white',
-                                    opacity: 0.8,
-                                },
-                            }}
-                            onClick={closeModal}
-                        >
-                            <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
-                        </Button>
-                        <Button
-                            disableElevation
-                            disableRipple
-                            variant="contained"
-                            sx={{
-                                bgcolor: '#E2542C',
-                                color: '#fff',
-                                borderRadius: '20px',
-                                textTransform: 'none',
-                                fontFamily: 'OpenReg',
-                                '&:hover': {
-                                    bgcolor: '#E2542C',
-                                    opacity: 0.8,
-                                },
-                            }}
-                            onClick={() => {
-                                closeModal();
-                                setIsTerminated(!isTerminated);
-                            }}
-                        >
+                    <div className={classes.buttonContainer}>
+                        <CustomButton closeModal={closeModal} width="auto" bgcolor="#E2542C" color="#fff" borderColor="transparent">
                             <LocalizedText label={{id: 'terminate', defaultMessage: 'Terminate'}} />
-                        </Button>
+                        </CustomButton>
+                        <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
+                            <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
+                        </CustomButton>
                     </div>
                 </div>
             </ModalContent>
@@ -175,10 +201,7 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
     };
 
     return (
-        <div
-            onClick={handleOpenModal}
-            className="flex items-center text-alertRed text-default py-[16px] px-[24px] font-mainSans gap-2 hover:opacity-80 duration-200 cursor-pointer"
-        >
+        <div onClick={handleOpenModal} className={classes.alertBox}>
             <IoMdCloseCircleOutline />
             <LocalizedText label={{id: 'terminateDeal', defaultMessage: 'Terminate the deal'}} />
         </div>

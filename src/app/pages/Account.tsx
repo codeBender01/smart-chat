@@ -7,6 +7,9 @@ import {Select} from '@components/select/Select';
 
 import LocalizedText from '@components/localize/LocalizedText';
 
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
+
 const reasons = [
     {
         label: 'No longer needed',
@@ -46,6 +49,47 @@ const reasons = [
     },
 ];
 
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    container: {
+        width: '100%',
+        minWidth: '360px',
+        '@media (min-width: 768px)': {
+            width: '35%',
+        },
+    },
+    accountText: {
+        marginTop: '32px',
+        fontSize: '1.25rem',
+        color: theme.custom.palette.newColors.headerIconBorder, // Replace with the value of textColor
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+        '@media (min-width: 768px)': {
+            display: 'none',
+        },
+        display: 'block',
+    },
+    descriptionText: {
+        color: theme.custom.palette.newColors.grayDot, // Replace with the value of lineGray
+        fontFamily: 'Open Sans, sans-serif',
+        marginBottom: '32px',
+        fontSize: '1rem', // Replace with the value of text-default
+        '@media (min-width: 620px)': {
+            marginBottom: '32px',
+        },
+    },
+    formContainer: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        minWidth: '360px',
+        width: '100%',
+        marginTop: '16px',
+        '@media (min-width: 768px)': {
+            width: '360px',
+        },
+    },
+}));
+
 const Account: FC = () => {
     const [reason, setReason] = useState('');
     const [isReasonSelected, setIsReasonSelected] = useState(false);
@@ -53,17 +97,19 @@ const Account: FC = () => {
 
     const intl = useIntl();
 
+    const classes = useStyles();
+
     const handleChange = (event: SelectChangeEvent) => {
         setReason(event.target.value as string);
         setIsReasonSelected(true);
     };
 
     return (
-        <div className="w-[100%] min-w-[360px] md:w-[35%]">
-            <div className="mt-8 md:hidden block text-xl text-textColor font-boldQuick">
+        <div className={classes.container}>
+            <div className={classes.accountText}>
                 <LocalizedText label={{id: 'account', defaultMessage: 'Account'}} />
             </div>
-            <p className="text-lineGray font-mainSans mb-8 text-default min-[620px]:mb-8">
+            <p className={classes.descriptionText}>
                 <LocalizedText
                     label={{
                         id: 'ifYouNeed',
@@ -71,7 +117,7 @@ const Account: FC = () => {
                     }}
                 />
             </p>
-            <div className="flex flex-col gap-4 min-w-[360px] md:w-[360px] w-[100%] mt-4">
+            <div className={classes.formContainer}>
                 <FormControl
                     sx={{
                         marginTop: 2,
@@ -79,7 +125,6 @@ const Account: FC = () => {
                             {
                                 borderColor: '#0000003B !important ',
                             },
-
                         '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
                             borderColor: '#0000003B',
                         },
@@ -103,7 +148,6 @@ const Account: FC = () => {
                             '& input': {
                                 backgroundColor: 'red',
                             },
-
                             '& .MuiOutlinedInput-notchedOutline': {
                                 borderColor: '#0000003B',
                             },

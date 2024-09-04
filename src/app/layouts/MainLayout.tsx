@@ -5,6 +5,9 @@ import {Outlet} from 'react-router-dom';
 import Footer from '@app/components/Footer';
 import Header from '@app/components/Header';
 
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
+
 import LocalizedText from '@components/localize/LocalizedText';
 
 const links = [
@@ -62,6 +65,80 @@ const linksMobile = [
     },
 ];
 
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        backgroundColor: theme.palette.secondary.main,
+        overflowY: 'auto',
+    },
+    contentContainer: {
+        width: '90%',
+        margin: '0 auto',
+        marginTop: '2.5rem',
+        marginBottom: '2.5rem',
+        '@media (min-width: 950px)': {
+            width: '80%',
+        },
+    },
+    headerText: {
+        color: theme.palette.text.primary,
+        fontFamily: 'Quicksand, sans-serif',
+        fontWeight: '700',
+    },
+    lastUpdatedText: {
+        color: theme.palette.text.primary,
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '1rem',
+        marginTop: '1rem',
+    },
+    layoutContainer: {
+        display: 'flex',
+        marginTop: '2.5rem',
+        gap: '1rem',
+        justifyContent: 'space-between',
+    },
+    mobileLinks: {
+        width: '100%',
+    },
+    desktopLinks: {
+        width: '15%',
+        minWidth: '155px',
+    },
+    desktopContent: {
+        width: '80%',
+    },
+    hiddenContent: {
+        width: 0,
+        display: 'none',
+    },
+    link: {
+        padding: '1rem',
+        paddingTop: '0.75rem',
+        paddingBottom: '0.75rem',
+        cursor: 'pointer',
+        transition: 'background-color 0.2s, color 0.2s, border-left 0.2s',
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '18px',
+        borderBottomWidth: '1px',
+        borderColor: theme.palette.secondary.light,
+        color: '#242136',
+        '&:hover': {
+            backgroundColor: theme.custom.palette.newColors.lightGreen, // Replace with the value of lightGreen
+            color: theme.palette.primary.main, // Replace with the value of logoGreen
+            borderLeftWidth: '2px',
+            borderColor: theme.palette.primary.main,
+        },
+    },
+    activeLink: {
+        backgroundColor: theme.custom.palette.newColors.lightGreen,
+        color: theme.palette.primary.main,
+        borderLeftWidth: '2px',
+        borderColor: theme.palette.primary.main,
+    },
+}));
+
 const MainLayout: FC = () => {
     const isMobile = useMediaQuery({query: '(max-width: 768px)'});
 
@@ -69,57 +146,49 @@ const MainLayout: FC = () => {
 
     const navigate = useNavigate();
 
+    const classes = useStyles();
+
     return (
-        <div className="flex flex-col min-h-[100vh] bg-paleGray overflow-y-auto">
+        <div className={classes.root}>
             <Header />
-            <div className="w-[90%] min-[950px]:w-[80%] mx-auto my-10">
-                <h1 className={`${isMobile ? 'text-[36px]' : 'text-[48px]'} text-textColor font-boldQuick`}>
+            <div className={classes.contentContainer}>
+                <h1 className={`${isMobile ? 'text-[36px]' : 'text-[48px]'} ${classes.headerText}`}>
                     <LocalizedText label={{id: 'terms', defaultMessage: 'Terms and Conditions'}} />
                 </h1>
-                <p className="text-default font-mainSans text-textColor mt-4">
+                <p className={classes.lastUpdatedText}>
                     <LocalizedText label={{id: 'lastUpdated', defaultMessage: 'Last updated'}} />: 06.04.2023
                 </p>
-                <div className="flex mt-10 gap-4 justify-between">
+                <div className={classes.layoutContainer}>
                     {isMobile ? (
-                        <ul className="w-[100%]">
-                            {linksMobile.map(l => {
-                                return (
-                                    <li
-                                        onClick={() => {
-                                            navigate(l.path);
-                                            setActiveTab(l.label);
-                                        }}
-                                        className={` ${
-                                            l.label === activeTab
-                                                ? 'font-mainSans border-l-[2px] border-l-[#15C370] text-md bg-lightGreen text-logoGreen'
-                                                : 'font-mainSans text-[#242136] text-md border-b-[1px] border-[#EAEBEB]'
-                                        }  p-4 py-3 cursor-pointer hover:bg-lightGreen duration-200 hover:text-logoGreen hover:border-l-[2px] hover:border-l-[#15C370]`}
-                                    >
-                                        <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
-                                    </li>
-                                );
-                            })}
+                        <ul className={classes.mobileLinks}>
+                            {linksMobile.map(l => (
+                                <li
+                                    key={l.label}
+                                    onClick={() => {
+                                        navigate(l.path);
+                                        setActiveTab(l.label);
+                                    }}
+                                    className={`${classes.link} ${l.label === activeTab ? classes.activeLink : ''}`}
+                                >
+                                    <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
+                                </li>
+                            ))}
                         </ul>
                     ) : (
-                        <ul className="w-[15%] min-w-[155px]">
-                            {links.map(l => {
-                                return (
-                                    <li
-                                        onClick={() => setActiveTab(l.label)}
-                                        key={l.label}
-                                        className={` ${
-                                            l.label === activeTab
-                                                ? 'font-mainSans border-l-[2px] border-l-[#15C370] text-md bg-lightGreen text-logoGreen'
-                                                : 'font-mainSans text-[#242136] text-md border-b-[1px] border-[#EAEBEB]'
-                                        }  p-4 py-3 cursor-pointer hover:bg-lightGreen duration-200 hover:text-logoGreen hover:border-l-[2px] hover:border-l-[#15C370]`}
-                                    >
-                                        <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
-                                    </li>
-                                );
-                            })}
+                        <ul className={classes.desktopLinks}>
+                            {links.map(l => (
+                                <li
+                                    onClick={() => setActiveTab(l.label)}
+                                    key={l.label}
+                                    className={`${classes.link} ${l.label === activeTab ? classes.activeLink : ''}`}
+                                >
+                                    <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
+                                </li>
+                            ))}
                         </ul>
                     )}
-                    <div className={`${isMobile ? 'w-0 hidden' : 'w-[80%]'}`}>
+
+                    <div className={isMobile ? classes.hiddenContent : classes.desktopContent}>
                         <Outlet />
                     </div>
                 </div>

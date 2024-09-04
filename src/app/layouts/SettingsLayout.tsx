@@ -4,6 +4,8 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import {Outlet} from 'react-router-dom';
 import Header from '@app/components/Header';
 import LocalizedText from '@components/localize/LocalizedText';
+import {makeStyles} from '@mui/styles';
+import {CustomTheme} from '@style';
 
 const links = [
     {
@@ -61,65 +63,124 @@ const linksMobile = [
     },
 ];
 
+const useStyles = makeStyles((theme: CustomTheme) => ({
+    root: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    contentContainer: {
+        backgroundColor: theme.palette.secondary.main,
+        minHeight: '90vh',
+    },
+    headerContainer: {
+        width: '95%',
+        margin: '0 auto',
+        marginTop: '5rem',
+        '@media (min-width: 620px)': {
+            width: '55%',
+        },
+        '@media (min-width: 1024px)': {
+            width: '63%',
+        },
+        '@media (min-width: 1440px)': {
+            width: '60%',
+        },
+    },
+    headerText: {
+        fontSize: '48px',
+        color: theme.custom.palette.newColors.headerIconBorder,
+        fontFamily: 'Quicksand, sans-serif',
+        marginBottom: '1rem',
+        fontWeight: '700',
+    },
+    layoutContainer: {
+        display: 'flex',
+        gap: '1.5rem',
+        width: '95%',
+        margin: '0 auto',
+    },
+    mobileLinks: {
+        width: '100%',
+    },
+    desktopLinks: {
+        width: '15%',
+        minWidth: '155px',
+    },
+    desktopContent: {
+        width: '80%',
+    },
+    link: {
+        padding: '0.75rem 1rem',
+        cursor: 'pointer',
+        transition: 'background-color 0.2s, color 0.2s, border-left 0.2s',
+        fontFamily: 'Open Sans, sans-serif',
+        fontSize: '18px',
+        borderColor: theme.palette.secondary.light,
+        color: '#242136',
+        '&:hover': {
+            backgroundColor: theme.custom.palette.newColors.lightGreen,
+            color: theme.palette.primary.main,
+            borderLeftWidth: '2px',
+            borderColor: theme.palette.primary.main,
+        },
+    },
+    activeLink: {
+        backgroundColor: theme.custom.palette.newColors.lightGreen,
+        color: theme.palette.primary.main,
+        borderLeftWidth: '2px',
+        borderColor: theme.palette.primary.main,
+    },
+    hiddenContent: {
+        width: 0,
+        display: 'none',
+    },
+}));
+
 const SettingsLayout: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
     const isMobile = useMediaQuery({query: '(max-width: 620px)'});
 
+    const classes = useStyles();
+
     return (
-        <div className="flex flex-col">
+        <div className={classes.root}>
             <Header />
-            <div className="bg-paleGray min-h-[90vh]">
-                <div className="w-[95%] mx-auto mt-20 min-[620px]:w-[55%] breakpoint:w-[60%]  min-[1024px]:w-[63%]">
-                    <h1 className="text-[48px] text-textColor font-boldQuick mb-4">
+            <div className={classes.contentContainer}>
+                <div className={classes.headerContainer}>
+                    <h1 className={classes.headerText}>
                         <LocalizedText label={{id: 'headerSettings', defaultMessage: 'Settings'}} />
                     </h1>
                 </div>
-                <div className="flex gap-6 w-[95%] mx-auto">
+                <div className={classes.layoutContainer}>
                     {isMobile ? (
-                        <ul className="w-[100%]">
-                            {linksMobile.map(l => {
-                                return (
-                                    <li
-                                        onClick={() => {
-                                            navigate(l.path);
-                                        }}
-                                        key={l.label}
-                                        className={` ${
-                                            location.pathname.includes(l.path)
-                                                ? 'font-mainSans border-l-[2px] border-l-[#15C370] text-md bg-lightGreen text-logoGreen'
-                                                : 'font-mainSans text-[#242136] text-md border-b-[1px] border-[#EAEBEB]'
-                                        }  px-4 py-3 cursor-pointer hover:bg-lightGreen duration-200 hover:text-logoGreen hover:border-l-[2px] hover:border-l-[#15C370]`}
-                                    >
-                                        <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
-                                    </li>
-                                );
-                            })}
+                        <ul className={classes.mobileLinks}>
+                            {linksMobile.map(l => (
+                                <li
+                                    onClick={() => navigate(l.path)}
+                                    key={l.label}
+                                    className={`${classes.link} ${location.pathname.includes(l.path) ? classes.activeLink : ''}`}
+                                >
+                                    <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
+                                </li>
+                            ))}
                         </ul>
                     ) : (
-                        <ul className="w-[15%] min-w-[155px]">
-                            {links.map(l => {
-                                return (
-                                    <li
-                                        onClick={() => {
-                                            navigate(l.path);
-                                        }}
-                                        key={l.label}
-                                        className={` ${
-                                            location.pathname.includes(l.path)
-                                                ? 'font-mainSans border-l-[2px] border-l-[#15C370] text-md bg-lightGreen text-logoGreen'
-                                                : 'font-mainSans text-[#242136] text-md border-b-[1px] border-[#EAEBEB]'
-                                        }  px-4 py-3 cursor-pointer hover:bg-lightGreen duration-200 hover:text-logoGreen hover:border-l-[2px] hover:border-l-[#15C370]`}
-                                    >
-                                        <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
-                                    </li>
-                                );
-                            })}
+                        <ul className={classes.desktopLinks}>
+                            {links.map(l => (
+                                <li
+                                    onClick={() => navigate(l.path)}
+                                    key={l.label}
+                                    className={`${classes.link} ${location.pathname.includes(l.path) ? classes.activeLink : ''}`}
+                                >
+                                    <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
+                                </li>
+                            ))}
                         </ul>
                     )}
 
-                    <div className={`${isMobile ? 'w-0 hidden' : 'w-[80%]'}`}>
+                    <div className={isMobile ? classes.hiddenContent : classes.desktopContent}>
                         <Outlet />
                     </div>
                 </div>
