@@ -150,7 +150,7 @@ const SettingsLayout: FC = () => {
             <div className={classes.contentContainer}>
                 <div className={classes.headerContainer}>
                     <h1 className={classes.headerText}>
-                        <LocalizedText label={{id: 'headerSettings', defaultMessage: 'Settings'}} />
+                        <LocalizedText label={{id: 'headerSettings'}} />
                     </h1>
                 </div>
                 <div className={classes.layoutContainer}>
@@ -162,7 +162,7 @@ const SettingsLayout: FC = () => {
                                     key={l.label}
                                     className={`${classes.link} ${location.pathname.includes(l.path) ? classes.activeLink : ''}`}
                                 >
-                                    <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
+                                    <LocalizedText label={{id: l.value}} />
                                 </li>
                             ))}
                         </ul>
@@ -174,7 +174,7 @@ const SettingsLayout: FC = () => {
                                     key={l.label}
                                     className={`${classes.link} ${location.pathname.includes(l.path) ? classes.activeLink : ''}`}
                                 >
-                                    <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
+                                    <LocalizedText label={{id: l.value}} />
                                 </li>
                             ))}
                         </ul>

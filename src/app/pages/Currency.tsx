@@ -85,10 +85,10 @@ const Currency: FC = () => {
     return (
         <div className={classes.container}>
             <div className={classes.title}>
-                <LocalizedText label={{id: 'currency', defaultMessage: 'Currency'}} />
+                <LocalizedText label={{id: 'currency'}} />
             </div>
             <p className={classes.description}>
-                <LocalizedText label={{id: 'change', defaultMessage: 'You can change your currency'}} labelParams={{prop: 'currency'}} />
+                <LocalizedText label={{id: 'change'}} labelParams={{prop: 'currency'}} />
             </p>
             <div className={classes.formContainer}>
                 <FormControl
@@ -123,7 +123,7 @@ const Currency: FC = () => {
                 </FormControl>
                 <div className="self-end">
                     <CustomButton closeModal={() => {}} width="110px" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                        <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
+                        <LocalizedText label={{id: 'save'}} />
                     </CustomButton>
                 </div>
             </div>

@@ -35,10 +35,17 @@ function AppInner() {
 function App() {
     const lang = useTypedSelector(state => state.lang.lang);
 
-    useEffect(() => {}, [lang]);
+    useEffect(() => {
+        console.log(lang);
+    }, [lang]);
+
+    const messagesForProvider = Object.entries(messages[lang]).reduce((acc, [key, message]) => {
+        acc[key] = message.defaultMessage;
+        return acc;
+    }, {} as Record<string, string>);
 
     return (
-        <IntlProvider messages={messages[lang]} locale={lang}>
+        <IntlProvider messages={messagesForProvider} locale={lang}>
             <CustomThemeProvider locale={lang}>
                 <BrowserRouter>
                     <ModalProvider>

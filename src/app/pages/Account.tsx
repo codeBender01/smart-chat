@@ -107,13 +107,12 @@ const Account: FC = () => {
     return (
         <div className={classes.container}>
             <div className={classes.accountText}>
-                <LocalizedText label={{id: 'account', defaultMessage: 'Account'}} />
+                <LocalizedText label={{id: 'account'}} />
             </div>
             <p className={classes.descriptionText}>
                 <LocalizedText
                     label={{
                         id: 'ifYouNeed',
-                        defaultMessage: 'If you need to deactivate an account and you’re prompted to provide a reason',
                     }}
                 />
             </p>

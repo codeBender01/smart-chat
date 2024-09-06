@@ -287,7 +287,7 @@ const ChatSupportWindow: FC = () => {
             <div className={classes.innerContainer}>
                 <div onClick={() => navigate(-1)} className={classes.backButton}>
                     <CgArrowLongLeft />
-                    <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
+                    <LocalizedText label={{id: 'goBack'}} />
                 </div>
             </div>
             <div className={classes.header}>
@@ -314,7 +314,7 @@ const ChatSupportWindow: FC = () => {
                                 }}
                             ></div>
                             <div className={classes.messageBubbleRight}>
-                                <LocalizedText label={{id: 'canWeHelpYou', defaultMessage: 'Hello! How can we help you?'}} />
+                                <LocalizedText label={{id: 'canWeHelpYou'}} />
                             </div>
                         </div>
                         <div className={`${classes.messageWrapper} ${classes.suggestionsMessage}`}>
@@ -331,7 +331,6 @@ const ChatSupportWindow: FC = () => {
                                     <LocalizedText
                                         label={{
                                             id: 'selectTag',
-                                            defaultMessage: 'Select one of the tags that matches your request to make the process easier',
                                         }}
                                     />
                                 </p>
@@ -346,7 +345,7 @@ const ChatSupportWindow: FC = () => {
                                                 }}
                                                 className={classes.suggestionButton}
                                             >
-                                                <LocalizedText label={{id: sug.value, defaultMessage: sug.label}} />
+                                                <LocalizedText label={{id: sug.value}} />
                                             </div>
                                         );
                                     })}

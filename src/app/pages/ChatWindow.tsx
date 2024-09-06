@@ -381,7 +381,7 @@ const ChatWindow: FC = () => {
                 <div className={classes.innerContainer}>
                     <div onClick={() => navigate(-1)} className={classes.backButton}>
                         <CgArrowLongLeft />
-                        <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
+                        <LocalizedText label={{id: 'goBack'}} />
                     </div>
                     <div className={classes.statusText}>{isEmailSent ? 'awaiting handover' : 'pending confirmation'}</div>
                 </div>
@@ -413,9 +413,9 @@ const ChatWindow: FC = () => {
                     <div className={classes.leftHeaderContainer}>
                         <div className={classes.awaitingText}>
                             {isEmailSent ? (
-                                <LocalizedText label={{id: 'awaitingHandover', defaultMessage: 'awaiting handover'}} />
+                                <LocalizedText label={{id: 'awaitingHandover'}} />
                             ) : (
-                                <LocalizedText label={{id: 'awaitingHandover', defaultMessage: 'pending confirmation'}} />
+                                <LocalizedText label={{id: 'awaitingHandover'}} />
                             )}
                         </div>
                         <TravelerModal />
@@ -451,11 +451,11 @@ const ChatWindow: FC = () => {
                             >
                                 <div className={classes.optionItem}>
                                     <MdEdit />
-                                    <LocalizedText label={{id: 'editTheOffer', defaultMessage: 'Edit the offer'}} />
+                                    <LocalizedText label={{id: 'editTheOffer'}} />
                                 </div>
                                 <div className={`${classes.optionItem} ${classes.reportItem}`}>
                                     <IoIosInformationCircleOutline />
-                                    <LocalizedText label={{id: 'reportProblem', defaultMessage: 'Report a problem'}} />
+                                    <LocalizedText label={{id: 'reportProblem'}} />
                                 </div>
                                 <TerminationModal isTerminated={isTerminated} setIsTerminated={setIsTerminated} />
                             </div>
@@ -466,14 +466,12 @@ const ChatWindow: FC = () => {
                 <div className={classes.confirmContainer}>
                     <div className={classes.textContainer}>
                         <div className={classes.confirmTitle}>
-                            <LocalizedText label={{id: 'isTravelerRight', defaultMessage: 'Is this traveler right for you?'}} />
+                            <LocalizedText label={{id: 'isTravelerRight'}} />
                         </div>
                         <p className={classes.warningText}>
                             <LocalizedText
                                 label={{
                                     id: 'warningText',
-                                    defaultMessage:
-                                        "If you click on the 'yes' button, the deal status will change and you will not be able to select another traveler",
                                 }}
                             />
                         </p>
@@ -538,7 +536,6 @@ const ChatWindow: FC = () => {
                     }}
                     placeholder={intl.formatMessage({
                         id: 'writeMessage',
-                        defaultMessage: 'Write a message...',
                     })}
                     sx={{
                         borderRadius: '12px',

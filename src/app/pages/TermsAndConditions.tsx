@@ -41,7 +41,7 @@ const TermsAndConditions: FC = () => {
         <div className={classes.card}>
             <div>
                 <h3 className={classes.title}>
-                    <LocalizedText label={{id: 'welcome', defaultMessage: 'Welcome to Eelow'}} />
+                    <LocalizedText label={{id: 'welcome'}} />
                 </h3>
                 <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
@@ -58,7 +58,7 @@ const TermsAndConditions: FC = () => {
             </div>
             <div>
                 <h3 className={classes.title}>
-                    <LocalizedText label={{id: 'welcome', defaultMessage: 'Welcome to Eelow'}} />
+                    <LocalizedText label={{id: 'welcome'}} />
                 </h3>
                 <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
@@ -75,7 +75,7 @@ const TermsAndConditions: FC = () => {
             </div>
             <div>
                 <h3 className={classes.title}>
-                    <LocalizedText label={{id: 'welcome', defaultMessage: 'Welcome to Eelow'}} />
+                    <LocalizedText label={{id: 'welcome'}} />
                 </h3>
                 <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
@@ -92,7 +92,7 @@ const TermsAndConditions: FC = () => {
             </div>
             <div>
                 <h3 className={classes.title}>
-                    <LocalizedText label={{id: 'welcome', defaultMessage: 'Welcome to Eelow'}} />
+                    <LocalizedText label={{id: 'welcome'}} />
                 </h3>
                 <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae

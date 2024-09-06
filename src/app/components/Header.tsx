@@ -14,7 +14,7 @@ import profileImage from '../../common/assets/profileImage.jpeg';
 
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
-import {display, fontSize} from '@mui/system';
+import messages from 'src/common/lang';
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
     header: {
@@ -153,12 +153,12 @@ const Header: React.FC = () => {
                     <ul className={classes.linksList}>
                         <li className={classes.listItem} onClick={() => navigate('/settings/password')}>
                             <Typography variant="body2">
-                                <LocalizedText label={{id: 'headerSettings', defaultMessage: 'Settings'}} />
+                                <LocalizedText label={{id: 'headerSettings'}} />
                             </Typography>
                         </li>
                         <li className={classes.listItem} onClick={() => navigate('/about')}>
                             <Typography variant="body2">
-                                <LocalizedText label={{id: 'headerHowItWorks', defaultMessage: 'How it works'}} />
+                                <LocalizedText label={{id: 'headerHowItWorks'}} />
                             </Typography>
                         </li>
                     </ul>
@@ -168,7 +168,7 @@ const Header: React.FC = () => {
                     <div className={classes.alertMessage}>
                         <IoIosInformationCircleOutline size={22} />
                         <Typography variant="h5" color="#E2542C">
-                            <LocalizedText label={{id: 'dealHasBeenUpdated', defaultMessage: 'Your deal status has been updated'}} />
+                            <LocalizedText label={{id: 'dealHasBeenUpdated'}} />
                         </Typography>
                     </div>
                     <div className={classes.iconWrapper}>

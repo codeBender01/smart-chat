@@ -111,12 +111,12 @@ const Payments: FC = () => {
         <div className={classes.container}>
             <div className={classes.headerText}>
                 <Typography variant="h2">
-                    <LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />
+                    <LocalizedText label={{id: 'payments'}} />
                 </Typography>
             </div>
             <p className={classes.descriptionText}>
                 <Typography variant="body1">
-                    <LocalizedText label={{id: 'manage', defaultMessage: 'You can manage your payments and payouts'}} />
+                    <LocalizedText label={{id: 'manage'}} />
                 </Typography>
             </p>
             <Box sx={{marginTop: 2}}>
@@ -151,7 +151,7 @@ const Payments: FC = () => {
                             },
                         }}
                         disableRipple
-                        label={<LocalizedText label={{id: 'payments', defaultMessage: 'Payments'}} />}
+                        label={<LocalizedText label={{id: 'payments'}} />}
                         {...a11yProps(0)}
                     />
                     <Tab
@@ -167,7 +167,7 @@ const Payments: FC = () => {
                             },
                         }}
                         disableRipple
-                        label={<LocalizedText label={{id: 'payouts', defaultMessage: 'Payouts'}} />}
+                        label={<LocalizedText label={{id: 'payouts'}} />}
                         {...a11yProps(1)}
                     />
                 </Tabs>
@@ -175,10 +175,10 @@ const Payments: FC = () => {
             <CustomTabPanel value={tabIndex} index={0}>
                 <div className={classes.tabPanelContainer}>
                     <div className={classes.sectionTitle}>
-                        <LocalizedText label={{id: 'yourPayments', defaultMessage: 'Your payments'}} />
+                        <LocalizedText label={{id: 'yourPayments'}} />
                     </div>
                     <p className={classes.sectionDescription}>
-                        <LocalizedText label={{id: 'seeAllPayments', defaultMessage: 'See all your payments and refunds'}} />
+                        <LocalizedText label={{id: 'seeAllPayments'}} />
                     </p>
                     <Button
                         disableElevation
@@ -200,16 +200,16 @@ const Payments: FC = () => {
                         }}
                     >
                         <Typography variant="button">
-                            <LocalizedText label={{id: 'managePayments', defaultMessage: 'Manage payments'}} />
+                            <LocalizedText label={{id: 'managePayments'}} />
                         </Typography>
                     </Button>
                 </div>
                 <div className={`${classes.tabPanelContainer} mt-6`}>
                     <div className={classes.sectionTitle}>
-                        <LocalizedText label={{id: 'paymentsMethod', defaultMessage: 'Payments methods'}} />
+                        <LocalizedText label={{id: 'paymentsMethod'}} />
                     </div>
                     <p className={classes.sectionDescription}>
-                        <LocalizedText label={{id: 'addPayment', defaultMessage: 'Add and manage your payment methods'}} />
+                        <LocalizedText label={{id: 'addPayment'}} />
                     </p>
                     <Button
                         disableElevation
@@ -231,7 +231,7 @@ const Payments: FC = () => {
                         }}
                     >
                         <Typography variant="button">
-                            <LocalizedText label={{id: 'addPaymentBtn', defaultMessage: 'Add payment method'}} />
+                            <LocalizedText label={{id: 'addPaymentBtn'}} />
                         </Typography>
                     </Button>
                 </div>
@@ -239,17 +239,15 @@ const Payments: FC = () => {
             <CustomTabPanel value={tabIndex} index={1}>
                 <div className={classes.tabPanelContainerWide}>
                     <div className={classes.sectionTitle}>
-                        <LocalizedText label={{id: 'howReceivePayments', defaultMessage: 'How can you receive your payouts'}} />
+                        <LocalizedText label={{id: 'howReceivePayments'}} />
                     </div>
                     <p className={classes.sectionDescription}>
-                        <LocalizedText
-                            label={{id: 'addPayoutMethod', defaultMessage: 'Add payout method so we know where to send your money'}}
-                        />
+                        <LocalizedText label={{id: 'addPayoutMethod'}} />
                     </p>
 
                     <div className="self-end">
                         <CustomButton closeModal={() => {}} width="auto" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                            <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
+                            <LocalizedText label={{id: 'save'}} />
                         </CustomButton>
                     </div>
                 </div>

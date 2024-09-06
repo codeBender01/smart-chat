@@ -67,10 +67,10 @@ const Password: FC = () => {
     return (
         <div className={classes.container}>
             <div className={classes.headerText}>
-                <LocalizedText label={{id: 'password', defaultMessage: 'Password'}} />
+                <LocalizedText label={{id: 'password'}} />
             </div>
             <p className={classes.descriptionText}>
-                <LocalizedText label={{id: 'change', defaultMessage: 'You can change your {prop}'}} labelParams={{prop: 'password'}} />
+                <LocalizedText label={{id: 'change'}} labelParams={{prop: 'password'}} />
             </p>
             <div className={classes.formContainer}>
                 <FormControl
@@ -98,7 +98,7 @@ const Password: FC = () => {
                         }}
                         htmlFor="outlined-adornment-password"
                     >
-                        <LocalizedText label={{id: 'passwordType', defaultMessage: '{type} password'}} labelParams={{type: 'Old'}} />
+                        <LocalizedText label={{id: 'passwordType'}} labelParams={{type: 'Old'}} />
                     </InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
@@ -123,7 +123,7 @@ const Password: FC = () => {
                                 </IconButton>
                             </InputAdornment>
                         }
-                        label="Old password"
+                        label={<LocalizedText label={{id: 'passwordType'}} labelParams={{type: 'Old'}} />}
                     />
                 </FormControl>
                 <FormControl
@@ -151,7 +151,7 @@ const Password: FC = () => {
                         }}
                         htmlFor="outlined-adornment-password"
                     >
-                        <LocalizedText label={{id: 'passwordType', defaultMessage: '{type} password'}} labelParams={{type: 'New'}} />
+                        <LocalizedText label={{id: 'passwordType'}} labelParams={{type: 'New'}} />
                     </InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
@@ -176,7 +176,7 @@ const Password: FC = () => {
                                 </IconButton>
                             </InputAdornment>
                         }
-                        label="New password"
+                        label={<LocalizedText label={{id: 'passwordType'}} labelParams={{type: 'New'}} />}
                     />
                 </FormControl>
                 <FormControl
@@ -204,10 +204,7 @@ const Password: FC = () => {
                         }}
                         htmlFor="outlined-adornment-password"
                     >
-                        <LocalizedText
-                            label={{id: 'passwordType', defaultMessage: '{type} password'}}
-                            labelParams={{type: 'Confirm new'}}
-                        />
+                        <LocalizedText label={{id: 'passwordType'}} labelParams={{type: 'Confirm new'}} />
                     </InputLabel>
                     <OutlinedInput
                         id="outlined-adornment-password"
@@ -232,13 +229,13 @@ const Password: FC = () => {
                                 </IconButton>
                             </InputAdornment>
                         }
-                        label="Confirm new password"
+                        label={<LocalizedText label={{id: 'passwordType'}} labelParams={{type: 'Confirm new'}} />}
                     />
                 </FormControl>
 
                 <div className="self-end">
                     <CustomButton closeModal={() => {}} width="110px" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                        <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
+                        <LocalizedText label={{id: 'save'}} />
                     </CustomButton>
                 </div>
             </div>

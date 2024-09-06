@@ -119,7 +119,7 @@ const customers = [
     {
         id: 3,
         title: 'Low price',
-        value: 'Low price',
+        value: 'lowPrice',
     },
     {
         id: 4,

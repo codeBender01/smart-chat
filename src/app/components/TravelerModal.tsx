@@ -211,19 +211,19 @@ const TravelerModal: FC = () => {
                     <div className={classes.infoRowContainer}>
                         <div className={classes.infoRow}>
                             <div className={classes.labelText}>
-                                <LocalizedText label={{id: 'packageType', defaultMessage: 'Package Type'}} />
+                                <LocalizedText label={{id: 'packageType'}} />
                             </div>
                             <div className={classes.valueText}>Military</div>
                         </div>
                         <div className={classes.infoRow}>
                             <div className={classes.labelText}>
-                                <LocalizedText label={{id: 'overallDimensions', defaultMessage: 'Overall dimensions (cm)'}} />
+                                <LocalizedText label={{id: 'overallDimensions'}} />
                             </div>
                             <div className={classes.valueText}>120 x 80 x 60</div>
                         </div>
                         <div className={`${classes.infoRow} ${classes.lastInfoRow}`}>
                             <div className={classes.labelText}>
-                                <LocalizedText label={{id: 'weight', defaultMessage: 'Weight (kg)'}} />
+                                <LocalizedText label={{id: 'weight'}} />
                             </div>
                             <div className={classes.valueText}>40</div>
                         </div>

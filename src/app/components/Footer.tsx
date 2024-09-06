@@ -175,7 +175,7 @@ const Footer: FC = () => {
                             <img className={classes.logoImage} src={logo} alt="Eelow" />
                         </div>
                         <p className={classes.descriptionText}>
-                            <LocalizedText label={{id: 'weNeed', defaultMessage: 'We need each other'}} />
+                            <LocalizedText label={{id: 'weNeed'}} />
                         </p>
                         <div className={classes.languageSelector}>
                             <PiGlobe size={24} />
@@ -199,26 +199,24 @@ const Footer: FC = () => {
                     <div className={classes.linksContainer}>
                         <div className={classes.companyLinks}>
                             <div className={classes.sectionTitle}>
-                                <LocalizedText label={{id: 'company', defaultMessage: 'Company'}} />
+                                <LocalizedText label={{id: 'company'}} />
                             </div>
                             <ul>
                                 <li className={classes.linkItem}>
-                                    <LocalizedText label={{id: 'terms', defaultMessage: 'Terms and Conditions'}} />
+                                    <LocalizedText label={{id: 'terms'}} />
                                 </li>
                                 <li className={classes.linkItem}>
-                                    <LocalizedText label={{id: 'ourBlog', defaultMessage: 'Our blog'}} />
+                                    <LocalizedText label={{id: 'ourBlog'}} />
                                 </li>
                             </ul>
                         </div>
                         <div className={classes.companyLinks}>
                             <div className={classes.sectionTitle}>
-                                <LocalizedText label={{id: 'alwaysInTouch', defaultMessage: 'We are always in touch!'}} />
+                                <LocalizedText label={{id: 'alwaysInTouch'}} />
                             </div>
                             <ul>
                                 <li className={classes.noteText}>
-                                    <LocalizedText
-                                        label={{id: 'youCanWrite', defaultMessage: 'You can write us a letter or call the numbers'}}
-                                    />
+                                    <LocalizedText label={{id: 'youCanWrite'}} />
                                 </li>
                                 <li className={classes.contactInfo}>(123) 456 789</li>
                                 <li className={classes.contactInfo}>example@gmail.com</li>

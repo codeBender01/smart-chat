@@ -42,11 +42,11 @@ const ApproveModal: FC = () => {
                             margin: '32px 0',
                         }}
                     >
-                        <LocalizedText label={{id: 'inviteSend', defaultMessage: 'Invite has been sent'}} />
+                        <LocalizedText label={{id: 'inviteSend'}} />
                     </Typography>
 
                     <CustomButton closeModal={closeModal} width="30%" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                        <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
+                        <LocalizedText label={{id: 'goBack'}} />
                     </CustomButton>
                 </Box>
             </ModalContent>
@@ -74,7 +74,7 @@ const ApproveModal: FC = () => {
                 }}
                 onClick={handleOpenModal}
             >
-                <LocalizedText label={{id: 'send', defaultMessage: 'Send'}} />
+                <LocalizedText label={{id: 'send'}} />
             </Button>
         </div>
     );

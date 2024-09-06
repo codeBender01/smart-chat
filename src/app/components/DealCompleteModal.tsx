@@ -60,10 +60,10 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
             <ModalContent>
                 <div className={classes.container}>
                     <h2 className={classes.heading}>
-                        <LocalizedText label={{id: 'dealCompleted', defaultMessage: 'The deal has been completed'}} />
+                        <LocalizedText label={{id: 'dealCompleted'}} />
                     </h2>
                     <div className={classes.textMd}>
-                        <LocalizedText label={{id: 'rateACustomer', defaultMessage: 'Rate a customer/traveller'}} />
+                        <LocalizedText label={{id: 'rateACustomer'}} />
                     </div>
                     <Rating
                         name="half-rating"
@@ -75,7 +75,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                         }}
                     />
                     <div className={classes.textMd}>
-                        <LocalizedText label={{id: 'leaveFeedback', defaultMessage: 'Leave feedback'}} />
+                        <LocalizedText label={{id: 'leaveFeedback'}} />
                     </div>
                     <FormControl
                         sx={{
@@ -98,11 +98,10 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                         fullWidth
                     >
                         <TextField
-                            label={<LocalizedText label={{id: 'description', defaultMessage: 'Description'}} />}
+                            label={<LocalizedText label={{id: 'description'}} />}
                             multiline
                             placeholder={intl.formatMessage({
                                 id: 'typeHere',
-                                defaultMessage: 'Type your comment here',
                             })}
                             rows={3}
                             minRows={3}
@@ -127,10 +126,10 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                     </FormControl>
                     <div className={classes.buttonGroup}>
                         <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
-                            <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
+                            <LocalizedText label={{id: 'cancel'}} />
                         </CustomButton>
                         <CustomButton closeModal={closeModal} width="88px" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                            <LocalizedText label={{id: 'send', defaultMessage: 'Send'}} />
+                            <LocalizedText label={{id: 'send'}} />
                         </CustomButton>
                     </div>
                 </div>

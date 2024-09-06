@@ -80,7 +80,7 @@ const Language: FC = () => {
     const dispatch = useDispatch();
     const classes = useStyles();
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent<string | string[]>) => {
         const newLang = event.target.value as Locale; // Type assertion
         setLanguage(event.target.value as string);
         dispatch(setLang(newLang));
@@ -114,6 +114,7 @@ const Language: FC = () => {
                         id="demo-simple-select"
                         value={language}
                         options={reasons}
+                        onChange={handleChange}
                         sx={{
                             padding: '0 12px',
                             fontSize: '16px',

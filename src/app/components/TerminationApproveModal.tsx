@@ -65,7 +65,7 @@ const TerminationApproveModal: FC = () => {
                     {isDeactivated ? (
                         <div className={classes.deactivatedContainer}>
                             <div className={classes.deactivatedText}>
-                                <LocalizedText label={{id: 'deactivated', defaultMessage: 'Your account has been deactivated'}} />
+                                <LocalizedText label={{id: 'deactivated'}} />
                             </div>
                             <Button
                                 sx={{
@@ -84,7 +84,7 @@ const TerminationApproveModal: FC = () => {
                                 }}
                                 onClick={closeModal}
                             >
-                                <LocalizedText label={{id: 'goToMain', defaultMessage: 'Go to Main page'}} />
+                                <LocalizedText label={{id: 'goToMain'}} />
                             </Button>
                         </div>
                     ) : (
@@ -93,20 +93,19 @@ const TerminationApproveModal: FC = () => {
                                 <LocalizedText
                                     label={{
                                         id: 'areYouSureDeactivate',
-                                        defaultMessage: 'Are you sure that you want to deactivate your account?',
                                     }}
                                 />
                             </div>
                             <p className={classes.defaultText}>
-                                <LocalizedText label={{id: 'youWontBeAble', defaultMessage: "You won't be able to recover your account"}} />
+                                <LocalizedText label={{id: 'youWontBeAble'}} />
                             </p>
 
                             <div className={classes.buttonContainer}>
                                 <CustomButton closeModal={closeModal} width="auto" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                                    <LocalizedText label={{id: 'keepAccount', defaultMessage: ' Keep my account'}} />
+                                    <LocalizedText label={{id: 'keepAccount'}} />
                                 </CustomButton>
                                 <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
-                                    <LocalizedText label={{id: 'deactivate', defaultMessage: 'Deacivate'}} />
+                                    <LocalizedText label={{id: 'deactivate'}} />
                                 </CustomButton>
                             </div>
                         </div>
@@ -141,7 +140,7 @@ const TerminationApproveModal: FC = () => {
             }}
             onClick={handleOpenModal}
         >
-            <LocalizedText label={{id: 'deactivate', defaultMessage: 'Deactivate'}} />
+            <LocalizedText label={{id: 'deactivate'}} />
         </Button>
     );
 };

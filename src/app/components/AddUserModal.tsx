@@ -79,30 +79,23 @@ const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleR
                     <div className={classes.headerText}>
                         {isEmailSent ? (
                             <Typography variant="h2">
-                                <LocalizedText
-                                    label={{id: 'areYouSure', defaultMessage: 'Are you sure that you want to change the {name}?'}}
-                                    labelParams={{name: 'customer2'}}
-                                />
+                                <LocalizedText label={{id: 'areYouSure'}} labelParams={{name: 'customer2'}} />
                             </Typography>
                         ) : (
                             <Typography variant="h2">
-                                <LocalizedText
-                                    label={{id: 'addCustomer', defaultMessage: 'Add a {name}'}}
-                                    labelParams={{name: 'customer2'}}
-                                />
+                                <LocalizedText label={{id: 'addCustomer'}} labelParams={{name: 'customer2'}} />
                             </Typography>
                         )}
                     </div>
                     <div>
                         <Typography variant="subtitle1">
-                            <LocalizedText label={{id: 'enterEmail', defaultMessage: 'Enter user email and we will send invite-message'}} />
+                            <LocalizedText label={{id: 'enterEmail'}} />
                         </Typography>
                     </div>
                     <div className={classes.roleText}>
                         <LocalizedText
                             label={{
                                 id: 'customerRole',
-                                defaultMessage: '{name} role',
                             }}
                             labelParams={{name: 'Customer2'}}
                         />
@@ -125,7 +118,7 @@ const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleR
                                         control={<Radio />}
                                         checked={selectedRole === r.value}
                                         value={r.value}
-                                        label={<LocalizedText label={{id: r.value, defaultMessage: r.title}} />}
+                                        label={<LocalizedText label={{id: r.value}} />}
                                         key={r.id}
                                         sx={{
                                             '& .MuiTypography-root': {
@@ -159,7 +152,7 @@ const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleR
                     />
                     <div className={classes.buttonContainer}>
                         <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
-                            <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
+                            <LocalizedText label={{id: 'cancel'}} />
                         </CustomButton>
 
                         <ApproveModal />

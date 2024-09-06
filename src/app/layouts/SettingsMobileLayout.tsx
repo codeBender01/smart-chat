@@ -45,7 +45,7 @@ const SettingsMobileLayout: FC = () => {
             <div className={classes.innerContainer}>
                 <div onClick={() => navigate(-1)} className={classes.goBackButton}>
                     <CgArrowLongLeft />
-                    <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
+                    <LocalizedText label={{id: 'goBack'}} />
                 </div>
                 <Outlet />
             </div>

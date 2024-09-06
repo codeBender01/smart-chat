@@ -3,11 +3,13 @@ import messagesEn from './en';
 import messagesPl from './pl';
 import messagesUk from './uk';
 
-const messages = {
-    en: messagesEn,
-    ['uk-UA']: messagesUk,
-    ['be-BY']: messagesBe,
-    ['pl-PL']: messagesPl,
+import {Locale} from '../style/theme';
+
+const messages: Record<Locale, Record<string, {id: string; defaultMessage: string}>> = {
+    en: {...messagesEn},
+    'be-BY': {...messagesBe},
+    'uk-UA': {...messagesUk},
+    'pl-PL': {...messagesPl},
 };
 
 export default messages;

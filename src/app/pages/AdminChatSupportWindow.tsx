@@ -222,7 +222,7 @@ const AdminChatSupportWindow: FC = () => {
             <div className={classes.innerContainer}>
                 <div onClick={() => navigate(-1)} className={classes.backButton}>
                     <CgArrowLongLeft />
-                    <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
+                    <LocalizedText label={{id: 'goBack'}} />
                 </div>
             </div>
             <div className={classes.header}>
@@ -275,7 +275,7 @@ const AdminChatSupportWindow: FC = () => {
                                 <div className={`${classes.messageWrapper} ${classes.senderMessage}`}>
                                     <div className={classes.messageBubbleLeft}>
                                         <div>
-                                            <LocalizedText label={{id: 'weHelped', defaultMessage: 'We helped you with your question?'}} />
+                                            <LocalizedText label={{id: 'weHelped'}} />
                                         </div>
                                         <div className={classes.responseButtonContainer}>
                                             <Button
@@ -297,7 +297,7 @@ const AdminChatSupportWindow: FC = () => {
                                                 variant="contained"
                                                 onClick={() => setIsConversationFinished(true)}
                                             >
-                                                <LocalizedText label={{id: 'yes', defaultMessage: 'yes'}} />
+                                                <LocalizedText label={{id: 'yes'}} />
                                             </Button>
                                             <div className={classes.responseButtonDivider}></div>
                                             <Button
@@ -319,7 +319,7 @@ const AdminChatSupportWindow: FC = () => {
                                                 }}
                                                 variant="contained"
                                             >
-                                                <LocalizedText label={{id: 'no', defaultMessage: 'no'}} />
+                                                <LocalizedText label={{id: 'no'}} />
                                             </Button>
                                         </div>
                                     </div>
@@ -366,7 +366,6 @@ const AdminChatSupportWindow: FC = () => {
                     }}
                     placeholder={intl.formatMessage({
                         id: 'writeMessage',
-                        defaultMessage: 'Write a message...',
                     })}
                     sx={{
                         borderRadius: '12px',

@@ -153,10 +153,10 @@ const MainLayout: FC = () => {
             <Header />
             <div className={classes.contentContainer}>
                 <h1 className={`${isMobile ? 'text-[36px]' : 'text-[48px]'} ${classes.headerText}`}>
-                    <LocalizedText label={{id: 'terms', defaultMessage: 'Terms and Conditions'}} />
+                    <LocalizedText label={{id: 'terms'}} />
                 </h1>
                 <p className={classes.lastUpdatedText}>
-                    <LocalizedText label={{id: 'lastUpdated', defaultMessage: 'Last updated'}} />: 06.04.2023
+                    <LocalizedText label={{id: 'lastUpdated'}} />: 06.04.2023
                 </p>
                 <div className={classes.layoutContainer}>
                     {isMobile ? (
@@ -170,7 +170,7 @@ const MainLayout: FC = () => {
                                     }}
                                     className={`${classes.link} ${l.label === activeTab ? classes.activeLink : ''}`}
                                 >
-                                    <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
+                                    <LocalizedText label={{id: l.value}} />
                                 </li>
                             ))}
                         </ul>
@@ -182,7 +182,7 @@ const MainLayout: FC = () => {
                                     key={l.label}
                                     className={`${classes.link} ${l.label === activeTab ? classes.activeLink : ''}`}
                                 >
-                                    <LocalizedText label={{id: l.value, defaultMessage: l.label}} />
+                                    <LocalizedText label={{id: l.value}} />
                                 </li>
                             ))}
                         </ul>

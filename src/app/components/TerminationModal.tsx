@@ -124,9 +124,7 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
             <ModalContent>
                 <div className={classes.container}>
                     <div className={classes.title}>
-                        <LocalizedText
-                            label={{id: 'areYouSureDeal', defaultMessage: 'Are you sure that you want to terminate your deal?'}}
-                        />
+                        <LocalizedText label={{id: 'areYouSureDeal'}} />
                     </div>
                     <div className={classes.formContainer}>
                         <FormControl
@@ -164,7 +162,6 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
                             <TextField
                                 placeholder={intl.formatMessage({
                                     id: 'leaveReason',
-                                    defaultMessage: 'Leave your reason',
                                 })}
                             />
                         </FormControl>
@@ -174,25 +171,24 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
                         <LocalizedText
                             label={{
                                 id: 'byClicking',
-                                defaultMessage: 'By clicking Terminate, you confirm that you have read, consent and agree to our',
                             }}
                         />
                         <span className={classes.link}>
-                            <LocalizedText label={{id: 'terms', defaultMessage: 'Terms and conditions'}} />
+                            <LocalizedText label={{id: 'terms'}} />
                         </span>{' '}
                         <LocalizedText label={{id: 'and', defaultMessage: 'and'}} />{' '}
                         <span className={classes.link}>
-                            <LocalizedText label={{id: 'cancellation', defaultMessage: 'Cancellation policy'}} />
+                            <LocalizedText label={{id: 'cancellation'}} />
                         </span>
                         .
                     </p>
 
                     <div className={classes.buttonContainer}>
                         <CustomButton closeModal={closeModal} width="auto" bgcolor="#E2542C" color="#fff" borderColor="transparent">
-                            <LocalizedText label={{id: 'terminate', defaultMessage: 'Terminate'}} />
+                            <LocalizedText label={{id: 'terminate'}} />
                         </CustomButton>
                         <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
-                            <LocalizedText label={{id: 'cancel', defaultMessage: 'Cancel'}} />
+                            <LocalizedText label={{id: 'cancel'}} />
                         </CustomButton>
                     </div>
                 </div>
@@ -203,7 +199,7 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
     return (
         <div onClick={handleOpenModal} className={classes.alertBox}>
             <IoMdCloseCircleOutline />
-            <LocalizedText label={{id: 'terminateDeal', defaultMessage: 'Terminate the deal'}} />
+            <LocalizedText label={{id: 'terminateDeal'}} />
         </div>
     );
 };

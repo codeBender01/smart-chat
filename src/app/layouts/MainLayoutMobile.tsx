@@ -58,14 +58,14 @@ const MainLayoutMobile: FC = () => {
             <div className={classes.innerContainer}>
                 <div onClick={() => navigate(-1)} className={classes.goBackButton}>
                     <CgArrowLongLeft />
-                    <LocalizedText label={{id: 'goBack', defaultMessage: 'Back'}} />
+                    <LocalizedText label={{id: 'goBack'}} />
                 </div>
                 <div className={classes.termsText}>
-                    <LocalizedText label={{id: 'terms', defaultMessage: 'Terms and Conditions'}} />
+                    <LocalizedText label={{id: 'terms'}} />
                 </div>
                 <p className={classes.lastUpdatedText}>
                     <Typography variant="body1">
-                        <LocalizedText label={{id: 'lastUpdated', defaultMessage: 'Last updated'}} />: 06.04.2023
+                        <LocalizedText label={{id: 'lastUpdated'}} />: 06.04.2023
                     </Typography>
                 </p>
                 <Outlet />
