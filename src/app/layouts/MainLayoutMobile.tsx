@@ -5,6 +5,7 @@ import {Outlet} from 'react-router-dom';
 import Footer from '@app/components/Footer';
 import Header from '@app/components/Header';
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 
 import {Typography} from '@mui/material';
 
@@ -47,6 +48,21 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    lastUpdated: {
+        id: 'MainLayoutMobile_lastUpdated',
+        defaultMessage: 'Last updated',
+    },
+    terms: {
+        id: 'MainLayoutMobile_terms',
+        defaultMessage: 'Terms and Conditions',
+    },
+    goBack: {
+        id: 'MainLayoutMobile_goBack',
+        defaultMessage: 'Back',
+    },
+});
+
 const MainLayoutMobile: FC = () => {
     const navigate = useNavigate();
 
@@ -58,14 +74,14 @@ const MainLayoutMobile: FC = () => {
             <div className={classes.innerContainer}>
                 <div onClick={() => navigate(-1)} className={classes.goBackButton}>
                     <CgArrowLongLeft />
-                    <LocalizedText label={{id: 'goBack'}} />
+                    <LocalizedText label={localized.goBack} />
                 </div>
                 <div className={classes.termsText}>
-                    <LocalizedText label={{id: 'terms'}} />
+                    <LocalizedText label={localized.terms} />
                 </div>
                 <p className={classes.lastUpdatedText}>
                     <Typography variant="body1">
-                        <LocalizedText label={{id: 'lastUpdated'}} />: 06.04.2023
+                        <LocalizedText label={localized.lastUpdated} />: 06.04.2023
                     </Typography>
                 </p>
                 <Outlet />

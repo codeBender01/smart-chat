@@ -1,6 +1,8 @@
-import React, {Dispatch, FC, SetStateAction, useContext, useState, ChangeEvent} from 'react';
-import {Button, FormControl, FormControlLabel, Radio, RadioGroup, TextField} from '@mui/material';
+import {FC, useContext, ChangeEvent} from 'react';
+import {FormControl, FormControlLabel, Radio, RadioGroup, TextField} from '@mui/material';
 import Typography from '@mui/material/Typography';
+
+import {defineMessages} from 'react-intl';
 
 import ApproveModal from './ApproveModal';
 
@@ -34,6 +36,37 @@ const roles = [
         value: 'parcelSender',
     },
 ];
+
+const localized = defineMessages({
+    areYouSure: {
+        id: 'AddUserModal_areYouSure',
+        defaultMessage: 'Are you sure that you want to change the {name}?',
+    },
+    addCustomer: {
+        id: 'AddUserModal_addCustomer',
+        defaultMessage: 'Add a {name}',
+    },
+    enterEmail: {
+        id: 'AddUserModal_enterEmail',
+        defaultMessage: 'Enter user email and we will send invite-message',
+    },
+    cancel: {
+        id: 'AddUserModal_cancel',
+        defaultMessage: 'Cancel',
+    },
+    parcelReceiver: {
+        id: 'AddUserModal_parcelReceiver',
+        defaultMessage: 'Parcel receiver',
+    },
+    parcelSender: {
+        id: 'AddUserModal_parcelSender',
+        defaultMessage: 'Parcel sender',
+    },
+    customerRole: {
+        id: 'AddUserModal_customerRole',
+        defaultMessage: '{name} role',
+    },
+});
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
     container: {
@@ -79,37 +112,32 @@ const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleR
                     <div className={classes.headerText}>
                         {isEmailSent ? (
                             <Typography variant="h2">
-                                <LocalizedText label={{id: 'areYouSure'}} labelParams={{name: 'customer2'}} />
+                                <LocalizedText label={localized.areYouSure} labelParams={{name: 'customer2'}} />
                             </Typography>
                         ) : (
                             <Typography variant="h2">
-                                <LocalizedText label={{id: 'addCustomer'}} labelParams={{name: 'customer2'}} />
+                                <LocalizedText label={localized.addCustomer} labelParams={{name: 'customer2'}} />
                             </Typography>
                         )}
                     </div>
                     <div>
                         <Typography variant="subtitle1">
-                            <LocalizedText label={{id: 'enterEmail'}} />
+                            <LocalizedText label={localized.enterEmail} />
                         </Typography>
                     </div>
                     <div className={classes.roleText}>
-                        <LocalizedText
-                            label={{
-                                id: 'customerRole',
-                            }}
-                            labelParams={{name: 'Customer2'}}
-                        />
+                        <LocalizedText label={localized.customerRole} labelParams={{name: 'Customer2'}} />
                     </div>
                     <FormControl>
                         <RadioGroup
                             aria-labelledby="demo-radio-buttons-group-label"
                             name="radio-buttons-group"
                             onChange={handleRoleSelect}
-                            sx={{
+                            sx={theme => ({
                                 '& .Mui-checked': {
-                                    color: '#15C370 !important',
+                                    color: theme.palette.primary.main,
                                 },
-                            }}
+                            })}
                             value={selectedRole}
                         >
                             {roles.map(r => {
@@ -118,13 +146,13 @@ const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleR
                                         control={<Radio />}
                                         checked={selectedRole === r.value}
                                         value={r.value}
-                                        label={<LocalizedText label={{id: r.value}} />}
+                                        label={<LocalizedText label={localized[r.value as keyof typeof localized]} />}
                                         key={r.id}
-                                        sx={{
+                                        sx={theme => ({
                                             '& .MuiTypography-root': {
-                                                color: r.value === selectedRole ? '#15C370' : '#838383',
+                                                color: r.value === selectedRole ? theme.palette.primary.main : theme.palette.text.secondary,
                                             },
-                                        }}
+                                        })}
                                     />
                                 );
                             })}
@@ -152,7 +180,7 @@ const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleR
                     />
                     <div className={classes.buttonContainer}>
                         <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
-                            <LocalizedText label={{id: 'cancel'}} />
+                            <LocalizedText label={localized.cancel} />
                         </CustomButton>
 
                         <ApproveModal />

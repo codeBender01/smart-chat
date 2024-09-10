@@ -7,8 +7,9 @@ import {useNavigate} from 'react-router-dom';
 import ChatInfoText from '@app/components/ChatInfoText';
 import {Button, InputAdornment, TextField} from '@mui/material';
 import LocalizedText from '@components/localize/LocalizedText';
+defineMessages;
 
-import {useIntl} from 'react-intl';
+import {defineMessages, useIntl} from 'react-intl';
 
 import logo from '../../common/assets/chatLogo.png';
 import profile2 from '../../common/assets/profile2.jpeg';
@@ -197,6 +198,37 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    weHelped: {
+        id: 'AdminChatSupportWindow_weHelped',
+        defaultMessage: 'We helped you with your question?',
+    },
+    yes: {
+        id: 'AdminChatSupportWindow_yes',
+        defaultMessage: 'yes',
+    },
+    no: {
+        id: 'AdminChatSupportWindow_no',
+        defaultMessage: 'no',
+    },
+    askForHelpFinished: {
+        id: 'AdminChatSupportWindow_askForHelpFinished',
+        defaultMessage: 'Ask for help conversation finished',
+    },
+    startDialog: {
+        id: 'AdminChatSupportWindow_startDialog',
+        defaultMessage: 'Start your dialog. Write something',
+    },
+    goBack: {
+        id: 'AdminChatSupportWindow_goBack',
+        defaultMessage: 'Back',
+    },
+    askForHelpStarted: {
+        id: 'AdminChatSupportWindow_askForHelpStarted',
+        defaultMessage: 'Ask for help conversation started',
+    },
+});
+
 const AdminChatSupportWindow: FC = () => {
     const [isMessageSent, setIsMessageSent] = useState(false);
     const [isConversationFinished, setIsConversationFinished] = useState(false);
@@ -222,7 +254,7 @@ const AdminChatSupportWindow: FC = () => {
             <div className={classes.innerContainer}>
                 <div onClick={() => navigate(-1)} className={classes.backButton}>
                     <CgArrowLongLeft />
-                    <LocalizedText label={{id: 'goBack'}} />
+                    <LocalizedText label={localized.goBack} />
                 </div>
             </div>
             <div className={classes.header}>
@@ -241,7 +273,7 @@ const AdminChatSupportWindow: FC = () => {
                 {isMessageSent ? (
                     <div className={classes.messageContainer}>
                         <div className={classes.chatInfoText}>
-                            {isMessageSent ? <ChatInfoText text="Ask for help conversation started" bgColor="#EFFFF8" /> : null}
+                            {isMessageSent ? <ChatInfoText text={localized.askForHelpStarted} bgColor="#EFFFF8" /> : null}
                         </div>
                         {isMessageSent ? (
                             <>
@@ -275,7 +307,7 @@ const AdminChatSupportWindow: FC = () => {
                                 <div className={`${classes.messageWrapper} ${classes.senderMessage}`}>
                                     <div className={classes.messageBubbleLeft}>
                                         <div>
-                                            <LocalizedText label={{id: 'weHelped'}} />
+                                            <LocalizedText label={localized.weHelped} />
                                         </div>
                                         <div className={classes.responseButtonContainer}>
                                             <Button
@@ -297,7 +329,7 @@ const AdminChatSupportWindow: FC = () => {
                                                 variant="contained"
                                                 onClick={() => setIsConversationFinished(true)}
                                             >
-                                                <LocalizedText label={{id: 'yes'}} />
+                                                <LocalizedText label={localized.yes} />
                                             </Button>
                                             <div className={classes.responseButtonDivider}></div>
                                             <Button
@@ -319,7 +351,7 @@ const AdminChatSupportWindow: FC = () => {
                                                 }}
                                                 variant="contained"
                                             >
-                                                <LocalizedText label={{id: 'no'}} />
+                                                <LocalizedText label={localized.no} />
                                             </Button>
                                         </div>
                                     </div>
@@ -347,12 +379,12 @@ const AdminChatSupportWindow: FC = () => {
                         })}
 
                         <div className={classes.chatInfoText}>
-                            {isConversationFinished ? <ChatInfoText text="askForHelp" bgColor="#EFFFF8" /> : null}
+                            {isConversationFinished ? <ChatInfoText text={localized.askForHelpFinished} bgColor="#EFFFF8" /> : null}
                         </div>
                     </div>
                 ) : (
                     <div className={classes.starterText}>
-                        <ChatInfoText text="startDialog" bgColor="#EEEEEE" />
+                        <ChatInfoText text={localized.startDialog} bgColor="#EEEEEE" />
                     </div>
                 )}
             </div>

@@ -1,7 +1,8 @@
 import {FC, useState} from 'react';
-import {Button, FormControl, InputLabel, MenuItem, SelectChangeEvent} from '@mui/material';
+import {FormControl, SelectChangeEvent} from '@mui/material';
 
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 import {Select} from '@components/select/Select';
 import CustomButton from '@components/Button';
 
@@ -73,6 +74,21 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    currency: {
+        id: 'Currency_currency',
+        defaultMessage: 'Currency',
+    },
+    change: {
+        id: 'Currency_change',
+        defaultMessage: 'You can change your {prop}',
+    },
+    save: {
+        id: 'Currency_save',
+        defaultMessage: 'Save',
+    },
+});
+
 const Currency: FC = () => {
     const [reason, setReason] = useState('USD');
 
@@ -85,10 +101,10 @@ const Currency: FC = () => {
     return (
         <div className={classes.container}>
             <div className={classes.title}>
-                <LocalizedText label={{id: 'currency'}} />
+                <LocalizedText label={localized.currency} />
             </div>
             <p className={classes.description}>
-                <LocalizedText label={{id: 'change'}} labelParams={{prop: 'currency'}} />
+                <LocalizedText label={localized.change} labelParams={{prop: 'currency'}} />
             </p>
             <div className={classes.formContainer}>
                 <FormControl
@@ -109,7 +125,7 @@ const Currency: FC = () => {
                 >
                     <Select
                         labelId="demo-simple-select-label"
-                        label="Currency"
+                        label={<LocalizedText label={localized.currency} />}
                         id="demo-simple-select"
                         value={reason}
                         options={reasons}
@@ -123,7 +139,7 @@ const Currency: FC = () => {
                 </FormControl>
                 <div className="self-end">
                     <CustomButton closeModal={() => {}} width="110px" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                        <LocalizedText label={{id: 'save'}} />
+                        <LocalizedText label={localized.save} />
                     </CustomButton>
                 </div>
             </div>

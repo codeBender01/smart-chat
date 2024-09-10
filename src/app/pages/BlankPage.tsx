@@ -3,6 +3,7 @@ import ChatInfoText from '@app/components/ChatInfoText';
 
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
+import {defineMessages} from 'react-intl';
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
     container: {
@@ -15,11 +16,18 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    blankPageMessage: {
+        id: 'BlankPage_blankPageMessage',
+        defaultMessage: 'Select a chat to start messaging',
+    },
+});
+
 const BlankPage: FC = () => {
     const classes = useStyles();
     return (
         <div className={classes.container}>
-            <ChatInfoText text="blankPageMessage" bgColor="#EEEEEE" />
+            <ChatInfoText text={localized.blankPageMessage} bgColor="#EEEEEE" />
         </div>
     );
 };

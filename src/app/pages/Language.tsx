@@ -1,9 +1,10 @@
 import {FC, useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {Button, FormControl, SelectChangeEvent} from '@mui/material';
+import {FormControl, SelectChangeEvent} from '@mui/material';
 import {setLang} from '@store/languageSlice';
 
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 import {Select} from '@components/select/Select';
 import CustomButton from '@components/Button';
 
@@ -74,6 +75,21 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    change: {
+        id: 'Language_change',
+        defaultMessage: 'You can change your {prop}',
+    },
+    save: {
+        id: 'Language_save',
+        defaultMessage: 'Save',
+    },
+    language: {
+        id: 'Language_language',
+        defaultMessage: 'Language',
+    },
+});
+
 const Language: FC = () => {
     const [language, setLanguage] = useState('en');
 
@@ -89,10 +105,10 @@ const Language: FC = () => {
     return (
         <div className={classes.container}>
             <div className={classes.title}>
-                <LocalizedText label={{id: 'language', defaultMessage: 'Language'}} />
+                <LocalizedText label={localized.language} />
             </div>
             <p className={classes.description}>
-                <LocalizedText label={{id: 'change', defaultMessage: 'You can change your {prop}'}} labelParams={{prop: 'language'}} />
+                <LocalizedText label={localized.change} labelParams={{prop: 'language'}} />
             </p>
             <div className={classes.formContainer}>
                 <FormControl
@@ -127,7 +143,7 @@ const Language: FC = () => {
                 </FormControl>
                 <div className="self-end">
                     <CustomButton closeModal={() => {}} width="110px" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                        <LocalizedText label={{id: 'save', defaultMessage: 'Save'}} />
+                        <LocalizedText label={localized.save} />
                     </CustomButton>
                 </div>
             </div>

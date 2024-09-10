@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom';
 import {Outlet} from 'react-router-dom';
 import Header from '@app/components/Header';
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
@@ -34,6 +35,13 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    goBack: {
+        id: 'SettingsLayoutMobile_goBack',
+        defaultMessage: 'Back',
+    },
+});
+
 const SettingsMobileLayout: FC = () => {
     const navigate = useNavigate();
 
@@ -45,7 +53,7 @@ const SettingsMobileLayout: FC = () => {
             <div className={classes.innerContainer}>
                 <div onClick={() => navigate(-1)} className={classes.goBackButton}>
                     <CgArrowLongLeft />
-                    <LocalizedText label={{id: 'goBack'}} />
+                    <LocalizedText label={localized.goBack} />
                 </div>
                 <Outlet />
             </div>

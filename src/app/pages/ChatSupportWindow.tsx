@@ -8,13 +8,12 @@ import ChatInfoText from '@app/components/ChatInfoText';
 import {InputAdornment, TextField} from '@mui/material';
 
 import LocalizedText from '@components/localize/LocalizedText';
-import {useIntl} from 'react-intl';
+import {useIntl, defineMessages} from 'react-intl';
 
 import logo from '../../common/assets/chatLogo.png';
 import profile2 from '../../common/assets/profile2.jpeg';
 
 import {makeStyles} from '@mui/styles';
-import {display} from '@mui/system';
 import {CustomTheme} from '@style';
 
 const suggestions = [
@@ -254,6 +253,77 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    goBack: {
+        id: 'ChatSupportWindow_goBack',
+        defaultMessage: 'Back',
+    },
+    canWeHelpYou: {
+        id: 'ChatSupportWindow_canWeHelpYou',
+        defaultMessage: 'Hello! How can we help you?',
+    },
+    selectTag: {
+        id: 'ChatSupportWindow_selectTag',
+        defaultMessage: 'Select one of the tags that matches your request to make the process easier',
+    },
+    help: {
+        id: 'ChatSupportWindow_help',
+        defaultMessage: 'Ask for help',
+    },
+    review: {
+        id: 'ChatSupportWindow_review',
+        defaultMessage: 'Leave a review',
+    },
+    service: {
+        id: 'ChatSupportWindow_service',
+        defaultMessage: 'Report a service problem',
+    },
+    suggest: {
+        id: 'ChatSupportWindow_suggest',
+        defaultMessage: 'Suggest improvements',
+    },
+    others: {
+        id: 'ChatSupportWindow_others',
+        defaultMessage: 'Others',
+    },
+    askForHelpStarted: {
+        id: 'ChatSupportWindow_askForHelpStarted',
+        defaultMessage: 'Ask for help conversation started',
+    },
+    myside: {
+        id: 'ChatSupportWindow_myside',
+        defaultMessage: 'Problem on my side',
+    },
+    party: {
+        id: 'ChatSupportWindow_party',
+        defaultMessage: 'Problem with another party',
+    },
+    agreement: {
+        id: 'ChatSupportWindow_agreement',
+        defaultMessage: 'Problem with agreement',
+    },
+    payment: {
+        id: 'ChatSupportWindow_payment',
+        defaultMessage: 'Problem with payment',
+    },
+    parcel: {
+        id: 'ChatSupportWindow_parcel',
+        defaultMessage: 'Problem with parcel',
+    },
+    problemWithPayment: {
+        id: 'ChatSupportWindow_problemWithPayment',
+        defaultMessage: 'Problem with payment conversation started',
+    },
+    chatSupportMessage: {
+        id: 'ChatSupportWindow_chatSupportMessage',
+        defaultMessage: 'Select one of the tags that matches your request before starting a conversation',
+    },
+    writeMessage: {
+        id: 'ChatSupportWindow_writeMessage',
+        defaultMessage: 'Write a message...',
+    },
+});
+
 const ChatSupportWindow: FC = () => {
     const [isSuggestionsOpen, setIsSuggestionsOpen] = useState(false);
     const [isMessageSent, setIsMessageSent] = useState(false);
@@ -287,7 +357,7 @@ const ChatSupportWindow: FC = () => {
             <div className={classes.innerContainer}>
                 <div onClick={() => navigate(-1)} className={classes.backButton}>
                     <CgArrowLongLeft />
-                    <LocalizedText label={{id: 'goBack'}} />
+                    <LocalizedText label={localized.goBack} />
                 </div>
             </div>
             <div className={classes.header}>
@@ -314,7 +384,7 @@ const ChatSupportWindow: FC = () => {
                                 }}
                             ></div>
                             <div className={classes.messageBubbleRight}>
-                                <LocalizedText label={{id: 'canWeHelpYou'}} />
+                                <LocalizedText label={localized.canWeHelpYou} />
                             </div>
                         </div>
                         <div className={`${classes.messageWrapper} ${classes.suggestionsMessage}`}>
@@ -328,11 +398,7 @@ const ChatSupportWindow: FC = () => {
                             ></div>
                             <div className={classes.messageBubbleRight}>
                                 <p>
-                                    <LocalizedText
-                                        label={{
-                                            id: 'selectTag',
-                                        }}
-                                    />
+                                    <LocalizedText label={localized.selectTag} />
                                 </p>
                                 <div className={classes.suggestionContainer}>
                                     {suggestions.map(sug => {
@@ -345,7 +411,7 @@ const ChatSupportWindow: FC = () => {
                                                 }}
                                                 className={classes.suggestionButton}
                                             >
-                                                <LocalizedText label={{id: sug.value}} />
+                                                <LocalizedText label={localized[sug.value as keyof typeof localized]} />
                                             </div>
                                         );
                                     })}
@@ -367,7 +433,7 @@ const ChatSupportWindow: FC = () => {
 
                         {option === 'help' ? (
                             <>
-                                <ChatInfoText text="Ask for help conversation started" bgColor="#EFFFF8" />
+                                <ChatInfoText text={localized.askForHelpStarted} bgColor="#EFFFF8" />
                                 <div className={classes.senderMessage}>
                                     <div className={classes.messageBubbleLeft}>I can’t get verified on the eelow.com</div>
                                     <div
@@ -405,7 +471,7 @@ const ChatSupportWindow: FC = () => {
                                         }}
                                     ></div>
                                     <div className={classes.messageBubbleRight}>
-                                        <LocalizedText label={{id: 'canWeHelpYou'}} />
+                                        <LocalizedText label={localized.canWeHelpYou} />
                                     </div>
                                 </div>
                                 <div className={`${classes.messageWrapper} ${classes.suggestionsMessage}`}>
@@ -419,13 +485,7 @@ const ChatSupportWindow: FC = () => {
                                     ></div>
                                     <div className={classes.messageBubbleRight}>
                                         <p>
-                                            <LocalizedText
-                                                label={{
-                                                    id: 'selectTag',
-                                                    defaultMessage:
-                                                        'Select one of the tags that matches your request to make the process easier',
-                                                }}
-                                            />
+                                            <LocalizedText label={localized.selectTag} />
                                         </p>
                                         <div className={classes.suggestionContainer}>
                                             {serviceProblems.map(sug => {
@@ -440,7 +500,7 @@ const ChatSupportWindow: FC = () => {
                                                             'text-textColor text-default font-mainSans rounded-medium w-fit py-1 px-4 hover:opacity-85 duration-200 cursor-pointer'
                                                         }
                                                     >
-                                                        <LocalizedText label={{id: sug.value, defaultMessage: sug.label}} />
+                                                        <LocalizedText label={localized[sug.value as keyof typeof localized]} />
                                                     </div>
                                                 );
                                             })}
@@ -451,7 +511,7 @@ const ChatSupportWindow: FC = () => {
                         ) : null}
                         {dealOption.length > 0 ? (
                             <>
-                                <ChatInfoText text="Problem with payment conversation started" bgColor="#EFFFF8" />
+                                <ChatInfoText text={localized.problemWithPayment} bgColor="#EFFFF8" />
 
                                 <div className={classes.senderMessage}>
                                     <div className={classes.messageBubbleLeft}>I can’t pay for the deal</div>
@@ -495,17 +555,14 @@ const ChatSupportWindow: FC = () => {
                     </div>
                 ) : (
                     <div className={classes.chatInfoContainer}>
-                        <ChatInfoText text="chatSupportMessage" bgColor="#EEEEEE" />
+                        <ChatInfoText text={localized.chatSupportMessage} bgColor="#EEEEEE" />
                     </div>
                 )}
             </div>
 
             <div className={classes.inputContainer}>
                 <TextField
-                    placeholder={intl.formatMessage({
-                        id: 'writeMessage',
-                        defaultMessage: 'Write a message',
-                    })}
+                    placeholder={intl.formatMessage(localized.writeMessage)}
                     onKeyDown={handleKeyDown}
                     value={textMessage}
                     onChange={e => {
@@ -564,7 +621,7 @@ const ChatSupportWindow: FC = () => {
                                             {suggestions.map(sug => {
                                                 return (
                                                     <div key={sug.label} onClick={() => {}} className={classes.suggestionsModalText}>
-                                                        <LocalizedText label={{id: sug.value, defaultMessage: sug.label}} />
+                                                        <LocalizedText label={localized[sug.value as keyof typeof localized]} />
                                                     </div>
                                                 );
                                             })}

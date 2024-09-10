@@ -14,7 +14,7 @@ import TravelerModal from '@app/components/TravelerModal';
 import {InputAdornment, TextField} from '@mui/material';
 
 import LocalizedText from '@components/localize/LocalizedText';
-import {useIntl} from 'react-intl';
+import {useIntl, defineMessages} from 'react-intl';
 
 import profile1 from '../../common/assets/profile1.jpeg';
 import profile2 from '../../common/assets/profile2.jpeg';
@@ -322,7 +322,6 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         alignItems: 'center',
         backgroundColor: theme.custom.palette.newColors.lightGreen,
         position: 'relative',
-        zIndex: 50,
     },
     textContainer: {
         display: 'flex',
@@ -342,6 +341,49 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontFamily: 'Open Sans, sans-serif',
     },
 }));
+
+const localized = defineMessages({
+    awaitingHandover: {
+        id: 'ChatWindow_awaitingHandover',
+        defaultMessage: 'awaiting handover',
+    },
+    pendingConfirmation: {
+        id: 'ChatWindow_pendingConfirmation',
+        defaultMessage: 'pending confirmation',
+    },
+    isTravelerRight: {
+        id: 'ChatWindow_isTravelerRight',
+        defaultMessage: 'Is this traveler right for you?',
+    },
+    warningText: {
+        id: 'ChatWindow_warningText',
+        defaultMessage: 'If you click on the "yes" button, the deal status will change and you will not be able to select another traveler',
+    },
+    goBack: {
+        id: 'ChatWindow_goBack',
+        defaultMessage: 'Back',
+    },
+    editTheOffer: {
+        id: 'ChatWindow_editTheOffer',
+        defaultMessage: 'Edit the offer',
+    },
+    reportProblem: {
+        id: 'ChatWindow_reportProblem',
+        defaultMessage: 'Report a problem',
+    },
+    dealTerminated: {
+        id: 'ChatWindow_dealTerminated',
+        defaultMessage: 'The deal was terminated due to the death of the other party',
+    },
+    paidSuccessfully: {
+        id: 'ChatWindow_paidSuccessfully',
+        defaultMessage: 'The deal has been paid successfully, agree on the other side to hand over the parcel',
+    },
+    writeMessage: {
+        id: 'ChatWindow_writeMessage',
+        defaultMessage: 'Write a message...',
+    },
+});
 
 const ChatWindow: FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -381,9 +423,16 @@ const ChatWindow: FC = () => {
                 <div className={classes.innerContainer}>
                     <div onClick={() => navigate(-1)} className={classes.backButton}>
                         <CgArrowLongLeft />
-                        <LocalizedText label={{id: 'goBack'}} />
+                        <LocalizedText label={localized.goBack} />
                     </div>
-                    <div className={classes.statusText}>{isEmailSent ? 'awaiting handover' : 'pending confirmation'}</div>
+                    <div className={classes.statusText}>
+                        {' '}
+                        {isEmailSent ? (
+                            <LocalizedText label={localized.awaitingHandover} />
+                        ) : (
+                            <LocalizedText label={localized.pendingConfirmation} />
+                        )}
+                    </div>
                 </div>
                 <div className={classes.headerContainer}>
                     <div className={classes.headerInner}>
@@ -413,9 +462,9 @@ const ChatWindow: FC = () => {
                     <div className={classes.leftHeaderContainer}>
                         <div className={classes.awaitingText}>
                             {isEmailSent ? (
-                                <LocalizedText label={{id: 'awaitingHandover'}} />
+                                <LocalizedText label={localized.awaitingHandover} />
                             ) : (
-                                <LocalizedText label={{id: 'awaitingHandover'}} />
+                                <LocalizedText label={localized.pendingConfirmation} />
                             )}
                         </div>
                         <TravelerModal />
@@ -447,15 +496,16 @@ const ChatWindow: FC = () => {
                                 className={classes.moreOptions}
                                 style={{
                                     opacity: isMoreOpen ? '1' : '0',
+                                    zIndex: isMoreOpen ? '10' : '0',
                                 }}
                             >
                                 <div className={classes.optionItem}>
                                     <MdEdit />
-                                    <LocalizedText label={{id: 'editTheOffer'}} />
+                                    <LocalizedText label={localized.editTheOffer} />
                                 </div>
                                 <div className={`${classes.optionItem} ${classes.reportItem}`}>
                                     <IoIosInformationCircleOutline />
-                                    <LocalizedText label={{id: 'reportProblem'}} />
+                                    <LocalizedText label={localized.reportProblem} />
                                 </div>
                                 <TerminationModal isTerminated={isTerminated} setIsTerminated={setIsTerminated} />
                             </div>
@@ -466,14 +516,10 @@ const ChatWindow: FC = () => {
                 <div className={classes.confirmContainer}>
                     <div className={classes.textContainer}>
                         <div className={classes.confirmTitle}>
-                            <LocalizedText label={{id: 'isTravelerRight'}} />
+                            <LocalizedText label={localized.isTravelerRight} />
                         </div>
                         <p className={classes.warningText}>
-                            <LocalizedText
-                                label={{
-                                    id: 'warningText',
-                                }}
-                            />
+                            <LocalizedText label={localized.warningText} />
                         </p>
                     </div>
                     <DealCompletedModal setIsDealApproved={setIsDealApproved} />
@@ -486,7 +532,7 @@ const ChatWindow: FC = () => {
         </div> */}
 
                 {isTerminated ? (
-                    <ChatInfoText text="dealTerminated" bgColor="#E2542C40" />
+                    <ChatInfoText text={localized.dealTerminated} bgColor="#E2542C40" />
                 ) : (
                     <div className={classes.messageContainer}>
                         <div className={`${classes.messageWrapper} ${classes.senderMessage}`}>
@@ -499,7 +545,7 @@ const ChatWindow: FC = () => {
                             ></div>
                         </div>
                         <div className={classes.chatInfo}>
-                            <ChatInfoText text="paidSuccessfully" bgColor="#EFFFF8" />
+                            <ChatInfoText text={localized.paidSuccessfully} bgColor="#EFFFF8" />
                         </div>
                         <div className={classes.messageWrapper}>
                             <div
@@ -534,9 +580,7 @@ const ChatWindow: FC = () => {
                     onChange={e => {
                         setTextMessage(e.target.value);
                     }}
-                    placeholder={intl.formatMessage({
-                        id: 'writeMessage',
-                    })}
+                    placeholder={intl.formatMessage(localized.writeMessage)}
                     sx={{
                         borderRadius: '12px',
                         backgroundColor: '#eee',

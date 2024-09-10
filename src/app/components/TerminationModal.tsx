@@ -1,12 +1,13 @@
 import {Dispatch, FC, SetStateAction, useContext, useState} from 'react';
 import {useIntl} from 'react-intl';
-import {Button, createTheme, FormControl, SelectChangeEvent, TextField, ThemeProvider} from '@mui/material';
+import {FormControl, MenuItem, SelectChangeEvent, TextField} from '@mui/material';
 
 import {Select} from '@components/select/Select';
 
 import {IoMdCloseCircleOutline} from 'react-icons/io';
 
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 
 import {ModalContext} from '@components/modal/ModalProvider';
 import {ModalContent} from '@components/modal/ModalContent';
@@ -104,6 +105,69 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    areYouSureDeal: {
+        id: 'TerminationModal_areYouSureDeal',
+        defaultMessage: 'Are you sure that you want to terminate your deal?',
+    },
+    paymentIssue: {
+        id: 'TerminationModal_paymentIssue',
+        defaultMessage: 'Payment issues',
+    },
+    agreementIssue: {
+        id: 'TerminationModal_agreementIssue',
+        defaultMessage: 'Agreement issues',
+    },
+    alternative: {
+        id: 'TerminationModal_alternative',
+        defaultMessage: 'Found an alternative service',
+    },
+    changedMyMind: {
+        id: 'TerminationModal_changedMyMind',
+        defaultMessage: 'Changed my mind',
+    },
+    other: {
+        id: 'TerminationModal_other',
+        defaultMessage: 'Other',
+    },
+    reason: {
+        id: 'TerminationModal_reason',
+        defaultMessage: 'Reason',
+    },
+    leaveReason: {
+        id: 'TerminationModal_leaveReason',
+        defaultMessage: 'Leave your reason',
+    },
+    byClicking: {
+        id: 'TerminationModal_byClicking',
+        defaultMessage: 'By clicking Terminate, you confirm that you have read, consent and agree to our',
+    },
+    cancellation: {
+        id: 'TerminationModal_cancellation',
+        defaultMessage: 'Cancellation policy',
+    },
+    and: {
+        id: 'TerminationModal_and',
+        defaultMessage: 'and',
+    },
+    terminate: {
+        id: 'TerminationModal_terminate',
+        defaultMessage: 'Terminate',
+    },
+    cancel: {
+        id: 'TerminationModal_cancel',
+        defaultMessage: 'Cancel',
+    },
+    terms: {
+        id: 'TerminationModal_terms',
+        defaultMessage: 'Terms and Conditions',
+    },
+    terminateDeal: {
+        id: 'TerminationModal_editTheOffer',
+        defaultMessage: 'Terminate the deal',
+    },
+});
+
 const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTerminated}) => {
     const [reason, setReason] = useState<string>('');
     const [isReasonSelected, setIsReasonSelected] = useState(false);
@@ -124,7 +188,7 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
             <ModalContent>
                 <div className={classes.container}>
                     <div className={classes.title}>
-                        <LocalizedText label={{id: 'areYouSureDeal'}} />
+                        <LocalizedText label={localized.areYouSureDeal} />
                     </div>
                     <div className={classes.formContainer}>
                         <FormControl
@@ -149,7 +213,15 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
                                 id="demo-simple-select"
                                 value={reason}
                                 options={reasons}
-                            ></Select>
+                            >
+                                {reasons.map(r => {
+                                    return (
+                                        <MenuItem key={r.label} value={r.value}>
+                                            <LocalizedText label={localized[r.value as keyof typeof localized]} />
+                                        </MenuItem>
+                                    );
+                                })}
+                            </Select>
                         </FormControl>
                         <FormControl
                             fullWidth
@@ -159,11 +231,7 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
                                 transition: 'all 0.6s',
                             }}
                         >
-                            <TextField
-                                placeholder={intl.formatMessage({
-                                    id: 'leaveReason',
-                                })}
-                            />
+                            <TextField placeholder={intl.formatMessage(localized.leaveReason)} />
                         </FormControl>
                     </div>
 
@@ -174,21 +242,21 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
                             }}
                         />
                         <span className={classes.link}>
-                            <LocalizedText label={{id: 'terms'}} />
+                            <LocalizedText label={localized.terms} />
                         </span>{' '}
-                        <LocalizedText label={{id: 'and', defaultMessage: 'and'}} />{' '}
+                        <LocalizedText label={localized.and} />{' '}
                         <span className={classes.link}>
-                            <LocalizedText label={{id: 'cancellation'}} />
+                            <LocalizedText label={localized.cancellation} />
                         </span>
                         .
                     </p>
 
                     <div className={classes.buttonContainer}>
                         <CustomButton closeModal={closeModal} width="auto" bgcolor="#E2542C" color="#fff" borderColor="transparent">
-                            <LocalizedText label={{id: 'terminate'}} />
+                            <LocalizedText label={localized.terminate} />
                         </CustomButton>
                         <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
-                            <LocalizedText label={{id: 'cancel'}} />
+                            <LocalizedText label={localized.cancel} />
                         </CustomButton>
                     </div>
                 </div>
@@ -199,7 +267,7 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
     return (
         <div onClick={handleOpenModal} className={classes.alertBox}>
             <IoMdCloseCircleOutline />
-            <LocalizedText label={{id: 'terminateDeal'}} />
+            <LocalizedText label={localized.terminateDeal} />
         </div>
     );
 };

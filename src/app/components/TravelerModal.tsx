@@ -12,6 +12,7 @@ import {ModalContent} from '@components/modal/ModalContent';
 
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
+import {defineMessages} from 'react-intl';
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
     container: {
@@ -163,6 +164,21 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    packageType: {
+        id: 'TravelerModal_packageType',
+        defaultMessage: 'Package type',
+    },
+    overallDimensions: {
+        id: 'TravelerModal_overallDimensions',
+        defaultMessage: 'Overall dimensions (cm)',
+    },
+    weight: {
+        id: 'TravelerModal_weight',
+        defaultMessage: 'Weight (kg)',
+    },
+});
+
 const TravelerModal: FC = () => {
     const {openModal, closeModal} = useContext(ModalContext);
 
@@ -211,19 +227,19 @@ const TravelerModal: FC = () => {
                     <div className={classes.infoRowContainer}>
                         <div className={classes.infoRow}>
                             <div className={classes.labelText}>
-                                <LocalizedText label={{id: 'packageType'}} />
+                                <LocalizedText label={localized.packageType} />
                             </div>
                             <div className={classes.valueText}>Military</div>
                         </div>
                         <div className={classes.infoRow}>
                             <div className={classes.labelText}>
-                                <LocalizedText label={{id: 'overallDimensions'}} />
+                                <LocalizedText label={localized.overallDimensions} />
                             </div>
                             <div className={classes.valueText}>120 x 80 x 60</div>
                         </div>
                         <div className={`${classes.infoRow} ${classes.lastInfoRow}`}>
                             <div className={classes.labelText}>
-                                <LocalizedText label={{id: 'weight'}} />
+                                <LocalizedText label={localized.weight} />
                             </div>
                             <div className={classes.valueText}>40</div>
                         </div>

@@ -119,13 +119,13 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         '& div:nth-child(2)': {
             width: '1px',
             height: '32px',
-            color: theme.palette.text.primary,
+            backgroundColor: theme.palette.text.primary,
         },
         '& div:last-child': {
             width: '6px',
             height: '6px',
             borderRadius: '50%',
-            color: theme.palette.text.primary,
+            backgroundColor: theme.palette.text.primary,
         },
     },
     packageInfo: {

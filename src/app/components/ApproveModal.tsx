@@ -2,10 +2,26 @@ import {FC, useContext} from 'react';
 import {IoCheckmarkCircleOutline} from 'react-icons/io5';
 import {Button, Box, Typography} from '@mui/material';
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 
 import {ModalContext} from '@components/modal/ModalProvider';
 import {ModalContent} from '@components/modal/ModalContent';
 import CustomButton from '@components/Button';
+
+const localized = defineMessages({
+    send: {
+        id: 'ApproveModal_send',
+        defaultMessage: 'Send',
+    },
+    inviteSend: {
+        id: 'ApproveModal_inviteSend',
+        defaultMessage: 'Invite has been send',
+    },
+    goBack: {
+        id: 'ApproveModal_goBack',
+        defaultMessage: 'Back',
+    },
+});
 
 const ApproveModal: FC = () => {
     const {openModal, closeModal} = useContext(ModalContext);
@@ -23,30 +39,30 @@ const ApproveModal: FC = () => {
                     }}
                 >
                     <Box
-                        sx={{
+                        sx={theme => ({
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             fontSize: '64px',
-                            color: '#15C370',
-                        }}
+                            color: theme.palette.primary.main,
+                        })}
                     >
                         <IoCheckmarkCircleOutline />
                     </Box>
                     <Typography
-                        sx={{
-                            color: '#282D41',
+                        sx={theme => ({
+                            color: theme.palette.text.primary,
                             fontSize: '32px',
                             textAlign: 'center',
                             fontFamily: 'QuicksandBold, sans-serif',
                             margin: '32px 0',
-                        }}
+                        })}
                     >
-                        <LocalizedText label={{id: 'inviteSend'}} />
+                        <LocalizedText label={localized.inviteSend} />
                     </Typography>
 
                     <CustomButton closeModal={closeModal} width="30%" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                        <LocalizedText label={{id: 'goBack'}} />
+                        <LocalizedText label={localized.goBack} />
                     </CustomButton>
                 </Box>
             </ModalContent>
@@ -60,21 +76,21 @@ const ApproveModal: FC = () => {
                 variant="contained"
                 disableElevation
                 disableRipple
-                sx={{
-                    bgcolor: '#15C370',
+                sx={theme => ({
+                    bgcolor: theme.palette.primary.main,
                     color: '#fff',
                     borderRadius: '20px',
                     textTransform: 'none',
                     fontFamily: 'OpenReg',
                     fontSize: '16px',
                     '&:hover': {
-                        bgcolor: '#15C370',
+                        bgcolor: theme.palette.primary.main,
                         opacity: 0.8,
                     },
-                }}
+                })}
                 onClick={handleOpenModal}
             >
-                <LocalizedText label={{id: 'send'}} />
+                <LocalizedText label={localized.send} />
             </Button>
         </div>
     );

@@ -4,6 +4,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import {Outlet} from 'react-router-dom';
 import Header from '@app/components/Header';
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
 
@@ -136,6 +137,33 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    language: {
+        id: 'SettingsLayout_language',
+        defaultMessage: 'Language',
+    },
+    password: {
+        id: 'SettingsLayout_password',
+        defaultMessage: 'Password',
+    },
+    payments: {
+        id: 'SettingsLayout_payments',
+        defaultMessage: 'Payments',
+    },
+    currency: {
+        id: 'SettingsLayout_currency',
+        defaultMessage: 'Currency',
+    },
+    account: {
+        id: 'SettingsLayout_account',
+        defaultMessage: 'Account',
+    },
+    headerSettings: {
+        id: 'SettingsLayout_headerSettings',
+        defaultMessage: 'Settings',
+    },
+});
+
 const SettingsLayout: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -150,7 +178,7 @@ const SettingsLayout: FC = () => {
             <div className={classes.contentContainer}>
                 <div className={classes.headerContainer}>
                     <h1 className={classes.headerText}>
-                        <LocalizedText label={{id: 'headerSettings'}} />
+                        <LocalizedText label={localized.headerSettings} />
                     </h1>
                 </div>
                 <div className={classes.layoutContainer}>
@@ -162,7 +190,7 @@ const SettingsLayout: FC = () => {
                                     key={l.label}
                                     className={`${classes.link} ${location.pathname.includes(l.path) ? classes.activeLink : ''}`}
                                 >
-                                    <LocalizedText label={{id: l.value}} />
+                                    <LocalizedText label={localized[l.value as keyof typeof localized]} />
                                 </li>
                             ))}
                         </ul>
@@ -174,7 +202,7 @@ const SettingsLayout: FC = () => {
                                     key={l.label}
                                     className={`${classes.link} ${location.pathname.includes(l.path) ? classes.activeLink : ''}`}
                                 >
-                                    <LocalizedText label={{id: l.value}} />
+                                    <LocalizedText label={localized[l.value as keyof typeof localized]} />
                                 </li>
                             ))}
                         </ul>

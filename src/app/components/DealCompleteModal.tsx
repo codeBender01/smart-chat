@@ -3,6 +3,7 @@ import {Button, createTheme, FormControl, Rating, TextField, ThemeProvider} from
 
 import LocalizedText from '@components/localize/LocalizedText';
 import {useIntl} from 'react-intl';
+import {defineMessages} from 'react-intl';
 
 import {ModalContext} from '@components/modal/ModalProvider';
 import {ModalContent} from '@components/modal/ModalContent';
@@ -48,6 +49,37 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    dealCompleted: {
+        id: 'DealCompletedModal_dealCompleted',
+        defaultMessage: 'The deal has been completed',
+    },
+    rateACustomer: {
+        id: 'DealCompletedModal_rateACustomer',
+        defaultMessage: 'Rate a customer/traveller',
+    },
+    leaveFeedback: {
+        id: 'DealCompletedModal_leaveFeedback',
+        defaultMessage: 'Leave a feedback',
+    },
+    cancel: {
+        id: 'DealCompletedModal_cancel',
+        defaultMessage: 'Cancel',
+    },
+    send: {
+        id: 'DealCompletedModal_send',
+        defaultMessage: 'Send',
+    },
+    yes: {
+        id: 'DealCompletedModal_yes',
+        defaultMessage: 'Yes',
+    },
+    description: {
+        id: 'DealCompletedModal_description',
+        defaultMessage: 'Description',
+    },
+});
+
 const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) => {
     const intl = useIntl();
 
@@ -60,10 +92,10 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
             <ModalContent>
                 <div className={classes.container}>
                     <h2 className={classes.heading}>
-                        <LocalizedText label={{id: 'dealCompleted'}} />
+                        <LocalizedText label={localized.dealCompleted} />
                     </h2>
                     <div className={classes.textMd}>
-                        <LocalizedText label={{id: 'rateACustomer'}} />
+                        <LocalizedText label={localized.rateACustomer} />
                     </div>
                     <Rating
                         name="half-rating"
@@ -75,7 +107,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                         }}
                     />
                     <div className={classes.textMd}>
-                        <LocalizedText label={{id: 'leaveFeedback'}} />
+                        <LocalizedText label={localized.leaveFeedback} />
                     </div>
                     <FormControl
                         sx={{
@@ -98,7 +130,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                         fullWidth
                     >
                         <TextField
-                            label={<LocalizedText label={{id: 'description'}} />}
+                            label={<LocalizedText label={localized.description} />}
                             multiline
                             placeholder={intl.formatMessage({
                                 id: 'typeHere',
@@ -126,10 +158,10 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                     </FormControl>
                     <div className={classes.buttonGroup}>
                         <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
-                            <LocalizedText label={{id: 'cancel'}} />
+                            <LocalizedText label={localized.cancel} />
                         </CustomButton>
                         <CustomButton closeModal={closeModal} width="88px" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                            <LocalizedText label={{id: 'send'}} />
+                            <LocalizedText label={localized.send} />
                         </CustomButton>
                     </div>
                 </div>
@@ -137,8 +169,6 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
         ),
             true;
     };
-
-    console.log('fuck');
 
     return (
         <Button
@@ -163,7 +193,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                 handleOpenModal();
             }}
         >
-            Yes
+            <LocalizedText label={localized.yes} />
         </Button>
     );
 };

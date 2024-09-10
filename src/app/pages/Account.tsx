@@ -1,7 +1,7 @@
 import {FC, useState} from 'react';
 import TerminationApproveModal from '@app/components/TerminationApproveModal';
-import {FormControl, InputLabel, MenuItem, SelectChangeEvent, TextField} from '@mui/material';
-import {useIntl} from 'react-intl';
+import {FormControl, MenuItem, SelectChangeEvent, TextField} from '@mui/material';
+import {defineMessages, useIntl} from 'react-intl';
 
 import {Select} from '@components/select/Select';
 
@@ -90,6 +90,53 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    account: {
+        id: 'Account_account',
+        defaultMessage: 'Account',
+    },
+    ifYouNeed: {
+        id: 'Account_ifYouNeed',
+        defaultMessage: 'If you need to deactivate an account and you’re prompted to provide a reason',
+    },
+    personal: {
+        id: 'Account_personal',
+        defaultMessage: 'Personal issues',
+    },
+    technical: {
+        id: 'Account_technical',
+        defaultMessage: 'Technical issues',
+    },
+    noLonger: {
+        id: 'Account_noLonger',
+        defaultMessage: 'No longer needed',
+    },
+    foundBetter: {
+        id: 'Account_foundBetter',
+        defaultMessage: 'Found a better alternative',
+    },
+    doesntMeet: {
+        id: 'Account_doesntMeet',
+        defaultMessage: 'Doesn’t meet my expectations',
+    },
+    tooMany: {
+        id: 'Account_tooMany',
+        defaultMessage: 'Too many emails and notifications',
+    },
+    unsatisfactory: {
+        id: 'Account_unsatisfactory',
+        defaultMessage: 'Unsatisfactory user support',
+    },
+    badUser: {
+        id: 'Account_badUser',
+        defaultMessage: 'Bad user experience',
+    },
+    leaveReason: {
+        id: 'Account_leaveReason',
+        defaultMessage: 'Leave your reason',
+    },
+});
+
 const Account: FC = () => {
     const [reason, setReason] = useState('');
     const [isReasonSelected, setIsReasonSelected] = useState(false);
@@ -151,7 +198,15 @@ const Account: FC = () => {
                                 borderColor: '#0000003B',
                             },
                         }}
-                    ></Select>
+                    >
+                        {reasons.map(r => {
+                            return (
+                                <MenuItem key={r.label} value={r.value}>
+                                    <LocalizedText label={localized[r.value as keyof typeof localized]} />
+                                </MenuItem>
+                            );
+                        })}
+                    </Select>
                 </FormControl>
                 <FormControl
                     fullWidth
@@ -161,7 +216,7 @@ const Account: FC = () => {
                         transition: 'all 0.6s',
                     }}
                 >
-                    <TextField placeholder={intl.formatMessage({id: 'leaveReason'})} />
+                    <TextField placeholder={intl.formatMessage(localized.leaveReason)} />
                 </FormControl>
                 <TerminationApproveModal />
             </div>

@@ -4,6 +4,7 @@ import {IoMoon} from 'react-icons/io5';
 import {MdOutlineMenu} from 'react-icons/md';
 import {useNavigate} from 'react-router-dom';
 import {Avatar, Badge} from '@mui/material';
+import {defineMessages} from 'react-intl';
 
 import Typography from '@mui/material/Typography';
 
@@ -14,7 +15,6 @@ import profileImage from '../../common/assets/profileImage.jpeg';
 
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
-import messages from 'src/common/lang';
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
     header: {
@@ -138,6 +138,21 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    headerSettings: {
+        id: 'Header_headerSettings',
+        defaultMessage: 'Settings',
+    },
+    headerHowItWorks: {
+        id: 'Header_headerHowItWorks',
+        defaultMessage: 'How it works',
+    },
+    dealHasBeenUpdated: {
+        id: 'Header_dealHasBeenUpdated',
+        defaultMessage: 'Your deal status has been updated',
+    },
+});
+
 const Header: React.FC = () => {
     const classes = useStyles();
     const navigate = useNavigate();
@@ -153,12 +168,12 @@ const Header: React.FC = () => {
                     <ul className={classes.linksList}>
                         <li className={classes.listItem} onClick={() => navigate('/settings/password')}>
                             <Typography variant="body2">
-                                <LocalizedText label={{id: 'headerSettings'}} />
+                                <LocalizedText label={localized.headerSettings} />
                             </Typography>
                         </li>
                         <li className={classes.listItem} onClick={() => navigate('/about')}>
                             <Typography variant="body2">
-                                <LocalizedText label={{id: 'headerHowItWorks'}} />
+                                <LocalizedText label={localized.headerHowItWorks} />
                             </Typography>
                         </li>
                     </ul>
@@ -168,7 +183,7 @@ const Header: React.FC = () => {
                     <div className={classes.alertMessage}>
                         <IoIosInformationCircleOutline size={22} />
                         <Typography variant="h5" color="#E2542C">
-                            <LocalizedText label={{id: 'dealHasBeenUpdated'}} />
+                            <LocalizedText label={localized.dealHasBeenUpdated} />
                         </Typography>
                     </div>
                     <div className={classes.iconWrapper}>

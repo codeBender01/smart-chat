@@ -19,7 +19,7 @@ import {
     TextField,
 } from '@mui/material';
 import {makeStyles} from '@mui/styles';
-import {Typography} from '@mui/material';
+import {defineMessages} from 'react-intl';
 
 import {CustomTheme} from '@style';
 
@@ -311,6 +311,69 @@ interface ChatListSidebarProps {
     isAdmin: boolean;
 }
 
+const localized = defineMessages({
+    All: {
+        id: 'ChatListSidebar_All',
+        defaultMessage: 'All',
+    },
+    searchInputSidebar: {
+        id: 'ChatListSidebar_searchInputSidebar',
+        defaultMessage: 'Search by keywords',
+    },
+    filterByRole: {
+        id: 'ChatListSidebar_filterByRole',
+        defaultMessage: 'Filter by role',
+    },
+    traveler: {
+        id: 'ChatListSidebar_traveler',
+        defaultMessage: 'Traveler',
+    },
+    customer: {
+        id: 'ChatListSidebar_customer',
+        defaultMessage: 'Customer',
+    },
+    sortBy: {
+        id: 'ChatListSidebar_sortBy',
+        defaultMessage: 'Sort by',
+    },
+    optimal: {
+        id: 'ChatListSidebar_optimal',
+        defaultMessage: 'Optimal',
+    },
+    lightParcel: {
+        id: 'ChatListSidebar_lightParcel',
+        defaultMessage: 'Light Parcel',
+    },
+    smallParcel: {
+        id: 'ChatListSidebar_smallParcel',
+        defaultMessage: 'Small Parcel',
+    },
+    highPrice: {
+        id: 'ChatListSidebar_highPrice',
+        defaultMessage: 'High Price',
+    },
+    resetRole: {
+        id: 'ChatListSidebar_resetRole',
+        defaultMessage: 'Reset role',
+    },
+    soonDate: {
+        id: 'ChatListSidebar_soonDate',
+        defaultMessage: 'Soon date',
+    },
+    lowPrice: {
+        id: 'ChatListSidebar_lowPrice',
+        defaultMessage: 'Low price',
+    },
+    rating: {
+        id: 'ChatListSidebar_rating',
+        defaultMessage: 'Rating',
+    },
+    helpSupport: {
+        id: 'ChatListSidebar_helpSupport',
+        defaultMessage: 'help and support',
+    },
+});
+
 const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     const [selectedOption, setSelectedOption] = useState('All');
     const [selectedRole, setSelectedRole] = useState('All');
@@ -428,22 +491,22 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             {filterOptions.map(opt => {
                                 return (
                                     <MenuItem
-                                        sx={{
+                                        sx={theme => ({
                                             padding: '7px 16px',
                                             '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
-                                                color: '#15C370',
+                                                color: theme.palette.primary.main,
                                             },
-                                            '& .MuiRadio-root.Mui-checked': {color: '#15C370'},
+                                            '& .MuiRadio-root.Mui-checked': {color: theme.palette.primary.main},
                                             '&.Mui-selected': {
-                                                backgroundColor: '#f7f7f7 !important',
+                                                backgroundColor: theme.palette.secondary.main,
                                                 color: '#1C1B1F',
                                                 fontSize: '16px',
 
                                                 '&:hover': {
-                                                    backgroundColor: '#f7f7f7',
+                                                    backgroundColor: theme.palette.secondary.main,
                                                 },
                                             },
-                                        }}
+                                        })}
                                         key={opt.id}
                                         value={opt.value}
                                     >
@@ -464,7 +527,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                     </FormControl>
                     <div className={classes.divider}></div>
                     <TextField
-                        sx={{
+                        sx={theme => ({
                             width: '90%',
                             fontFamily: 'OpenReg',
                             '& .MuiInputBase-input:focus': {
@@ -478,7 +541,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             },
                             '& .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root': {
                                 fontSize: '12px',
-                                color: '#838383',
+                                color: theme.palette.text.secondary,
                                 fontFamily: 'OpenReg',
                             },
                             '& input': {
@@ -494,10 +557,10 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
                                 border: 'none',
                             },
-                        }}
+                        })}
                         hiddenLabel
                         id="filled-hidden-label-normal"
-                        placeholder={intl.formatMessage({id: 'searchInputSidebar', defaultMessage: 'Search by keywords'})}
+                        placeholder={intl.formatMessage(localized.searchInputSidebar)}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -530,7 +593,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             }}
                         >
                             <div className={classes.filterText}>
-                                <LocalizedText label={{id: 'filterByRole', defaultMessage: 'Filter by role'}} />
+                                <LocalizedText label={localized.filterByRole} />
                             </div>
                             <FormControl>
                                 <RadioGroup
@@ -538,9 +601,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     defaultValue="All"
                                     name="radio-buttons-group"
                                     onChange={handleRoleSelect}
-                                    sx={{
+                                    sx={theme => ({
                                         '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
-                                            color: '#15C370 !important',
+                                            color: theme.palette.primary.main,
                                         },
 
                                         '& .MuiFormControlLabel-root': {
@@ -548,14 +611,14 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                         },
                                         gap: '12px',
                                         marginTop: '16px',
-                                    }}
+                                    })}
                                 >
                                     {roles.map(r => {
                                         return (
                                             <FormControlLabel
                                                 value={r.value}
                                                 control={<Radio />}
-                                                label={<LocalizedText label={{id: r.value, defaultMessage: r.title}} />}
+                                                label={<LocalizedText label={localized[r.value as keyof typeof localized]} />}
                                                 key={r.id}
                                                 sx={{
                                                     '& .MuiTypography-root': {
@@ -576,7 +639,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 }}
                             >
                                 <div className={classes.filterText}>
-                                    <LocalizedText label={{id: 'sortBy', defaultMessage: 'Sort by'}} />
+                                    <LocalizedText label={localized.sortBy} />
                                 </div>
                                 <FormControl>
                                     <RadioGroup
@@ -584,9 +647,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                         defaultValue="all"
                                         name="radio-buttons-group"
                                         onChange={handleRoleSelect}
-                                        sx={{
+                                        sx={theme => ({
                                             '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
-                                                color: '#15C370',
+                                                color: theme.palette.primary.main,
                                             },
 
                                             '& .MuiFormControlLabel-root': {
@@ -594,20 +657,23 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                             },
                                             gap: '12px',
                                             marginTop: '16px',
-                                        }}
+                                        })}
                                     >
                                         {travelers.map(r => {
                                             return (
                                                 <FormControlLabel
                                                     value={r.value}
                                                     control={<Radio />}
-                                                    label={<LocalizedText label={{id: r.value, defaultMessage: r.title}} />}
+                                                    label={<LocalizedText label={localized[r.value as keyof typeof localized]} />}
                                                     key={r.id}
-                                                    sx={{
+                                                    sx={theme => ({
                                                         '& .MuiTypography-root': {
-                                                            color: r.value === selectedRole ? '#15C370' : '#838383', // Change colors as needed
+                                                            color:
+                                                                r.value === selectedRole
+                                                                    ? theme.palette.primary.main
+                                                                    : theme.palette.text.secondary, // Change colors as needed
                                                         },
-                                                    }}
+                                                    })}
                                                 />
                                             );
                                         })}
@@ -621,7 +687,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit p-2 cursor-pointer duration-200 font-boldSans"
                                 >
                                     <CgArrowLongLeft />
-                                    <LocalizedText label={{id: 'resetRole', defaultMessage: 'Reset role'}} />
+                                    <LocalizedText label={localized.resetRole} />
                                 </div>
                             </div>
                         ) : null}
@@ -640,9 +706,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                         defaultValue="all"
                                         name="radio-buttons-group"
                                         onChange={handleRoleSelect}
-                                        sx={{
+                                        sx={theme => ({
                                             '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
-                                                color: '#15C370',
+                                                color: theme.palette.primary.main,
                                             },
 
                                             '& .MuiFormControlLabel-root': {
@@ -650,20 +716,23 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                             },
                                             gap: '12px',
                                             marginTop: '16px',
-                                        }}
+                                        })}
                                     >
                                         {customers.map(r => {
                                             return (
                                                 <FormControlLabel
                                                     value={r.value}
                                                     control={<Radio />}
-                                                    label={<LocalizedText label={{id: r.value, defaultMessage: r.title}} />}
+                                                    label={<LocalizedText label={localized[r.value as keyof typeof localized]} />}
                                                     key={r.id}
-                                                    sx={{
+                                                    sx={theme => ({
                                                         '& .MuiTypography-root': {
-                                                            color: r.value === selectedRole ? '#15C370' : '#838383', // Change colors as needed
+                                                            color:
+                                                                r.value === selectedRole
+                                                                    ? theme.palette.primary.main
+                                                                    : theme.palette.text.secondary,
                                                         },
-                                                    }}
+                                                    })}
                                                 />
                                             );
                                         })}
@@ -677,7 +746,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     className={classes.goBackFilter}
                                 >
                                     <CgArrowLongLeft />
-                                    <LocalizedText label={{id: 'resetRole', defaultMessage: 'Reset role'}} />
+                                    <LocalizedText label={localized.resetRole} />
                                 </div>
                             </div>
                         ) : null}
@@ -723,7 +792,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 <div className={classes.textContainer}>
                                     <div className={classes.chatItemName}>Eelow</div>
                                     <p className={classes.chatItemSubtext}>
-                                        <LocalizedText label={{id: 'helpSupport', defaultMessage: 'help and support'}} />
+                                        <LocalizedText label={localized.helpSupport} />
                                     </p>
                                 </div>
                             </div>

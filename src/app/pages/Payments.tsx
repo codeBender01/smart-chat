@@ -8,6 +8,7 @@ import {CustomTheme} from '@style';
 import CustomButton from '@components/Button';
 
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -96,6 +97,57 @@ function a11yProps(index: number) {
     };
 }
 
+const localized = defineMessages({
+    payments: {
+        id: 'Payments_payments',
+        defaultMessage: 'Payments',
+    },
+    payouts: {
+        id: 'Payments_payouts',
+        defaultMessage: 'Payouts',
+    },
+    manage: {
+        id: 'Payments_manage',
+        defaultMessage: 'You can manage your payments and payouts',
+    },
+    yourPayments: {
+        id: 'Payments_yourPayments',
+        defaultMessage: 'Your payments',
+    },
+    seeAllPayments: {
+        id: 'Payments_seeAllPayments',
+        defaultMessage: 'See all your payments and refunds',
+    },
+    managePayments: {
+        id: 'Payments_managePayments',
+        defaultMessage: 'Manage payments',
+    },
+    paymentsMethod: {
+        id: 'Payments_paymentsMethod',
+        defaultMessage: 'Payments method',
+    },
+    addPayment: {
+        id: 'Payments_addPayment',
+        defaultMessage: 'Add and manage your payment methods',
+    },
+    addPaymentBtn: {
+        id: 'Payments_addPaymentBtn',
+        defaultMessage: 'Add payment method',
+    },
+    howReceivePayments: {
+        id: 'Payments_howReceivePayments',
+        defaultMessage: 'How can you receive your payouts',
+    },
+    addPayoutMethod: {
+        id: 'Payments_addPayoutMethod',
+        defaultMessage: 'Add payout method so we know where to send your money',
+    },
+    addPayoutBtn: {
+        id: 'Payments_addPayoutBtn',
+        defaultMessage: 'Add payout method',
+    },
+});
+
 const Payments: FC = () => {
     const [tabIndex, setTabIndex] = useState(0);
 
@@ -111,12 +163,12 @@ const Payments: FC = () => {
         <div className={classes.container}>
             <div className={classes.headerText}>
                 <Typography variant="h2">
-                    <LocalizedText label={{id: 'payments'}} />
+                    <LocalizedText label={localized.payments} />
                 </Typography>
             </div>
             <p className={classes.descriptionText}>
                 <Typography variant="body1">
-                    <LocalizedText label={{id: 'manage'}} />
+                    <LocalizedText label={localized.manage} />
                 </Typography>
             </p>
             <Box sx={{marginTop: 2}}>
@@ -151,7 +203,7 @@ const Payments: FC = () => {
                             },
                         }}
                         disableRipple
-                        label={<LocalizedText label={{id: 'payments'}} />}
+                        label={<LocalizedText label={localized.payments} />}
                         {...a11yProps(0)}
                     />
                     <Tab
@@ -167,7 +219,7 @@ const Payments: FC = () => {
                             },
                         }}
                         disableRipple
-                        label={<LocalizedText label={{id: 'payouts'}} />}
+                        label={<LocalizedText label={localized.payouts} />}
                         {...a11yProps(1)}
                     />
                 </Tabs>
@@ -175,10 +227,10 @@ const Payments: FC = () => {
             <CustomTabPanel value={tabIndex} index={0}>
                 <div className={classes.tabPanelContainer}>
                     <div className={classes.sectionTitle}>
-                        <LocalizedText label={{id: 'yourPayments'}} />
+                        <LocalizedText label={localized.yourPayments} />
                     </div>
                     <p className={classes.sectionDescription}>
-                        <LocalizedText label={{id: 'seeAllPayments'}} />
+                        <LocalizedText label={localized.seeAllPayments} />
                     </p>
                     <Button
                         disableElevation
@@ -200,16 +252,16 @@ const Payments: FC = () => {
                         }}
                     >
                         <Typography variant="button">
-                            <LocalizedText label={{id: 'managePayments'}} />
+                            <LocalizedText label={localized.managePayments} />
                         </Typography>
                     </Button>
                 </div>
                 <div className={`${classes.tabPanelContainer} mt-6`}>
                     <div className={classes.sectionTitle}>
-                        <LocalizedText label={{id: 'paymentsMethod'}} />
+                        <LocalizedText label={localized.paymentsMethod} />
                     </div>
                     <p className={classes.sectionDescription}>
-                        <LocalizedText label={{id: 'addPayment'}} />
+                        <LocalizedText label={localized.addPayment} />
                     </p>
                     <Button
                         disableElevation
@@ -231,7 +283,7 @@ const Payments: FC = () => {
                         }}
                     >
                         <Typography variant="button">
-                            <LocalizedText label={{id: 'addPaymentBtn'}} />
+                            <LocalizedText label={localized.addPaymentBtn} />
                         </Typography>
                     </Button>
                 </div>
@@ -239,15 +291,15 @@ const Payments: FC = () => {
             <CustomTabPanel value={tabIndex} index={1}>
                 <div className={classes.tabPanelContainerWide}>
                     <div className={classes.sectionTitle}>
-                        <LocalizedText label={{id: 'howReceivePayments'}} />
+                        <LocalizedText label={localized.howReceivePayments} />
                     </div>
                     <p className={classes.sectionDescription}>
-                        <LocalizedText label={{id: 'addPayoutMethod'}} />
+                        <LocalizedText label={localized.addPayoutMethod} />
                     </p>
 
                     <div className="self-end">
                         <CustomButton closeModal={() => {}} width="auto" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                            <LocalizedText label={{id: 'save'}} />
+                            <LocalizedText label={localized.addPayoutBtn} />
                         </CustomButton>
                     </div>
                 </div>

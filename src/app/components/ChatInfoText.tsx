@@ -7,7 +7,10 @@ import LocalizedText from '@components/localize/LocalizedText';
 import {CustomTheme} from '@style';
 
 interface ChatInfoTextProps {
-    text: string;
+    text: {
+        id: string;
+        defaultMessage: string;
+    };
     bgColor: string;
 }
 
@@ -33,7 +36,7 @@ const ChatInfoText: FC<ChatInfoTextProps> = ({text, bgColor}) => {
                 backgroundColor: bgColor,
             }}
         >
-            <LocalizedText label={{id: text}} />
+            <LocalizedText label={text} />
         </div>
     );
 };

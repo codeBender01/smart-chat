@@ -5,8 +5,6 @@ import {makeStyles} from '@mui/styles';
 
 import {useTypedSelector} from '@store/initStore';
 
-import messages from '../../common/lang';
-
 import {CustomTheme, CustomThemeProvider} from '@style';
 import {ModalProvider} from '@components/modal/ModalProvider';
 
@@ -39,13 +37,8 @@ function App() {
         console.log(lang);
     }, [lang]);
 
-    const messagesForProvider = Object.entries(messages[lang]).reduce((acc, [key, message]) => {
-        acc[key] = message.defaultMessage;
-        return acc;
-    }, {} as Record<string, string>);
-
     return (
-        <IntlProvider messages={messagesForProvider} locale={lang}>
+        <IntlProvider locale={lang}>
             <CustomThemeProvider locale={lang}>
                 <BrowserRouter>
                     <ModalProvider>

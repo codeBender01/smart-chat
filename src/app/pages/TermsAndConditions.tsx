@@ -1,6 +1,7 @@
 import {FC} from 'react';
 
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
@@ -34,6 +35,13 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    welcome: {
+        id: 'TermsAndConditions_welcome',
+        defaultMessage: 'Welcome to Eelow',
+    },
+});
+
 const TermsAndConditions: FC = () => {
     const classes = useStyles();
 
@@ -41,7 +49,7 @@ const TermsAndConditions: FC = () => {
         <div className={classes.card}>
             <div>
                 <h3 className={classes.title}>
-                    <LocalizedText label={{id: 'welcome'}} />
+                    <LocalizedText label={localized.welcome} />
                 </h3>
                 <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
@@ -58,7 +66,7 @@ const TermsAndConditions: FC = () => {
             </div>
             <div>
                 <h3 className={classes.title}>
-                    <LocalizedText label={{id: 'welcome'}} />
+                    <LocalizedText label={localized.welcome} />
                 </h3>
                 <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
@@ -75,7 +83,7 @@ const TermsAndConditions: FC = () => {
             </div>
             <div>
                 <h3 className={classes.title}>
-                    <LocalizedText label={{id: 'welcome'}} />
+                    <LocalizedText label={localized.welcome} />
                 </h3>
                 <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae
@@ -92,7 +100,7 @@ const TermsAndConditions: FC = () => {
             </div>
             <div>
                 <h3 className={classes.title}>
-                    <LocalizedText label={{id: 'welcome'}} />
+                    <LocalizedText label={localized.welcome} />
                 </h3>
                 <p className={classes.description}>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet nisi ac nibh tristique tempus. Fusce vitae

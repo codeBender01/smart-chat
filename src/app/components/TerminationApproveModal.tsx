@@ -2,6 +2,7 @@ import {FC, useContext, useState} from 'react';
 import {Button} from '@mui/material';
 
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 
 import {ModalContext} from '@components/modal/ModalProvider';
 import {ModalContent} from '@components/modal/ModalContent';
@@ -51,6 +52,33 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    deactivated: {
+        id: 'TerminationApproveModal_deactivated',
+        defaultMessage: 'Your account has been deactivated',
+    },
+    goToMain: {
+        id: 'TerminationApproveModal_goToMain',
+        defaultMessage: 'Go to Main page',
+    },
+    areYouSureDeactivate: {
+        id: 'TerminationApproveModal_areYouSureDeactivate',
+        defaultMessage: 'Are you sure that you want to deactivate your account?',
+    },
+    youWontBeAble: {
+        id: 'TerminationApproveModal_youWontBeAble',
+        defaultMessage: "You won't be able to recover your account",
+    },
+    keepAccounnt: {
+        id: 'TerminationApproveModal_keepAccounnt',
+        defaultMessage: 'Keep my account',
+    },
+    deactivate: {
+        id: 'TerminationApproveModal_deactivate',
+        defaultMessage: 'Deactivate',
+    },
+});
+
 const TerminationApproveModal: FC = () => {
     const [isDeactivated, setIsDeactivated] = useState(false);
 
@@ -65,7 +93,7 @@ const TerminationApproveModal: FC = () => {
                     {isDeactivated ? (
                         <div className={classes.deactivatedContainer}>
                             <div className={classes.deactivatedText}>
-                                <LocalizedText label={{id: 'deactivated'}} />
+                                <LocalizedText label={localized.deactivated} />
                             </div>
                             <Button
                                 sx={{
@@ -84,28 +112,24 @@ const TerminationApproveModal: FC = () => {
                                 }}
                                 onClick={closeModal}
                             >
-                                <LocalizedText label={{id: 'goToMain'}} />
+                                <LocalizedText label={localized.goToMain} />
                             </Button>
                         </div>
                     ) : (
                         <div>
                             <div className={classes.mainText}>
-                                <LocalizedText
-                                    label={{
-                                        id: 'areYouSureDeactivate',
-                                    }}
-                                />
+                                <LocalizedText label={localized.areYouSureDeactivate} />
                             </div>
                             <p className={classes.defaultText}>
-                                <LocalizedText label={{id: 'youWontBeAble'}} />
+                                <LocalizedText label={localized.youWontBeAble} />
                             </p>
 
                             <div className={classes.buttonContainer}>
                                 <CustomButton closeModal={closeModal} width="auto" bgcolor="#15C370" color="#fff" borderColor="transparent">
-                                    <LocalizedText label={{id: 'keepAccount'}} />
+                                    <LocalizedText label={localized.keepAccounnt} />
                                 </CustomButton>
                                 <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
-                                    <LocalizedText label={{id: 'deactivate'}} />
+                                    <LocalizedText label={localized.deactivate} />
                                 </CustomButton>
                             </div>
                         </div>
@@ -140,7 +164,7 @@ const TerminationApproveModal: FC = () => {
             }}
             onClick={handleOpenModal}
         >
-            <LocalizedText label={{id: 'deactivate'}} />
+            <LocalizedText label={localized.deactivate} />
         </Button>
     );
 };

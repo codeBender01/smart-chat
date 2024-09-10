@@ -9,6 +9,7 @@ import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
 
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 
 const links = [
     {
@@ -123,7 +124,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontSize: '18px',
         borderBottomWidth: '1px',
         borderColor: theme.palette.secondary.light,
-        color: '#242136',
+        color: theme.custom.palette.newColors.sectionTitle,
         '&:hover': {
             backgroundColor: theme.custom.palette.newColors.lightGreen, // Replace with the value of lightGreen
             color: theme.palette.primary.main, // Replace with the value of logoGreen
@@ -139,6 +140,41 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    termsOfUse: {
+        id: 'MainLayout_termsOfUse',
+        defaultMessage: 'Terms of Use',
+    },
+    verification: {
+        id: 'MainLayout_verification',
+        defaultMessage: 'Verification',
+    },
+    privacy: {
+        id: 'MainLayout_privacy',
+        defaultMessage: 'Privacy Policy',
+    },
+    cookies: {
+        id: 'MainLayout_cookies',
+        defaultMessage: 'Cookies Policy',
+    },
+    general: {
+        id: 'MainLayout_general',
+        defaultMessage: 'General terms and conditions for delivery sharing',
+    },
+    charges: {
+        id: 'MainLayout_charges',
+        defaultMessage: 'Charges and Payment',
+    },
+    lastUpdated: {
+        id: 'MainLayout_lastUpdated',
+        defaultMessage: 'Last updated',
+    },
+    terms: {
+        id: 'MainLayout_terms',
+        defaultMessage: 'Terms and Conditions',
+    },
+});
+
 const MainLayout: FC = () => {
     const isMobile = useMediaQuery({query: '(max-width: 768px)'});
 
@@ -153,10 +189,10 @@ const MainLayout: FC = () => {
             <Header />
             <div className={classes.contentContainer}>
                 <h1 className={`${isMobile ? 'text-[36px]' : 'text-[48px]'} ${classes.headerText}`}>
-                    <LocalizedText label={{id: 'terms'}} />
+                    <LocalizedText label={localized.terms} />
                 </h1>
                 <p className={classes.lastUpdatedText}>
-                    <LocalizedText label={{id: 'lastUpdated'}} />: 06.04.2023
+                    <LocalizedText label={localized.lastUpdated} />: 06.04.2023
                 </p>
                 <div className={classes.layoutContainer}>
                     {isMobile ? (
@@ -170,7 +206,7 @@ const MainLayout: FC = () => {
                                     }}
                                     className={`${classes.link} ${l.label === activeTab ? classes.activeLink : ''}`}
                                 >
-                                    <LocalizedText label={{id: l.value}} />
+                                    <LocalizedText label={localized[l.value as keyof typeof localized]} />
                                 </li>
                             ))}
                         </ul>
@@ -182,7 +218,7 @@ const MainLayout: FC = () => {
                                     key={l.label}
                                     className={`${classes.link} ${l.label === activeTab ? classes.activeLink : ''}`}
                                 >
-                                    <LocalizedText label={{id: l.value}} />
+                                    <LocalizedText label={localized[l.value as keyof typeof localized]} />
                                 </li>
                             ))}
                         </ul>

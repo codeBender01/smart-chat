@@ -2,6 +2,7 @@ import {FC} from 'react';
 import {PiGlobe} from 'react-icons/pi';
 
 import LocalizedText from '@components/localize/LocalizedText';
+import {defineMessages} from 'react-intl';
 
 import facebook from '../../common/assets/facebook.png';
 import instagram from '../../common/assets/instagram.png';
@@ -10,7 +11,6 @@ import telegram from '../../common/assets/telegram.png';
 import twitter from '../../common/assets/twitter.png';
 
 import {makeStyles} from '@mui/styles';
-import {display} from '@mui/system';
 import {CustomTheme} from '@style';
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
@@ -163,6 +163,33 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
+const localized = defineMessages({
+    weNeed: {
+        id: 'Footer_weNeed',
+        defaultMessage: 'We need each other',
+    },
+    company: {
+        id: 'Footer_company',
+        defaultMessage: 'Company',
+    },
+    terms: {
+        id: 'Footer_terms',
+        defaultMessage: 'Terms and Conditions',
+    },
+    ourBlog: {
+        id: 'Footer_ourBlog',
+        defaultMessage: 'Our Blog',
+    },
+    alwaysInTouch: {
+        id: 'Footer_alwaysInTouch',
+        defaultMessage: 'We are always in touch!',
+    },
+    youCanWrite: {
+        id: 'Footer_youCanWrite',
+        defaultMessage: 'You can write us a letter or call the numbers',
+    },
+});
+
 const Footer: FC = () => {
     const classes = useStyles();
 
@@ -175,7 +202,7 @@ const Footer: FC = () => {
                             <img className={classes.logoImage} src={logo} alt="Eelow" />
                         </div>
                         <p className={classes.descriptionText}>
-                            <LocalizedText label={{id: 'weNeed'}} />
+                            <LocalizedText label={localized.weNeed} />
                         </p>
                         <div className={classes.languageSelector}>
                             <PiGlobe size={24} />
@@ -199,24 +226,24 @@ const Footer: FC = () => {
                     <div className={classes.linksContainer}>
                         <div className={classes.companyLinks}>
                             <div className={classes.sectionTitle}>
-                                <LocalizedText label={{id: 'company'}} />
+                                <LocalizedText label={localized.company} />
                             </div>
                             <ul>
                                 <li className={classes.linkItem}>
-                                    <LocalizedText label={{id: 'terms'}} />
+                                    <LocalizedText label={localized.terms} />
                                 </li>
                                 <li className={classes.linkItem}>
-                                    <LocalizedText label={{id: 'ourBlog'}} />
+                                    <LocalizedText label={localized.terms} />
                                 </li>
                             </ul>
                         </div>
                         <div className={classes.companyLinks}>
                             <div className={classes.sectionTitle}>
-                                <LocalizedText label={{id: 'alwaysInTouch'}} />
+                                <LocalizedText label={localized.alwaysInTouch} />
                             </div>
                             <ul>
                                 <li className={classes.noteText}>
-                                    <LocalizedText label={{id: 'youCanWrite'}} />
+                                    <LocalizedText label={localized.youCanWrite} />
                                 </li>
                                 <li className={classes.contactInfo}>(123) 456 789</li>
                                 <li className={classes.contactInfo}>example@gmail.com</li>
