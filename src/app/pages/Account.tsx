@@ -140,7 +140,6 @@ const localized = defineMessages({
 const Account: FC = () => {
     const [reason, setReason] = useState('');
     const [isReasonSelected, setIsReasonSelected] = useState(false);
-    const [isTerminate, setIsTerminate] = useState(false);
 
     const intl = useIntl();
 
