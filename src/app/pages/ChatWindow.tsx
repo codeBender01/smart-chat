@@ -136,7 +136,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         backgroundColor: theme.palette.secondary.contrastText, // Replace with the value of bg-activeChatGray
         borderRadius: '10px',
         borderBottomRightRadius: 0,
-        padding: '0.75rem 1rem',
+        padding: '0.5rem',
         fontFamily: 'Open Sans, sans-serif',
         color: theme.palette.text.primary, // Replace with the value of textColor
     },
@@ -144,9 +144,15 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         backgroundColor: theme.palette.secondary.contrastText, // Replace with the value of bg-activeChatGray
         borderRadius: '10px',
         borderBottomLeftRadius: 0,
-        padding: '0.75rem 1rem',
+        padding: '0.5rem',
         fontFamily: 'Open Sans, sans-serif',
         color: theme.palette.text.primary, // Replace with the value of textColor
+    },
+
+    messageTime: {
+        fontSize: '14px',
+        color: theme.palette.text.secondary,
+        marginLeft: '8px',
     },
     suggestionContainer: {
         display: 'flex',
@@ -503,7 +509,10 @@ const ChatWindow: FC = () => {
                                     <MdEdit />
                                     <LocalizedText label={localized.editTheOffer} />
                                 </div>
-                                <div className={`${classes.optionItem} ${classes.reportItem}`}>
+                                <div
+                                    onClick={() => navigate('/chat-view/support')}
+                                    className={`${classes.optionItem} ${classes.reportItem}`}
+                                >
                                     <IoIosInformationCircleOutline />
                                     <LocalizedText label={localized.reportProblem} />
                                 </div>
@@ -536,7 +545,10 @@ const ChatWindow: FC = () => {
                 ) : (
                     <div className={classes.messageContainer}>
                         <div className={`${classes.messageWrapper} ${classes.senderMessage}`}>
-                            <div className={classes.messageBubbleLeft}>Hello, can you bring my box with you?</div>
+                            <div className={classes.messageBubbleLeft}>
+                                Hello, can you bring my box with you?
+                                <span className={classes.messageTime}>12:00</span>
+                            </div>
                             <div
                                 className={classes.logoIcon}
                                 style={{
@@ -554,12 +566,18 @@ const ChatWindow: FC = () => {
                                     backgroundImage: `url(${profile1})`,
                                 }}
                             ></div>
-                            <div className={classes.messageBubbleRight}>Hello, Yes I can</div>
+                            <div className={classes.messageBubbleRight}>
+                                Hello, Yes I can
+                                <span className={classes.messageTime}>12:01</span>
+                            </div>
                         </div>
                         {messagesList.map(val => {
                             return (
                                 <div className={`${classes.messageWrapper} ${classes.senderMessage}`}>
-                                    <div className={classes.messageBubbleLeft}>{val}</div>
+                                    <div className={classes.messageBubbleLeft}>
+                                        {val}
+                                        <span className={classes.messageTime}>12:01</span>
+                                    </div>
                                     <div
                                         className={classes.logoIcon}
                                         style={{

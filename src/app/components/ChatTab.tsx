@@ -12,6 +12,10 @@ import profile1 from '../../common/assets/profile1.jpeg';
 import profile2 from '../../common/assets/profile2.jpeg';
 import {CustomTheme} from '@style';
 
+import {useTypedSelector} from '@store/initStore';
+import {setDealUpdate} from '@store/dealUpdateSlice';
+import {useDispatch} from 'react-redux';
+
 interface ChatTabProps {
     name: string;
     isPackage: boolean;
@@ -43,6 +47,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         alignItems: 'flex-end',
         backgroundPosition: 'top',
         backgroundSize: 'cover',
+        position: 'relative',
     },
     iconContainer: {
         width: '24px',
@@ -95,7 +100,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
     textSecondary: {
         color: theme.palette.text.secondary,
-        fontSize: '12px',
+        fontSize: '14px',
         fontFamily: 'Open Sans',
         textTransform: 'uppercase',
     },
@@ -175,23 +180,39 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontWeight: '600',
         marginLeft: '3px',
     },
+    secondaryLogo: {
+        width: '32px',
+        height: '32px',
+        borderRadius: '50%', // equivalent to rounded-round
+        position: 'absolute',
+        bottom: '-15%',
+        right: '-10%',
+        backgroundPosition: 'top',
+        backgroundSize: 'cover',
+    },
 }));
 
 const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColor, chatId}) => {
     const navigate = useNavigate();
     const location = useLocation();
+    const dispatch = useDispatch();
 
     const isMobile = useMediaQuery({query: '(max-width: 850px)'});
     const classes = useStyles();
+
+    const isDealApproved = useTypedSelector(state => state.dealUpdate.isDealCompleted);
 
     return (
         <>
             <div
                 onClick={() => {
                     if (isMobile) {
+                        dispatch(setDealUpdate(false));
                         navigate(`/chat-view-mobile/${chatId}`, {state: isPackage});
                         return;
                     }
+                    dispatch(setDealUpdate(false));
+
                     navigate(`/chat-view/${chatId}`, {state: isPackage});
                 }}
                 className={classes.container}
@@ -214,6 +235,17 @@ const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColo
                             <IoCarSharp />
                         </div>
                     )}
+
+                    {isDealApproved && location.pathname.includes(`/chat-view/${chatId}`) ? (
+                        <div
+                            className={classes.secondaryLogo}
+                            style={{
+                                backgroundImage: `url(${profile2})`,
+                                backgroundPosition: 'top',
+                                backgroundSize: 'cover',
+                            }}
+                        ></div>
+                    ) : null}
                 </div>
                 <div className={classes.flex1}>
                     <div className={classes.flexBetween}>

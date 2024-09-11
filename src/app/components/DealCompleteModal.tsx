@@ -1,5 +1,6 @@
 import {FC, SetStateAction, useContext, Dispatch} from 'react';
-import {Button, createTheme, FormControl, Rating, TextField, ThemeProvider} from '@mui/material';
+import {Button, FormControl, Rating, TextField} from '@mui/material';
+import {useLocation} from 'react-router-dom';
 
 import LocalizedText from '@components/localize/LocalizedText';
 import {useIntl} from 'react-intl';
@@ -11,6 +12,9 @@ import CustomButton from '@components/Button';
 
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
+
+import {setDealUpdate} from '@store/dealUpdateSlice';
+import {useDispatch} from 'react-redux';
 
 interface DealCompletedModalProps {
     setIsDealApproved: Dispatch<SetStateAction<boolean>>;
@@ -82,8 +86,10 @@ const localized = defineMessages({
 
 const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) => {
     const intl = useIntl();
+    const location = useLocation();
 
     const classes = useStyles();
+    const dispatch = useDispatch();
 
     const {openModal, closeModal} = useContext(ModalContext);
 
@@ -112,10 +118,9 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                     <FormControl
                         sx={{
                             marginTop: 2,
-                            '& .css-1m5g6k3-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                {
-                                    borderColor: '#0000003B',
-                                },
+                            '& .MuiInputBase-root': {
+                                borderColor: '#0000003B',
+                            },
                             '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
                                 borderColor: '#0000003B',
                             },
@@ -181,7 +186,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                 transitionDuration: '500ms',
                 borderRadius: '20px',
                 height: '40px',
-                padding: '0 26px',
+                padding: '0 30px',
                 textTransform: 'capitalize',
                 '&:hover': {
                     backgroundColor: '#15C370',
@@ -190,6 +195,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
             }}
             onClick={() => {
                 setIsDealApproved(true);
+                dispatch(setDealUpdate(true));
                 handleOpenModal();
             }}
         >

@@ -87,9 +87,18 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
             fontFamily: 'MainSans, sans-serif',
         },
     },
+
+    vehicleInfo: {
+        color: theme.palette.text.secondary,
+        fontSize: '0.875rem',
+        fontFamily: 'MainSans, sans-serif',
+    },
     routeIcon: {
         color: '#333333',
         fontSize: '22px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     progressWrapper: {
         display: 'flex',
@@ -209,6 +218,7 @@ const TravelerModal: FC = () => {
                         </div>
                         <div className={classes.routeIcon}>
                             <IoIosSubway />
+                            <div className={classes.vehicleInfo}>BA2981</div>
                         </div>
                         <div className={classes.cityInfo}>
                             <div className="cityName">Minsk</div>

@@ -4,10 +4,12 @@ import thunk from 'redux-thunk';
 import {configureStore} from '@reduxjs/toolkit';
 
 import languageSlice from './languageSlice';
+import dealUpdateSlice from './dealUpdateSlice';
 
 const store = configureStore({
     reducer: {
         lang: languageSlice,
+        dealUpdate: dealUpdateSlice,
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(thunk),
 });

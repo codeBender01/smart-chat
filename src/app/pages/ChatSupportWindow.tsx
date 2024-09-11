@@ -143,12 +143,12 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     messageContainer: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '1.5rem',
+        gap: '1rem',
         zIndex: 10,
     },
     messageWrapper: {
         display: 'flex',
-        gap: '0.5rem',
+        gap: '1.2rem',
         alignItems: 'center',
     },
     logoIcon: {
@@ -251,6 +251,20 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         },
         transition: 'background-color 200ms',
     },
+    sugBubble: {
+        maxWidth: '110px',
+        width: '110px',
+        fontFamily: 'Open Sans, sans-serif',
+        color: theme.palette.text.primary,
+        fontWeight: '400',
+        fontSize: '16px',
+        borderRadius: '8px',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        overflowX: 'hidden',
+        padding: '4px 8px',
+        textAlign: 'center',
+    },
 }));
 
 const localized = defineMessages({
@@ -331,6 +345,12 @@ const ChatSupportWindow: FC = () => {
     const [dealOption, setDealOption] = useState('');
     const [textMessage, setTextMessage] = useState('');
     const [messagesList, setMessagesList] = useState<string[]>([]);
+    const [selectedSuggestion, setSelectedSuggestion] = useState({
+        label: '',
+        value: '',
+        colorCode: '',
+    });
+    const [isSugSelected, setIsSugSelected] = useState(false);
 
     const navigate = useNavigate();
     const intl = useIntl();
@@ -580,7 +600,7 @@ const ChatSupportWindow: FC = () => {
                             border: 'none',
                         },
                         '& .MuiInputBase-input': {
-                            padding: '12px 18px',
+                            padding: '12px ',
                             fontFamily: 'OpenReg, sans-serif',
                         },
                         '& .MuiInputBase-input:focus': {
@@ -610,7 +630,19 @@ const ChatSupportWindow: FC = () => {
                                             setIsSuggestionsOpen(!isSuggestionsOpen);
                                         }}
                                     >
-                                        <MdOutlineNewLabel size={24} color="#34434E" className={classes.inputIcon} />
+                                        {isSugSelected ? (
+                                            <div
+                                                style={{
+                                                    backgroundColor: selectedSuggestion.colorCode ? selectedSuggestion.colorCode : '',
+                                                }}
+                                                className={classes.sugBubble}
+                                            >
+                                                {selectedSuggestion.label}
+                                            </div>
+                                        ) : (
+                                            <MdOutlineNewLabel size={24} color="#34434E" className={classes.inputIcon} />
+                                        )}
+
                                         <div
                                             className={classes.suggestionsModal}
                                             style={{
@@ -620,7 +652,14 @@ const ChatSupportWindow: FC = () => {
                                         >
                                             {suggestions.map(sug => {
                                                 return (
-                                                    <div key={sug.label} onClick={() => {}} className={classes.suggestionsModalText}>
+                                                    <div
+                                                        key={sug.label}
+                                                        onClick={() => {
+                                                            setSelectedSuggestion(sug);
+                                                            setIsSugSelected(true);
+                                                        }}
+                                                        className={classes.suggestionsModalText}
+                                                    >
                                                         <LocalizedText label={localized[sug.value as keyof typeof localized]} />
                                                     </div>
                                                 );

@@ -33,7 +33,7 @@ const ChatView: FC = () => {
             <Header />
             <div className={classes.innerContainer}>
                 <ChatListSidebar isAdmin={location.pathname.includes('/admin')} />
-                <div className={!isMobile ? 'block w-[65%]' : 'hidden'}>
+                <div className={!isMobile ? 'block w-[70%]' : 'hidden'}>
                     <Outlet />
                 </div>
             </div>

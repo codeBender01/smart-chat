@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     container: {
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh',
+        overflow: 'hidden',
     },
     innerContainer: {
         width: '100%',

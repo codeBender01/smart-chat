@@ -139,15 +139,15 @@ const localized = defineMessages({
 
 const Account: FC = () => {
     const [reason, setReason] = useState('');
-    const [isReasonSelected, setIsReasonSelected] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
 
     const intl = useIntl();
 
     const classes = useStyles();
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent<string | string[]>) => {
         setReason(event.target.value as string);
-        setIsReasonSelected(true);
+        setIsDisabled(false);
     };
 
     return (
@@ -185,6 +185,7 @@ const Account: FC = () => {
                         id="demo-simple-select"
                         value={reason}
                         options={reasons}
+                        onChange={handleChange}
                         sx={{
                             padding: '0 12px',
                             '& .Mui-List': {
@@ -210,14 +211,14 @@ const Account: FC = () => {
                 <FormControl
                     fullWidth
                     sx={{
-                        height: isReasonSelected ? 'auto' : 0,
+                        height: reason === 'other' ? 'auto' : 0,
                         overflowY: 'hidden',
                         transition: 'all 0.6s',
                     }}
                 >
                     <TextField placeholder={intl.formatMessage(localized.leaveReason)} />
                 </FormControl>
-                <TerminationApproveModal />
+                <TerminationApproveModal disabled={isDisabled} />
             </div>
         </div>
     );

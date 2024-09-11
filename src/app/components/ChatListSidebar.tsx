@@ -132,13 +132,13 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     sidebarContainer: {
         width: '100%',
         backgroundColor: theme.palette.secondary.main,
-        padding: '16px',
+        padding: '16px 0',
         '@media (min-width: 850px)': {
-            minWidth: '380px',
-            width: '35%',
+            minWidth: '350px',
+            width: '30%',
         },
         '@media (min-width: 1024px)': {
-            minWidth: '450px',
+            // minWidth: '450px',
         },
     },
     innerContainer: {
@@ -222,7 +222,6 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         transition: 'all 200ms',
         fontFamily: 'Open Sans',
         fontWeight: '700',
-        marginTop: '25px',
         '&:hover': {
             opacity: 0.85,
         },
@@ -230,11 +229,12 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     scrollContainer: {
         overflowY: 'auto',
         maxHeight: '85vh',
-        paddingBottom: '12px',
+        paddingBottom: '30px',
         cursor: 'pointer',
     },
     contentContainer: {
-        minHeight: '100vh',
+        minHeight: '85vh',
+        padding: '0 16px',
     },
     chatItem: {
         width: '100%',
@@ -601,6 +601,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     defaultValue="All"
                                     name="radio-buttons-group"
                                     onChange={handleRoleSelect}
+                                    value={selectedRole}
                                     sx={theme => ({
                                         '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
                                             color: theme.palette.primary.main,
@@ -644,9 +645,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 <FormControl>
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
-                                        defaultValue="all"
                                         name="radio-buttons-group"
-                                        onChange={handleRoleSelect}
                                         sx={theme => ({
                                             '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
                                                 color: theme.palette.primary.main,
@@ -683,6 +682,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     onClick={e => {
                                         e.stopPropagation();
                                         setIsTraveler(false);
+                                        setSelectedRole('All');
                                     }}
                                     className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit p-2 cursor-pointer duration-200 font-boldSans"
                                 >
@@ -703,9 +703,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 <FormControl>
                                     <RadioGroup
                                         aria-labelledby="demo-radio-buttons-group-label"
-                                        defaultValue="all"
                                         name="radio-buttons-group"
-                                        onChange={handleRoleSelect}
                                         sx={theme => ({
                                             '& .css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked': {
                                                 color: theme.palette.primary.main,
@@ -742,6 +740,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     onClick={e => {
                                         e.stopPropagation();
                                         setIsCustomer(false);
+                                        setSelectedRole('All');
                                     }}
                                     className={classes.goBackFilter}
                                 >

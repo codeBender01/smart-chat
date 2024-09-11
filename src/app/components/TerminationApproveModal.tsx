@@ -79,7 +79,11 @@ const localized = defineMessages({
     },
 });
 
-const TerminationApproveModal: FC = () => {
+interface TerminationApproveModalProps {
+    disabled: boolean;
+}
+
+const TerminationApproveModal: FC<TerminationApproveModalProps> = ({disabled}) => {
     const [isDeactivated, setIsDeactivated] = useState(false);
 
     const {openModal, closeModal} = useContext(ModalContext);
@@ -163,6 +167,7 @@ const TerminationApproveModal: FC = () => {
                 },
             }}
             onClick={handleOpenModal}
+            disabled={disabled}
         >
             <LocalizedText label={localized.deactivate} />
         </Button>
