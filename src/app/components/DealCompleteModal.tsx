@@ -107,10 +107,10 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                         name="half-rating"
                         defaultValue={2.5}
                         precision={0.5}
-                        sx={{
-                            color: '#15C370',
+                        sx={theme => ({
+                            color: theme.palette.primary.main,
                             marginTop: '18px',
-                        }}
+                        })}
                     />
                     <div className={classes.textMd}>
                         <LocalizedText label={localized.leaveFeedback} />
@@ -178,9 +178,9 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
     return (
         <Button
             variant="contained"
-            sx={{
+            sx={theme => ({
                 zIndex: 5,
-                backgroundColor: '#15C370',
+                backgroundColor: theme.palette.primary.main,
                 fontFamily: 'OpenReg',
                 fontSize: 16,
                 transitionDuration: '500ms',
@@ -189,10 +189,10 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                 padding: '0 30px',
                 textTransform: 'capitalize',
                 '&:hover': {
-                    backgroundColor: '#15C370',
+                    backgroundColor: theme.palette.primary.main,
                     opacity: 0.8,
                 },
-            }}
+            })}
             onClick={() => {
                 setIsDealApproved(true);
                 dispatch(setDealUpdate(true));

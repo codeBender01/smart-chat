@@ -159,9 +159,9 @@ const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleR
                         </RadioGroup>
                     </FormControl>
                     <TextField
-                        sx={{
+                        sx={theme => ({
                             width: '100%',
-                            color: '#282D41',
+                            color: theme.palette.text.primary,
                             fontFamily: 'OpenReg',
                             marginTop: '10px',
                             marginBottom: '32px',
@@ -175,7 +175,7 @@ const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleR
                                     opacity: 0.8,
                                 },
                             },
-                        }}
+                        })}
                         placeholder="Email"
                     />
                     <div className={classes.buttonContainer}>

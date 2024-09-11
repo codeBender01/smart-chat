@@ -333,7 +333,7 @@ const AdminChatSupportWindow: FC = () => {
                                             </Button>
                                             <div className={classes.responseButtonDivider}></div>
                                             <Button
-                                                sx={{
+                                                sx={theme => ({
                                                     borderTopLeftRadius: 0,
                                                     borderBottomLeftRadius: 0,
                                                     backgroundColor: '#E0E0E0',
@@ -348,7 +348,7 @@ const AdminChatSupportWindow: FC = () => {
                                                         opacity: 0.85,
                                                         backgroundColor: '#E0E0E0',
                                                     },
-                                                }}
+                                                })}
                                                 variant="contained"
                                             >
                                                 <LocalizedText label={localized.no} />
@@ -399,12 +399,12 @@ const AdminChatSupportWindow: FC = () => {
                     placeholder={intl.formatMessage({
                         id: 'writeMessage',
                     })}
-                    sx={{
+                    sx={theme => ({
                         borderRadius: '12px',
                         backgroundColor: '#eee',
                         border: 'none',
                         width: '100%',
-                        color: '#282D41',
+                        color: theme.palette.text.primary,
                         fontFamily: 'OpenReg',
                         '& .MuiInputBase-input:focus': {
                             boxShadow: 'none',
@@ -418,11 +418,11 @@ const AdminChatSupportWindow: FC = () => {
                         },
                         input: {
                             '::placeholder': {
-                                color: '#282D41',
+                                color: theme.palette.text.primary,
                                 opacity: 1,
                             },
                         },
-                    }}
+                    })}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

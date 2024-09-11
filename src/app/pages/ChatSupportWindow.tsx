@@ -588,12 +588,12 @@ const ChatSupportWindow: FC = () => {
                     onChange={e => {
                         setTextMessage(e.target.value);
                     }}
-                    sx={{
+                    sx={theme => ({
                         borderRadius: '12px',
                         backgroundColor: '#eee',
                         border: 'none',
                         width: '100%',
-                        color: '#282D41',
+                        color: theme.palette.text.primary,
                         fontFamily: 'OpenReg',
 
                         '& fieldset': {
@@ -608,11 +608,11 @@ const ChatSupportWindow: FC = () => {
                         },
                         input: {
                             '::placeholder': {
-                                color: '#282D41',
+                                color: theme.palette.text.primary,
                                 opacity: 1,
                             },
                         },
-                    }}
+                    })}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">

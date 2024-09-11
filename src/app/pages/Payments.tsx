@@ -191,8 +191,8 @@ const Payments: FC = () => {
                     aria-label="basic tabs example"
                 >
                     <Tab
-                        sx={{
-                            color: '#838383',
+                        sx={theme => ({
+                            color: theme.palette.text.secondary,
                             paddingInline: '48px',
                             textTransform: 'none',
                             fontFamily: 'Open Sans, sans-serif',
@@ -201,14 +201,14 @@ const Payments: FC = () => {
                             '&.Mui-selected': {
                                 color: '#242136',
                             },
-                        }}
+                        })}
                         disableRipple
                         label={<LocalizedText label={localized.payments} />}
                         {...a11yProps(0)}
                     />
                     <Tab
-                        sx={{
-                            color: '#838383',
+                        sx={theme => ({
+                            color: theme.palette.text.secondary,
                             paddingInline: '48px',
                             textTransform: 'none',
                             fontFamily: 'Open Sans, sans-serif',
@@ -217,7 +217,7 @@ const Payments: FC = () => {
                             '&.Mui-selected': {
                                 color: '#242136',
                             },
-                        }}
+                        })}
                         disableRipple
                         label={<LocalizedText label={localized.payouts} />}
                         {...a11yProps(1)}
@@ -236,9 +236,9 @@ const Payments: FC = () => {
                         disableElevation
                         disableRipple
                         variant="contained"
-                        sx={{
-                            bgcolor: '#15C370',
-                            color: '#fff',
+                        sx={theme => ({
+                            bgcolor: theme.palette.primary.main,
+                            color: theme.palette.primary.contrastText,
                             alignSelf: 'flex-end',
                             marginTop: 3,
                             borderRadius: '20px',
@@ -246,10 +246,10 @@ const Payments: FC = () => {
                             textTransform: 'none',
                             fontFamily: 'OpenReg',
                             '&:hover': {
-                                bgcolor: '#15C370',
+                                bgcolor: theme.palette.primary.main,
                                 opacity: 0.8,
                             },
-                        }}
+                        })}
                     >
                         <Typography variant="button">
                             <LocalizedText label={localized.managePayments} />
@@ -267,9 +267,9 @@ const Payments: FC = () => {
                         disableElevation
                         disableRipple
                         variant="contained"
-                        sx={{
-                            bgcolor: '#15C370',
-                            color: '#fff',
+                        sx={theme => ({
+                            bgcolor: theme.palette.primary.main,
+                            color: theme.palette.primary.contrastText,
                             alignSelf: 'flex-end',
                             marginTop: 3,
                             borderRadius: '20px',
@@ -277,10 +277,10 @@ const Payments: FC = () => {
                             textTransform: 'none',
                             fontFamily: 'OpenReg',
                             '&:hover': {
-                                bgcolor: '#15C370',
+                                bgcolor: theme.palette.primary.main,
                                 opacity: 0.8,
                             },
-                        }}
+                        })}
                     >
                         <Typography variant="button">
                             <LocalizedText label={localized.addPaymentBtn} />

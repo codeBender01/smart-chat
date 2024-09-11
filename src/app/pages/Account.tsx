@@ -191,9 +191,7 @@ const Account: FC = () => {
                             '& .Mui-List': {
                                 maxHeight: '400px',
                             },
-                            '& input': {
-                                backgroundColor: 'red',
-                            },
+
                             '& .MuiOutlinedInput-notchedOutline': {
                                 borderColor: '#0000003B',
                             },

@@ -100,9 +100,9 @@ const TerminationApproveModal: FC<TerminationApproveModalProps> = ({disabled}) =
                                 <LocalizedText label={localized.deactivated} />
                             </div>
                             <Button
-                                sx={{
-                                    bgcolor: '#15C370',
-                                    color: '#fff',
+                                sx={theme => ({
+                                    bgcolor: theme.palette.primary.main,
+                                    color: theme.palette.primary.contrastText,
                                     marginTop: 2,
                                     borderRadius: '20px',
                                     textTransform: 'none',
@@ -110,10 +110,10 @@ const TerminationApproveModal: FC<TerminationApproveModalProps> = ({disabled}) =
                                     fontSize: '16px',
 
                                     '&:hover': {
-                                        bgcolor: '#15C370',
+                                        bgcolor: theme.palette.primary.main,
                                         opacity: 0.8,
                                     },
-                                }}
+                                })}
                                 onClick={closeModal}
                             >
                                 <LocalizedText label={localized.goToMain} />
@@ -149,23 +149,23 @@ const TerminationApproveModal: FC<TerminationApproveModalProps> = ({disabled}) =
             variant="outlined"
             disableElevation
             disableRipple
-            sx={{
+            sx={theme => ({
                 width: '120px',
                 alignSelf: 'flex-end',
                 borderRadius: '20px',
                 textTransform: 'none',
                 fontFamily: 'OpenReg',
                 backgroundColor: 'transparent',
-                borderColor: '#E2542C',
+                borderColor: theme.palette.error.light,
                 borderWidth: '1px',
-                color: '#E2542C',
+                color: theme.palette.error.light,
                 '&:hover': {
-                    bgcolor: '#E2542C',
+                    bgcolor: theme.palette.error.light,
                     opacity: 0.8,
-                    color: '#fff',
-                    borderColor: '#E2542C',
+                    color: theme.palette.primary.contrastText,
+                    borderColor: theme.palette.error.light,
                 },
-            }}
+            })}
             onClick={handleOpenModal}
             disabled={disabled}
         >

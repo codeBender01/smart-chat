@@ -621,11 +621,14 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                                 control={<Radio />}
                                                 label={<LocalizedText label={localized[r.value as keyof typeof localized]} />}
                                                 key={r.id}
-                                                sx={{
+                                                sx={theme => ({
                                                     '& .MuiTypography-root': {
-                                                        color: r.value === selectedRole ? '#15C370' : '#838383', // Change colors as needed
+                                                        color:
+                                                            r.value === selectedRole
+                                                                ? theme.palette.primary.main
+                                                                : theme.palette.text.secondary, // Change colors as needed
                                                     },
-                                                }}
+                                                })}
                                             />
                                         );
                                     })}
