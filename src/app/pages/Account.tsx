@@ -153,14 +153,10 @@ const Account: FC = () => {
     return (
         <div className={classes.container}>
             <div className={classes.accountText}>
-                <LocalizedText label={{id: 'account'}} />
+                <LocalizedText label={localized.account} />
             </div>
             <p className={classes.descriptionText}>
-                <LocalizedText
-                    label={{
-                        id: 'ifYouNeed',
-                    }}
-                />
+                <LocalizedText label={localized.ifYouNeed} />
             </p>
             <div className={classes.formContainer}>
                 <FormControl
@@ -186,16 +182,26 @@ const Account: FC = () => {
                         value={reason}
                         options={reasons}
                         onChange={handleChange}
-                        sx={{
+                        MenuProps={{
+                            MenuListProps: {
+                                sx: {
+                                    maxHeight: '450px',
+                                },
+                            },
+                        }}
+                        sx={theme => ({
                             padding: '0 12px',
-                            '& .Mui-List': {
-                                maxHeight: '400px',
+                            maxHeight: '450px',
+                            [theme.breakpoints.up(850)]: {
+                                '& .Mui-List': {
+                                    maxHeight: '400px',
+                                },
                             },
 
                             '& .MuiOutlinedInput-notchedOutline': {
                                 borderColor: '#0000003B',
                             },
-                        }}
+                        })}
                     >
                         {reasons.map(r => {
                             return (

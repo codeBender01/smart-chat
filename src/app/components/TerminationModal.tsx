@@ -99,6 +99,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         gap: '0.5rem',
         cursor: 'pointer',
         transition: 'opacity 0.2s',
+        fontWeight: '400',
         '&:hover': {
             opacity: 0.8,
         },
@@ -266,7 +267,7 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
 
     return (
         <div onClick={handleOpenModal} className={classes.alertBox}>
-            <IoMdCloseCircleOutline />
+            <IoMdCloseCircleOutline size={22} />
             <LocalizedText label={localized.terminateDeal} />
         </div>
     );

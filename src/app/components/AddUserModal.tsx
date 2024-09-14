@@ -1,4 +1,4 @@
-import {FC, useContext, ChangeEvent} from 'react';
+import {FC, useContext, ChangeEvent, useState, useEffect, memo} from 'react';
 import {FormControl, FormControlLabel, Radio, RadioGroup, TextField} from '@mui/material';
 import Typography from '@mui/material/Typography';
 
@@ -100,14 +100,19 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
 }));
 
-const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleRoleSelect}) => {
+const AddUserModal: FC<AdduserModalProps> = memo(({isEmailSent, selectedRole, handleRoleSelect}) => {
     const {openModal, closeModal} = useContext(ModalContext);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     const classes = useStyles();
 
+    useEffect(() => {
+        console.log(isButtonDisabled);
+    }, [isButtonDisabled]);
+
     const handleOpenModal = () => {
         openModal(
-            <ModalLayout title={''} key={selectedRole}>
+            <ModalLayout title={''}>
                 <div className={classes.container}>
                     <div className={classes.headerText}>
                         {isEmailSent ? (
@@ -177,13 +182,20 @@ const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleR
                             },
                         })}
                         placeholder="Email"
+                        onChange={e => {
+                            if (e.target.value === '') {
+                                setIsButtonDisabled(true);
+                                return;
+                            }
+                            setIsButtonDisabled(false);
+                        }}
                     />
                     <div className={classes.buttonContainer}>
                         <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
                             <LocalizedText label={localized.cancel} />
                         </CustomButton>
 
-                        <ApproveModal />
+                        <ApproveModal disabled={isButtonDisabled} />
                     </div>
                 </div>
             </ModalLayout>
@@ -195,6 +207,6 @@ const AddUserModal: FC<AdduserModalProps> = ({isEmailSent, selectedRole, handleR
             <AddUser />
         </div>
     );
-};
+});
 
 export default AddUserModal;

@@ -110,13 +110,15 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     sectionTitle: {
         fontFamily: 'Quicksand, sans-serif',
         fontSize: '24px',
-        fontWeight: 'bold',
+        fontWeight: '500',
     },
     linkItem: {
-        fontFamily: 'Quicksand, sans-serif',
+        fontFamily: 'Open Sans, sans-serif',
         color: theme.palette.text.primary,
         fontSize: '18px',
         cursor: 'pointer',
+        fontWeight: '400',
+
         '&:hover': {
             opacity: 0.8,
             transition: 'opacity 0.2s',
@@ -126,8 +128,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         },
     },
     contactInfo: {
-        fontFamily: 'Quicksand, sans-serif',
+        fontFamily: 'Open Sans, sans-serif',
         color: theme.palette.text.primary,
+        fontWeight: '400',
         fontSize: '20px',
         '&:not(:first-child)': {
             marginTop: '0.5rem',
@@ -135,9 +138,8 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
     noteText: {
         fontFamily: 'Open Sans, sans-serif',
-        color: theme.palette.text.primary,
+        color: theme.palette.text.secondary,
         fontSize: '18px',
-
         marginBottom: '1rem',
     },
     divider: {
@@ -233,7 +235,7 @@ const Footer: FC = () => {
                                     <LocalizedText label={localized.terms} />
                                 </li>
                                 <li className={classes.linkItem}>
-                                    <LocalizedText label={localized.terms} />
+                                    <LocalizedText label={localized.ourBlog} />
                                 </li>
                             </ul>
                         </div>

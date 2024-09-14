@@ -137,9 +137,6 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
             minWidth: '350px',
             width: '30%',
         },
-        '@media (min-width: 1024px)': {
-            // minWidth: '450px',
-        },
     },
     innerContainer: {
         display: 'flex',
@@ -217,11 +214,11 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         color: theme.palette.primary.main,
         fontSize: '16px',
         width: 'fit-content',
-        padding: '8px',
         cursor: 'pointer',
         transition: 'all 200ms',
         fontFamily: 'Open Sans',
         fontWeight: '700',
+        marginTop: '25px',
         '&:hover': {
             opacity: 0.85,
         },
@@ -419,6 +416,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                         }}
                     >
                         <Select
+                            disabled={isAdmin}
                             id="search-filter"
                             MenuProps={{
                                 MenuListProps: {
@@ -527,6 +525,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                     </FormControl>
                     <div className={classes.divider}></div>
                     <TextField
+                        disabled={isAdmin}
                         sx={theme => ({
                             width: '90%',
                             fontFamily: 'OpenReg',
@@ -573,6 +572,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                 <div className={classes.filterContainer}>
                     <div
                         onClick={e => {
+                            if (isAdmin) {
+                                return;
+                            }
                             e.stopPropagation();
                             setIsFilterOpen(!isFilterOpen);
                         }}
@@ -687,7 +689,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                         setIsTraveler(false);
                                         setSelectedRole('All');
                                     }}
-                                    className="flex items-center gap-2 text-logoGreen text-default hover:opacity-85 w-fit p-2 cursor-pointer duration-200 font-boldSans"
+                                    className={classes.goBackFilter}
                                 >
                                     <CgArrowLongLeft />
                                     <LocalizedText label={localized.resetRole} />

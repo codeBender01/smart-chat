@@ -21,7 +21,7 @@ export function ModalProvider({children}: ModalProviderProps) {
     const [modalContent, setModalContent] = React.useState((<div></div>) as JSX.Element);
 
     function openModal(content: JSX.Element, disableBackdropClick?: boolean) {
-        setModalContent(content);
+        setModalContent(React.cloneElement(content, {key: new Date().getTime()}));
         setOpen(true);
         if (disableBackdropClick) {
             setDisableBackdropClick(disableBackdropClick);
@@ -32,7 +32,7 @@ export function ModalProvider({children}: ModalProviderProps) {
         if (reason === 'backdropClick' && disableBackdropClick) {
             /* empty */
         } else {
-            setModalContent(<div></div>);
+            // setModalContent(<div></div>);
             setOpen(false);
             setDisableBackdropClick(false);
         }

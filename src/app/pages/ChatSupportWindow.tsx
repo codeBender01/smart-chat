@@ -3,7 +3,7 @@ import {BsPaperclip} from 'react-icons/bs';
 import {CgArrowLongLeft} from 'react-icons/cg';
 import {IoMdSend} from 'react-icons/io';
 import {MdOutlineNewLabel} from 'react-icons/md';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import ChatInfoText from '@app/components/ChatInfoText';
 import {InputAdornment, TextField} from '@mui/material';
 
@@ -154,6 +154,8 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     logoIcon: {
         width: '36px',
         height: '36px',
+        minHeight: '36px',
+        minWidth: '36px',
         borderRadius: '50%',
         backgroundPosition: 'top',
         backgroundSize: 'cover',
@@ -353,12 +355,17 @@ const ChatSupportWindow: FC = () => {
     const [isSugSelected, setIsSugSelected] = useState(false);
 
     const navigate = useNavigate();
+    const {state} = useLocation();
     const intl = useIntl();
 
     useEffect(() => {
         document.body.addEventListener('click', () => {
             setIsSuggestionsOpen(false);
         });
+
+        if (state) {
+            setIsMessageSent(true);
+        }
     }, []);
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -451,7 +458,7 @@ const ChatSupportWindow: FC = () => {
                             ></div>
                         </div>
 
-                        {option === 'help' ? (
+                        {option === 'help' || state ? (
                             <>
                                 <ChatInfoText text={localized.askForHelpStarted} bgColor="#EFFFF8" />
                                 <div className={classes.senderMessage}>

@@ -131,6 +131,13 @@ const Language: FC = () => {
                         value={language}
                         options={reasons}
                         onChange={handleChange}
+                        MenuProps={{
+                            MenuListProps: {
+                                sx: {
+                                    maxHeight: 'auto',
+                                },
+                            },
+                        }}
                         sx={{
                             padding: '0 12px',
                             fontSize: '16px',

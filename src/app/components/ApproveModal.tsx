@@ -1,4 +1,4 @@
-import {FC, useContext} from 'react';
+import {FC, useContext, useEffect} from 'react';
 import {IoCheckmarkCircleOutline} from 'react-icons/io5';
 import {Button, Box, Typography} from '@mui/material';
 import LocalizedText from '@components/localize/LocalizedText';
@@ -23,8 +23,16 @@ const localized = defineMessages({
     },
 });
 
-const ApproveModal: FC = () => {
+interface ApproveModalProps {
+    disabled?: boolean;
+}
+
+const ApproveModal: FC<ApproveModalProps> = ({disabled}) => {
     const {openModal, closeModal} = useContext(ModalContext);
+
+    useEffect(() => {
+        console.log(disabled);
+    }, [disabled]);
 
     const handleOpenModal = () => {
         openModal(
@@ -76,6 +84,7 @@ const ApproveModal: FC = () => {
                 variant="contained"
                 disableElevation
                 disableRipple
+                disabled={disabled}
                 sx={theme => ({
                     bgcolor: theme.palette.primary.main,
                     color: '#fff',

@@ -123,7 +123,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         },
         '& div:nth-child(2)': {
             width: '1px',
-            height: '32px',
+            height: '28px',
             backgroundColor: theme.palette.text.primary,
         },
         '& div:last-child': {
@@ -208,12 +208,16 @@ const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColo
                 onClick={() => {
                     if (isMobile) {
                         dispatch(setDealUpdate(false));
-                        navigate(`/chat-view-mobile/${chatId}`, {state: isPackage});
+                        navigate(`/chat-view-mobile/${chatId}`, {
+                            state: chatId,
+                        });
                         return;
                     }
                     dispatch(setDealUpdate(false));
 
-                    navigate(`/chat-view/${chatId}`, {state: isPackage});
+                    navigate(`/chat-view/${chatId}`, {
+                        state: chatId,
+                    });
                 }}
                 className={classes.container}
                 style={{

@@ -1,10 +1,10 @@
-import React, {FC, useState, ChangeEvent} from 'react';
+import React, {FC, useState, ChangeEvent, useEffect} from 'react';
 import {BsPaperclip} from 'react-icons/bs';
 import {CgArrowLongLeft} from 'react-icons/cg';
 import {IoMdMore, IoMdSend, IoIosInformationCircleOutline} from 'react-icons/io';
 import {MdEdit} from 'react-icons/md';
 import {TbRefresh} from 'react-icons/tb';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import '../../scrollbar.css';
 import AddUserModal from '@app/components/AddUserModal';
 import ChatInfoText from '@app/components/ChatInfoText';
@@ -263,10 +263,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontFamily: 'Quicksand, sans-serif', // equivalent to font-boldQuick
         fontWeight: '700',
         marginRight: theme.spacing(2), // equivalent to mr-8
-        display: 'none',
-        [theme.breakpoints.up('lg')]: {
-            display: 'block',
-        },
+        // [theme.breakpoints.up('lg')]: {
+        //     display: 'block',
+        // },
     },
     refreshIcon: {
         fontSize: '1.125rem',
@@ -311,6 +310,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         color: theme.palette.text.primary,
         fontFamily: 'Open Sans, sans-serif',
         gap: theme.spacing(0.5),
+        fontWeight: '400',
         '&:hover': {
             opacity: 0.8,
         },
@@ -345,6 +345,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontSize: '12px',
         color: theme.palette.text.secondary,
         fontFamily: 'Open Sans, sans-serif',
+        '@media (max-width: 850px)': {
+            width: '70%',
+        },
     },
 }));
 
@@ -403,6 +406,7 @@ const ChatWindow: FC = () => {
     const [messagesList, setMessagesList] = useState<string[]>([]);
     const navigate = useNavigate();
     const intl = useIntl();
+    const {state} = useLocation();
 
     const handleRoleSelect = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -422,6 +426,10 @@ const ChatWindow: FC = () => {
             event.preventDefault();
         }
     };
+
+    useEffect(() => {
+        console.log(selectedRole);
+    }, [selectedRole]);
 
     return (
         <div className={classes.container}>
@@ -475,19 +483,21 @@ const ChatWindow: FC = () => {
                         </div>
                         <TravelerModal />
 
-                        <div className={classes.refreshIcon} onClick={() => setIsModalOpen(true)}>
-                            {isEmailSent ? (
-                                <TbRefresh />
-                            ) : (
-                                <AddUserModal
-                                    open={isModalOpen}
-                                    setOpen={setIsModalOpen}
-                                    isEmailSent={isEmailSent}
-                                    selectedRole={selectedRole}
-                                    handleRoleSelect={handleRoleSelect}
-                                />
-                            )}
-                        </div>
+                        {state % 2 === 1 ? (
+                            <div className={classes.refreshIcon} onClick={() => setIsModalOpen(true)}>
+                                {isEmailSent ? (
+                                    <TbRefresh />
+                                ) : (
+                                    <AddUserModal
+                                        open={isModalOpen}
+                                        setOpen={setIsModalOpen}
+                                        isEmailSent={isEmailSent}
+                                        selectedRole={selectedRole}
+                                        handleRoleSelect={handleRoleSelect}
+                                    />
+                                )}
+                            </div>
+                        ) : null}
                         <div className="relative">
                             <div
                                 className={classes.moreIcon}
@@ -506,14 +516,14 @@ const ChatWindow: FC = () => {
                                 }}
                             >
                                 <div className={classes.optionItem}>
-                                    <MdEdit />
+                                    <MdEdit size={22} />
                                     <LocalizedText label={localized.editTheOffer} />
                                 </div>
                                 <div
-                                    onClick={() => navigate('/chat-view/support')}
+                                    onClick={() => navigate('/chat-view/support', {state: true})}
                                     className={`${classes.optionItem} ${classes.reportItem}`}
                                 >
-                                    <IoIosInformationCircleOutline />
+                                    <IoIosInformationCircleOutline size={22} />
                                     <LocalizedText label={localized.reportProblem} />
                                 </div>
                                 <TerminationModal isTerminated={isTerminated} setIsTerminated={setIsTerminated} />
@@ -522,7 +532,12 @@ const ChatWindow: FC = () => {
                     </div>
                 </div>
 
-                <div className={classes.confirmContainer}>
+                <div
+                    className={classes.confirmContainer}
+                    style={{
+                        zIndex: isMoreOpen ? '0' : '20',
+                    }}
+                >
                     <div className={classes.textContainer}>
                         <div className={classes.confirmTitle}>
                             <LocalizedText label={localized.isTravelerRight} />

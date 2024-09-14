@@ -129,6 +129,13 @@ const Currency: FC = () => {
                         id="demo-simple-select"
                         value={reason}
                         options={reasons}
+                        MenuProps={{
+                            MenuListProps: {
+                                sx: {
+                                    maxHeight: 'auto',
+                                },
+                            },
+                        }}
                         sx={{
                             padding: '0 12px',
                             '& input': {

@@ -1,5 +1,5 @@
 import {FC, useContext} from 'react';
-import {IoIosSubway} from 'react-icons/io';
+import {FaCarAlt} from 'react-icons/fa';
 import {IoClose} from 'react-icons/io5';
 import LocalizedText from '@components/localize/LocalizedText';
 
@@ -217,7 +217,7 @@ const TravelerModal: FC = () => {
                             <div className="date">18.07.2023</div>
                         </div>
                         <div className={classes.routeIcon}>
-                            <IoIosSubway />
+                            <FaCarAlt />
                             <div className={classes.vehicleInfo}>BA2981</div>
                         </div>
                         <div className={classes.cityInfo}>

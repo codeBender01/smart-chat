@@ -11,9 +11,10 @@ interface ButtonProps {
     width: string;
     closeModal: () => void;
     children: ReactElement;
+    disabled?: boolean;
 }
 
-const CustomButton: FC<ButtonProps> = ({closeModal, bgcolor, borderColor, color, width, children}) => {
+const CustomButton: FC<ButtonProps> = ({closeModal, bgcolor, borderColor, color, width, children, disabled}) => {
     return (
         <Button
             disableElevation
@@ -34,6 +35,7 @@ const CustomButton: FC<ButtonProps> = ({closeModal, bgcolor, borderColor, color,
                 },
             }}
             onClick={closeModal}
+            disabled={disabled}
         >
             {children}
         </Button>
