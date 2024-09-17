@@ -12,6 +12,9 @@ import DealCompletedModal from '@app/components/DealCompleteModal';
 import TerminationModal from '@app/components/TerminationModal';
 import TravelerModal from '@app/components/TravelerModal';
 import {InputAdornment, TextField} from '@mui/material';
+import {Modal} from '@components/modal/Modal';
+import {setRole} from '@store/roleSlice';
+import {useDispatch} from 'react-redux';
 
 import LocalizedText from '@components/localize/LocalizedText';
 import {useIntl, defineMessages} from 'react-intl';
@@ -395,7 +398,7 @@ const localized = defineMessages({
 });
 
 const ChatWindow: FC = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const dispatch = useDispatch();
 
     const [isEmailSent, setIsEmailSent] = useState(false);
     const [isMoreOpen, setIsMoreOpen] = useState(false);
@@ -410,6 +413,7 @@ const ChatWindow: FC = () => {
 
     const handleRoleSelect = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
+        dispatch(setRole(value));
         setSelectedRole(value);
     };
 
@@ -433,6 +437,8 @@ const ChatWindow: FC = () => {
 
     return (
         <div className={classes.container}>
+            <Modal />
+
             <div>
                 <div className={classes.innerContainer}>
                     <div onClick={() => navigate(-1)} className={classes.backButton}>
@@ -484,18 +490,8 @@ const ChatWindow: FC = () => {
                         <TravelerModal />
 
                         {state % 2 === 1 ? (
-                            <div className={classes.refreshIcon} onClick={() => setIsModalOpen(true)}>
-                                {isEmailSent ? (
-                                    <TbRefresh />
-                                ) : (
-                                    <AddUserModal
-                                        open={isModalOpen}
-                                        setOpen={setIsModalOpen}
-                                        isEmailSent={isEmailSent}
-                                        selectedRole={selectedRole}
-                                        handleRoleSelect={handleRoleSelect}
-                                    />
-                                )}
+                            <div className={classes.refreshIcon}>
+                                <AddUserModal isEmailSent={isEmailSent} selectedRole={selectedRole} handleRoleSelect={handleRoleSelect} />
                             </div>
                         ) : null}
                         <div className="relative">

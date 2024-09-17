@@ -10,7 +10,6 @@ const useStyles = makeStyles<CustomTheme>(theme => ({
     modal: {
         '& .MuiPaper-root': {
             borderRadius: theme.shape.borderRadius * 4,
-            // padding: theme.spacing(1, 1, 0),
             maxWidth: '840px',
         },
     },

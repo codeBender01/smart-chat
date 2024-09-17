@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {Modal} from '@components/modal/Modal';
+
+import {useTypedSelector} from '@store/initStore';
 
 type ModalContextProps = {
     open: boolean;
@@ -32,7 +34,7 @@ export function ModalProvider({children}: ModalProviderProps) {
         if (reason === 'backdropClick' && disableBackdropClick) {
             /* empty */
         } else {
-            // setModalContent(<div></div>);
+            setModalContent(<div></div>);
             setOpen(false);
             setDisableBackdropClick(false);
         }
