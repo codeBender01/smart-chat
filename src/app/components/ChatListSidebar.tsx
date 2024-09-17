@@ -142,6 +142,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         display: 'flex',
         alignItems: 'center',
         gap: '1.5rem',
+        marginLeft: '16px',
     },
     inputContainer: {
         borderWidth: '1px',
@@ -151,11 +152,11 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         padding: '8px 0 8px 24px',
         display: 'flex',
         alignItems: 'center',
+
         '@media (min-width: 850px)': {
             width: '95%',
         },
     },
-
     selectedOption: {
         width: '100%',
         textOverflow: 'ellipsis',
@@ -377,6 +378,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [isTraveler, setIsTraveler] = useState(false);
     const [isCustomer, setIsCustomer] = useState(false);
+    const [selectedInstance, setSelectedInstance] = useState('');
 
     const intl = useIntl();
 
@@ -385,6 +387,11 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
 
     const handleChange = (event: SelectChangeEvent) => {
         setSelectedOption(event.target.value);
+    };
+
+    const handleInstanceChange = (event: SelectChangeEvent) => {
+        event.stopPropagation();
+        setSelectedInstance(event.target.value);
     };
 
     const handleRoleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -422,6 +429,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 MenuListProps: {
                                     sx: {
                                         maxHeight: '330px',
+
                                         overflowY: 'auto',
                                         paddingBottom: '16px',
                                         borderRadius: '18px',
@@ -454,6 +462,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             sx={{
                                 border: 'none',
                                 width: '100%',
+
                                 '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
                                     border: 'none',
                                 },
@@ -662,6 +671,8 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                             gap: '12px',
                                             marginTop: '16px',
                                         })}
+                                        value={selectedInstance}
+                                        onChange={handleInstanceChange}
                                     >
                                         {travelers.map(r => {
                                             return (
@@ -673,9 +684,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                                     sx={theme => ({
                                                         '& .MuiTypography-root': {
                                                             color:
-                                                                r.value === selectedRole
+                                                                r.value === selectedInstance
                                                                     ? theme.palette.primary.main
-                                                                    : theme.palette.text.secondary, // Change colors as needed
+                                                                    : theme.palette.text.secondary,
                                                         },
                                                     })}
                                                 />
@@ -720,6 +731,8 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                             gap: '12px',
                                             marginTop: '16px',
                                         })}
+                                        value={selectedInstance}
+                                        onChange={handleInstanceChange}
                                     >
                                         {customers.map(r => {
                                             return (
@@ -731,7 +744,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                                     sx={theme => ({
                                                         '& .MuiTypography-root': {
                                                             color:
-                                                                r.value === selectedRole
+                                                                r.value === selectedInstance
                                                                     ? theme.palette.primary.main
                                                                     : theme.palette.text.secondary,
                                                         },

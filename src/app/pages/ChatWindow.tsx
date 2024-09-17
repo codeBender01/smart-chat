@@ -6,10 +6,10 @@ import {MdEdit} from 'react-icons/md';
 import {TbRefresh} from 'react-icons/tb';
 import {useNavigate, useLocation} from 'react-router-dom';
 import '../../scrollbar.css';
-import AddUserModal from '@app/components/AddUserModal';
+import AddUserModalButton from '@app/components/AddUserModalButton';
 import ChatInfoText from '@app/components/ChatInfoText';
 import DealCompletedModal from '@app/components/DealCompleteModal';
-import TerminationModal from '@app/components/TerminationModal';
+import TerminationModalButton from '@app/components/TerminationModalButton';
 import TravelerModal from '@app/components/TravelerModal';
 import {InputAdornment, TextField} from '@mui/material';
 import {Modal} from '@components/modal/Modal';
@@ -491,7 +491,11 @@ const ChatWindow: FC = () => {
 
                         {state % 2 === 1 ? (
                             <div className={classes.refreshIcon}>
-                                <AddUserModal isEmailSent={isEmailSent} selectedRole={selectedRole} handleRoleSelect={handleRoleSelect} />
+                                <AddUserModalButton
+                                    isEmailSent={isEmailSent}
+                                    selectedRole={selectedRole}
+                                    handleRoleSelect={handleRoleSelect}
+                                />
                             </div>
                         ) : null}
                         <div className="relative">
@@ -522,7 +526,7 @@ const ChatWindow: FC = () => {
                                     <IoIosInformationCircleOutline size={22} />
                                     <LocalizedText label={localized.reportProblem} />
                                 </div>
-                                <TerminationModal isTerminated={isTerminated} setIsTerminated={setIsTerminated} />
+                                <TerminationModalButton isTerminated={isTerminated} setIsTerminated={setIsTerminated} />
                             </div>
                         </div>
                     </div>

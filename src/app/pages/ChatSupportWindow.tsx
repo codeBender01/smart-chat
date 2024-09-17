@@ -398,193 +398,165 @@ const ChatSupportWindow: FC = () => {
                 ></div>
                 <div className={classes.title}>Eelow</div>
             </div>
-            <div className={`${classes.chatContainer} ${!isMessageSent ? 'justify-center items-center' : ''}`}>
-                {isMessageSent || option === 'help' || option === 'service' ? (
-                    <div className={classes.messageContainer}>
-                        <div className={classes.messageWrapper}>
-                            <div
-                                className={classes.logoIcon}
-                                style={{
-                                    backgroundImage: `url(${logo})`,
-                                    backgroundPosition: 'top',
-                                    backgroundSize: 'cover',
-                                }}
-                            ></div>
-                            <div className={classes.messageBubbleRight}>
-                                <LocalizedText label={localized.canWeHelpYou} />
+            <div className={`${classes.chatContainer}`}>
+                <div className={`${classes.messageWrapper} ${classes.suggestionsMessage}`}>
+                    <div
+                        className={classes.logoIcon}
+                        style={{
+                            backgroundImage: `url(${logo})`,
+                            backgroundPosition: 'top',
+                            backgroundSize: 'cover',
+                        }}
+                    ></div>
+                    <div className={classes.messageBubbleRight}>
+                        <p>
+                            <LocalizedText label={localized.selectTag} />
+                        </p>
+                        <div className={classes.suggestionContainer}>
+                            {suggestions.map(sug => {
+                                return (
+                                    <div
+                                        key={sug.label}
+                                        onClick={() => setOption(sug.value)}
+                                        style={{
+                                            backgroundColor: sug.colorCode,
+                                        }}
+                                        className={classes.suggestionButton}
+                                    >
+                                        <LocalizedText label={localized[sug.value as keyof typeof localized]} />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+
+                <div className={classes.messageContainer}>
+                    <div className={classes.messageWrapper}>
+                        <div
+                            className={classes.logoIcon}
+                            style={{
+                                backgroundImage: `url(${logo})`,
+                                backgroundPosition: 'top',
+                                backgroundSize: 'cover',
+                            }}
+                        ></div>
+                        <div className={classes.messageBubbleRight}>
+                            <LocalizedText label={localized.canWeHelpYou} />
+                        </div>
+                    </div>
+
+                    {option === 'help' || state ? (
+                        <>
+                            <ChatInfoText text={localized.askForHelpStarted} bgColor="#EFFFF8" />
+                            <div className={classes.senderMessage}>
+                                <div className={classes.messageBubbleLeft}>I can’t get verified on the eelow.com</div>
+                                <div
+                                    className={classes.logoIcon}
+                                    style={{
+                                        backgroundImage: `url(${profile2})`,
+                                        backgroundPosition: 'top',
+                                        backgroundSize: 'cover',
+                                    }}
+                                ></div>
                             </div>
-                        </div>
-                        <div className={`${classes.messageWrapper} ${classes.suggestionsMessage}`}>
-                            <div
-                                className={classes.logoIcon}
-                                style={{
-                                    backgroundImage: `url(${logo})`,
-                                    backgroundPosition: 'top',
-                                    backgroundSize: 'cover',
-                                }}
-                            ></div>
-                            <div className={classes.messageBubbleRight}>
-                                <p>
-                                    <LocalizedText label={localized.selectTag} />
-                                </p>
-                                <div className={classes.suggestionContainer}>
-                                    {suggestions.map(sug => {
-                                        return (
-                                            <div
-                                                key={sug.label}
-                                                onClick={() => setOption(sug.value)}
-                                                style={{
-                                                    backgroundColor: sug.colorCode,
-                                                }}
-                                                className={classes.suggestionButton}
-                                            >
-                                                <LocalizedText label={localized[sug.value as keyof typeof localized]} />
-                                            </div>
-                                        );
-                                    })}
-                                </div>
+                            <div className={classes.messageWrapper}>
+                                <div
+                                    className={classes.logoIcon}
+                                    style={{
+                                        backgroundImage: `url(${logo})`,
+                                        backgroundPosition: 'top',
+                                        backgroundSize: 'cover',
+                                    }}
+                                ></div>
+                                <div className={classes.messageBubbleRight}>Got it! Give me a second please</div>
                             </div>
-                        </div>
+                        </>
+                    ) : null}
 
-                        <div className={classes.senderMessage}>
-                            <div className={classes.messageBubbleLeft}>messagemessagemessage</div>
-                            <div
-                                className={classes.logoIcon}
-                                style={{
-                                    backgroundImage: `url(${profile2})`,
-                                    backgroundPosition: 'top',
-                                    backgroundSize: 'cover',
-                                }}
-                            ></div>
-                        </div>
+                    {option === 'service' ? (
+                        <>
+                            <ChatInfoText text={localized.service} bgColor="#EFFFF8" />
 
-                        {option === 'help' || state ? (
-                            <>
-                                <ChatInfoText text={localized.askForHelpStarted} bgColor="#EFFFF8" />
-                                <div className={classes.senderMessage}>
-                                    <div className={classes.messageBubbleLeft}>I can’t get verified on the eelow.com</div>
-                                    <div
-                                        className={classes.logoIcon}
-                                        style={{
-                                            backgroundImage: `url(${profile2})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
-                                        }}
-                                    ></div>
-                                </div>
-                                <div className={classes.messageWrapper}>
-                                    <div
-                                        className={classes.logoIcon}
-                                        style={{
-                                            backgroundImage: `url(${logo})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
-                                        }}
-                                    ></div>
-                                    <div className={classes.messageBubbleRight}>Got it! Give me a second please</div>
-                                </div>
-                            </>
-                        ) : null}
-
-                        {option === 'service' ? (
-                            <>
-                                <div className={classes.messageWrapper}>
-                                    <div
-                                        className={classes.logoIcon}
-                                        style={{
-                                            backgroundImage: `url(${logo})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
-                                        }}
-                                    ></div>
-                                    <div className={classes.messageBubbleRight}>
-                                        <LocalizedText label={localized.canWeHelpYou} />
+                            <div className={`${classes.messageWrapper} ${classes.suggestionsMessage}`}>
+                                <div
+                                    className={classes.logoIcon}
+                                    style={{
+                                        backgroundImage: `url(${logo})`,
+                                        backgroundPosition: 'top',
+                                        backgroundSize: 'cover',
+                                    }}
+                                ></div>
+                                <div className={classes.messageBubbleRight}>
+                                    <p>
+                                        <LocalizedText label={localized.selectTag} />
+                                    </p>
+                                    <div className={classes.suggestionContainer}>
+                                        {serviceProblems.map(sug => {
+                                            return (
+                                                <div
+                                                    onClick={() => setDealOption(sug.value)}
+                                                    key={sug.label}
+                                                    style={{
+                                                        backgroundColor: sug.colorCode,
+                                                    }}
+                                                    className={
+                                                        'text-textColor text-default font-mainSans rounded-medium w-fit py-1 px-4 hover:opacity-85 duration-200 cursor-pointer'
+                                                    }
+                                                >
+                                                    <LocalizedText label={localized[sug.value as keyof typeof localized]} />
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
-                                <div className={`${classes.messageWrapper} ${classes.suggestionsMessage}`}>
-                                    <div
-                                        className={classes.logoIcon}
-                                        style={{
-                                            backgroundImage: `url(${logo})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
-                                        }}
-                                    ></div>
-                                    <div className={classes.messageBubbleRight}>
-                                        <p>
-                                            <LocalizedText label={localized.selectTag} />
-                                        </p>
-                                        <div className={classes.suggestionContainer}>
-                                            {serviceProblems.map(sug => {
-                                                return (
-                                                    <div
-                                                        onClick={() => setDealOption(sug.value)}
-                                                        key={sug.label}
-                                                        style={{
-                                                            backgroundColor: sug.colorCode,
-                                                        }}
-                                                        className={
-                                                            'text-textColor text-default font-mainSans rounded-medium w-fit py-1 px-4 hover:opacity-85 duration-200 cursor-pointer'
-                                                        }
-                                                    >
-                                                        <LocalizedText label={localized[sug.value as keyof typeof localized]} />
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        ) : null}
-                        {dealOption.length > 0 ? (
-                            <>
-                                <ChatInfoText text={localized.problemWithPayment} bgColor="#EFFFF8" />
+                            </div>
+                        </>
+                    ) : null}
+                    {dealOption.length > 0 ? (
+                        <>
+                            <ChatInfoText text={localized.problemWithPayment} bgColor="#EFFFF8" />
 
-                                <div className={classes.senderMessage}>
-                                    <div className={classes.messageBubbleLeft}>I can’t pay for the deal</div>
-                                    <div
-                                        className={classes.logoIcon}
-                                        style={{
-                                            backgroundImage: `url(${profile2})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
-                                        }}
-                                    ></div>
-                                </div>
-                                <div className={classes.messageWrapper}>
-                                    <div
-                                        className={classes.logoIcon}
-                                        style={{
-                                            backgroundImage: `url(${logo})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
-                                        }}
-                                    ></div>
-                                    <div className={classes.messageBubbleRight}>Got it! Give me a second please</div>
-                                </div>
-                            </>
-                        ) : null}
-                        {messagesList.map(val => {
-                            return (
-                                <div className={classes.senderMessage}>
-                                    <div className={classes.messageBubbleRight}>{val}</div>
-                                    <div
-                                        className={classes.logoIcon}
-                                        style={{
-                                            backgroundImage: `url(${profile2})`,
-                                            backgroundPosition: 'top',
-                                            backgroundSize: 'cover',
-                                        }}
-                                    ></div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                ) : (
-                    <div className={classes.chatInfoContainer}>
-                        <ChatInfoText text={localized.chatSupportMessage} bgColor="#EEEEEE" />
-                    </div>
-                )}
+                            <div className={classes.senderMessage}>
+                                <div className={classes.messageBubbleLeft}>I can’t pay for the deal</div>
+                                <div
+                                    className={classes.logoIcon}
+                                    style={{
+                                        backgroundImage: `url(${profile2})`,
+                                        backgroundPosition: 'top',
+                                        backgroundSize: 'cover',
+                                    }}
+                                ></div>
+                            </div>
+                            <div className={classes.messageWrapper}>
+                                <div
+                                    className={classes.logoIcon}
+                                    style={{
+                                        backgroundImage: `url(${logo})`,
+                                        backgroundPosition: 'top',
+                                        backgroundSize: 'cover',
+                                    }}
+                                ></div>
+                                <div className={classes.messageBubbleRight}>Got it! Give me a second please</div>
+                            </div>
+                        </>
+                    ) : null}
+                    {messagesList.map(val => {
+                        return (
+                            <div className={classes.senderMessage}>
+                                <div className={classes.messageBubbleRight}>{val}</div>
+                                <div
+                                    className={classes.logoIcon}
+                                    style={{
+                                        backgroundImage: `url(${profile2})`,
+                                        backgroundPosition: 'top',
+                                        backgroundSize: 'cover',
+                                    }}
+                                ></div>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
 
             <div className={classes.inputContainer}>

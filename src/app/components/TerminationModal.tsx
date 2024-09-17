@@ -1,10 +1,10 @@
-import {Dispatch, FC, SetStateAction, useContext, useState} from 'react';
+import {ChangeEvent, Dispatch, FC, SetStateAction, useContext, useState} from 'react';
 import {useIntl} from 'react-intl';
 import {FormControl, MenuItem, SelectChangeEvent, TextField} from '@mui/material';
 
 import {Select} from '@components/select/Select';
 
-import {IoMdCloseCircleOutline} from 'react-icons/io';
+import {TerminationModalButtonProps} from './TerminationModalButton';
 
 import LocalizedText from '@components/localize/LocalizedText';
 import {defineMessages} from 'react-intl';
@@ -16,10 +16,9 @@ import CustomButton from '@components/Button';
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
 
-interface TerminationModalProps {
-    isTerminated: boolean;
-    setIsTerminated: Dispatch<SetStateAction<boolean>>;
-}
+export type TerminationModalProps = TerminationModalButtonProps & {
+    closeModal: () => void;
+};
 
 const reasons = [
     {
@@ -169,61 +168,60 @@ const localized = defineMessages({
     },
 });
 
-const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTerminated}) => {
+const TerminationModal: FC<TerminationModalProps> = ({closeModal}) => {
     const [reason, setReason] = useState<string>('');
     const [isReasonSelected, setIsReasonSelected] = useState(false);
-
-    const {openModal, closeModal} = useContext(ModalContext);
 
     const intl = useIntl();
 
     const classes = useStyles();
 
-    const handleChange = (event: SelectChangeEvent<string>) => {
-        setReason(event.target.value);
+    const handleChange = (e: any) => {
+        setReason(e.target.value as string);
         setIsReasonSelected(true);
     };
 
-    const handleOpenModal = () => {
-        openModal(
-            <ModalContent>
-                <div className={classes.container}>
-                    <div className={classes.title}>
-                        <LocalizedText label={localized.areYouSureDeal} />
-                    </div>
-                    <div className={classes.formContainer}>
-                        <FormControl
-                            sx={{
-                                marginTop: 2,
-                                root: {
-                                    '& .css-1m5g6k3-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline':
-                                        {
-                                            borderColor: '#0000003B',
-                                        },
-
-                                    '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+    return (
+        <ModalContent>
+            <div className={classes.container}>
+                <div className={classes.title}>
+                    <LocalizedText label={localized.areYouSureDeal} />
+                </div>
+                <div className={classes.formContainer}>
+                    <FormControl
+                        sx={{
+                            marginTop: 2,
+                            root: {
+                                '& .css-1m5g6k3-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+                                    {
                                         borderColor: '#0000003B',
                                     },
+
+                                '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#0000003B',
                                 },
-                            }}
-                            fullWidth
+                            },
+                        }}
+                        fullWidth
+                    >
+                        <Select
+                            onChange={handleChange}
+                            labelId="demo-simple-select-label"
+                            label="Reason"
+                            id="demo-simple-select"
+                            value={reason}
+                            options={reasons}
                         >
-                            <Select
-                                labelId="demo-simple-select-label"
-                                label="Reason"
-                                id="demo-simple-select"
-                                value={reason}
-                                options={reasons}
-                            >
-                                {reasons.map(r => {
-                                    return (
-                                        <MenuItem key={r.label} value={r.value}>
-                                            <LocalizedText label={localized[r.value as keyof typeof localized]} />
-                                        </MenuItem>
-                                    );
-                                })}
-                            </Select>
-                        </FormControl>
+                            {reasons.map(r => {
+                                return (
+                                    <MenuItem key={r.label} value={r.value}>
+                                        <LocalizedText label={localized[r.value as keyof typeof localized]} />
+                                    </MenuItem>
+                                );
+                            })}
+                        </Select>
+                    </FormControl>
+                    {reason === 'other' && (
                         <FormControl
                             fullWidth
                             sx={{
@@ -234,42 +232,38 @@ const TerminationModal: FC<TerminationModalProps> = ({setIsTerminated, isTermina
                         >
                             <TextField placeholder={intl.formatMessage(localized.leaveReason)} />
                         </FormControl>
-                    </div>
-
-                    <p className={classes.text}>
-                        <LocalizedText
-                            label={{
-                                id: 'byClicking',
-                            }}
-                        />
-                        <span className={classes.link}>
-                            <LocalizedText label={localized.terms} />
-                        </span>{' '}
-                        <LocalizedText label={localized.and} />{' '}
-                        <span className={classes.link}>
-                            <LocalizedText label={localized.cancellation} />
-                        </span>
-                        .
-                    </p>
-
-                    <div className={classes.buttonContainer}>
-                        <CustomButton closeModal={closeModal} width="auto" bgcolor="#E2542C" color="#fff" borderColor="transparent">
-                            <LocalizedText label={localized.terminate} />
-                        </CustomButton>
-                        <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
-                            <LocalizedText label={localized.cancel} />
-                        </CustomButton>
-                    </div>
+                    )}
                 </div>
-            </ModalContent>
-        );
-    };
 
-    return (
-        <div onClick={handleOpenModal} className={classes.alertBox}>
-            <IoMdCloseCircleOutline size={22} />
-            <LocalizedText label={localized.terminateDeal} />
-        </div>
+                <p className={classes.text}>
+                    <LocalizedText label={localized.byClicking} />{' '}
+                    <span className={classes.link}>
+                        <LocalizedText label={localized.terms} />
+                    </span>{' '}
+                    <LocalizedText label={localized.and} />{' '}
+                    <span className={classes.link}>
+                        <LocalizedText label={localized.cancellation} />
+                    </span>
+                    .
+                </p>
+
+                <div className={classes.buttonContainer}>
+                    <CustomButton
+                        disabled={!isReasonSelected}
+                        closeModal={closeModal}
+                        width="auto"
+                        bgcolor={!isReasonSelected ? 'white' : '#E2542C'}
+                        color={!isReasonSelected ? '#A9A9A9' : '#fff'}
+                        borderColor={!isReasonSelected ? '#A9A9A9' : 'transparent'}
+                    >
+                        <LocalizedText label={localized.terminate} />
+                    </CustomButton>
+                    <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
+                        <LocalizedText label={localized.cancel} />
+                    </CustomButton>
+                </div>
+            </div>
+        </ModalContent>
     );
 };
 

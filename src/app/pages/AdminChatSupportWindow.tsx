@@ -227,6 +227,10 @@ const localized = defineMessages({
         id: 'AdminChatSupportWindow_askForHelpStarted',
         defaultMessage: 'Ask for help conversation started',
     },
+    writeMessage: {
+        id: 'ChatWindow_writeMessage',
+        defaultMessage: 'Write a message...',
+    },
 });
 
 const AdminChatSupportWindow: FC = () => {
@@ -396,9 +400,7 @@ const AdminChatSupportWindow: FC = () => {
                     onChange={e => {
                         setTextMessage(e.target.value);
                     }}
-                    placeholder={intl.formatMessage({
-                        id: 'writeMessage',
-                    })}
+                    placeholder={intl.formatMessage(localized.writeMessage)}
                     sx={theme => ({
                         borderRadius: '12px',
                         backgroundColor: '#eee',
