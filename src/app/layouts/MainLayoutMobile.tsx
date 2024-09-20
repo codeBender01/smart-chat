@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {CgArrowLongLeft} from 'react-icons/cg';
 import {useNavigate} from 'react-router-dom';
 import {Outlet} from 'react-router-dom';
@@ -15,8 +15,9 @@ import {makeStyles} from '@mui/styles';
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
     container: {
-        minHeight: '90vh',
+        minHeight: '120vh',
         backgroundColor: theme.palette.secondary.main,
+        overflow: 'scroll',
     },
     innerContainer: {
         padding: '2rem 24px',
@@ -67,6 +68,14 @@ const MainLayoutMobile: FC = () => {
     const navigate = useNavigate();
 
     const classes = useStyles();
+
+    useEffect(() => {
+        document.body.classList.add('overflow-auto');
+
+        return () => {
+            document.body.classList.remove('overflow-auto');
+        };
+    }, []);
 
     return (
         <div className={classes.container}>

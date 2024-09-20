@@ -207,14 +207,26 @@ const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColo
             <div
                 onClick={() => {
                     if (isMobile) {
+                        if (location.pathname === `/chat-view-mobile/${chatId}`) {
+                            navigate(`/chat-view-mobile/${chatId}`, {
+                                state: chatId,
+                            });
+                            return;
+                        }
                         dispatch(setDealUpdate(false));
                         navigate(`/chat-view-mobile/${chatId}`, {
                             state: chatId,
                         });
                         return;
                     }
-                    dispatch(setDealUpdate(false));
 
+                    if (location.pathname === `/chat-view/${chatId}`) {
+                        navigate(`/chat-view/${chatId}`, {
+                            state: chatId,
+                        });
+                        return;
+                    }
+                    dispatch(setDealUpdate(false));
                     navigate(`/chat-view/${chatId}`, {
                         state: chatId,
                     });

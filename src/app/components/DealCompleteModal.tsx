@@ -82,6 +82,10 @@ const localized = defineMessages({
         id: 'DealCompletedModal_description',
         defaultMessage: 'Description',
     },
+    typeHere: {
+        id: 'DealCompleteModal_typeHere',
+        defaultMessage: 'Type your comment here',
+    },
 });
 
 const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) => {
@@ -137,9 +141,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                         <TextField
                             label={<LocalizedText label={localized.description} />}
                             multiline
-                            placeholder={intl.formatMessage({
-                                id: 'typeHere',
-                            })}
+                            placeholder={intl.formatMessage(localized.typeHere)}
                             rows={3}
                             minRows={3}
                             sx={{
@@ -148,7 +150,6 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                                     paddingRight: 0,
                                 },
                                 '& .MuiInputBase-input': {
-                                    resize: 'both',
                                     overflow: 'auto',
                                 },
                                 '& textarea:focus': {

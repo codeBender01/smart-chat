@@ -206,7 +206,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontSize: '18px',
         color: theme.palette.text.primary,
         fontFamily: 'Quicksand',
-        fontWeight: '700',
+        fontWeight: '600',
     },
     goBackFilter: {
         display: 'flex',
@@ -578,7 +578,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                         }}
                     />
                 </div>
-                <div className={classes.filterContainer}>
+                <div className={classes.filterContainer} onClick={e => e.stopPropagation()}>
                     <div
                         onClick={e => {
                             if (isAdmin) {
@@ -628,6 +628,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     {roles.map(r => {
                                         return (
                                             <FormControlLabel
+                                                onClick={e => {
+                                                    e.stopPropagation();
+                                                }}
                                                 value={r.value}
                                                 control={<Radio />}
                                                 label={<LocalizedText label={localized[r.value as keyof typeof localized]} />}
@@ -652,6 +655,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 style={{
                                     display: isTraveler ? 'initial' : 'none',
                                 }}
+                                onClick={e => e.stopPropagation()}
                             >
                                 <div className={classes.filterText}>
                                     <LocalizedText label={localized.sortBy} />
@@ -677,6 +681,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                         {travelers.map(r => {
                                             return (
                                                 <FormControlLabel
+                                                    onClick={e => {
+                                                        e.stopPropagation();
+                                                    }}
                                                     value={r.value}
                                                     control={<Radio />}
                                                     label={<LocalizedText label={localized[r.value as keyof typeof localized]} />}
@@ -712,6 +719,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 style={{
                                     display: isTraveler ? 'none' : 'initial',
                                 }}
+                                onClick={e => e.stopPropagation()}
                             >
                                 <div className={classes.filterText}>
                                     <LocalizedText label={{id: 'sortBy', defaultMessage: 'Sort by'}} />
@@ -737,6 +745,9 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                         {customers.map(r => {
                                             return (
                                                 <FormControlLabel
+                                                    onClick={e => {
+                                                        e.stopPropagation();
+                                                    }}
                                                     value={r.value}
                                                     control={<Radio />}
                                                     label={<LocalizedText label={localized[r.value as keyof typeof localized]} />}

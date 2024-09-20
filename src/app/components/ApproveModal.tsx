@@ -17,6 +17,7 @@ const localized = defineMessages({
         id: 'ApproveModal_inviteSend',
         defaultMessage: 'Invite has been send',
     },
+    
     goBack: {
         id: 'ApproveModal_goBack',
         defaultMessage: 'Back',

@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useState, useEffect} from 'react';
 import {useMediaQuery} from 'react-responsive';
 import {useNavigate} from 'react-router-dom';
 import {Outlet} from 'react-router-dom';
@@ -183,6 +183,14 @@ const MainLayout: FC = () => {
     const navigate = useNavigate();
 
     const classes = useStyles();
+
+    useEffect(() => {
+        document.body.classList.add('overflow-auto');
+
+        return () => {
+            document.body.classList.remove('overflow-auto');
+        };
+    }, []);
 
     return (
         <div className={classes.root}>

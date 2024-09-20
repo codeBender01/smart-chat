@@ -48,7 +48,11 @@ body {
     -webkit-tap-highlight-color: transparent;
     background-color: #fff;
 
-    @media screen and (max-width: 850px) {
+    @media (max-width: 850px) {
         overflow: hidden;
     }
+}
+
+body.overflow-auto {
+    overflow: visible !important;
 }

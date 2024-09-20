@@ -24,6 +24,7 @@ import profile2 from '../../common/assets/profile2.jpeg';
 
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
+import {display} from '@mui/system';
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
     innerContainer: {
@@ -265,10 +266,11 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         color: theme.palette.text.primary, // equivalent to text-textColor
         fontFamily: 'Quicksand, sans-serif', // equivalent to font-boldQuick
         fontWeight: '700',
-        marginRight: theme.spacing(2), // equivalent to mr-8
-        // [theme.breakpoints.up('lg')]: {
-        //     display: 'block',
-        // },
+        marginRight: theme.spacing(2),
+        display: 'none',
+        [theme.breakpoints.up(850)]: {
+            display: 'initial',
+        },
     },
     refreshIcon: {
         fontSize: '1.125rem',

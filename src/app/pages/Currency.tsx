@@ -92,7 +92,7 @@ const localized = defineMessages({
 const Currency: FC = () => {
     const [reason, setReason] = useState('USD');
 
-    const handleChange = (event: SelectChangeEvent) => {
+    const handleChange = (event: SelectChangeEvent<string | string[]>) => {
         setReason(event.target.value as string);
     };
 
@@ -129,6 +129,7 @@ const Currency: FC = () => {
                         id="demo-simple-select"
                         value={reason}
                         options={reasons}
+                        onChange={handleChange}
                         MenuProps={{
                             MenuListProps: {
                                 sx: {
