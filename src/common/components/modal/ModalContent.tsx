@@ -8,6 +8,7 @@ const useStyles = makeStyles<CustomTheme>(theme => ({
         gap: theme.spacing(2),
         padding: theme.spacing(0),
         overflowY: 'auto',
+        overflowX: 'hidden',
         margin: `0 ${theme.spacing(0.25)}`,
     },
 }));

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
 }));
 
 const ChatView: FC = () => {
-    const isMobile = useMediaQuery({query: '(max-width: 850px)'});
+    const isMobile = useMediaQuery({query: '(max-width: 768px)'});
 
     const location = useLocation();
 

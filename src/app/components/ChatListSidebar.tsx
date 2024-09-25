@@ -60,7 +60,42 @@ const filterOptions = [
     {
         id: 6,
         name: 'Metal money_ Odesa - Kiev',
-        value: 'Metal money_ Odesa - Kiev',
+        value: 'Metal money_ Odesa - Kiev2',
+    },
+    {
+        id: 7,
+        name: 'Metal money_ Odesa - Kiev',
+        value: 'Metal money_ Odesa - Kiev3',
+    },
+    {
+        id: 8,
+        name: 'Metal money_ Odesa - Kiev',
+        value: 'Metal money_ Odesa - Kiev4',
+    },
+    {
+        id: 9,
+        name: 'Metal money_ Odesa - Kiev',
+        value: 'Metal money_ Odesa - Kiev5',
+    },
+    {
+        id: 10,
+        name: 'Metal money_ Odesa - Kiev',
+        value: 'Metal money_ Odesa - Kiev6',
+    },
+    {
+        id: 11,
+        name: 'Metal money_ Odesa - Kiev',
+        value: 'Metal money_ Odesa - Kiev7',
+    },
+    {
+        id: 12,
+        name: 'Metal money_ Odesa - Kiev',
+        value: 'Metal money_ Odesa - Kiev8',
+    },
+    {
+        id: 13,
+        name: 'Metal money_ Odesa - Kiev',
+        value: 'Metal money_ Odesa - Kiev9',
     },
 ];
 
@@ -133,7 +168,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         width: '100%',
         backgroundColor: theme.palette.secondary.main,
         padding: '16px 0',
-        '@media (min-width: 850px)': {
+        '@media (min-width: 768px)': {
             minWidth: '350px',
             width: '30%',
         },
@@ -153,7 +188,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         display: 'flex',
         alignItems: 'center',
 
-        '@media (min-width: 850px)': {
+        '@media (min-width: 768px)': {
             width: '95%',
         },
     },
@@ -163,7 +198,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         textWrap: 'nowrap',
         overflow: 'hidden',
         fontFamily: 'Open Sans',
-        fontWeight: '700',
+        fontWeight: '600',
     },
     divider: {
         height: '20px',
@@ -195,7 +230,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         backgroundColor: theme.palette.primary.contrastText,
         right: '20%',
         top: '100%',
-        padding: '24px',
+        padding: '24px 34px',
         borderRadius: '12px',
         fontSize: '18px',
         fontFamily: 'Quicksand',
@@ -218,7 +253,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         cursor: 'pointer',
         transition: 'all 200ms',
         fontFamily: 'Open Sans',
-        fontWeight: '700',
+        fontWeight: '400',
         marginTop: '25px',
         '&:hover': {
             opacity: 0.85,
@@ -267,9 +302,10 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         alignItems: 'center',
     },
     chatItemName: {
-        fontFamily: 'QuicksandBold, sans-serif',
+        fontFamily: 'Quicksand, sans-serif',
         fontSize: '20px',
         color: theme.palette.text.primary,
+        fontWeight: '600',
     },
     chatItemSubtext: {
         fontFamily: 'Open Sans, sans-serif',
@@ -378,7 +414,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [isTraveler, setIsTraveler] = useState(false);
     const [isCustomer, setIsCustomer] = useState(false);
-    const [selectedInstance, setSelectedInstance] = useState('');
+    const [selectedInstance, setSelectedInstance] = useState('optimal');
 
     const intl = useIntl();
 
@@ -392,6 +428,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
     const handleInstanceChange = (event: SelectChangeEvent) => {
         event.stopPropagation();
         setSelectedInstance(event.target.value);
+        setIsFilterOpen(false);
     };
 
     const handleRoleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -418,7 +455,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                 <div className={classes.inputContainer}>
                     <FormControl
                         sx={{
-                            width: '5%',
+                            width: '10%',
                             minWidth: '18px',
                         }}
                     >
@@ -787,11 +824,11 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
             {/* ///////////// chat support //////// */}
 
             <div
-                onScroll={e => {
-                    if (e.currentTarget.classList.contains('chatlist') === false) {
-                        e.currentTarget.classList.add('chatlist');
-                    }
-                }}
+                // onScroll={e => {
+                //     if (e.currentTarget.classList.contains('chatlist') === false) {
+                //         e.currentTarget.classList.add('chatlist');
+                //     }
+                // }}
                 className={classes.scrollContainer}
             >
                 <div className={classes.contentContainer}>

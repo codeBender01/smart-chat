@@ -1,6 +1,6 @@
 import {FC, useContext, Dispatch, SetStateAction} from 'react';
 
-import {IoMdCloseCircleOutline} from 'react-icons/io';
+import {RiCloseCircleLine} from 'react-icons/ri';
 
 import LocalizedText from '@components/localize/LocalizedText';
 import {defineMessages} from 'react-intl';
@@ -53,7 +53,7 @@ const TerminationModalButton: FC<TerminationModalButtonProps> = props => {
 
     return (
         <div onClick={handleOpenModal} className={classes.alertBox}>
-            <IoMdCloseCircleOutline size={22} />
+            <RiCloseCircleLine size={22} />
             <LocalizedText label={localized.terminateDeal} />
         </div>
     );

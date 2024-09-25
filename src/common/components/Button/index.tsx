@@ -29,6 +29,7 @@ const CustomButton: FC<ButtonProps> = ({closeModal, bgcolor, borderColor, color,
                 textTransform: 'none',
                 fontFamily: 'OpenReg',
                 fontSize: '16px',
+                padding: '10px 16px',
                 '&:hover': {
                     bgcolor: bgcolor,
                     opacity: 0.8,

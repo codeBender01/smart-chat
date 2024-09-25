@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import {FaStar} from 'react-icons/fa';
-import {IoCarSharp} from 'react-icons/io5';
-import {MdOutlineLocationOn} from 'react-icons/md';
+import {MdOutlineLocationOn, MdOutlineDirectionsCar} from 'react-icons/md';
 import {RiArchiveLine} from 'react-icons/ri';
 import {useMediaQuery} from 'react-responsive';
 import {useLocation, useNavigate} from 'react-router-dom';
@@ -82,20 +81,19 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontSize: '20px',
         marginRight: '5px',
         fontFamily: 'Quicksand',
-        fontWeight: '700',
+        fontWeight: '600',
     },
     locationText: {
         fontFamily: 'Open Sans',
         fontSize: '14px',
         fontWeight: '400',
-        lineHeight: '19.07px',
         color: theme.palette.text.primary,
+        height: '18px',
     },
     dateTimeText: {
         fontFamily: 'Open Sans',
         fontSize: '8px',
         fontWeight: '400',
-        lineHeight: '10.89px',
         color: theme.palette.text.secondary,
     },
     textSecondary: {
@@ -156,7 +154,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         borderWidth: '1px',
         borderColor: theme.palette.text.primary,
         fontFamily: 'Open Sans',
-        fontWeight: '700',
+        fontWeight: '600',
         fontSize: '12px',
         color: theme.palette.text.primary,
         alignSelf: 'flex-end',
@@ -248,7 +246,7 @@ const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColo
                         </div>
                     ) : (
                         <div className={`${classes.iconContainer} ${classes.logoGreen}`}>
-                            <IoCarSharp />
+                            <MdOutlineDirectionsCar />
                         </div>
                     )}
 
@@ -305,7 +303,11 @@ const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColo
                                         <div className={classes.locationText}>Krakov</div>
                                         <div className={classes.dateTimeText}>Jul 18, 12:00</div>
                                     </div>
-                                    <div>
+                                    <div
+                                        style={{
+                                            marginTop: '4px',
+                                        }}
+                                    >
                                         <div className={classes.locationText}>Kiev</div>
                                         <div className={classes.dateTimeText}>Jul 18, 12:00</div>
                                     </div>

@@ -1,9 +1,9 @@
 import React, {FC, useState, ChangeEvent, useEffect} from 'react';
 import {BsPaperclip} from 'react-icons/bs';
 import {CgArrowLongLeft} from 'react-icons/cg';
-import {IoMdMore, IoMdSend, IoIosInformationCircleOutline} from 'react-icons/io';
+import {IoMdMore, IoMdSend} from 'react-icons/io';
 import {MdEdit} from 'react-icons/md';
-import {TbRefresh} from 'react-icons/tb';
+import {AiOutlineExclamationCircle} from 'react-icons/ai';
 import {useNavigate, useLocation} from 'react-router-dom';
 import '../../scrollbar.css';
 import AddUserModalButton from '@app/components/AddUserModalButton';
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         padding: '1rem',
         justifyContent: 'space-between',
         alignItems: 'center',
-        '@media (min-width: 850px)': {
+        '@media (min-width: 768px)': {
             display: 'none',
         },
     },
@@ -43,9 +43,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         maxHeight: '90vh',
         height: '90vh',
         justifyContent: 'space-between',
-        paddingBottom: theme.spacing(1),
+        paddingBottom: theme.spacing(3),
         backgroundColor: theme.palette.secondary.main,
-        [theme.breakpoints.up(850)]: {
+        [theme.breakpoints.up(768)]: {
             backgroundColor: theme.palette.primary.contrastText,
             width: '100%',
         },
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         cursor: 'pointer',
         transition: 'opacity 0.2s',
         fontFamily: 'Open Sans, sans-serif',
-        fontWeight: '700',
+        fontWeight: '600',
         '&:hover': {
             opacity: 0.85,
         },
@@ -94,24 +94,28 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontSize: '18px',
         color: theme.palette.text.primary,
         fontFamily: 'Quicksand, sans-serif',
-        fontWeight: '700',
+        fontWeight: '600',
     },
     chatContainer: {
         flex: 1,
         overflowY: 'auto',
         display: 'flex',
         flexDirection: 'column',
-        padding: '2rem',
         gap: '1.5rem',
         zIndex: 10,
+        padding: '1rem',
+        paddingTop: '40px',
+        [theme.breakpoints.up(850)]: {
+            padding: '2rem',
+        },
     },
     messageContainer: {
         display: 'flex',
         flexDirection: 'column',
         padding: 0,
-        gap: theme.spacing(1.5), // This converts 'gap-6'
+        gap: theme.spacing(4),
         [theme.breakpoints.up('lg')]: {
-            padding: theme.spacing(2), // This converts 'lg:p-8'
+            padding: theme.spacing(2),
         },
     },
     chatInfo: {
@@ -132,6 +136,8 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     logoIcon: {
         width: '36px',
         height: '36px',
+        minWidth: '36px',
+        minHeight: '36px',
         borderRadius: '50%',
         backgroundPosition: 'top',
         backgroundSize: 'cover',
@@ -258,7 +264,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     leftHeaderContainer: {
         display: 'flex',
         alignItems: 'center',
-        gap: theme.spacing(1.5),
+        gap: '24px',
         zIndex: 20,
     },
     awaitingText: {
@@ -266,8 +272,8 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         color: theme.palette.text.primary, // equivalent to text-textColor
         fontFamily: 'Quicksand, sans-serif', // equivalent to font-boldQuick
         fontWeight: '700',
-        marginRight: theme.spacing(2),
         display: 'none',
+        marginRight: '24px',
         [theme.breakpoints.up(850)]: {
             display: 'initial',
         },
@@ -283,6 +289,12 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
     moreIconContainer: {
         position: 'relative',
+    },
+    optionsContainer: {
+        position: 'relative',
+        display: 'flex',
+        gap: '24px',
+        alignItems: 'center',
     },
     moreIcon: {
         fontSize: '1.25rem',
@@ -316,6 +328,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontFamily: 'Open Sans, sans-serif',
         gap: theme.spacing(0.5),
         fontWeight: '400',
+
         '&:hover': {
             opacity: 0.8,
         },
@@ -344,12 +357,16 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontSize: '18px',
         fontweight: '700',
         fontFamily: 'Quicksand, sans-serif',
-        fontWeight: '700',
+        fontWeight: '600',
     },
     warningText: {
         fontSize: '12px',
         color: theme.palette.text.secondary,
         fontFamily: 'Open Sans, sans-serif',
+        width: '85%',
+        '@media (min-width: 1100px)': {
+            width: '100%',
+        },
         '@media (max-width: 850px)': {
             width: '70%',
         },
@@ -525,7 +542,7 @@ const ChatWindow: FC = () => {
                                     onClick={() => navigate('/chat-view/support', {state: true})}
                                     className={`${classes.optionItem} ${classes.reportItem}`}
                                 >
-                                    <IoIosInformationCircleOutline size={22} />
+                                    <AiOutlineExclamationCircle size={22} />
                                     <LocalizedText label={localized.reportProblem} />
                                 </div>
                                 <TerminationModalButton isTerminated={isTerminated} setIsTerminated={setIsTerminated} />

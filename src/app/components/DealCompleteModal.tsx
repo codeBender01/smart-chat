@@ -23,10 +23,13 @@ interface DealCompletedModalProps {
 const useStyles = makeStyles((theme: CustomTheme) => ({
     container: {
         padding: '2rem',
-        minWidth: '514px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        width: '100%',
+        '@media (min-width: 850px)': {
+            minWidth: '514px',
+        },
     },
     heading: {
         color: theme.palette.text.primary,
@@ -188,6 +191,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                 borderRadius: '20px',
                 height: '40px',
                 padding: '0 30px',
+                minWidth: '88px',
                 textTransform: 'capitalize',
                 '&:hover': {
                     backgroundColor: theme.palette.primary.main,

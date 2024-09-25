@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         alignSelf: 'center',
         fontFmaily: 'QuicksandBold',
         color: theme.palette.text.primary,
-        fontWeight: '700',
+        fontWeight: '600',
     },
 }));
 

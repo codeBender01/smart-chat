@@ -1,6 +1,6 @@
-import {ChangeEvent, Dispatch, FC, SetStateAction, useContext, useState} from 'react';
+import {FC, useState} from 'react';
 import {useIntl} from 'react-intl';
-import {FormControl, MenuItem, SelectChangeEvent, TextField} from '@mui/material';
+import {FormControl, MenuItem, TextField} from '@mui/material';
 
 import {Select} from '@components/select/Select';
 
@@ -9,7 +9,6 @@ import {TerminationModalButtonProps} from './TerminationModalButton';
 import LocalizedText from '@components/localize/LocalizedText';
 import {defineMessages} from 'react-intl';
 
-import {ModalContext} from '@components/modal/ModalProvider';
 import {ModalContent} from '@components/modal/ModalContent';
 import CustomButton from '@components/Button';
 
@@ -248,6 +247,9 @@ const TerminationModal: FC<TerminationModalProps> = ({closeModal}) => {
                 </p>
 
                 <div className={classes.buttonContainer}>
+                    <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
+                        <LocalizedText label={localized.cancel} />
+                    </CustomButton>
                     <CustomButton
                         disabled={!isReasonSelected}
                         closeModal={closeModal}
@@ -257,9 +259,6 @@ const TerminationModal: FC<TerminationModalProps> = ({closeModal}) => {
                         borderColor={!isReasonSelected ? '#A9A9A9' : 'transparent'}
                     >
                         <LocalizedText label={localized.terminate} />
-                    </CustomButton>
-                    <CustomButton closeModal={closeModal} width="88px" bgcolor="white" color="#A9A9A9" borderColor="#A9A9A9">
-                        <LocalizedText label={localized.cancel} />
                     </CustomButton>
                 </div>
             </div>

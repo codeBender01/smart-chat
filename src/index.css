@@ -56,3 +56,8 @@ body {
 body.overflow-auto {
     overflow: visible !important;
 }
+
+.Mui-focused {
+    outline: none !important;
+    box-shadow: none !important;
+}

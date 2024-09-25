@@ -164,11 +164,15 @@ function AddUserModal({selectedRole, isEmailSent, handleRoleSelect, closeModal}:
                         fontFamily: 'OpenReg',
                         marginTop: '10px',
                         marginBottom: '32px',
+                        boxShadow: 'none',
+
                         '& .MuiInputBase-input': {
                             padding: '12px 18px',
+                            boxShadow: 'none',
                             fontFamily: 'OpenReg, sans-serif',
                         },
                         input: {
+                            boxShadow: 'none',
                             '::placeholder': {
                                 color: '#49454F',
                                 opacity: 0.8,
