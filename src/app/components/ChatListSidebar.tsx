@@ -824,14 +824,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
 
             {/* ///////////// chat support //////// */}
 
-            <div
-                onScroll={e => {
-                    if (e.currentTarget.classList.contains('chatlist') === false) {
-                        e.currentTarget.classList.add('chatlist');
-                    }
-                }}
-                className={classes.scrollContainer}
-            >
+            <div className={`${classes.scrollContainer} chatlist`}>
                 <div className={classes.contentContainer}>
                     {isAdmin ? null : (
                         <div
