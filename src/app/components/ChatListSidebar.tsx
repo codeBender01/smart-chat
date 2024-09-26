@@ -262,12 +262,13 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     scrollContainer: {
         overflowY: 'auto',
         maxHeight: '85vh',
-        paddingBottom: '30px',
         cursor: 'pointer',
+        width: '95%',
+        margin: '0 auto',
     },
     contentContainer: {
         minHeight: '85vh',
-        padding: '0 16px',
+        paddingBottom: '40px',
     },
     chatItem: {
         width: '100%',
@@ -824,11 +825,11 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
             {/* ///////////// chat support //////// */}
 
             <div
-                // onScroll={e => {
-                //     if (e.currentTarget.classList.contains('chatlist') === false) {
-                //         e.currentTarget.classList.add('chatlist');
-                //     }
-                // }}
+                onScroll={e => {
+                    if (e.currentTarget.classList.contains('chatlist') === false) {
+                        e.currentTarget.classList.add('chatlist');
+                    }
+                }}
                 className={classes.scrollContainer}
             >
                 <div className={classes.contentContainer}>
