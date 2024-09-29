@@ -92,6 +92,8 @@ const ApproveModal: FC<ApproveModalProps> = ({disabled}) => {
                     textTransform: 'none',
                     fontFamily: 'OpenReg',
                     fontSize: '16px',
+                    width: '88px',
+                    padding: '10px 0',
                     '&:hover': {
                         bgcolor: theme.palette.primary.main,
                         opacity: 0.8,

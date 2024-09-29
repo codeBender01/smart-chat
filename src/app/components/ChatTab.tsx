@@ -95,6 +95,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontSize: '8px',
         fontWeight: '400',
         color: theme.palette.text.secondary,
+        mt: '-8px',
     },
     textSecondary: {
         color: theme.palette.text.secondary,
@@ -246,7 +247,7 @@ const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColo
                         </div>
                     ) : (
                         <div className={`${classes.iconContainer} ${classes.logoGreen}`}>
-                            <MdOutlineDirectionsCar />
+                            <MdOutlineDirectionsCar size={20} />
                         </div>
                     )}
 

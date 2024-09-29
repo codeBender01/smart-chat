@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         maxHeight: '90vh',
         height: '90vh',
         justifyContent: 'space-between',
-        paddingBottom: theme.spacing(3),
+        paddingBottom: theme.spacing(2),
         backgroundColor: theme.palette.secondary.main,
         [theme.breakpoints.up(768)]: {
             backgroundColor: theme.palette.primary.contrastText,
@@ -66,9 +66,12 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         width: 'fit-content',
     },
     headerContainer: {
-        padding: '16px',
+        padding: '24px 32px',
         display: 'flex',
         justifyContent: 'space-between',
+        '@media (max-width: 768px)': {
+            padding: '8px 16px',
+        },
     },
     header: {
         padding: '1rem',
@@ -105,7 +108,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         zIndex: 10,
         padding: '1rem',
         paddingTop: '40px',
-        [theme.breakpoints.up(850)]: {
+        [theme.breakpoints.up(768)]: {
             padding: '2rem',
         },
     },
@@ -124,7 +127,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         padding: theme.spacing(0.5, 1),
         borderRadius: 10,
 
-        [theme.breakpoints.up(850)]: {
+        [theme.breakpoints.up(768)]: {
             width: '50%',
         },
     },
@@ -186,7 +189,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
     chatInfoContainer: {
         width: '80%',
-        '@media (min-width: 850px)': {
+        '@media (min-width: 768px)': {
             width: '60%',
         },
     },
@@ -201,6 +204,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     },
     inputContainer: {
         padding: '16px 32px',
+        '@media (max-width: 768px)': {
+            padding: '16px 32px',
+        },
     },
     inputIcon: {
         cursor: 'pointer',
@@ -259,7 +265,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         color: theme.palette.text.primary,
         fontFamily: 'Quicksand, sans-serif',
         fontSize: '0.875rem',
-        fontWeight: '700',
+        fontWeight: '600',
     },
     leftHeaderContainer: {
         display: 'flex',
@@ -326,7 +332,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         padding: theme.spacing(2, 3),
         color: theme.palette.text.primary,
         fontFamily: 'Open Sans, sans-serif',
-        gap: theme.spacing(0.5),
+        gap: '10px',
         fontWeight: '400',
 
         '&:hover': {
@@ -340,7 +346,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         color: theme.palette.error.main,
     },
     confirmContainer: {
-        padding: theme.spacing(1),
+        padding: theme.spacing(2),
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -355,7 +361,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     confirmTitle: {
         color: theme.palette.text.primary,
         fontSize: '18px',
-        fontweight: '700',
+        fontweight: '600',
         fontFamily: 'Quicksand, sans-serif',
         fontWeight: '600',
     },

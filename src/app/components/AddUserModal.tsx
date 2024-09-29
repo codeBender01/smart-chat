@@ -92,12 +92,14 @@ export type AddUserModalProps = AddUserModalButtonProps & {
 
 function AddUserModal({selectedRole, isEmailSent, handleRoleSelect, closeModal}: AddUserModalProps) {
     const classes = useStyles();
-    const [role, setRole] = useState<string>('');
+    const [role, setRole] = useState<string>('parcelReceiver');
     const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
     useEffect(() => {
-        setRole(selectedRole);
-    }, [selectedRole]);
+        if (!role) {
+            setRole('parcelReceiver');
+        }
+    }, [role]);
 
     function handleSelectChange(event: ChangeEvent<HTMLInputElement>) {
         const value = event.target.value;

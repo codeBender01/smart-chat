@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         cursor: 'pointer',
         transition: 'opacity 0.2s',
         fontFamily: 'Open Sans, sans-serif',
-        fontWeight: '700',
+        fontWeight: '600',
         '&:hover': {
             opacity: 0.85,
         },
@@ -266,6 +266,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         overflowX: 'hidden',
         padding: '4px 8px',
         textAlign: 'center',
+        cursor: 'pointer',
     },
 }));
 

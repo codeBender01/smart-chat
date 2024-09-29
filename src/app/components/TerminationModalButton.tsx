@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontSize: '1rem',
         padding: '16px 24px',
         fontFamily: 'Open Sans, sans-serif',
-        gap: '0.5rem',
+        gap: '10px',
         cursor: 'pointer',
         transition: 'opacity 0.2s',
         fontWeight: '400',

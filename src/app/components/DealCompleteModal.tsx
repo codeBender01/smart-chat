@@ -190,7 +190,7 @@ const DealCompletedModal: FC<DealCompletedModalProps> = ({setIsDealApproved}) =>
                 transitionDuration: '500ms',
                 borderRadius: '20px',
                 height: '40px',
-                padding: '0 30px',
+                // padding: '0 30px',
                 minWidth: '88px',
                 textTransform: 'capitalize',
                 '&:hover': {

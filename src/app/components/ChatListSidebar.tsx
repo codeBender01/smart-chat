@@ -177,7 +177,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         display: 'flex',
         alignItems: 'center',
         gap: '1.5rem',
-        marginLeft: '16px',
+        padding: '0 16px',
     },
     inputContainer: {
         borderWidth: '1px',
@@ -211,7 +211,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         color: theme.palette.text.primary,
         fontSize: '22px',
         position: 'relative',
-        padding: '8px',
+        padding: '8px 0',
     },
     filterIcon: {
         transition: 'all 150ms',
@@ -269,6 +269,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     contentContainer: {
         minHeight: '85vh',
         paddingBottom: '40px',
+        marginRight: '4px',
     },
     chatItem: {
         width: '100%',
@@ -456,7 +457,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                 <div className={classes.inputContainer}>
                     <FormControl
                         sx={{
-                            width: '10%',
+                            width: '5%',
                             minWidth: '18px',
                         }}
                     >
@@ -467,10 +468,10 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                 MenuListProps: {
                                     sx: {
                                         maxHeight: '330px',
-
                                         overflowY: 'auto',
                                         paddingBottom: '16px',
                                         borderRadius: '18px',
+
                                         '&::-webkit-scrollbar': {
                                             width: '6px',
                                         },

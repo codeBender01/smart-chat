@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         fontFamily: 'Quicksand, sans-serif',
         fontSize: '2rem',
         color: theme.palette.text.primary,
-        fontWeight: '700',
+        fontWeight: '600',
     },
     subTitle: {
         fontFamily: 'Open Sans, sans-serif',
