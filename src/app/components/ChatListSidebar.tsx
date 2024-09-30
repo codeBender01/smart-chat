@@ -184,7 +184,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         borderColor: theme.custom.palette.newColors.sidebarInputBorder,
         borderRadius: '28px',
         width: '90%',
-        padding: '8px 0 8px 24px',
+        paddingLeft: '24px',
         display: 'flex',
         alignItems: 'center',
 
@@ -501,7 +501,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                             sx={{
                                 border: 'none',
                                 width: '100%',
-
+                                padding: '8px 0',
                                 '& .MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline': {
                                     border: 'none',
                                 },
