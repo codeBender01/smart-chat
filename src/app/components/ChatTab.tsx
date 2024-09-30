@@ -2,6 +2,8 @@ import {FC} from 'react';
 import {FaStar} from 'react-icons/fa';
 import {MdOutlineLocationOn, MdOutlineDirectionsCar} from 'react-icons/md';
 import {RiArchiveLine} from 'react-icons/ri';
+import Car from 'src/common/svgs/Car';
+import Package from 'src/common/svgs/Package';
 import {useMediaQuery} from 'react-responsive';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {makeStyles} from '@mui/styles';
@@ -182,7 +184,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     secondaryLogo: {
         width: '32px',
         height: '32px',
-        borderRadius: '50%', // equivalent to rounded-round
+        borderRadius: '50%',
         position: 'absolute',
         bottom: '-15%',
         right: '-10%',
@@ -243,11 +245,11 @@ const ChatTab: FC<ChatTabProps> = ({isPackage, name, rating, packageName, bgColo
                 >
                     {isPackage ? (
                         <div className={`${classes.iconContainer} ${classes.badgeBlack}`}>
-                            <RiArchiveLine />
+                            <Package />
                         </div>
                     ) : (
                         <div className={`${classes.iconContainer} ${classes.logoGreen}`}>
-                            <MdOutlineDirectionsCar size={20} />
+                            <Car />
                         </div>
                     )}
 
