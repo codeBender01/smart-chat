@@ -744,6 +744,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     onClick={e => {
                                         e.stopPropagation();
                                         setIsTraveler(false);
+                                        setSelectedInstance('optimal');
                                         setSelectedRole('All');
                                     }}
                                     className={classes.goBackFilter}
@@ -808,6 +809,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                                     onClick={e => {
                                         e.stopPropagation();
                                         setIsCustomer(false);
+                                        setSelectedInstance('optimal');
                                         setSelectedRole('All');
                                     }}
                                     className={classes.goBackFilter}
