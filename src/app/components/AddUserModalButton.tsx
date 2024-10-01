@@ -1,7 +1,6 @@
 import {FC, useContext, ChangeEvent} from 'react';
 
 import {ModalContext} from '@components/modal/ModalProvider';
-import CustomButton from '@components/Button';
 
 import AddUser from 'src/common/svgs/AddUser';
 import AddUserModal from '@app/components/AddUserModal';

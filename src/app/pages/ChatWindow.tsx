@@ -325,11 +325,12 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         flexDirection: 'column',
         boxShadow: '0px 2px 6px 2px #00000026, 0px 1px 2px 0px #0000004D',
         transition: 'opacity 312ms cubic-bezier(0.4, 0, 0.2, 1), transform 208ms cubic-bezier(0.4, 0, 0.2, 1)',
+        padding: '8px 0',
     },
     optionItem: {
         display: 'flex',
         alignItems: 'center',
-        padding: theme.spacing(2, 3),
+        padding: '16px 24px',
         color: theme.palette.text.primary,
         fontFamily: 'Open Sans, sans-serif',
         gap: '10px',

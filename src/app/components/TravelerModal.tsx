@@ -3,7 +3,8 @@ import {FaCarAlt} from 'react-icons/fa';
 import {IoClose} from 'react-icons/io5';
 import LocalizedText from '@components/localize/LocalizedText';
 
-import {IoIosInformationCircleOutline} from 'react-icons/io';
+import Info from 'src/common/svgs/Info';
+import TravelerCar from 'src/common/svgs/TravelerCar';
 
 import money from '../../common/assets/money.jpeg';
 
@@ -217,7 +218,7 @@ const TravelerModal: FC = () => {
                             <div className="date">18.07.2023</div>
                         </div>
                         <div className={classes.routeIcon}>
-                            <FaCarAlt />
+                            <TravelerCar />
                             <div className={classes.vehicleInfo}>BA2981</div>
                         </div>
                         <div className={classes.cityInfo}>
@@ -262,7 +263,7 @@ const TravelerModal: FC = () => {
 
     return (
         <div onClick={handleOpenModal} className="text-md2 text-textColor hover:text-lineGray duration-200 cursor-pointer">
-            <IoIosInformationCircleOutline />
+            <Info />
         </div>
     );
 };

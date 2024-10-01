@@ -2,6 +2,7 @@ import {FC, useEffect, useState} from 'react';
 import {useIntl} from 'react-intl';
 import {CgArrowLongLeft} from 'react-icons/cg';
 import {IoMdOptions, IoMdSearch} from 'react-icons/io';
+import Filter from 'src/common/svgs/Filter';
 import {useMediaQuery} from 'react-responsive';
 import {useNavigate} from 'react-router-dom';
 import '../../mui.css';
@@ -177,7 +178,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
         display: 'flex',
         alignItems: 'center',
         gap: '1.5rem',
-        padding: '0 16px',
+        padding: '0 24px 0 16px',
     },
     inputContainer: {
         borderWidth: '1px',
@@ -628,7 +629,7 @@ const ChatListSidebar: FC<ChatListSidebarProps> = ({isAdmin}) => {
                         }}
                         className={classes.filterIcon}
                     >
-                        <IoMdOptions />
+                        <Filter />
                     </div>
                     <div
                         style={{
