@@ -1,7 +1,7 @@
 import React, {FC, useState, ChangeEvent, useEffect} from 'react';
 import {BsPaperclip} from 'react-icons/bs';
 import {CgArrowLongLeft} from 'react-icons/cg';
-import {IoMdMore, IoMdSend} from 'react-icons/io';
+import {IoMdSend} from 'react-icons/io';
 import {MdEdit} from 'react-icons/md';
 import {AiOutlineExclamationCircle} from 'react-icons/ai';
 import {useNavigate, useLocation} from 'react-router-dom';
@@ -25,6 +25,7 @@ import profile2 from '../../common/assets/profile2.jpeg';
 import {makeStyles} from '@mui/styles';
 import {CustomTheme} from '@style';
 import {display} from '@mui/system';
+import More from 'src/common/svgs/More';
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
     innerContainer: {
@@ -314,8 +315,8 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     moreOptions: {
         position: 'absolute',
         backgroundColor: theme.palette.primary.contrastText,
-        right: '20%',
-        top: '110%',
+        right: '-100%',
+        top: '200%',
         borderRadius: '8px',
         fontSize: '1.25rem',
         fontFamily: 'Quicksand, sans-serif',
@@ -532,7 +533,7 @@ const ChatWindow: FC = () => {
                                     setIsMoreOpen(!isMoreOpen);
                                 }}
                             >
-                                <IoMdMore />
+                                <More />
                             </div>
                             <div
                                 className={classes.moreOptions}
